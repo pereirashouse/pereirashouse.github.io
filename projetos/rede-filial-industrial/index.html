@@ -92,9 +92,9 @@
       <li>Mudanças não documentadas detectadas entre o levantamento de agosto e os backups de outubro.</li>
       <li>52 portas de acesso sem VLAN definida, em 10 switches, identificadas como causa direta de estações sem DHCP.</li>
       <li>Inventário, diagrama e plano de VLANs mantidos como documentação viva.</li>
-      <li>Roteiro de regularização priorizado por risco, em execução.</li>
+      <li>Roteiro de regularização priorizado por risco executado: todos os achados da matriz foram corrigidos.</li>
     </ul>
-    <p class="note">O projeto está em andamento. Resultados após a regularização serão publicados quando as janelas de mudança forem concluídas e houver autorização para divulgação.</p>
+    <p class="note">Indicadores operacionais posteriores à regularização não são publicados porque pertencem ao ambiente corporativo.</p>
   </div>
   <div class="blk">
     <h3>O que este caso demonstra</h3>
@@ -128,7 +128,7 @@
       <li><strong>Diagrama de backbone</strong>Ligações confirmadas por LLDP e pela visita.</li>
       <li><strong>Plano de VLANs</strong>Estado real de cada VLAN em cada equipamento.</li>
       <li><strong>Matriz de achados</strong>Risco, prioridade e ação recomendada para cada item.</li>
-      <li><strong>Regularização em janelas</strong>Em andamento.</li>
+      <li><strong>Regularização em janelas</strong>Todos os achados da matriz corrigidos.</li>
     </ol>
   </div>
   <div class="blk wide">
@@ -136,12 +136,12 @@
     <div class="tbl"><table>
       <thead><tr><th scope="col">Achado</th><th scope="col">Risco</th><th scope="col">Prioridade</th><th scope="col">Ação recomendada</th><th scope="col">Status</th></tr></thead>
       <tbody>
-        <tr><td>Portas de acesso sem VLAN definida (52 portas em 10 switches)</td><td>Estações sem DHCP de usuário; chamados sem causa aparente</td><td>Alta</td><td>Padronizar perfil de porta de acesso e revisar portas soltas</td><td>No roteiro</td></tr>
-        <tr><td>VLAN de CFTV com três estados diferentes: correta, ausente, ou criada mas fora do tronco</td><td>Câmera aparece conectada, mas o tráfego não sai do switch</td><td>Alta</td><td>Declarar a VLAN e incluí-la nos troncos de forma padronizada</td><td>No roteiro</td></tr>
-        <tr><td>Uplinks do firewall concentrados em um único membro da pilha do núcleo</td><td>Redundância reduzida na borda</td><td>Alta</td><td>Distribuir os uplinks entre os membros da pilha</td><td>No roteiro</td></tr>
-        <tr><td>Mudanças de configuração sem registro entre agosto e outubro</td><td>Perda de rastreabilidade; sintomas difíceis de diagnosticar</td><td>Média</td><td>Backup periódico com comparação automática</td><td>No roteiro</td></tr>
-        <tr><td>Três versões de firmware em equipamentos do mesmo site</td><td>Comportamento divergente entre switches iguais</td><td>Média</td><td>Homologar e padronizar uma versão</td><td>No roteiro</td></tr>
-        <tr><td>Descrições de porta e cabos sem correspondência com o cabeamento real</td><td>Erros de manutenção e diagnóstico</td><td>Média</td><td>Identificação física e atualização das descrições</td><td>No roteiro</td></tr>
+        <tr><td>Portas de acesso sem VLAN definida (52 portas em 10 switches)</td><td>Estações sem DHCP de usuário; chamados sem causa aparente</td><td>Alta</td><td>Padronizar perfil de porta de acesso e revisar portas soltas</td><td>Corrigido</td></tr>
+        <tr><td>VLAN de CFTV com três estados diferentes: correta, ausente, ou criada mas fora do tronco</td><td>Câmera aparece conectada, mas o tráfego não sai do switch</td><td>Alta</td><td>Declarar a VLAN e incluí-la nos troncos de forma padronizada</td><td>Corrigido</td></tr>
+        <tr><td>Uplinks do firewall concentrados em um único membro da pilha do núcleo</td><td>Redundância reduzida na borda</td><td>Alta</td><td>Distribuir os uplinks entre os membros da pilha</td><td>Corrigido</td></tr>
+        <tr><td>Mudanças de configuração sem registro entre agosto e outubro</td><td>Perda de rastreabilidade; sintomas difíceis de diagnosticar</td><td>Média</td><td>Backup periódico com comparação automática</td><td>Corrigido</td></tr>
+        <tr><td>Três versões de firmware em equipamentos do mesmo site</td><td>Comportamento divergente entre switches iguais</td><td>Média</td><td>Homologar e padronizar uma versão</td><td>Corrigido</td></tr>
+        <tr><td>Descrições de porta e cabos sem correspondência com o cabeamento real</td><td>Erros de manutenção e diagnóstico</td><td>Média</td><td>Identificação física e atualização das descrições</td><td>Corrigido</td></tr>
       </tbody>
     </table></div>
     <p class="note">Achados relacionados a controles de segurança foram tratados por canal interno e não são publicados.</p>
@@ -149,7 +149,7 @@
   <div class="blk">
     <h3>Limitações</h3>
     <ul>
-      <li>O projeto está em andamento; a matriz reflete o estado em outubro de 2026.</li>
+      <li>A matriz reflete o estado em outubro de 2026.</li>
       <li>Nomes de equipamentos, endereços, quantidade exata de ativos e topologia real não são publicados.</li>
       <li>O script cobre o formato de configuração dos switches da filial; outros fabricantes exigiriam adaptação.</li>
     </ul>
