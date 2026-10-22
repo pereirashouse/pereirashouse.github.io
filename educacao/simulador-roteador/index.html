@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulador de configuração de roteador para aprendizagem de redes · Jeferson Pereira</title>
+<meta name="description" content="Estudo de caso didático: simulador web de configuração de roteador doméstico para o 9º ano, com objetivo de aprendizagem, desafios, gabarito para o professor, limitações e próximos recursos.">
+<link rel="canonical" href="https://pereirashouse.github.io/educacao/simulador-roteador/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#23774A">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Simulador interativo de configuração de roteador para aprendizagem de redes">
+<meta property="og:description" content="Objeto de aprendizagem em HTML, CSS e JavaScript para estudantes configurarem Wi-Fi 2,4 e 5 GHz, canais e QoS sem risco de derrubar a rede da escola.">
+<meta property="og:url" content="https://pereirashouse.github.io/educacao/simulador-roteador/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="edu-page">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../">Início</a></li>
+  <li><a href="../../#destaques">Destaques</a></li>
+  <li><a href="../../#infra">Infraestrutura</a></li>
+  <li><a href="../../#edu">Educação</a></li>
+  <li><a href="../../#arquivo">Todos os projetos</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head edu">
+  <p class="crumb"><a href="../../#edu">Computação e Educação</a> / Estudo de caso</p>
+  <h1>Simulador interativo de configuração de roteador para aprendizagem de redes</h1>
+  <p class="lede">Uma réplica simplificada do painel de um roteador doméstico, para que estudantes experimentem configurações de Wi-Fi sem risco de derrubar a rede de casa ou da escola.</p>
+  <ul class="badges" aria-label="Etiquetas">
+    <li class="badge tipo">Didático</li>
+    <li class="badge tipo">Acadêmico</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">↗</span>Publicado</li>
+    <li class="badge">Redes</li><li class="badge">BNCC · Mundo Digital</li>
+  </ul>
+  <dl class="facts">
+    <div><dt>Público</dt><dd>Estudantes do 9º ano do Ensino Fundamental</dd></div>
+    <div><dt>Contexto</dt><dd>Licenciatura em Computação · oficina da Ilha Interdisciplinar de Racionalidade sobre Wi-Fi</dd></div>
+    <div><dt>Período</dt><dd>1º semestre de 2026</dd></div>
+    <div><dt>Autoria</dt><dd>Simulador: Jeferson · investigação interdisciplinar: Jeferson e grupo</dd></div>
+  </dl>
+  <p class="summary">Ao final da atividade, o aluno deve conseguir localizar as configurações sem fio de um roteador, escolher um canal sem sobreposição em 2,4 GHz, comparar as faixas de 2,4 e 5 GHz e explicar para que serve o controle de banda (QoS).</p>
+  <div class="links edu"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Experimentar o simulador ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/simulador-configura-o-roteador" target="_blank" rel="noopener">Código-fonte no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://drive.google.com/file/d/1y5PUGET-o_UAfKixnomOxO5nb5pLfpK8/view?usp=sharing" target="_blank" rel="noopener">Guia de Sobrevivência do Wi-Fi Doméstico (PDF) ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
+  <p class="updated">Última atualização: 22 de outubro de 2026</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Modo de leitura">
+  <button role="tab" id="t-resumo" aria-controls="resumo" aria-selected="true">Resumo executivo</button>
+  <button role="tab" id="t-tecnico" aria-controls="tecnico" aria-selected="false" tabindex="-1">Detalhes técnicos</button>
+  <button role="tab" id="t-evidencias" aria-controls="evidencias" aria-selected="false" tabindex="-1">Evidências</button>
+  <button role="tab" id="t-didatica" aria-controls="didatica" aria-selected="false" tabindex="-1">Versão didática</button>
+</div>
+
+<main id="conteudo">
+<section class="panel" id="resumo" role="tabpanel" aria-labelledby="t-resumo">
+  <h2 class="ph">Resumo executivo</h2>
+  <div class="blk">
+    <h3>Contexto</h3>
+    <p>O simulador nasceu na Ilha Interdisciplinar de Racionalidade “A invisibilidade do Wi-Fi: por que a internet de 400 Mega trava?”, produzida na Licenciatura em Computação. A turma investiga a física das ondas, a disputa pelo canal e a fila de pacotes e, na oficina de 40 minutos, passa da teoria para a configuração.</p>
+  </div>
+  <div class="blk">
+    <h3>Problema pedagógico</h3>
+    <p>Mexer no roteador real da escola ou de casa pode derrubar a rede de todos, e muitas escolas públicas não têm equipamento de laboratório. Os alunos precisavam de um lugar seguro para errar.</p>
+  </div>
+  <div class="blk">
+    <h3>Meu papel</h3>
+    <ul>
+      <li>desenho e programação do simulador;</li>
+      <li>escolha dos conceitos e das telas a reproduzir;</li>
+      <li>integração com a investigação e com o guia em PDF;</li>
+      <li>publicação no GitHub Pages.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Conceitos trabalhados</h3>
+    <ul>
+      <li>Nome da rede (SSID) e rádios de 2,4 GHz e 5 GHz.</li>
+      <li>Canais 1, 6 e 11 sem sobreposição em 2,4 GHz.</li>
+      <li>Largura de canal (20, 40 e 80 MHz) e o equilíbrio entre velocidade e interferência.</li>
+      <li>Controle de banda (QoS), upload e download, e conversão entre Mbps e Kbps.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Resultado</h3>
+    <ul>
+      <li>Simulador publicado e acessível pelo navegador, sem instalação nem cadastro.</li>
+      <li>Usado na oficina da Ilha de Racionalidade sobre Wi-Fi.</li>
+      <li>Código aberto no GitHub.</li>
+    </ul>
+    <p class="note">Não há medição formal de aprendizagem publicada. A avaliação da oficina foi formativa, feita em sala.</p>
+  </div>
+  <div class="blk">
+    <h3>O que este caso demonstra</h3>
+    <ul class="comp">
+      <li>Transposição didática de redes</li><li>Desenho de objeto de aprendizagem</li><li>HTML, CSS e JavaScript</li>
+      <li>Ensino por investigação</li><li>Atenção a escolas com pouca infraestrutura</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="tecnico" role="tabpanel" aria-labelledby="t-tecnico">
+  <h2 class="ph">Detalhes técnicos</h2>
+  <div class="blk">
+    <h3>Como funciona</h3>
+    <ul>
+      <li>Arquivo único em HTML, CSS e JavaScript puro, com cerca de 10 KB e sem dependências externas.</li>
+      <li>Menu lateral com painéis de Wireless 2,4 GHz, Wireless 5 GHz, QoS, Status e Ferramentas do Sistema.</li>
+      <li>Campos de SSID, canal e largura de canal por faixa; QoS com tipo de linha e banda de upload e download.</li>
+      <li>Ao salvar, o simulador confirma a configuração; nada sai do navegador.</li>
+      <li>Hospedado no GitHub Pages.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Decisões de design</h3>
+    <h4>Parecer um roteador de verdade</h4>
+    <p>O layout reproduz a organização típica de um roteador doméstico (cabeçalho, menu lateral e formulários) para que o aluno reconheça a tela quando abrir o roteador de casa.</p>
+    <h4>Poucos campos</h4>
+    <p>Só aparecem as opções ligadas aos conceitos da aula. Status e Ferramentas existem para dar contexto, mas não têm conteúdo funcional.</p>
+    <h4>Leve e sem cadastro</h4>
+    <p>Um único arquivo pequeno abre em computadores antigos e em conexões lentas, comuns na rede pública.</p>
+  </div>
+  <div class="blk">
+    <h3>Limitações atuais</h3>
+    <ul>
+      <li>O simulador não verifica as respostas: o retorno ao aluno hoje vem da discussão mediada pelo professor.</li>
+      <li>Não simula o efeito das escolhas (interferência, alcance ou velocidade).</li>
+      <li>Não cobre endereçamento IP, DHCP nem rotas.</li>
+      <li>O menu não é acessível por teclado e o layout não se adapta bem ao celular.</li>
+      <li>O README do repositório ainda não traz instruções para professores.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Próximos recursos planejados</h3>
+    <ul>
+      <li>Modo desafio com verificação automática e feedback explicativo para cada resposta.</li>
+      <li>Medidor visual de interferência por canal.</li>
+      <li>Menu acessível por teclado e layout responsivo.</li>
+      <li>Guia do professor no repositório, com objetivos, desafios e gabarito.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
+  <h2 class="ph">Evidências</h2>
+  <div class="blk">
+    <p>O simulador é público e pode ser testado agora: <a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">abrir o simulador<span class="sr-only"> (abre em nova aba)</span></a>. O código completo está em <a href="https://github.com/pereirashouse/simulador-configura-o-roteador" target="_blank" rel="noopener">github.com/pereirashouse/simulador-configura-o-roteador<span class="sr-only"> (abre em nova aba)</span></a>.</p>
+  </div>
+  <figure class="diag">
+    <svg viewBox="0 0 860 300" role="img" aria-labelledby="d5t d5d">
+      <title id="d5t">Esquema da interface do simulador</title>
+      <desc id="d5d">Cabeçalho com o nome do roteador; menu lateral com Status, Wireless 2,4 GHz, Wireless 5 GHz, QoS e Ferramentas do Sistema; à direita, o formulário da faixa de 2,4 GHz com habilitar rádio, nome da rede, canal e largura do canal, e o botão Salvar.</desc>
+      <rect class="dg-box" x="20" y="20" width="820" height="40" rx="4"/><text class="dg-t" x="40" y="45">Roteador · painel de configuração</text><text class="dg-s" x="760" y="45">admin | Sair</text>
+      <rect class="dg-box" x="20" y="60" width="200" height="220"/>
+      <text class="dg-s" x="36" y="92">Status</text>
+      <rect x="20" y="104" width="200" height="34" style="fill:var(--edu-soft)"/><text class="dg-t" x="36" y="126">Wireless 2,4 GHz</text>
+      <text class="dg-s" x="36" y="162">Wireless 5 GHz</text>
+      <text class="dg-s" x="36" y="198">QoS</text>
+      <text class="dg-s" x="36" y="234">Ferramentas do Sistema</text>
+      <text class="dg-t" x="250" y="92">Configurações Wireless · 2,4 GHz</text>
+      <text class="dg-s" x="250" y="128">Habilitar rádio</text><rect class="dg-box" x="420" y="116" width="16" height="16" rx="2"/><path class="dg-ok" d="M423 124 l4 4 l6 -7"/>
+      <text class="dg-s" x="250" y="164">Nome da rede (SSID)</text><rect class="dg-box" x="420" y="150" width="260" height="24" rx="3"/><text class="dg-s" x="430" y="166">MinhaRede_2G</text>
+      <text class="dg-s" x="250" y="200">Canal</text><rect class="dg-box" x="420" y="186" width="120" height="24" rx="3"/><text class="dg-s" x="430" y="202">1 · 6 · 11 · Auto</text>
+      <text class="dg-s" x="250" y="236">Largura do canal</text><rect class="dg-box" x="420" y="222" width="120" height="24" rx="3"/><text class="dg-s" x="430" y="238">20 · 40 MHz</text>
+      <rect x="720" y="236" width="90" height="30" rx="4" style="fill:var(--edu)"/><text x="765" y="256" text-anchor="middle" style="fill:var(--bg);font:600 12px var(--body)">Salvar</text>
+    </svg>
+    <figcaption>Esquema da tela principal, desenhado a partir do código publicado.</figcaption>
+  </figure>
+  <div class="blk wide">
+    <h3>Trecho do código publicado</h3>
+<pre><span class="c">// Alterna os painéis do menu lateral (trecho de index.html)</span>
+function showPanel(panelId) {
+    document.querySelectorAll('.panel').forEach(panel =&gt; {
+        panel.classList.remove('active');
+    });
+    document.querySelectorAll('.sidebar ul li').forEach(li =&gt; {
+        li.classList.remove('active');
+    });
+    document.getElementById(panelId).classList.add('active');
+    ...
+}</pre>
+  </div>
+</section>
+
+<section class="panel" id="didatica" role="tabpanel" aria-labelledby="t-didatica">
+  <h2 class="ph">Versão didática</h2>
+  <div class="blk">
+    <h3>Objetivo de aprendizagem</h3>
+    <p>Ao final da atividade, o aluno deve conseguir localizar as configurações sem fio de um roteador, escolher um canal sem sobreposição em 2,4 GHz, comparar as faixas de 2,4 e 5 GHz e explicar para que serve o controle de banda (QoS).</p>
+  </div>
+  <div class="blk">
+    <h3>Instruções para o aluno</h3>
+    <ol>
+      <li>Abra o simulador no navegador do computador.</li>
+      <li>Use o menu da esquerda para trocar de tela.</li>
+      <li>Altere os campos pedidos em cada desafio e clique em <strong>Salvar</strong>.</li>
+      <li>Anote no caderno o que escolheu e por quê.</li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h3>Desafios</h3>
+    <ol class="steps">
+      <li><strong>Batize a rede</strong>Troque o nome das redes de 2,4 GHz e de 5 GHz por nomes que a turma reconheça. Por que é útil saber qual é qual?</li>
+      <li><strong>Fuja do vizinho</strong>A rede do vizinho usa o canal 6 em 2,4 GHz. Qual canal você escolhe para não sobrepor?</li>
+      <li><strong>Prédio lotado</strong>Em um prédio com muitas redes, é melhor usar 20 ou 40 MHz em 2,4 GHz? Configure e justifique.</li>
+      <li><strong>Faça a conta</strong>O plano de internet tem 400 Mbps de download. Ative o QoS e preencha a banda de download em Kbps.</li>
+      <li><strong>Quem vai para o 5 GHz?</strong>O notebook na sala, perto do roteador, ou a TV no quarto do fundo? Explique usando o que a turma mediu na investigação.</li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h3>Feedback ao aluno</h3>
+    <p>Como o simulador ainda não corrige as respostas, o retorno acontece na socialização: cada dupla apresenta uma escolha e a turma confronta com o que mediu no analisador de espectro. O gabarito abaixo apoia o professor.</p>
+    <details class="more"><summary>Gabarito para o professor</summary>
+      <ol>
+        <li>Nomes diferentes permitem escolher conscientemente a faixa em cada aparelho.</li>
+        <li>Canal 1 ou 11: em 2,4 GHz, só 1, 6 e 11 não se sobrepõem.</li>
+        <li>20 MHz: com muitas redes, 40 MHz ocupa quase toda a faixa de 2,4 GHz e aumenta a interferência.</li>
+        <li>400 Mbps = 400.000 Kbps (1 Mbps = 1.000 Kbps).</li>
+        <li>O notebook perto do roteador: 5 GHz é mais rápido, mas atravessa pior paredes; a TV distante tende a se sair melhor em 2,4 GHz.</li>
+      </ol>
+    </details>
+  </div>
+  <div class="blk">
+    <h3>Para outros professores</h3>
+    <p>O simulador pode ser usado sozinho, em uma aula de 40 a 50 minutos, ou como fechamento da investigação sobre Wi-Fi. Funciona em computadores simples e não exige cadastro dos alunos.</p>
+  </div>
+</section>
+</main>
+
+<nav class="pager" aria-label="Outros estudos de caso">
+  <a href="../../#edu"><span>Voltar</span><strong>Computação e Educação</strong></a>
+  <a href="../../projetos/wifi-8021x/#didatica" style="text-align:right"><span>Laboratório relacionado</span><strong>Autenticação de rede: senha, usuário ou máquina</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
