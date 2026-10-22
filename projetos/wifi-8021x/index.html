@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wi-Fi corporativo com 802.1X e autenticação de máquina · Jeferson Pereira</title>
+<meta name="description" content="Estudo de caso: implantação de 802.1X com NPS e Active Directory em 60 access points para substituir senha Wi-Fi compartilhada e bloquear dispositivos pessoais.">
+<link rel="canonical" href="https://pereirashouse.github.io/projetos/wifi-8021x/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Autenticação de máquinas em Wi-Fi corporativo com NPS e Active Directory">
+<meta property="og:description" content="60 access points, senha compartilhada substituída, NPS local por restrição de MTU, mitigação Blast-RADIUS e implantação sem rollback.">
+<meta property="og:url" content="https://pereirashouse.github.io/projetos/wifi-8021x/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../">Início</a></li>
+  <li><a href="../../#destaques">Destaques</a></li>
+  <li><a href="../../#infra">Infraestrutura</a></li>
+  <li><a href="../../#edu">Educação</a></li>
+  <li><a href="../../#arquivo">Todos os projetos</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head infra">
+  <p class="crumb"><a href="../../#infra">Infraestrutura de TI</a> / Estudo de caso</p>
+  <h1>Autenticação de máquinas em Wi-Fi corporativo com NPS e Active Directory</h1>
+  <p class="lede">Implantação de 802.1X com NPS e Active Directory para bloquear dispositivos pessoais e substituir uma senha Wi-Fi compartilhada.</p>
+  <ul class="badges" aria-label="Etiquetas">
+    <li class="badge tipo">Profissional</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">●</span>Em produção</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">✓</span>Concluído</li>
+    <li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li>
+    <li class="badge">Redes</li><li class="badge">Segurança</li><li class="badge">Identidade</li>
+  </ul>
+  <dl class="facts">
+    <div><dt>Ambiente</dt><dd>Filial industrial · PR</dd></div>
+    <div><dt>Período</dt><dd>Agosto a outubro de 2026</dd></div>
+    <div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div>
+    <div><dt>Escala</dt><dd>60 access points</dd></div>
+  </dl>
+  <p class="summary">O projeto substituiu a autenticação por senha compartilhada por autenticação baseada na conta de máquina do Active Directory. A implantação cobriu 60 access points e foi concluída sem rollback.</p>
+  <p class="updated">Última atualização: 22 de outubro de 2026</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Modo de leitura">
+  <button role="tab" id="t-resumo" aria-controls="resumo" aria-selected="true">Resumo executivo</button>
+  <button role="tab" id="t-tecnico" aria-controls="tecnico" aria-selected="false" tabindex="-1">Detalhes técnicos</button>
+  <button role="tab" id="t-evidencias" aria-controls="evidencias" aria-selected="false" tabindex="-1">Evidências</button>
+  <button role="tab" id="t-didatica" aria-controls="didatica" aria-selected="false" tabindex="-1">Versão didática</button>
+</div>
+
+<main id="conteudo">
+<section class="panel" id="resumo" role="tabpanel" aria-labelledby="t-resumo">
+  <h2 class="ph">Resumo executivo</h2>
+  <div class="blk">
+    <h3>Contexto</h3>
+    <p>A filial é uma planta industrial de uma organização com várias fábricas e centros de distribuição. O Wi-Fi corporativo atendia estações de trabalho, notebooks e equipamentos de operação (impressoras, coletores de dados e câmeras) e usava uma senha compartilhada no SSID corporativo.</p>
+    <p>Isso permitia que celulares e tablets pessoais acessassem a rede sempre que a senha era reutilizada fora das estações corporativas.</p>
+    <ul>
+      <li><strong>Escala:</strong> 60 access points UniFi cobrindo toda a planta produtiva.</li>
+      <li><strong>Restrição de rede:</strong> o link com a matriz passa por uma VPN com limitação de MTU.</li>
+      <li><strong>Restrição operacional:</strong> impressoras, coletores e câmeras não podiam parar durante a migração.</li>
+      <li><strong>Situação encontrada:</strong> o certificado do servidor NPS existente estava expirado.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Problema</h3>
+    <p>O objetivo era impedir o acesso de dispositivos não pertencentes ao domínio, sem exigir intervenção manual do usuário e sem interromper o funcionamento de impressoras, coletores, câmeras e demais equipamentos existentes.</p>
+  </div>
+  <div class="blk">
+    <h3>Meu papel</h3>
+    <p>Atuei como analista de infraestrutura responsável pela implantação. Responsabilidades:</p>
+    <ul>
+      <li>levantamento dos dispositivos conectados ao SSID;</li>
+      <li>desenho da política de autenticação;</li>
+      <li>configuração do NPS e renovação do certificado;</li>
+      <li>cadastro dos access points como clientes RADIUS;</li>
+      <li>criação das GPOs de perfil sem fio;</li>
+      <li>execução do piloto;</li>
+      <li>validação pelos logs de autenticação;</li>
+      <li>documentação e plano de rollback.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Resultado</h3>
+    <h4>Resultado observado</h4>
+    <ul>
+      <li>60 access points migrados;</li>
+      <li>dispositivos pessoais bloqueados pelo NPS, sem intervenção manual;</li>
+      <li>nenhum rollback após a migração completa;</li>
+      <li>autenticação monitorada pelos logs do NPS, com cada tentativa aceita ou negada registrada.</li>
+    </ul>
+    <p class="note">Não foram publicados indicadores de disponibilidade ou de redução de incidentes porque esses dados pertencem ao ambiente corporativo.</p>
+  </div>
+  <div class="blk">
+    <h3>O que este caso demonstra</h3>
+    <ul class="comp">
+      <li>Desenho de autenticação de rede</li><li>Windows NPS e Active Directory</li><li>Análise de restrições de MTU e VPN</li>
+      <li>Implantação gradual com rollback</li><li>Análise de segurança (Blast-RADIUS)</li><li>Documentação técnica</li><li>Comunicação de decisões arquiteturais</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="tecnico" role="tabpanel" aria-labelledby="t-tecnico">
+  <h2 class="ph">Detalhes técnicos</h2>
+  <div class="blk">
+    <h3>Decisões técnicas</h3>
+    <h4>1. Autenticar a máquina, não a pessoa</h4>
+    <p>A autenticação baseada em conta de máquina foi escolhida porque celulares e tablets não possuem uma conta de computador no Active Directory. No PEAP-MSCHAPv2, um túnel TLS externo protege a credencial enviada dentro dele; com a condição de <em>grupo de computadores</em> no NPS, a única credencial aceita é a da conta de máquina, cuja senha fica armazenada na própria estação e nunca é conhecida pelo usuário. Saber a senha de um funcionário deixa de ser suficiente.</p>
+    <h4>2. NPS local, e não na matriz</h4>
+    <p>O NPS foi mantido localmente porque a autenticação RADIUS atravessaria uma VPN com restrição de MTU herdada do protocolo de VPN (IKEv1). As mensagens EAP carregam certificados e geram pacotes UDP grandes; com a fragmentação comprometida, a autenticação falharia de forma intermitente. Com o NPS na filial, nenhum fluxo de autenticação depende da VPN.</p>
+    <h4>3. Um cliente RADIUS por access point, com Message-Authenticator obrigatório</h4>
+    <p>Cada access point foi cadastrado como cliente RADIUS independente e, em todos, foi exigido o atributo <em>Message-Authenticator</em>. Isso mitiga o Blast-RADIUS (CVE-2024-3596), ataque de forja de resposta que afeta servidores RADIUS sem essa verificação.</p>
+    <h4>4. Política de negação explícita</h4>
+    <p>Além da política que libera as máquinas do grupo autorizado, uma segunda política, a última da lista, nega qualquer requisição Wi-Fi não capturada pela primeira. Sem ela, uma política permissiva mais antiga poderia aceitar os dispositivos rejeitados.</p>
+    <h4>5. Perfil sem fio distribuído por GPO</h4>
+    <p>Uma GPO distribui o perfil Wi-Fi às estações do grupo, com autenticação de computador e confiança apenas na CA emissora do certificado do NPS. Isso elimina o aviso de confiança e garante a conexão já na tela de logon.</p>
+  </div>
+  <div class="blk wide">
+    <h4>Alternativas avaliadas</h4>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Alternativa</th><th scope="col">Avaliação</th><th scope="col">Decisão</th></tr></thead>
+      <tbody>
+        <tr><td>Senha compartilhada (WPA2-PSK)</td><td>Não permite controle individual nem revogação sem trocar a senha de todos.</td><td>Rejeitada</td></tr>
+        <tr><td>802.1X somente com credencial de usuário</td><td>O usuário pode digitar a própria senha em um celular pessoal; não conecta antes do logon.</td><td>Inadequada</td></tr>
+        <tr><td>PEAP-MSCHAPv2 com conta de máquina</td><td>Bloqueia dispositivos fora do domínio usando a infraestrutura existente (NPS, AD, GPO).</td><td>Adotada como solução de transição</td></tr>
+        <tr><td>EAP-TLS com certificado de máquina</td><td>Elimina a dependência de MSCHAPv2; exige PKI com emissão, renovação e revogação estruturadas.</td><td>Recomendada como evolução definitiva</td></tr>
+        <tr><td>NPS centralizado na matriz</td><td>Autenticação dependeria da VPN com restrição de MTU.</td><td>Rejeitada</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk">
+    <h3>Implementação por fases</h3>
+    <ol class="steps">
+      <li><strong>Inventário dos dispositivos no SSID</strong>Impressoras, coletores, câmeras e estações identificados antes de qualquer mudança.</li>
+      <li><strong>Renovação do certificado do NPS</strong>O certificado anterior estava expirado.</li>
+      <li><strong>Grupo de computadores autorizados</strong>Com reinicialização obrigatória das estações após a inclusão no grupo.</li>
+      <li><strong>Políticas no NPS</strong>Clientes RADIUS, política de solicitação de conexão, política de rede e política de negação.</li>
+      <li><strong>Perfil Wi-Fi via GPO</strong>Autenticação de computador e CA confiável definidas.</li>
+      <li><strong>Piloto em access points de teste</strong>SSID piloto apenas nos APs de teste, com rollback previsto em menos de 5 minutos.</li>
+      <li><strong>Expansão para os 60 access points</strong>Migração completa da planta produtiva.</li>
+      <li><strong>Monitoramento e documentação</strong>Acompanhamento dos logs de autenticação e registro do procedimento.</li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h3>Limitações e próximos passos</h3>
+    <ul>
+      <li>O PEAP-MSCHAPv2 permaneceu dependente de um mecanismo legado.</li>
+      <li>Equipamentos sem conta de máquina exigiram inventário e tratamento separados.</li>
+      <li>A solução foi definida desde o início como etapa intermediária.</li>
+    </ul>
+    <p>Essa limitação se confirmou em outubro, quando uma atualização do Windows passou a bloquear a credencial derivada de NTLMv1 usada pelo PEAP-MSCHAPv2. O diagnóstico está no <a href="../incidente-8021x-windows/">estudo de caso do incidente</a>.</p>
+    <p><strong>Próximo passo:</strong> migrar para EAP-TLS com certificados de máquina e reforçar o ciclo de emissão, renovação e revogação de certificados.</p>
+  </div>
+</section>
+
+<section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
+  <h2 class="ph">Evidências</h2>
+  <p class="callout">Os nomes de servidores, endereços, domínios e credenciais foram removidos. Abaixo está uma representação genérica da arquitetura usada, suficiente para demonstrar o fluxo de autenticação.</p>
+  <figure class="diag">
+    <svg viewBox="0 0 860 300" role="img" aria-labelledby="d1t d1d">
+      <title id="d1t">Fluxo de autenticação 802.1X com NPS local</title>
+      <desc id="d1d">A estação do domínio apresenta a conta de máquina ao access point, que encaminha ao NPS local; o NPS consulta o grupo de computadores no Active Directory e concede acesso. Um celular pessoal chega ao mesmo access point, mas é negado pela política de negação. O link com a matriz pela VPN não participa da autenticação.</desc>
+      <rect class="dg-box" x="20" y="50" width="170" height="60" rx="6"/><text class="dg-t" x="105" y="76" text-anchor="middle">Estação do domínio</text><text class="dg-s" x="105" y="94" text-anchor="middle">perfil Wi-Fi via GPO</text>
+      <rect class="dg-box" x="20" y="200" width="170" height="60" rx="6"/><text class="dg-t" x="105" y="226" text-anchor="middle">Celular pessoal</text><text class="dg-s" x="105" y="244" text-anchor="middle">sem conta de máquina</text>
+      <rect class="dg-box" x="270" y="125" width="150" height="60" rx="6"/><text class="dg-t" x="345" y="151" text-anchor="middle">Access point</text><text class="dg-s" x="345" y="169" text-anchor="middle">cliente RADIUS</text>
+      <rect class="dg-box" x="490" y="125" width="150" height="60" rx="6"/><text class="dg-t" x="565" y="151" text-anchor="middle">NPS local</text><text class="dg-s" x="565" y="169" text-anchor="middle">RADIUS na filial</text>
+      <rect class="dg-box" x="700" y="125" width="140" height="60" rx="6"/><text class="dg-t" x="770" y="151" text-anchor="middle">Active Directory</text><text class="dg-s" x="770" y="169" text-anchor="middle">grupo de computadores</text>
+      <rect class="dg-dash" x="700" y="20" width="140" height="50" rx="6"/><text class="dg-s" x="770" y="49" text-anchor="middle">Matriz (via VPN)</text>
+      <path class="dg-ok" d="M190 80 L270 145"/><text class="dg-okt" x="196" y="128">conta de máquina</text>
+      <path class="dg-no" d="M190 230 L270 165"/><text class="dg-not" x="196" y="185">senha de usuário</text>
+      <path class="dg" d="M420 155 H490"/><text class="dg-s" x="455" y="147" text-anchor="middle">EAP</text>
+      <path class="dg" d="M640 155 H700"/>
+      <path class="dg-dash" d="M565 125 V45 H700"/><text class="dg-s" x="575" y="60">autenticação não atravessa a VPN</text>
+      <text class="dg-okt" x="490" y="215">política 1: grupo autorizado → concede</text>
+      <text class="dg-not" x="490" y="235">política 2 (última): demais Wi-Fi → nega</text>
+    </svg>
+    <figcaption>Diagrama sanitizado: componentes e fluxo reais, sem nomes, endereços ou quantidades internas.</figcaption>
+  </figure>
+  <div class="blk wide">
+    <h3>Políticas de rede no NPS (representação genérica)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Ordem</th><th scope="col">Política</th><th scope="col">Condições</th><th scope="col">Resultado</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Wi-Fi corporativo · máquinas</td><td>Tipo de porta NAS = sem fio (IEEE 802.11) · Grupo de computadores = <span class="mono">&lt;GRUPO-WIFI-COMPUTADORES&gt;</span> · Método EAP = PEAP (MSCHAPv2)</td><td>Conceder acesso</td></tr>
+        <tr><td>2</td><td>Wi-Fi corporativo · negar demais</td><td>Tipo de porta NAS = sem fio (IEEE 802.11)</td><td>Negar acesso</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk">
+    <h3>Checklist de validação do piloto (modelo reutilizável)</h3>
+    <ul>
+      <li>Estação do grupo conecta na tela de logon, sem aviso de certificado.</li>
+      <li>NPS registra evento de acesso concedido (ID 6272) com o nome da máquina e o AP de origem.</li>
+      <li>Celular com a senha correta de um usuário é negado e o NPS registra o evento de acesso negado (ID 6273).</li>
+      <li>Impressoras, coletores e câmeras inventariados continuam operando.</li>
+      <li>Rollback testado: SSID anterior pode ser reativado nos APs de teste em menos de 5 minutos.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="didatica" role="tabpanel" aria-labelledby="t-didatica">
+  <h2 class="ph">Versão didática</h2>
+  <div class="blk">
+    <h3>Como eu ensinaria este conceito</h3>
+    <p>Este caso pode ser usado para explicar a diferença entre autenticação por senha compartilhada, autenticação por usuário e autenticação baseada na identidade da máquina.</p>
+    <div class="cols2">
+      <div><h4>Público</h4><p>Ensino médio técnico, cursos de redes e licenciatura em Computação. Os conceitos de identidade também cabem no eixo Mundo Digital da BNCC da Computação.</p></div>
+      <div><h4>Pré-requisitos</h4><p>Saber o que é uma rede Wi-Fi, uma senha e um servidor.</p></div>
+      <div><h4>Analogia</h4><p>Senha compartilhada é a chave do portão copiada para todo mundo. Credencial de usuário é o crachá pessoal, que funciona em qualquer aparelho que a pessoa usar. Conta de máquina é o lacre de patrimônio: só entra o equipamento cadastrado.</p></div>
+      <div><h4>Experimento mínimo (desplugado)</h4><p>Um aluno é o access point, outro é o servidor de autenticação com uma lista de “equipamentos patrimoniados”. Os demais recebem cartões de máquina ou de celular e tentam entrar. A turma observa quem decide (o servidor, não o access point) e por que saber a senha não basta.</p></div>
+      <div><h4>Erro comum</h4><p>Confundir criptografia do Wi-Fi com controle de acesso, ou acreditar que esconder o nome da rede (SSID) a protege.</p></div>
+      <div><h4>Pergunta de reflexão</h4><p>Se um notebook corporativo for roubado, qual dos três modelos permite bloqueá-lo sem afetar os demais?</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="pager" aria-label="Outros estudos de caso">
+  <a href="../../#destaques"><span>Voltar</span><strong>Projetos em destaque</strong></a>
+  <a href="../incidente-8021x-windows/" style="text-align:right"><span>Próximo caso</span><strong>Diagnóstico de falha 802.1X após atualização do Windows</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

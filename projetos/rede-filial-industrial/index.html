@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Levantamento e modernização de rede de uma filial industrial · Jeferson Pereira</title>
+<meta name="description" content="Estudo de caso de engenharia de rede: levantamento físico, auditoria de backups de configuração, inconsistências de VLAN, redundância, matriz de riscos e roteiro de regularização.">
+<link rel="canonical" href="https://pereirashouse.github.io/projetos/rede-filial-industrial/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Levantamento e modernização de rede de uma filial industrial">
+<meta property="og:description" content="Da visita de campo ao inventário vivo: VLANs, redundância, drift de configuração e roteiro de regularização priorizado por risco.">
+<meta property="og:url" content="https://pereirashouse.github.io/projetos/rede-filial-industrial/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../">Início</a></li>
+  <li><a href="../../#destaques">Destaques</a></li>
+  <li><a href="../../#infra">Infraestrutura</a></li>
+  <li><a href="../../#edu">Educação</a></li>
+  <li><a href="../../#arquivo">Todos os projetos</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head infra">
+  <p class="crumb"><a href="../../#infra">Infraestrutura de TI</a> / Estudo de caso</p>
+  <h1>Levantamento e modernização de rede de uma filial industrial</h1>
+  <p class="lede">Documentação de uma rede que cresceu sem padrão: levantamento físico, auditoria das configurações, inconsistências de VLAN e redundância, e um roteiro de regularização priorizado por risco.</p>
+  <ul class="badges" aria-label="Etiquetas">
+    <li class="badge tipo">Profissional</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">◐</span>Em andamento</li>
+    <li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li>
+    <li class="badge">Redes</li><li class="badge">Automação</li><li class="badge">Documentação</li>
+  </ul>
+  <dl class="facts">
+    <div><dt>Ambiente</dt><dd>Filial industrial · PR</dd></div>
+    <div><dt>Período</dt><dd>Agosto de 2026 até hoje</dd></div>
+    <div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div>
+    <div><dt>Escopo</dt><dd>Borda, núcleo e switches de acesso da planta</dd></div>
+  </dl>
+  <p class="summary">A rede da filial foi levantada do zero, com confirmação física dos uplinks, análise automatizada das configurações e detecção de mudanças não documentadas. O resultado é um inventário vivo e uma matriz de achados que orienta a regularização por ordem de risco.</p>
+  <p class="updated">Última atualização: 22 de outubro de 2026</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Modo de leitura">
+  <button role="tab" id="t-resumo" aria-controls="resumo" aria-selected="true">Resumo executivo</button>
+  <button role="tab" id="t-tecnico" aria-controls="tecnico" aria-selected="false" tabindex="-1">Detalhes técnicos</button>
+  <button role="tab" id="t-evidencias" aria-controls="evidencias" aria-selected="false" tabindex="-1">Evidências</button>
+  <button role="tab" id="t-didatica" aria-controls="didatica" aria-selected="false" tabindex="-1">Versão didática</button>
+</div>
+
+<main id="conteudo">
+<section class="panel" id="resumo" role="tabpanel" aria-labelledby="t-resumo">
+  <h2 class="ph">Resumo executivo</h2>
+  <div class="blk">
+    <h3>Contexto</h3>
+    <p>A filial é uma planta industrial com firewall de borda e SD-WAN sobre links de provedores distintos, núcleo em pilha de switches e cerca de uma dezena de switches de acesso ligados em estrela ao núcleo. A topologia era conhecida apenas parcialmente por quem já havia trabalhado no local.</p>
+    <ul>
+      <li>Nenhum diagrama ou inventário estava atualizado.</li>
+      <li>As descrições de porta no núcleo eram herdadas de equipamentos anteriores e não correspondiam ao cabeamento real.</li>
+      <li>Cabos e portas não tinham identificação física.</li>
+      <li>Qualquer mudança precisa respeitar a operação contínua da fábrica.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Problema</h3>
+    <p>Sem documentação nem padrão de configuração, sintomas como “estação sem DHCP” ou “câmera conectada sem imagem” não tinham causa aparente, e cada mudança na rede era um risco. Era preciso saber o que existia de fato antes de propor qualquer correção.</p>
+  </div>
+  <div class="blk">
+    <h3>Meu papel</h3>
+    <ul>
+      <li>levantamento de campo, porta a porta, no rack de distribuição;</li>
+      <li>coleta e auditoria dos backups de configuração dos switches;</li>
+      <li>desenvolvimento de um script para extrair e comparar as configurações;</li>
+      <li>diagrama de backbone confirmado por LLDP e visita de campo;</li>
+      <li>plano de VLANs com o estado real de cada VLAN em cada equipamento;</li>
+      <li>classificação dos achados por risco e roteiro de regularização.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Resultado</h3>
+    <ul>
+      <li>14 arquivos de configuração analisados por script.</li>
+      <li>Mudanças não documentadas detectadas entre o levantamento de agosto e os backups de outubro.</li>
+      <li>52 portas de acesso sem VLAN definida, em 10 switches, identificadas como causa direta de estações sem DHCP.</li>
+      <li>Inventário, diagrama e plano de VLANs mantidos como documentação viva.</li>
+      <li>Roteiro de regularização priorizado por risco, em execução.</li>
+    </ul>
+    <p class="note">O projeto está em andamento. Resultados após a regularização serão publicados quando as janelas de mudança forem concluídas e houver autorização para divulgação.</p>
+  </div>
+  <div class="blk">
+    <h3>O que este caso demonstra</h3>
+    <ul class="comp">
+      <li>Engenharia e documentação de rede</li><li>VLANs, troncos e spanning tree</li><li>Automação de auditoria com script</li>
+      <li>Detecção de drift de configuração</li><li>Análise de redundância</li><li>Priorização por risco</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="tecnico" role="tabpanel" aria-labelledby="t-tecnico">
+  <h2 class="ph">Detalhes técnicos</h2>
+  <div class="blk">
+    <h3>Decisões técnicas</h3>
+    <h4>1. Campo antes do papel</h4>
+    <p>Em vez de confiar nas descrições de porta, os uplinks foram confirmados fisicamente. A visita mostrou que os switches sobem diretamente no núcleo, cada um com link único, e descartou a hipótese de cascata. Seis das onze portas do rack de distribuição no núcleo carregavam nomes de outros destinos. Esse dado físico virou a âncora para reconciliar backups e topologia.</p>
+    <h4>2. Script em vez de leitura manual</h4>
+    <p>Um script extrai de cada configuração as portas de acesso, os troncos, as VLANs presentes, as portas sem configuração, o modelo, o firmware e o endereço de gerência. A saída é uma tabela comparativa que expõe na hora as divergências entre equipamentos do mesmo modelo e lote.</p>
+    <h4>3. Regularizar por risco, não tudo de uma vez</h4>
+    <p>Corrigir todos os achados em uma única janela poderia parar a produção. A matriz de achados ordena as ações por risco e impacto, para que cada mudança tenha janela, validação e retorno definidos.</p>
+    <h4>4. Documentação viva em Markdown</h4>
+    <p>Uma nota por equipamento, diagrama de backbone em Mermaid e pendências como checklist. Quando uma hipótese é confirmada ou descartada, o registro é atualizado com a fonte, sem apagar o histórico de raciocínio.</p>
+  </div>
+  <div class="blk">
+    <h3>Implementação por fases</h3>
+    <ol class="steps">
+      <li><strong>Visita de campo</strong>Confirmação física dos uplinks no rack de distribuição.</li>
+      <li><strong>Coleta dos backups</strong>Configurações de todos os switches de acesso e do núcleo.</li>
+      <li><strong>Parser e tabela comparativa</strong>Extração automática de portas, VLANs, modelo e firmware.</li>
+      <li><strong>Confronto campo × backups</strong>Detecção de mudanças não documentadas entre agosto e outubro.</li>
+      <li><strong>Diagrama de backbone</strong>Ligações confirmadas por LLDP e pela visita.</li>
+      <li><strong>Plano de VLANs</strong>Estado real de cada VLAN em cada equipamento.</li>
+      <li><strong>Matriz de achados</strong>Risco, prioridade e ação recomendada para cada item.</li>
+      <li><strong>Regularização em janelas</strong>Em andamento.</li>
+    </ol>
+  </div>
+  <div class="blk wide">
+    <h3>Matriz de achados</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Achado</th><th scope="col">Risco</th><th scope="col">Prioridade</th><th scope="col">Ação recomendada</th><th scope="col">Status</th></tr></thead>
+      <tbody>
+        <tr><td>Portas de acesso sem VLAN definida (52 portas em 10 switches)</td><td>Estações sem DHCP de usuário; chamados sem causa aparente</td><td>Alta</td><td>Padronizar perfil de porta de acesso e revisar portas soltas</td><td>No roteiro</td></tr>
+        <tr><td>VLAN de CFTV com três estados diferentes: correta, ausente, ou criada mas fora do tronco</td><td>Câmera aparece conectada, mas o tráfego não sai do switch</td><td>Alta</td><td>Declarar a VLAN e incluí-la nos troncos de forma padronizada</td><td>No roteiro</td></tr>
+        <tr><td>Uplinks do firewall concentrados em um único membro da pilha do núcleo</td><td>Redundância reduzida na borda</td><td>Alta</td><td>Distribuir os uplinks entre os membros da pilha</td><td>No roteiro</td></tr>
+        <tr><td>Mudanças de configuração sem registro entre agosto e outubro</td><td>Perda de rastreabilidade; sintomas difíceis de diagnosticar</td><td>Média</td><td>Backup periódico com comparação automática</td><td>No roteiro</td></tr>
+        <tr><td>Três versões de firmware em equipamentos do mesmo site</td><td>Comportamento divergente entre switches iguais</td><td>Média</td><td>Homologar e padronizar uma versão</td><td>No roteiro</td></tr>
+        <tr><td>Descrições de porta e cabos sem correspondência com o cabeamento real</td><td>Erros de manutenção e diagnóstico</td><td>Média</td><td>Identificação física e atualização das descrições</td><td>No roteiro</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Achados relacionados a controles de segurança foram tratados por canal interno e não são publicados.</p>
+  </div>
+  <div class="blk">
+    <h3>Limitações</h3>
+    <ul>
+      <li>O projeto está em andamento; a matriz reflete o estado em outubro de 2026.</li>
+      <li>Nomes de equipamentos, endereços, quantidade exata de ativos e topologia real não são publicados.</li>
+      <li>O script cobre o formato de configuração dos switches da filial; outros fabricantes exigiriam adaptação.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
+  <h2 class="ph">Evidências</h2>
+  <p class="callout">Nomes de switches, endereços, VLAN IDs reais e topologia exata foram removidos. O diagrama é uma representação genérica; a tabela e o código usam dados fictícios.</p>
+  <figure class="diag">
+    <svg viewBox="0 0 860 280" role="img" aria-labelledby="d3t d3d">
+      <title id="d3t">Topologia genérica da filial</title>
+      <desc id="d3d">Dois provedores de internet chegam a um firewall de borda com SD-WAN, ligado a um núcleo formado por uma pilha de dois switches. Do núcleo saem, em estrela, os switches de acesso e um switch PoE dedicado aos access points.</desc>
+      <rect class="dg-dash" x="20" y="20" width="130" height="40" rx="6"/><text class="dg-s" x="85" y="45" text-anchor="middle">Provedor A</text>
+      <rect class="dg-dash" x="20" y="80" width="130" height="40" rx="6"/><text class="dg-s" x="85" y="105" text-anchor="middle">Provedor B</text>
+      <rect class="dg-box" x="200" y="45" width="150" height="50" rx="6"/><text class="dg-t" x="275" y="68" text-anchor="middle">Firewall de borda</text><text class="dg-s" x="275" y="84" text-anchor="middle">SD-WAN</text>
+      <path class="dg" d="M150 40 L200 62 M150 100 L200 78"/>
+      <rect class="dg-box" x="400" y="40" width="190" height="60" rx="6"/><text class="dg-t" x="495" y="64" text-anchor="middle">Núcleo em pilha</text><text class="dg-s" x="495" y="82" text-anchor="middle">2 membros · raiz do spanning tree</text>
+      <path class="dg" d="M350 70 H400"/>
+      <path class="dg" d="M440 100 L90 190 M470 100 L250 190 M500 100 L410 190 M530 100 L570 190 M560 100 L730 190"/>
+      <rect class="dg-box" x="30" y="190" width="120" height="44" rx="6"/><text class="dg-t" x="90" y="217" text-anchor="middle">Acesso 01</text>
+      <rect class="dg-box" x="190" y="190" width="120" height="44" rx="6"/><text class="dg-t" x="250" y="217" text-anchor="middle">Acesso 02</text>
+      <rect class="dg-box" x="350" y="190" width="120" height="44" rx="6"/><text class="dg-t" x="410" y="217" text-anchor="middle">Acesso …</text>
+      <rect class="dg-box" x="510" y="190" width="120" height="44" rx="6"/><text class="dg-t" x="570" y="217" text-anchor="middle">Acesso N</text>
+      <rect class="dg-box" x="670" y="190" width="120" height="44" rx="6"/><text class="dg-t" x="730" y="212" text-anchor="middle">Switch PoE</text><text class="dg-s" x="730" y="227" text-anchor="middle">access points</text>
+      <text class="dg-s" x="430" y="262" text-anchor="middle">cada switch de acesso com uplink único e direto no núcleo (confirmado em campo)</text>
+    </svg>
+    <figcaption>Diagrama sanitizado da topologia: camadas e tipo de ligação reais, sem nomes, quantidades exatas ou endereços.</figcaption>
+  </figure>
+  <div class="blk wide">
+    <h3>Saída comparativa do parser (dados fictícios)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Switch</th><th scope="col">Modelo</th><th scope="col">Firmware</th><th scope="col">VLAN CFTV</th><th scope="col">CFTV no tronco</th><th scope="col">Portas sem VLAN</th></tr></thead>
+      <tbody>
+        <tr><td>SW-ACESSO-01</td><td>modelo A</td><td>versão 1</td><td>presente</td><td>sim</td><td>0</td></tr>
+        <tr><td>SW-ACESSO-02</td><td>modelo A</td><td>versão 2</td><td>ausente</td><td>não</td><td>6</td></tr>
+        <tr><td>SW-ACESSO-03</td><td>modelo A</td><td>versão 1</td><td>presente</td><td>não</td><td>4</td></tr>
+        <tr><td>SW-ACESSO-04</td><td>modelo B</td><td>versão 3</td><td>presente</td><td>sim</td><td>11</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk wide">
+    <h3>Lógica do parser (exemplo simplificado)</h3>
+    <p>Trecho reescrito para publicação, não o script original. Lê blocos de VLAN de uma configuração em formato ArubaOS-Switch e devolve as portas marcadas e não marcadas de cada VLAN.</p>
+<pre><span class="c"># Exemplo simplificado: portas numéricas, um arquivo por switch</span>
+import re
+from pathlib import Path
+
+BLOCO_VLAN = re.compile(r"^vlan (\d+)\n(.*?)^\s*exit", re.M | re.S)
+PORTAS = re.compile(r"^\s*(untagged|tagged) (\S+)", re.M)
+
+def expandir(faixa):
+    portas = set()
+    for parte in faixa.split(","):
+        ini, _, fim = parte.partition("-")
+        portas.update(range(int(ini), int(fim or ini) + 1))
+    return portas
+
+def vlans_do_switch(arquivo):
+    cfg = Path(arquivo).read_text()
+    return {
+        int(vid): {modo: expandir(faixa) for modo, faixa in PORTAS.findall(corpo)}
+        for vid, corpo in BLOCO_VLAN.findall(cfg)
+    }</pre>
+  </div>
+</section>
+
+<section class="panel" id="didatica" role="tabpanel" aria-labelledby="t-didatica">
+  <h2 class="ph">Versão didática</h2>
+  <div class="blk">
+    <h3>Como eu ensinaria este conceito</h3>
+    <p>O achado da VLAN de CFTV “criada mas fora do tronco” é um ótimo laboratório: o equipamento parece conectado, mas o tráfego não chega ao destino.</p>
+    <div class="cols2">
+      <div><h4>Público</h4><p>Cursos técnicos de redes e disciplinas de redes na licenciatura em Computação.</p></div>
+      <div><h4>Pré-requisitos</h4><p>Endereço IP, switch e o comando ping.</p></div>
+      <div><h4>Analogia</h4><p>VLANs são andares de um prédio; o tronco é o elevador. Se o elevador não para em um andar, quem mora lá não sai do prédio, mesmo com a porta do apartamento aberta.</p></div>
+      <div><h4>Experimento mínimo</h4><p>Em um simulador de redes, dois switches ligados por tronco e uma VLAN de câmeras. Os alunos criam a VLAN nos dois switches, mas não a permitem no tronco, observam o ping falhar e corrigem.</p></div>
+      <div><h4>Erro comum</h4><p>Achar que criar a VLAN no switch basta; esquecer de incluí-la no tronco.</p></div>
+      <div><h4>Pergunta de reflexão</h4><p>Por que documentar a rede é uma medida de segurança, e não só de organização?</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="pager" aria-label="Outros estudos de caso">
+  <a href="../incidente-8021x-windows/"><span>Caso anterior</span><strong>Diagnóstico de falha 802.1X após atualização do Windows</strong></a>
+  <a href="../poc-virtualizacao/" style="text-align:right"><span>Próximo caso</span><strong>Avaliação de plataformas de virtualização</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

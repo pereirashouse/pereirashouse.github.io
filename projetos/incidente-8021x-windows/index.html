@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnóstico de falha 802.1X após atualização do Windows · Jeferson Pereira</title>
+<meta name="description" content="Estudo de caso de troubleshooting: notebook deixou de autenticar no Wi-Fi 802.1X após atualização do Windows; causa isolada cruzando logs do cliente, NTLM, RADIUS e Active Directory.">
+<link rel="canonical" href="https://pereirashouse.github.io/projetos/incidente-8021x-windows/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Diagnóstico de falha de autenticação 802.1X após atualização do Windows">
+<meta property="og:description" content="Sintoma, hipóteses, evidências, causa raiz, contorno e correção definitiva de um incidente de autenticação Wi-Fi.">
+<meta property="og:url" content="https://pereirashouse.github.io/projetos/incidente-8021x-windows/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../">Início</a></li>
+  <li><a href="../../#destaques">Destaques</a></li>
+  <li><a href="../../#infra">Infraestrutura</a></li>
+  <li><a href="../../#edu">Educação</a></li>
+  <li><a href="../../#arquivo">Todos os projetos</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head infra">
+  <p class="crumb"><a href="../../#infra">Infraestrutura de TI</a> / Estudo de caso</p>
+  <h1>Diagnóstico de falha de autenticação 802.1X após atualização do Windows</h1>
+  <p class="lede">Investigação de um notebook que deixou de entrar no Wi-Fi corporativo. A suspeita inicial era sinal ou antena; a causa estava em uma atualização de segurança do Windows.</p>
+  <ul class="badges" aria-label="Etiquetas">
+    <li class="badge tipo">Profissional</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">✓</span>Concluído</li>
+    <li class="badge">Resposta a incidentes</li><li class="badge">Redes</li><li class="badge">Segurança</li>
+  </ul>
+  <dl class="facts">
+    <div><dt>Ambiente</dt><dd>Wi-Fi corporativo com 802.1X (mesma filial do caso anterior)</dd></div>
+    <div><dt>Período</dt><dd>Outubro de 2026</dd></div>
+    <div><dt>Papel</dt><dd>Analista de infraestrutura, responsável pelo diagnóstico</dd></div>
+    <div><dt>Tempo até a causa</dt><dd>Um dia de análise</dd></div>
+  </dl>
+  <p class="summary">Cruzando quatro fontes de log, isolei a causa em um dia: a atualização de outubro do Windows passou a bloquear a credencial derivada de NTLMv1 usada pelo PEAP-MSCHAPv2. Apliquei um contorno e recomendei a migração para EAP-TLS antes que os demais notebooks fossem afetados.</p>
+  <p class="updated">Última atualização: 22 de outubro de 2026</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Modo de leitura">
+  <button role="tab" id="t-resumo" aria-controls="resumo" aria-selected="true">Resumo executivo</button>
+  <button role="tab" id="t-tecnico" aria-controls="tecnico" aria-selected="false" tabindex="-1">Detalhes técnicos</button>
+  <button role="tab" id="t-evidencias" aria-controls="evidencias" aria-selected="false" tabindex="-1">Evidências</button>
+  <button role="tab" id="t-didatica" aria-controls="didatica" aria-selected="false" tabindex="-1">Versão didática</button>
+</div>
+
+<main id="conteudo">
+<section class="panel" id="resumo" role="tabpanel" aria-labelledby="t-resumo">
+  <h2 class="ph">Resumo executivo</h2>
+  <div class="blk">
+    <h3>Contexto</h3>
+    <p>A rede Wi-Fi corporativa da filial autentica estações com a conta de máquina do Active Directory, via 802.1X e PEAP-MSCHAPv2, sem pedir senha ao usuário. A implantação está descrita no <a href="../wifi-8021x/">estudo de caso do 802.1X</a>.</p>
+  </div>
+  <div class="blk">
+    <h3>Problema</h3>
+    <p>Um notebook deixou de se conectar à rede corporativa. Nenhuma mudança havia sido feita na controladora Wi-Fi nem no servidor de autenticação. Se a causa estivesse no cliente e fosse sistêmica, outros notebooks poderiam cair da mesma forma.</p>
+  </div>
+  <div class="blk">
+    <h3>Meu papel</h3>
+    <ul>
+      <li>levantamento da linha do tempo da falha;</li>
+      <li>formulação e teste das hipóteses;</li>
+      <li>coleta e correlação dos logs do cliente, do NTLM, do RADIUS e do Active Directory;</li>
+      <li>definição do contorno imediato;</li>
+      <li>recomendação da correção definitiva e da análise de impacto para os demais notebooks.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Resultado</h3>
+    <ul>
+      <li>Causa raiz identificada e comprovada por evidência de log em todas as falhas do dia.</li>
+      <li>Usuário reconectado com um contorno que não exigiu mudança na infraestrutura.</li>
+      <li>Risco antecipado: os demais notebooks com autenticação por credencial de máquina cairiam ao receber a mesma atualização.</li>
+      <li>Migração para EAP-TLS recomendada como correção definitiva.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>O que este caso demonstra</h3>
+    <ul class="comp">
+      <li>Troubleshooting orientado por hipóteses</li><li>Correlação de logs de várias fontes</li><li>802.1X, PEAP e NTLM</li>
+      <li>Análise de impacto de atualizações</li><li>Comunicação de risco e recomendação</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="tecnico" role="tabpanel" aria-labelledby="t-tecnico">
+  <h2 class="ph">Detalhes técnicos</h2>
+  <div class="blk wide">
+    <h3>Roteiro da investigação</h3>
+    <ol class="flow" aria-label="Etapas da investigação">
+      <li>Sintoma</li><li>Hipóteses</li><li>Fontes de evidência</li><li>Hipóteses descartadas</li><li>Causa raiz</li><li>Contorno</li><li>Correção definitiva</li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h4>Sintoma</h4>
+    <ul>
+      <li>Última conexão bem-sucedida às 13:48.</li>
+      <li>Às 14:01 o notebook reinicia sozinho para instalar a atualização.</li>
+      <li>Às 14:03 ocorre a primeira recusa. Nenhuma tentativa foi aceita depois disso.</li>
+    </ul>
+    <h4>Hipóteses</h4>
+    <ol>
+      <li>Sinal fraco ou falha de antena (a suspeita inicial).</li>
+      <li>Mudança na controladora Wi-Fi ou no servidor RADIUS.</li>
+      <li>Problema na conta de computador ou no canal seguro com o domínio.</li>
+      <li>Problema na conta do usuário.</li>
+      <li>Mudança no próprio cliente Windows.</li>
+    </ol>
+    <h4>Fontes de evidência</h4>
+    <ul>
+      <li>Log de conexões sem fio do cliente (WLAN AutoConfig).</li>
+      <li>Log operacional de NTLM no cliente.</li>
+      <li>Log de autenticação do servidor RADIUS (NPS).</li>
+      <li>Active Directory: OU, grupos e estado da conta de computador.</li>
+    </ul>
+  </div>
+  <div class="blk wide">
+    <h4>Hipóteses descartadas e confirmada</h4>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Hipótese</th><th scope="col">Evidência consultada</th><th scope="col">Conclusão</th></tr></thead>
+      <tbody>
+        <tr><td>Sinal ou antena</td><td>A falha começou logo após o reinício para atualização, e o túnel TLS com o servidor chegava a abrir, o que exige rádio funcionando.</td><td>Descartada</td></tr>
+        <tr><td>Controladora Wi-Fi ou RADIUS</td><td>Nenhuma mudança de configuração na janela da falha.</td><td>Descartada</td></tr>
+        <tr><td>Conta de computador / AD</td><td>Mesma OU e mesmos grupos dos notebooks que conectavam; canal seguro íntegro.</td><td>Descartada</td></tr>
+        <tr><td>Conta do usuário</td><td>Ativa, sem bloqueio, senha válida.</td><td>Descartada</td></tr>
+        <tr><td>Mudança no cliente Windows</td><td>Bloqueio de NTLMv1 registrado no mesmo segundo de cada uma das 13 falhas do dia.</td><td><strong>Confirmada</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk">
+    <h4>Causa raiz</h4>
+    <p>A rede usa PEAP-MSCHAPv2 com a credencial da máquina, sem pedir senha. A atualização de segurança de outubro passou a bloquear o login automático (SSO) baseado em credenciais derivadas de NTLMv1. O túnel TLS com o servidor de autenticação era estabelecido, mas o Windows deixava de enviar a credencial dentro dele.</p>
+    <h4>Contorno imediato</h4>
+    <p>Conectar digitando usuário e senha de domínio, que a atualização não bloqueia, e aceitar o certificado do servidor de autenticação.</p>
+    <h4>Correção definitiva</h4>
+    <p>Migrar a rede para EAP-TLS com certificado de máquina, eliminando a dependência de MSCHAPv2 e NTLMv1. A migração já constava como próximo passo no projeto original.</p>
+  </div>
+  <div class="blk">
+    <h3>Limitações</h3>
+    <ul>
+      <li>O contorno depende de ação manual do usuário e não escala para muitos equipamentos.</li>
+      <li>A correção definitiva depende de uma PKI com emissão, renovação e revogação de certificados de máquina, que exige planejamento próprio.</li>
+      <li>Os logs reais não são publicados; a evidência abaixo é uma reconstrução sintética do padrão observado.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
+  <h2 class="ph">Evidências</h2>
+  <p class="callout">Nomes de máquina, usuário, SSID, domínio e servidores foram substituídos por marcadores. Os horários e a mensagem do NTLM são os observados; o formato das linhas foi simplificado para leitura.</p>
+  <div class="blk wide">
+    <h3>Linha do tempo correlacionada (reconstrução sintética)</h3>
+<pre><span class="c"># fonte      hora    evento</span>
+WLAN        13:48   última conexão 802.1X bem-sucedida   SSID=&lt;SSID-CORPORATIVO&gt;
+Sistema     14:01   reinício para instalar a atualização de segurança
+WLAN        14:03   falha de autenticação 802.1X         SSID=&lt;SSID-CORPORATIVO&gt;
+NTLM        14:03   "An attempt to use NTLMv1-derived credentials for
+                     Single Sign-On was blocked due to policy"
+<span class="c"># ... o mesmo par WLAN + NTLM se repete nas 13 falhas do dia, no mesmo segundo</span></pre>
+  </div>
+  <div class="blk">
+    <h3>Por que esta evidência é suficiente</h3>
+    <p>A correlação não é apenas de horário aproximado: o evento de bloqueio do NTLM aparece no mesmo segundo de cada uma das 13 falhas, e a primeira delas ocorre logo após a instalação da atualização. As demais camadas (rádio, RADIUS, AD) foram verificadas e não apresentaram mudança.</p>
+  </div>
+</section>
+
+<section class="panel" id="didatica" role="tabpanel" aria-labelledby="t-didatica">
+  <h2 class="ph">Versão didática</h2>
+  <div class="blk">
+    <h3>Como eu ensinaria este conceito</h3>
+    <p>O caso mostra que diagnóstico é um método, não um palpite: levantar hipóteses, testar cada uma contra uma evidência e descartar antes de trocar qualquer peça.</p>
+    <div class="cols2">
+      <div><h4>Público</h4><p>Cursos técnicos de redes e suporte, e formação de professores de Computação.</p></div>
+      <div><h4>Pré-requisitos</h4><p>Saber o que é um log e ler horários.</p></div>
+      <div><h4>Analogia</h4><p>Um médico que pergunta “o que mudou desde ontem?” antes de pedir exames. A pergunta mais útil de um incidente é a mesma.</p></div>
+      <div><h4>Experimento mínimo</h4><p>Entregar à turma três “logs” sintéticos impressos (rede, sistema e servidor) com um evento intruso. Em grupos, os alunos montam a linha do tempo e precisam justificar cada hipótese descartada.</p></div>
+      <div><h4>Erro comum</h4><p>Confundir correlação com causa, ou trocar hardware (antena, placa) antes de ler os registros.</p></div>
+      <div><h4>Pergunta de reflexão</h4><p>Por que uma correção de segurança pode quebrar algo que funcionava? Quem deveria ser avisado antes?</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="pager" aria-label="Outros estudos de caso">
+  <a href="../wifi-8021x/"><span>Caso anterior</span><strong>Autenticação de máquinas em Wi-Fi corporativo</strong></a>
+  <a href="../rede-filial-industrial/" style="text-align:right"><span>Próximo caso</span><strong>Levantamento e modernização de rede de uma filial industrial</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>

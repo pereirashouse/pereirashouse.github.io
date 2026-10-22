@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Avaliação de plataformas de virtualização e HCI · Jeferson Pereira</title>
+<meta name="description" content="Estudo de caso: prova de conceito para substituir VMware, com critérios de avaliação, riscos e critérios de rollback definidos antes da implantação e acionados quando o risco se confirmou.">
+<link rel="canonical" href="https://pereirashouse.github.io/projetos/poc-virtualizacao/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Avaliação de plataformas de virtualização e infraestrutura hiperconvergente">
+<meta property="og:description" content="VMware, Sangfor HCI e Proxmox VE: como conduzir uma PoC com critérios e interromper a implantação quando o risco se confirma.">
+<meta property="og:url" content="https://pereirashouse.github.io/projetos/poc-virtualizacao/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../">Início</a></li>
+  <li><a href="../../#destaques">Destaques</a></li>
+  <li><a href="../../#infra">Infraestrutura</a></li>
+  <li><a href="../../#edu">Educação</a></li>
+  <li><a href="../../#arquivo">Todos os projetos</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head infra">
+  <p class="crumb"><a href="../../#infra">Infraestrutura de TI</a> / Estudo de caso</p>
+  <h1>Avaliação de plataformas de virtualização e infraestrutura hiperconvergente</h1>
+  <p class="lede">Prova de conceito para substituir o VMware antes do vencimento da licença, com riscos e critérios de rollback formalizados antes da implantação e executados quando o risco se confirmou.</p>
+  <ul class="badges" aria-label="Etiquetas">
+    <li class="badge tipo">Profissional</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">✓</span>Concluído</li>
+    <li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li>
+    <li class="badge">Virtualização</li><li class="badge">Gestão de riscos</li><li class="badge">Backup</li>
+  </ul>
+  <dl class="facts">
+    <div><dt>Ambiente</dt><dd>Dois datacenters corporativos</dd></div>
+    <div><dt>Período</dt><dd>Junho a agosto de 2026</dd></div>
+    <div><dt>Papel</dt><dd>Responsável técnico pela PoC</dd></div>
+    <div><dt>Entregas</dt><dd>Relatório executivo, PoC, registro de riscos e plano de rollback</dd></div>
+  </dl>
+  <p class="summary">O ponto central deste caso não é a lista de plataformas, e sim o método: avaliar com critérios, registrar o que a PoC não conseguiu validar, definir antes quando voltar atrás e cumprir esse critério quando o risco apareceu em produção.</p>
+  <p class="updated">Última atualização: 22 de outubro de 2026</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Modo de leitura">
+  <button role="tab" id="t-resumo" aria-controls="resumo" aria-selected="true">Resumo executivo</button>
+  <button role="tab" id="t-tecnico" aria-controls="tecnico" aria-selected="false" tabindex="-1">Detalhes técnicos</button>
+  <button role="tab" id="t-evidencias" aria-controls="evidencias" aria-selected="false" tabindex="-1">Evidências</button>
+  <button role="tab" id="t-didatica" aria-controls="didatica" aria-selected="false" tabindex="-1">Versão didática</button>
+</div>
+
+<main id="conteudo">
+<section class="panel" id="resumo" role="tabpanel" aria-labelledby="t-resumo">
+  <h2 class="ph">Resumo executivo</h2>
+  <div class="blk">
+    <h3>Cenário inicial</h3>
+    <p>A organização operava um ecossistema híbrido de VMware e KVM em dois datacenters, com backup em Veeam. A licença VMware venceria em poucas semanas, e o diagnóstico prévio havia apontado VMs com sistema operacional em fim de suporte e pendências de licenciamento.</p>
+  </div>
+  <div class="blk">
+    <h3>Problema</h3>
+    <p>Escolher e validar uma plataforma substituta em prazo crítico, sem colocar em risco os serviços em produção e sem perder a integração com o backup existente.</p>
+  </div>
+  <div class="blk">
+    <h3>Meu papel</h3>
+    <ul>
+      <li>levantamento completo da infraestrutura e relatório executivo para a gestão de TI;</li>
+      <li>condução técnica da PoC;</li>
+      <li>registro dos riscos e dos itens que a PoC não conseguiu validar;</li>
+      <li>definição dos critérios objetivos de rollback;</li>
+      <li>execução do rollback e redesenho da arquitetura de backup.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Resultado</h3>
+    <ul>
+      <li>Riscos e critérios de rollback documentados antes da implantação.</li>
+      <li>A incompatibilidade com o storage SAS do datacenter principal, um dos riscos registrados, se confirmou em produção.</li>
+      <li>O critério de rollback foi acionado: dois hosts retornaram ao VMware conforme o plano, sem improviso.</li>
+      <li>O impacto ficou restrito a poucos hosts, e a decisão sobre o storage definitivo passou a ser tomada com dados reais.</li>
+    </ul>
+    <p class="note">Quantidade de VMs, custos de licenciamento e nomes de fornecedores contratados não são publicados.</p>
+  </div>
+  <div class="blk">
+    <h3>O que este caso demonstra</h3>
+    <ul class="comp">
+      <li>Condução de PoC com critérios</li><li>Gestão de riscos técnicos</li><li>Decisão de rollback baseada em critério</li>
+      <li>VMware, Sangfor HCI, KVM e Proxmox VE</li><li>Arquitetura de backup</li><li>Comunicação com a gestão</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="tecnico" role="tabpanel" aria-labelledby="t-tecnico">
+  <h2 class="ph">Detalhes técnicos</h2>
+  <div class="blk">
+    <h3>Critérios de avaliação</h3>
+    <ul>
+      <li>Compatibilidade com o storage de produção.</li>
+      <li>Integração com o backup existente (Veeam).</li>
+      <li>Migração das VMs atuais, incluindo as legadas.</li>
+      <li>Operação e administração no dia a dia.</li>
+      <li>Licenciamento e prazo até o vencimento do VMware.</li>
+    </ul>
+  </div>
+  <div class="blk wide">
+    <h3>Plataformas</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Plataforma</th><th scope="col">Papel na avaliação</th><th scope="col">Situação</th></tr></thead>
+      <tbody>
+        <tr><td>VMware vSphere</td><td>Ambiente atual e referência de comparação; caminho de retorno do plano de rollback.</td><td>Mantido nos hosts onde o rollback foi acionado</td></tr>
+        <tr><td>Sangfor HCI</td><td>Candidata principal. PoC em host isolado, fora do datacenter principal; cerca de 40% dos itens de avaliação não puderam ser validados contra produção.</td><td>Implantação controlada interrompida no storage SAS incompatível</td></tr>
+        <tr><td>Proxmox VE</td><td>Alternativa de código aberto avaliada em PoC própria.</td><td>Detalhes ainda não publicados</td></tr>
+        <tr><td>KVM</td><td>Parte do ambiente existente, considerada no diagnóstico e no plano de modernização.</td><td>Em operação</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk">
+    <h3>Decisões técnicas</h3>
+    <h4>1. Declarar o que a PoC não validou</h4>
+    <p>Como a PoC rodou em host isolado, compatibilidade de storage e integração com backup não puderam ser testadas contra produção. Em vez de tratar a PoC como aprovada, esses itens foram registrados como ressalvas, cada um com seu risco.</p>
+    <h4>2. Critério de rollback definido antes</h4>
+    <p>A implantação seguiu como teste controlado em produção, com um critério objetivo para voltar ao VMware. Quando o storage SAS se mostrou incompatível, a decisão não precisou ser discutida sob pressão: o critério já existia.</p>
+    <h4>3. Backup sem depender de plugin instável</h4>
+    <p>O plugin oficial do Veeam para Sangfor ainda não tinha versão estável (GA). A saída foi redesenhar a arquitetura: servidor Veeam em Linux e uso da API nativa do Sangfor, eliminando o risco de prazo e simplificando o licenciamento do servidor de backup.</p>
+    <h4>4. Tratar desempenho separadamente</h4>
+    <p>Um terceiro host com lentidão causada por discos mecânicos no datastore principal foi tratado com rebalanceamento de VMs entre datastores, sem confundir esse sintoma com a incompatibilidade de storage.</p>
+  </div>
+  <div class="blk">
+    <h3>Implementação por fases</h3>
+    <ol class="steps">
+      <li><strong>Diagnóstico e relatório executivo</strong>Inventário do ambiente VMware + KVM, VMs em fim de suporte e pendências priorizadas por risco.</li>
+      <li><strong>PoC em host isolado</strong>Avaliação da Sangfor HCI dentro do prazo da licença.</li>
+      <li><strong>Registro de ressalvas e riscos</strong>Itens não validados documentados, com risco e mitigação.</li>
+      <li><strong>Critérios de rollback</strong>Condição objetiva para retornar ao VMware.</li>
+      <li><strong>Implantação controlada</strong>Teste em produção com escopo limitado.</li>
+      <li><strong>Rollback acionado</strong>Dois hosts reformatados e devolvidos ao VMware.</li>
+      <li><strong>Redesenho do backup</strong>Veeam em Linux com API nativa.</li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h3>Limitações e aprendizados</h3>
+    <ul>
+      <li>Uma PoC fora do ambiente real deixa lacunas; o valor está em declará-las, não em escondê-las.</li>
+      <li>O prazo da licença reduziu o tempo de teste; com mais tempo, a validação de storage teria sido feita antes.</li>
+      <li>Rollback é parte do plano, não sinal de fracasso: o problema apareceu em poucos hosts, não no ambiente inteiro.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
+  <h2 class="ph">Evidências</h2>
+  <p class="callout">O relatório executivo, o registro de riscos e a matriz RACI são documentos internos. Abaixo estão o fluxo de decisão e os modelos genéricos usados, sem dados do ambiente.</p>
+  <figure class="diag">
+    <svg viewBox="0 0 960 220" role="img" aria-labelledby="d4t d4d">
+      <title id="d4t">Fluxo de decisão da PoC</title>
+      <desc id="d4d">Diagnóstico, PoC em host isolado, registro de ressalvas e critério de rollback, implantação controlada e, por fim, a verificação do critério: se atendido, segue a migração; se não, executa o rollback para o VMware.</desc>
+      <rect class="dg-box" x="10" y="80" width="130" height="56" rx="6"/><text class="dg-t" x="75" y="104" text-anchor="middle">Diagnóstico</text><text class="dg-s" x="75" y="120" text-anchor="middle">relatório executivo</text>
+      <rect class="dg-box" x="170" y="80" width="130" height="56" rx="6"/><text class="dg-t" x="235" y="104" text-anchor="middle">PoC isolada</text><text class="dg-s" x="235" y="120" text-anchor="middle">critérios de avaliação</text>
+      <rect class="dg-box" x="330" y="80" width="140" height="56" rx="6"/><text class="dg-t" x="400" y="104" text-anchor="middle">Ressalvas</text><text class="dg-s" x="400" y="120" text-anchor="middle">+ critério de rollback</text>
+      <rect class="dg-box" x="500" y="80" width="140" height="56" rx="6"/><text class="dg-t" x="570" y="104" text-anchor="middle">Implantação</text><text class="dg-s" x="570" y="120" text-anchor="middle">controlada</text>
+      <path class="dg" d="M140 108 H170 M300 108 H330 M470 108 H500"/>
+      <path class="dg" d="M640 108 L680 108"/>
+      <path class="dg-box" d="M720 78 L760 108 L720 138 L680 108 Z"/><text class="dg-s" x="720" y="112" text-anchor="middle">critério?</text>
+      <path class="dg-ok" d="M720 78 V40 H780"/><text class="dg-okt" x="785" y="44">atendido: segue</text>
+      <path class="dg-no" d="M720 138 V180 H780"/><text class="dg-not" x="785" y="184">violado: rollback</text>
+    </svg>
+    <figcaption>Fluxo genérico da PoC. No caso real, o critério foi violado pelo storage SAS e o rollback foi executado em dois hosts.</figcaption>
+  </figure>
+  <div class="blk wide">
+    <h3>Modelo de registro de riscos (genérico)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Risco</th><th scope="col">Validado na PoC?</th><th scope="col">Mitigação</th><th scope="col">Critério de rollback</th></tr></thead>
+      <tbody>
+        <tr><td>Incompatibilidade com o storage de produção</td><td>Não (host isolado)</td><td>Implantação limitada a poucos hosts</td><td>Datastore não reconhecido ou instável → retorno ao VMware</td></tr>
+        <tr><td>Integração com backup</td><td>Não (plugin sem GA)</td><td>Veeam em Linux com API nativa</td><td>Sem backup com evidência recente → janela não avança</td></tr>
+        <tr><td>Desempenho de datastore</td><td>Parcial</td><td>Rebalanceamento de VMs entre datastores</td><td>Latência acima do aceitável após rebalanceamento</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk">
+    <h3>Critério de Go/No-Go por janela</h3>
+    <ul>
+      <li>Backup com evidência recente.</li>
+      <li>Restore testado.</li>
+      <li>Rollback documentado.</li>
+      <li>Dono de negócio disponível durante a janela.</li>
+    </ul>
+    <p>O programa de modernização em que a PoC se insere tinha 35 riscos mapeados (12 críticos e 23 altos) e uma matriz RACI com 38 atividades.</p>
+  </div>
+</section>
+
+<section class="panel" id="didatica" role="tabpanel" aria-labelledby="t-didatica">
+  <h2 class="ph">Versão didática</h2>
+  <div class="blk">
+    <h3>Como eu ensinaria este conceito</h3>
+    <p>Prova de conceito e plano de retorno são ideias que servem para qualquer projeto, não só para datacenters.</p>
+    <div class="cols2">
+      <div><h4>Público</h4><p>Cursos técnicos de informática e licenciatura em Computação.</p></div>
+      <div><h4>Pré-requisitos</h4><p>Saber o que é um servidor e um sistema operacional.</p></div>
+      <div><h4>Analogia</h4><p>Virtualização é um prédio de apartamentos: um terreno (o servidor físico) abriga várias casas independentes (as máquinas virtuais). Trocar a plataforma é trocar a administradora do condomínio sem despejar ninguém.</p></div>
+      <div><h4>Experimento mínimo</h4><p>Antes de mudar algo no laboratório da escola, a turma escreve três linhas: o que vai testar, o que pode dar errado e qual sinal fará a equipe desfazer a mudança.</p></div>
+      <div><h4>Erro comum</h4><p>Achar que uma PoC é uma demonstração para provar que vai dar certo, e não um teste para descobrir onde pode dar errado.</p></div>
+      <div><h4>Pergunta de reflexão</h4><p>Por que decidir o critério de desistência antes de começar torna a decisão mais fácil depois?</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="pager" aria-label="Outros estudos de caso">
+  <a href="../rede-filial-industrial/"><span>Caso anterior</span><strong>Levantamento e modernização de rede</strong></a>
+  <a href="../../educacao/simulador-roteador/" style="text-align:right"><span>Trilha de educação</span><strong>Simulador de configuração de roteador</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
