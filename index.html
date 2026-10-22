@@ -122,7 +122,7 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
     <article class="case infra-c">
       <div class="meta">
         <span class="tag">IT-INFRA-012</span>
-        <dl><div><dt>Local</dt><dd>Porto Amazonas – PR</dd></div><div><dt>Tipo</dt><dd>Implantação</dd></div><div><dt>Quando</dt><dd>Ago 2026, em andamento</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+        <dl><div><dt>Local</dt><dd>Porto Amazonas – PR</dd></div><div><dt>Tipo</dt><dd>Implantação · Em produção</dd></div><div><dt>Quando</dt><dd>Ago – Out 2026, concluído</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
       </div>
       <div class="content">
         <h3>Wi-Fi corporativo com autenticação de máquina (802.1X PEAP-MSCHAPv2)</h3>
@@ -134,6 +134,7 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
           <div class="field"><h4>Política de negação explícita</h4><p>Além da política que libera as máquinas do grupo, foi criada uma segunda política — a última da lista — que nega qualquer requisição de Wi-Fi não capturada pela primeira. Sem ela, uma política permissiva mais antiga poderia aceitar os celulares rejeitados.</p></div>
           <div class="field"><h4>GPO de perfil sem fio</h4><p>Uma Política de Grupo distribui o perfil de Wi-Fi para as estações do grupo, configurando a autenticação de computador e apontando para a CA emissora do certificado do NPS. Isso elimina o prompt de confiança e garante que o Wi-Fi já esteja conectado na tela de logon.</p></div>
           <div class="field"><h4>Fases de implantação</h4><ul><li>Inventário de todos os dispositivos no SSID (impressoras, coletores, câmeras) antes de qualquer mudança</li><li>Emissão de novo certificado para o servidor NPS (o anterior estava expirado)</li><li>Criação de grupo de computadores autorizados, com reinicialização obrigatória após a inclusão</li><li>Configuração de clientes RADIUS, políticas de conexão e de rede no NPS</li><li>SSID piloto apenas nos APs de teste; rollback previsto em menos de 5 min</li></ul></div>
+          <div class="field"><h4>Resultado em produção</h4><p>Implantação concluída e estável. A rede corporativa passou a exigir conta de máquina do Active Directory para associação ao SSID — dispositivos pessoais (celulares, tablets) são bloqueados silenciosamente pelo NPS sem qualquer intervenção manual. Nenhum rollback foi necessário após a migração completa dos APs. O ambiente permanece monitorado via logs de autenticação do NPS, que registram cada tentativa aceita ou rejeitada com timestamp, identidade e AP de origem.</p></div>
         </div>
         <div class="chips"><span class="chip">Windows Server / NPS</span><span class="chip">802.1X</span><span class="chip">PEAP-MSCHAPv2</span><span class="chip">Active Directory</span><span class="chip">UniFi</span><span class="chip">GPO</span><span class="chip">Blast-RADIUS CVE-2024-3596</span></div>
       </div>
