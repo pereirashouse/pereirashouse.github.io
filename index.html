@@ -121,13 +121,39 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
 
     <article class="case infra-c">
       <div class="meta">
-        <span class="tag">NPS / RADIUS</span>
-        <dl><div><dt>Local</dt><dd>Porto Amazonas – PR</dd></div><div><dt>Tipo</dt><dd>Implantação</dd></div></dl>
+        <span class="tag">IT-INFRA-012</span>
+        <dl><div><dt>Local</dt><dd>Porto Amazonas – PR</dd></div><div><dt>Tipo</dt><dd>Implantação</dd></div><div><dt>Quando</dt><dd>Ago 2026, em andamento</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
       </div>
       <div class="content">
-        <h3>Autenticação centralizada de rede com NPS e RADIUS</h3>
-        <p>Implantação do Network Policy Server (NPS) do Windows Server como servidor RADIUS, para que o acesso à rede passe a ser liberado por usuário ou dispositivo autenticado, em vez de uma senha compartilhada. Estudo de caso completo em breve.</p>
-        <div class="chips"><span class="chip">Windows Server</span><span class="chip">NPS</span><span class="chip">RADIUS</span><span class="chip">Autenticação de rede</span></div>
+        <h3>Wi-Fi corporativo com autenticação de máquina (802.1X PEAP-MSCHAPv2)</h3>
+        <p>O Wi-Fi corporativo usava senha compartilhada, o que permitia que celulares e tablets pessoais entrassem com as credenciais de um funcionário. A solução foi mudar o sujeito da autenticação: em vez de <em>quem é você</em>, passou a valer <em>esta máquina pertence ao domínio</em>. Um celular, por não ter conta de computador no Active Directory, simplesmente não consegue apresentar a credencial exigida — independentemente de saber a senha do usuário.</p>
+        <div class="fields">
+          <div class="field"><h4>Por que a autenticação de máquina bloqueia celulares</h4><p>PEAP-MSCHAPv2 abre um túnel TLS externo e, dentro dele, envia a credencial. Com a política de <em>Grupos de Computadores</em> no NPS, a credencial aceita é a conta de máquina do domínio. Essa senha fica armazenada na LSA da estação e nunca sai dela — um celular não tem como obtê-la.</p></div>
+          <div class="field"><h4>Decisão arquitetural: NPS local</h4><p>O servidor NPS foi mantido na própria filial, e não na matriz. Motivo: a autenticação RADIUS usa UDP com payloads grandes, e o túnel VPN entre os sites tem uma restrição de MTU herdada do protocolo de VPN (IKEv1). UDP não fragmenta, o que derruba a autenticação. Com o NPS local, nenhum fluxo de autenticação precisa atravessar a VPN.</p></div>
+          <div class="field"><h4>Mitigação Blast-RADIUS (CVE-2024-3596)</h4><p>Cada access point UniFi foi cadastrado como cliente RADIUS independente. Em todos eles, a opção <em>Solicitações devem conter o atributo Message Authenticator</em> foi ativada. Esse atributo impede o ataque de forja de resposta do Blast-RADIUS, que afeta servidores RADIUS sem essa proteção.</p></div>
+          <div class="field"><h4>Política de negação explícita</h4><p>Além da política que libera as máquinas do grupo, foi criada uma segunda política — a última da lista — que nega qualquer requisição de Wi-Fi não capturada pela primeira. Sem ela, uma política permissiva mais antiga poderia aceitar os celulares rejeitados.</p></div>
+          <div class="field"><h4>GPO de perfil sem fio</h4><p>Uma Política de Grupo distribui o perfil de Wi-Fi para as estações do grupo, configurando a autenticação de computador e apontando para a CA emissora do certificado do NPS. Isso elimina o prompt de confiança e garante que o Wi-Fi já esteja conectado na tela de logon.</p></div>
+          <div class="field"><h4>Fases de implantação</h4><ul><li>Inventário de todos os dispositivos no SSID (impressoras, coletores, câmeras) antes de qualquer mudança</li><li>Emissão de novo certificado para o servidor NPS (o anterior estava expirado)</li><li>Criação de grupo de computadores autorizados, com reinicialização obrigatória após a inclusão</li><li>Configuração de clientes RADIUS, políticas de conexão e de rede no NPS</li><li>SSID piloto apenas nos APs de teste; rollback previsto em menos de 5 min</li></ul></div>
+        </div>
+        <div class="chips"><span class="chip">Windows Server / NPS</span><span class="chip">802.1X</span><span class="chip">PEAP-MSCHAPv2</span><span class="chip">Active Directory</span><span class="chip">UniFi</span><span class="chip">GPO</span><span class="chip">Blast-RADIUS CVE-2024-3596</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Projeto de rede</span>
+        <dl><div><dt>Local</dt><dd>Porto Amazonas – PR</dd></div><div><dt>Tipo</dt><dd>Levantamento e modernização</dd></div><div><dt>Quando</dt><dd>Ago – Out 2026, em andamento</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Modernização e documentação da rede de uma filial industrial</h3>
+        <p>A rede da filial havia crescido sem documentação: switches de distribuição sem configuração-padrão, VLANs com três tratamentos diferentes para o mesmo propósito, cabos sem identificação e nenhuma autenticação centralizada nos equipamentos. O trabalho cobriu levantamento físico, auditoria de backups de configuração, plano de VLANs e identificação de achados de segurança.</p>
+        <div class="fields">
+          <div class="field"><h4>Topologia</h4><ul><li>Firewall de borda com SD-WAN agregando dois links de 100 Mb de provedores distintos</li><li>Core com par de switches em pilha (VSF), raiz do spanning tree</li><li>Distribuição: onze switches de acesso, cada um com uplink direto no core</li><li>Switch PoE separado para os access points do site</li></ul></div>
+          <div class="field"><h4>Problemas encontrados</h4><ul><li>Dois switches do mesmo modelo com VLAN de CFTV ausente; um terceiro com a VLAN declarada mas fora do tronco — câmera aparece conectada mas não sai do switch</li><li>Todos os switches de distribuição gerenciados pela VLAN 1 (padrão de fábrica) em vez da VLAN de gerência definida no projeto</li><li>Seis dos sete uplinks do firewall concentrados no mesmo membro da pilha</li><li>Certificados autoassinados vencidos e chaves privadas exportadas em texto claro nos backups</li></ul></div>
+          <div class="field"><h4>Achado de segurança crítico</h4><p>O SSID dos coletores de armazém estava aberto (sem senha), transmitido pelo switch de antenas, na mesma VLAN dos servidores — sem isolamento. Qualquer dispositivo na área de cargas conseguia acessar a rede interna. Documentado como achado crítico e encaminhado para correção imediata (migração dos coletores para a VLAN do WMS).</p></div>
+          <div class="field"><h4>Entregas</h4><ul><li>Mapeamento completo de todos os switches com portas, VLANs e IPs</li><li>Diagrama de backbone com ligações confirmadas por LLDP e visita de campo</li><li>Plano de VLANs 350–360 com estado real de cada VLAN em cada equipamento</li><li>Roteiro de regularização priorizado por risco</li></ul></div>
+        </div>
+        <div class="chips"><span class="chip">FortiGate</span><span class="chip">SD-WAN</span><span class="chip">HPE Aruba</span><span class="chip">UniFi</span><span class="chip">VLAN</span><span class="chip">Spanning Tree</span><span class="chip">Documentação técnica</span><span class="chip">Achado de segurança</span></div>
       </div>
     </article>
 
@@ -236,7 +262,7 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
     <div class="sec-head"><h2>Áreas de atuação</h2></div>
     <div class="skills">
       <div><h3>Servidores e serviços</h3><div class="chips"><span class="chip">Windows Server</span><span class="chip">Active Directory</span><span class="chip">NPS / RADIUS</span><span class="chip">Linux</span></div></div>
-      <div><h3>Redes</h3><div class="chips"><span class="chip">Switches</span><span class="chip">Firewalls</span><span class="chip">Wi-Fi corporativo</span><span class="chip">TCP/IP</span></div></div>
+      <div><h3>Redes</h3><div class="chips"><span class="chip">Switches</span><span class="chip">Firewalls</span><span class="chip">FortiGate / SD-WAN</span><span class="chip">Wi-Fi corporativo</span><span class="chip">VLAN</span><span class="chip">TCP/IP</span></div></div>
       <div><h3>Nuvem e operação</h3><div class="chips"><span class="chip">Nuvem</span><span class="chip">Monitoramento</span><span class="chip">Documentação (IT)</span></div></div>
       <div><h3>Ensino</h3><div class="chips"><span class="chip">BNCC Computação</span><span class="chip">IIR</span><span class="chip">Oficinas</span><span class="chip">HTML, CSS, JS</span></div></div>
     </div>
