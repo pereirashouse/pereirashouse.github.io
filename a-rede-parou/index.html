@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Rede Parou</title>
+<meta name="description" content="Laboratório de investigação: descubra, a partir de registros fictícios, por que a rede de uma escola parou.">
+<style>
+:root{
+  --bg:#f6f7f9;--card:#fff;--ink:#1d232b;--muted:#5b6673;--line:#d9dee5;
+  --acc:#1f6feb;--acc-ink:#fff;--ok:#1a7f37;--warn:#9a6700;--err:#cf222e;
+  --ok-bg:#dafbe1;--err-bg:#ffebe9;--mark:#fff1b8;--chip:#eef1f5;--code:#f3f5f8;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1318;--card:#171c23;--ink:#e6e9ee;--muted:#9aa5b1;--line:#2c343e;
+  --acc:#4c8dff;--acc-ink:#0b0f14;--ok:#3fb950;--warn:#d29922;--err:#f85149;
+  --ok-bg:#12261a;--err-bg:#2d1416;--mark:#3a3112;--chip:#222a33;--code:#11161c;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1318;--card:#171c23;--ink:#e6e9ee;--muted:#9aa5b1;--line:#2c343e;
+  --acc:#4c8dff;--acc-ink:#0b0f14;--ok:#3fb950;--warn:#d29922;--err:#f85149;
+  --ok-bg:#12261a;--err-bg:#2d1416;--mark:#3a3112;--chip:#222a33;--code:#11161c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1100px;margin:auto}
+h1{font-size:1.5rem;margin:0 0 4px}
+h2{font-size:1.1rem;margin:0 0 10px}
+main{max-width:1100px;margin:auto;padding:0 16px 40px;display:grid;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.muted{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,input,textarea{font:inherit;color:inherit}
+button{background:var(--chip);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.primary{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+button[aria-pressed="true"]{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+input,select,textarea{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:5px 8px;min-width:0}
+textarea{width:100%;min-height:3.2em;resize:vertical}
+.briefing{border-left:4px solid var(--err)}
+.fontes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.fontes button{font-size:.88rem}
+.desc{font-size:.9rem;margin:0 0 8px}
+.log{background:var(--code);border:1px solid var(--line);border-radius:8px;max-height:420px;overflow:auto;font:13px/1.55 ui-monospace,Consolas,monospace}
+.log div{display:grid;grid-template-columns:3em 1fr;cursor:pointer;padding:1px 8px 1px 0}
+.log div:hover{background:var(--chip)}
+.log div.marcada{background:var(--mark)}
+.log .n{color:var(--muted);text-align:right;padding-right:10px;user-select:none}
+.log .t{white-space:pre-wrap;word-break:break-word}
+.log mark{background:var(--acc);color:var(--acc-ink);border-radius:2px}
+.ev{list-style:none;padding:0;margin:0}
+.ev li{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:start;padding:6px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.ev .q{font-family:ui-monospace,Consolas,monospace;font-size:.82rem;color:var(--muted);white-space:nowrap}
+.ev code{font-size:.82rem;word-break:break-word}
+.hip{display:grid;gap:10px}
+.hip .h{border:1px solid var(--line);border-radius:8px;padding:10px}
+.hip .h.confirmada{border-color:var(--ok)}
+.hip .h.descartada{opacity:.75}
+.q-laudo{margin:12px 0;padding:10px;border:1px solid var(--line);border-radius:8px}
+.q-laudo legend{font-weight:600;padding:0 4px}
+.q-laudo label{display:block;padding:2px 0}
+.fb{margin-top:6px;padding:6px 8px;border-radius:6px;font-size:.92rem}
+.fb.c{background:var(--ok-bg)} .fb.e{background:var(--err-bg)}
+.pista{margin:6px 0;padding-left:10px;border-left:3px solid var(--acc)}
+.grid2{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:900px){.grid2{grid-template-columns:1.4fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>A Rede Parou</h1>
+  <p class="muted">Laboratório de investigação com registros fictícios. Nenhum dado aqui é de uma escola real.</p>
+</header>
+<main>
+  <section class="card briefing">
+    <h2>O caso</h2>
+    <p><b>Segunda-feira, 17 de março, 07h20.</b> Os chamados começam a chegar: na secretaria, na sala dos professores e no laboratório, os computadores dizem “conectado, sem internet” e o sistema de notas não abre. Mas a direção diz que lá está tudo normal.</p>
+    <p>Vocês são a equipe de investigação. Os registros (logs) dos equipamentos foram coletados. Descubram <b>o que mudou, quando, onde</b> e <b>por que só alguns computadores foram afetados</b>.</p>
+    <p class="muted" style="margin:0">Como trabalhar: leiam os registros, cliquem nas linhas importantes para guardá-las como evidência, avaliem cada hipótese e, no fim, preencham o laudo.</p>
+  </section>
+
+  <section class="card">
+    <h2>1. Registros coletados</h2>
+    <div class="fontes" id="fontes" role="tablist"></div>
+    <p class="desc muted" id="descFonte"></p>
+    <div class="row" style="margin-bottom:8px">
+      <label for="filtro">Procurar</label>
+      <input id="filtro" placeholder="ex.: 192.168.0.1, FALHOU, porta 14" style="flex:1;min-width:12em">
+      <button id="btnTodas">Procurar em todos os registros</button>
+    </div>
+    <div class="log" id="log" aria-label="Linhas do registro. Clique em uma linha para marcar como evidência."></div>
+    <p class="muted" style="font-size:.85rem;margin:6px 0 0">Clique numa linha para marcar ou desmarcar como evidência.</p>
+    <div id="busca"></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>2. Hipóteses</h2>
+      <p class="muted desc">Para cada hipótese, decidam se as evidências a confirmam ou a descartam, e escrevam por quê.</p>
+      <div class="hip" id="hipoteses"></div>
+    </section>
+    <section class="card">
+      <h2>3. Linha do tempo das evidências</h2>
+      <p class="muted desc">As linhas marcadas aparecem aqui em ordem de horário.</p>
+      <ul class="ev" id="evidencias"></ul>
+      <div style="margin-top:12px">
+        <h2 style="margin-top:8px">Pistas</h2>
+        <p class="muted desc">Usem só se travarem. O uso de pistas aparece no laudo.</p>
+        <div id="pistas"></div>
+        <button id="btnPista">Ver próxima pista</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>4. Laudo da investigação</h2>
+    <div class="row"><label for="equipe">Equipe</label><input id="equipe" placeholder="nomes" style="flex:1;min-width:12em"></div>
+    <form id="laudo"></form>
+    <div class="row" style="margin-top:10px">
+      <button class="primary" id="btnConferir">Conferir laudo</button>
+      <button id="btnBaixar">Baixar laudo (.txt)</button>
+      <button id="btnLimpar">Recomeçar</button>
+    </div>
+    <div id="resultado" aria-live="polite"></div>
+  </section>
+</main>
+<footer style="max-width:1100px;margin:auto;padding:0 16px 32px;font-size:.85rem" class="muted">Plano de aula, material do professor e do aluno: <a href="https://github.com/pereirashouse/computacao-bncc/tree/main/projetos/03-investigacao-incidente-logs" style="color:var(--acc)">github.com/pereirashouse/computacao-bncc</a> · Conteúdo sob CC BY 4.0 · Jeferson Luiz Pereira</footer>
+
+<script>
+"use strict";
+// Conteúdo de ../logs/. Para atualizar depois de editar os arquivos: python3 embutir-logs.py
+const LOGS = /*LOGS:INICIO*/{
+ "autenticacao.log": "2025-03-14 07:15:22 SRV-NOTAS login OK: secretaria02 de 192.168.1.121\n2025-03-14 07:41:05 SRV-NOTAS login OK: prof.historia de 192.168.1.147\n2025-03-14 08:02:51 SRV-NOTAS login OK: prof.matematica de 192.168.1.133\n2025-03-14 08:40:00 SRV-NOTAS estatística: 14 logins de professores e secretaria desde 07h\n2025-03-14 16:55:10 SRV-NOTAS logout: secretaria02\n2025-03-15 10:18:10 SRV-NOTAS sistema: desligamento seguro (nobreak)\n2025-03-15 10:41:30 SRV-NOTAS sistema: serviço iniciado\n2025-03-17 07:20:05 SRV-NOTAS login OK: direcao de 192.168.1.20\n2025-03-17 07:52:10 SRV-NOTAS login FALHOU: aluno.lab05 de 192.168.1.153, senha incorreta (1 de 5)\n2025-03-17 07:52:31 SRV-NOTAS login FALHOU: aluno.lab05 de 192.168.1.153, senha incorreta (2 de 5)\n2025-03-17 07:52:55 SRV-NOTAS login FALHOU: aluno.lab05 de 192.168.1.153, senha incorreta (3 de 5)\n2025-03-17 07:53:20 SRV-NOTAS login FALHOU: aluno.lab05 de 192.168.1.153, senha incorreta (4 de 5)\n2025-03-17 07:53:40 SRV-NOTAS login FALHOU: aluno.lab05 de 192.168.1.153, senha incorreta (5 de 5); conta bloqueada por 15 min\n2025-03-17 08:40:00 SRV-NOTAS estatística: 1 login de professores e secretaria desde 07h\n",
+ "captura-pc-direcao.txt": "Captura feita pelo técnico em 2025-03-17 08:22 no computador PC-DIRECAO (comando ipconfig /all)\n\nAdaptador Ethernet:\n   Endereço físico (MAC) . . . . . : 02-1B-00-0A-01-02\n   DHCP habilitado . . . . . . . . : Não\n   Endereço IPv4 . . . . . . . . . : 192.168.1.20\n   Máscara de sub-rede . . . . . . : 255.255.255.0\n   Gateway padrão  . . . . . . . . : 192.168.1.1\n   Servidores DNS  . . . . . . . . : 192.168.1.10\n\nTeste: ping 192.168.1.12 (SRV-NOTAS) → Resposta de 192.168.1.12: tempo<1ms\n",
+ "captura-pc-sec-02.txt": "Captura feita pelo técnico em 2025-03-17 08:20 no computador PC-SEC-02 (comando ipconfig /all)\n\nAdaptador Ethernet:\n   Endereço físico (MAC) . . . . . : 02-1B-00-0A-01-21\n   DHCP habilitado . . . . . . . . : Sim\n   Endereço IPv4 . . . . . . . . . : 192.168.0.104\n   Máscara de sub-rede . . . . . . : 255.255.255.0\n   Concessão obtida  . . . . . . . : segunda-feira, 17 de março de 2025 07:05:13\n   Gateway padrão  . . . . . . . . : 192.168.0.1\n   Servidor DHCP . . . . . . . . . : 192.168.0.1\n   Servidores DNS  . . . . . . . . : 192.168.0.1\n\nTeste: ping 192.168.1.12 (SRV-NOTAS) → Esgotado o tempo limite do pedido.\nTeste: ping 192.168.0.1 → Resposta de 192.168.0.1: tempo=2ms\n",
+ "chamados.csv": "data_hora;quem;local;relato;situacao\n2025-03-14 17:48;bibliotecaria;Biblioteca;Recebemos um roteador Wi-Fi doado pela associação de pais. Ligamos na tomada de rede da mesa 2 para os alunos usarem. Alguém da TI pode configurar depois?;aberto\n2025-03-17 07:18;secretaria02;Secretaria;O computador mostra \"Conectado, sem internet\". O sistema de notas não abre.;aberto\n2025-03-17 07:25;prof.historia;Sala dos professores;O notebook conecta no Wi-Fi da escola, mas nenhum site abre.;aberto\n2025-03-17 07:31;monitor.lab;Laboratório;Metade das máquinas sem internet. As que ficaram ligadas desde sexta funcionam.;aberto\n2025-03-17 07:40;direcao;Direção;Aqui está tudo normal: internet e sistema de notas funcionando.;informativo\n2025-03-17 07:55;aluno.lab05;Laboratório;Minha senha não entra no sistema e agora diz que a conta está bloqueada.;aberto\n2025-03-17 08:05;secretaria01;Secretaria;A impressora da secretaria imprime pelo computador da direção, mas não pelo meu.;aberto\n2025-03-17 08:30;bibliotecaria;Biblioteca;Os alunos estão conectando no Wi-Fi novo (BIBLIOTECA-LIVRE), mas também ficam sem internet.;aberto\n2025-03-17 09:10;tecnico.ti;Rack;Link de internet testado: OK. Firewall mostra tráfego normal saindo da direção. Investigando.;em andamento\n",
+ "dhcp-servidor.log": "2025-03-14 07:01:10 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:21 (PC-SEC-02)\n2025-03-14 07:01:10 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.121 para 02:1b:00:0a:01:21\n2025-03-14 07:01:11 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.1.121 de 02:1b:00:0a:01:21 (servidor escolhido: 192.168.1.10)\n2025-03-14 07:01:11 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.121 para 02:1b:00:0a:01:21 (PC-SEC-02), concessão de 8 h\n2025-03-14 07:12:40 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:33 (PC-PROF-03)\n2025-03-14 07:12:40 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.133 para 02:1b:00:0a:01:33\n2025-03-14 07:12:41 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.1.133 de 02:1b:00:0a:01:33 (servidor escolhido: 192.168.1.10)\n2025-03-14 07:12:41 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.133 para 02:1b:00:0a:01:33 (PC-PROF-03), concessão de 8 h\n2025-03-14 07:20:03 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:47 (NOTE-PROF-07)\n2025-03-14 07:20:03 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.147 para 02:1b:00:0a:01:47\n2025-03-14 07:20:04 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.1.147 de 02:1b:00:0a:01:47 (servidor escolhido: 192.168.1.10)\n2025-03-14 07:20:04 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.147 para 02:1b:00:0a:01:47 (NOTE-PROF-07), concessão de 8 h\n2025-03-14 07:30:15 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.153 para 02:1b:00:0a:01:53 (PC-LAB-03), concessão de 8 h\n2025-03-14 07:30:22 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.155 para 02:1b:00:0a:01:55 (PC-LAB-05), concessão de 8 h\n2025-03-14 07:30:31 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.162 para 02:1b:00:0a:01:62 (PC-LAB-12), concessão de 8 h\n2025-03-14 11:01:12 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.1.121 de 02:1b:00:0a:01:21 (renovação)\n2025-03-14 11:01:12 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.121 para 02:1b:00:0a:01:21 (PC-SEC-02), concessão de 8 h\n2025-03-14 17:40:00 SRV-DHCP-DNS dhcp: estatística: 87 concessões ativas\n2025-03-15 10:18:05 SRV-DHCP-DNS dhcp: serviço parado (desligamento do servidor)\n2025-03-15 10:41:02 SRV-DHCP-DNS dhcp: serviço iniciado; faixa 192.168.1.100 a 192.168.1.199; gateway 192.168.1.1; DNS 192.168.1.10\n2025-03-16 23:59:00 SRV-DHCP-DNS dhcp: estatística: 4 concessões ativas\n2025-03-17 07:05:12 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:21 (PC-SEC-02)\n2025-03-17 07:05:12 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.121 para 02:1b:00:0a:01:21\n2025-03-17 07:05:13 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.0.104 de 02:1b:00:0a:01:21 (servidor escolhido: 192.168.0.1): pedido para outro servidor, ignorado\n2025-03-17 07:09:47 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:33 (PC-PROF-03)\n2025-03-17 07:09:47 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.133 para 02:1b:00:0a:01:33\n2025-03-17 07:09:47 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.0.105 de 02:1b:00:0a:01:33 (servidor escolhido: 192.168.0.1): pedido para outro servidor, ignorado\n2025-03-17 07:14:20 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:47 (NOTE-PROF-07)\n2025-03-17 07:14:20 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.147 para 02:1b:00:0a:01:47\n2025-03-17 07:14:21 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.0.106 de 02:1b:00:0a:01:47 (servidor escolhido: 192.168.0.1): pedido para outro servidor, ignorado\n2025-03-17 07:22:02 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:55 (PC-LAB-05)\n2025-03-17 07:22:02 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.155 para 02:1b:00:0a:01:55\n2025-03-17 07:22:03 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.0.107 de 02:1b:00:0a:01:55 (servidor escolhido: 192.168.0.1): pedido para outro servidor, ignorado\n2025-03-17 07:22:09 SRV-DHCP-DNS dhcp: DHCPDISCOVER de 02:1b:00:0a:01:62 (PC-LAB-12)\n2025-03-17 07:22:09 SRV-DHCP-DNS dhcp: DHCPOFFER 192.168.1.162 para 02:1b:00:0a:01:62\n2025-03-17 07:22:10 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.0.108 de 02:1b:00:0a:01:62 (servidor escolhido: 192.168.0.1): pedido para outro servidor, ignorado\n2025-03-17 07:31:40 SRV-DHCP-DNS dhcp: DHCPREQUEST 192.168.1.153 de 02:1b:00:0a:01:53 (renovação)\n2025-03-17 07:31:40 SRV-DHCP-DNS dhcp: DHCPACK 192.168.1.153 para 02:1b:00:0a:01:53 (PC-LAB-03), concessão de 8 h\n2025-03-17 08:00:00 SRV-DHCP-DNS dhcp: estatística: 5 concessões ativas (média das segundas-feiras às 08h: 80)\n",
+ "firewall.log": "2025-03-14 10:00:00 FW-ESCOLA estatística: 412 sessões ativas vindas da rede interna; 79 origens diferentes\n2025-03-14 14:00:05 FW-ESCOLA sistema: atualização de firmware iniciada (7.2.0 para 7.2.1)\n2025-03-14 14:03:40 FW-ESCOLA sistema: reiniciado com firmware 7.2.1\n2025-03-14 14:04:10 FW-ESCOLA interface: LAN 192.168.1.1/24 ativa; WAN1 ativa\n2025-03-14 14:30:00 FW-ESCOLA estatística: 398 sessões ativas vindas da rede interna; 77 origens diferentes\n2025-03-14 17:00:00 FW-ESCOLA estatística: 205 sessões ativas vindas da rede interna; 60 origens diferentes\n2025-03-15 10:18:20 FW-ESCOLA sistema: falta de energia detectada, desligando\n2025-03-15 10:40:15 FW-ESCOLA sistema: iniciado com firmware 7.2.1\n2025-03-16 03:12:44 FW-ESCOLA interface: WAN1 sem sinal do provedor (link caiu)\n2025-03-16 03:14:02 FW-ESCOLA interface: WAN1 restabelecida\n2025-03-17 07:00:00 FW-ESCOLA estatística: 9 sessões ativas vindas da rede interna; 4 origens diferentes (192.168.1.11, 192.168.1.12, 192.168.1.20, 192.168.1.153)\n2025-03-17 07:45:00 FW-ESCOLA diagnóstico: teste do link WAN1 OK, latência 18 ms, 0% de perda de pacotes\n2025-03-17 08:00:00 FW-ESCOLA estatística: 31 sessões ativas vindas da rede interna; 6 origens diferentes (192.168.1.10, 192.168.1.11, 192.168.1.12, 192.168.1.20, 192.168.1.30, 192.168.1.153)\n2025-03-17 09:00:00 FW-ESCOLA estatística: 33 sessões ativas vindas da rede interna; 6 origens diferentes\n2025-03-17 09:00:00 FW-ESCOLA regras: nenhuma conexão da rede interna foi bloqueada nas últimas 2 horas\n",
+ "registro-de-mudancas.csv": "data;hora;responsavel;mudanca;teste_depois\n2025-03-11;15:00;TI;Troca de toner da impressora da secretaria;Impressão de teste OK\n2025-03-14;14:00;TI;Atualização do firmware do firewall (7.2.0 para 7.2.1);Navegação testada na secretaria e no laboratório às 14:20: OK\n2025-03-15;10:15;TI e eletricista;Troca do nobreak do rack (servidores, switch e firewall desligados por cerca de 25 min);Tudo religado às 10:41; navegação testada na direção: OK\n",
+ "servidor-arquivos.log": "2025-03-15 10:15:02 SRV-ARQUIVOS energia: nobreak operando em bateria (troca programada)\n2025-03-15 10:18:00 SRV-ARQUIVOS sistema: desligamento seguro iniciado pelo administrador\n2025-03-15 10:40:30 SRV-ARQUIVOS sistema: iniciado\n2025-03-15 10:41:10 SRV-ARQUIVOS compartilhamento: serviço de arquivos ativo\n2025-03-16 02:00:00 SRV-ARQUIVOS backup: cópia diária iniciada\n2025-03-16 02:47:15 SRV-ARQUIVOS backup: cópia diária concluída com sucesso (12,4 GB)\n2025-03-16 23:00:00 SRV-ARQUIVOS disco: aviso, unidade D: com 87% de uso\n2025-03-17 07:00:00 SRV-ARQUIVOS compartilhamento: serviço ativo; 0 conexões\n2025-03-17 08:00:00 SRV-ARQUIVOS compartilhamento: 2 conexões ativas (192.168.1.20, 192.168.1.153); média das segundas-feiras às 08h: 40\n",
+ "switch-central.log": "2025-03-14 16:30:12 SW-CENTRAL stp: porta 3 (LAB-RACK) mudança de topologia\n2025-03-14 16:30:14 SW-CENTRAL stp: topologia estável\n2025-03-14 17:52:08 SW-CENTRAL porta 14 (BIBLIOTECA-MESA2): link ativo, 100 Mb/s\n2025-03-14 17:52:31 SW-CENTRAL porta 14 (BIBLIOTECA-MESA2): endereço MAC 02:1b:00:ee:00:01 aprendido\n2025-03-15 10:18:30 SW-CENTRAL sistema: sem energia, desligando\n2025-03-15 10:40:05 SW-CENTRAL sistema: iniciado; VLANs: 1 (todas as portas); DHCP snooping: desativado; proteção de porta: desativada\n2025-03-15 10:40:20 SW-CENTRAL porta 14 (BIBLIOTECA-MESA2): link ativo, 100 Mb/s\n2025-03-15 10:40:44 SW-CENTRAL porta 14 (BIBLIOTECA-MESA2): endereço MAC 02:1b:00:ee:00:01 aprendido\n2025-03-17 06:58:31 SW-CENTRAL porta 5 (SECRETARIA-1): link ativo, 1 Gb/s\n2025-03-17 06:58:40 SW-CENTRAL porta 6 (SECRETARIA-2): link ativo, 1 Gb/s\n2025-03-17 07:02:15 SW-CENTRAL porta 9 (SALA-PROF-1): link ativo, 1 Gb/s\n2025-03-17 07:13:58 SW-CENTRAL porta 10 (SALA-PROF-AP): link ativo, 1 Gb/s\n2025-03-17 07:21:44 SW-CENTRAL porta 3 (LAB-RACK): 18 endereços MAC aprendidos\n"
+}/*LOGS:FIM*/;
+
+const FONTES = [
+  ["chamados.csv","Chamados","Pedidos de ajuda abertos pelas pessoas da escola."],
+  ["registro-de-mudancas.csv","Mudanças","Alterações planejadas e registradas pela equipe de TI."],
+  ["dhcp-servidor.log","Servidor DHCP","O servidor oficial que entrega endereços IP (192.168.1.10)."],
+  ["firewall.log","Firewall","O equipamento que liga a escola à internet (192.168.1.1)."],
+  ["switch-central.log","Switch central","O switch onde chegam os cabos de todas as salas."],
+  ["autenticacao.log","Sistema de notas","Entradas (logins) no sistema de notas (192.168.1.12)."],
+  ["servidor-arquivos.log","Servidor de arquivos","Eventos do servidor de arquivos (192.168.1.11)."],
+  ["captura-pc-sec-02.txt","PC da secretaria","Configuração de rede de um computador com problema."],
+  ["captura-pc-direcao.txt","PC da direção","Configuração de rede de um computador que funciona."]
+];
+
+const HIPOTESES = [
+  {id:"h1", t:"O link de internet do provedor caiu."},
+  {id:"h2", t:"A atualização do firewall de sexta-feira quebrou a navegação."},
+  {id:"h3", t:"Os servidores não voltaram direito depois da troca do nobreak."},
+  {id:"h4", t:"Alguém está tentando invadir o sistema de notas descobrindo senhas."},
+  {id:"h5", t:"Os computadores estão recebendo endereço IP de um servidor DHCP que não é o oficial."},
+  {id:"h6", t:"O disco do servidor de arquivos está cheio."}
+];
+
+const PISTAS = [
+  "Comparem quem funciona com quem não funciona. O que a direção tem de diferente da secretaria?",
+  "Olhem o endereço IP, o gateway e o servidor DHCP nas duas capturas de computador. Todos começam com 192.168.1?",
+  "Procurem “192.168.0.1” em todos os registros. Depois procurem quando apareceu um equipamento novo no switch e o que diz o chamado de sexta às 17:48."
+];
+
+// Perguntas do laudo. "ok" é a alternativa correta; "porque" explica depois da conferência.
+const PERGUNTAS = [
+  {id:"q1", tipo:"radio", p:"Qual é a causa do problema?", ops:HIPOTESES.map(h=>[h.id,h.t]), ok:"h5",
+   porque:"As capturas mostram computadores com IP 192.168.0.x, gateway e servidor DHCP 192.168.0.1, que não existe na rede oficial (192.168.1.x). O servidor oficial registra os pedidos “para outro servidor, ignorado”."},
+  {id:"q2", tipo:"radio", p:"Qual equipamento está entregando os endereços errados?", ok:"b",
+   ops:[["a","O firewall, depois da atualização"],["b","O roteador Wi-Fi doado, ligado na porta 14 da biblioteca"],["c","O servidor DHCP oficial, depois de religar"],["d","O switch central"]],
+   porque:"O chamado de sexta às 17:48 conta que um roteador doado foi ligado na mesa 2 da biblioteca. Às 17:52 o switch registra um equipamento novo na porta 14 (BIBLIOTECA-MESA2). Esse roteador tem servidor DHCP próprio ligado de fábrica."},
+  {id:"q3", tipo:"texto", p:"Qual é o endereço IP do servidor DHCP indevido?", ok:"192.168.0.1",
+   porque:"Aparece como “servidor escolhido: 192.168.0.1” no log do DHCP oficial e como servidor DHCP na captura do PC-SEC-02."},
+  {id:"q4", tipo:"radio", p:"Quando aconteceu a mudança que causou o problema?", ok:"b",
+   ops:[["a","Sexta, 14:00 (firmware do firewall)"],["b","Sexta, 17:52 (equipamento novo na porta 14)"],["c","Sábado, 10:15 (troca do nobreak)"],["d","Domingo, 03:12 (queda do link)"],["e","Segunda, 07:05 (primeiro chamado)"]],
+   porque:"A causa entrou na sexta às 17:52, mas só apareceu na segunda: no fim de semana quase ninguém pediu endereço. Na segunda cedo, cada computador que ligava pedia IP e aceitava a primeira oferta que chegava."},
+  {id:"q5", tipo:"radio", p:"Por que a direção e o PC-LAB-03 continuaram funcionando?", ok:"c",
+   ops:[["a","Estão mais perto do rack"],["b","Usam cabo de rede melhor"],["c","A direção tem IP fixo; o PC-LAB-03 ficou ligado e renovou o endereço com o servidor oficial"],["d","Têm um antivírus diferente"]],
+   porque:"Quem não precisa pedir endereço novo não é enganado pelo DHCP indevido. A captura da direção mostra “DHCP habilitado: Não”, e o log do DHCP oficial mostra a renovação do PC-LAB-03 às 07:31."},
+  {id:"q6", tipo:"check", p:"Quais medidas evitam que isso se repita? (marquem todas as corretas)", ok:["a","b","c","d"],
+   ops:[["a","Ativar a proteção DHCP snooping no switch, que só aceita ofertas da porta do servidor oficial"],["b","Separar a rede em VLANs, para um problema na biblioteca não atingir a secretaria"],["c","Registrar toda mudança, inclusive equipamento doado, antes de ligar na rede"],["d","Desativar as portas de rede que não estão em uso"],["e","Obrigar todos a trocar de senha"],["f","Contratar uma internet mais rápida"],["g","Formatar o servidor de arquivos"]],
+   porque:"DHCP snooping e VLANs são as defesas técnicas; registro de mudanças e portas desativadas são as defesas de processo. Senha, velocidade e formatação não têm relação com a causa."},
+  {id:"q7", tipo:"radio", p:"O que é preciso fazer agora para normalizar a rede?", ok:"a",
+   ops:[["a","Desligar o roteador doado da porta 14 e pedir aos computadores um endereço novo (reiniciar ou “ipconfig /renew”)"],["b","Reiniciar o firewall"],["c","Reinstalar o sistema de notas"],["d","Desbloquear a conta do aluno"]],
+   porque:"Sem o servidor indevido, ao pedir endereço de novo os computadores recebem a oferta do servidor oficial. Depois, o roteador pode voltar como access point, com o DHCP desligado e com registro da mudança."}
+];
+
+// ---------- Estado ----------
+const CHAVE = "rede-parou-v1";
+let E = {fonte:FONTES[0][0], marcadas:{}, hip:{}, resp:{}, pistas:0, equipe:"", conferencias:0};
+try{ const j=JSON.parse(localStorage.getItem(CHAVE)||"null"); if(j) E=Object.assign(E,j); }catch(e){}
+const salvar = ()=>{ try{ localStorage.setItem(CHAVE, JSON.stringify(E)); }catch(e){} };
+const $ = q => document.querySelector(q);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const linhas = f => (LOGS[f]||"").replace(/\n$/,"").split("\n");
+const horario = t => { const m=/^(\d{4}-\d{2}-\d{2})[ ;](\d{2}:\d{2}(?::\d{2})?)/.exec(t); return m ? `${m[1]} ${m[2].length===5?m[2]+":00":m[2]}` : null; };
+const DIAS = {"2025-03-14":"sex","2025-03-15":"sáb","2025-03-16":"dom","2025-03-17":"seg"};
+const curto = h => h ? `${DIAS[h.slice(0,10)]||h.slice(0,10)} ${h.slice(11,16)}` : "sem horário";
+
+function destacar(texto, termo){
+  if(!termo) return esc(texto);
+  const i = texto.toLowerCase().indexOf(termo.toLowerCase());
+  if(i<0) return esc(texto);
+  return esc(texto.slice(0,i)) + "<mark>" + esc(texto.slice(i,i+termo.length)) + "</mark>" + destacar(texto.slice(i+termo.length), termo);
+}
+
+// ---------- Visualização ----------
+function renderFontes(){
+  $("#fontes").innerHTML = FONTES.map(([f,n])=>{
+    const qtd = Object.keys(E.marcadas).filter(k=>k.startsWith(f+"#")).length;
+    return `<button role="tab" aria-pressed="${f===E.fonte}" data-fonte="${f}">${esc(n)}${qtd?` (${qtd})`:""}</button>`;
+  }).join("");
+  const fo = FONTES.find(x=>x[0]===E.fonte);
+  $("#descFonte").textContent = `${fo[2]} Arquivo: ${fo[0]}`;
+}
+function renderLog(){
+  const termo = $("#filtro").value.trim();
+  const ls = linhas(E.fonte);
+  $("#log").innerHTML = ls.map((t,i)=>{
+    if(termo && !t.toLowerCase().includes(termo.toLowerCase())) return "";
+    const k = `${E.fonte}#${i}`;
+    return `<div data-k="${k}" class="${E.marcadas[k]?"marcada":""}" tabindex="0" role="button" aria-pressed="${!!E.marcadas[k]}"><span class="n">${i+1}</span><span class="t">${destacar(t,termo)}</span></div>`;
+  }).join("") || `<p class="muted" style="padding:8px">Nenhuma linha com “${esc(termo)}” neste registro.</p>`;
+}
+function renderEvidencias(){
+  const itens = Object.keys(E.marcadas).map(k=>{
+    const [f,i] = k.split("#"); const t = linhas(f)[Number(i)]||""; const h = horario(t);
+    return {k, f, t, h, nome:(FONTES.find(x=>x[0]===f)||[f,f])[1]};
+  }).sort((a,b)=>(a.h||"9999").localeCompare(b.h||"9999"));
+  $("#evidencias").innerHTML = itens.length ? itens.map(e=>`<li><span class="q">${esc(curto(e.h))}</span><span><b>${esc(e.nome)}</b><br><code>${esc(e.t)}</code></span><button data-rm="${e.k}" aria-label="Remover evidência">✕</button></li>`).join("")
+    : `<li class="muted" style="display:block">Nenhuma evidência marcada ainda.</li>`;
+}
+function renderHipoteses(){
+  $("#hipoteses").innerHTML = HIPOTESES.map(h=>{
+    const st = E.hip[h.id]||{s:"aberta",j:""};
+    return `<div class="h ${st.s}"><b>${esc(h.t)}</b>
+      <div class="row" style="margin:6px 0"><label>Situação <select data-hs="${h.id}">
+        ${[["aberta","Em aberto"],["confirmada","Confirmada pelas evidências"],["descartada","Descartada pelas evidências"]].map(([v,n])=>`<option value="${v}" ${st.s===v?"selected":""}>${n}</option>`).join("")}
+      </select></label></div>
+      <textarea data-hj="${h.id}" placeholder="Qual evidência sustenta essa decisão?" aria-label="Justificativa">${esc(st.j)}</textarea></div>`;
+  }).join("");
+}
+function renderPistas(){
+  $("#pistas").innerHTML = PISTAS.slice(0,E.pistas).map((p,i)=>`<p class="pista"><b>Pista ${i+1}.</b> ${esc(p)}</p>`).join("");
+  $("#btnPista").disabled = E.pistas>=PISTAS.length;
+  $("#btnPista").textContent = E.pistas>=PISTAS.length ? "Sem mais pistas" : `Ver pista ${E.pistas+1} de ${PISTAS.length}`;
+}
+function renderLaudo(){
+  $("#laudo").innerHTML = PERGUNTAS.map((q,n)=>{
+    const r = E.resp[q.id];
+    let campo;
+    if(q.tipo==="texto") campo = `<input name="${q.id}" value="${esc(r||"")}" placeholder="x.x.x.x" style="width:12em">`;
+    else campo = q.ops.map(([v,t])=>{
+      const marc = q.tipo==="check" ? (r||[]).includes(v) : r===v;
+      return `<label><input type="${q.tipo==="check"?"checkbox":"radio"}" name="${q.id}" value="${v}" ${marc?"checked":""}> ${esc(t)}</label>`;
+    }).join("");
+    return `<fieldset class="q-laudo"><legend>${n+1}. ${esc(q.p)}</legend>${campo}<div id="fb-${q.id}"></div></fieldset>`;
+  }).join("") + `<fieldset class="q-laudo"><legend>${PERGUNTAS.length+1}. Expliquem com suas palavras o que aconteceu, do jeito que contariam para a direção.</legend>
+    <textarea name="relato" style="min-height:6em">${esc(E.resp.relato||"")}</textarea></fieldset>`;
+}
+function lerLaudo(){
+  const fd = new FormData($("#laudo"));
+  PERGUNTAS.forEach(q=>{ E.resp[q.id] = q.tipo==="check" ? fd.getAll(q.id) : (fd.get(q.id)||""); });
+  E.resp.relato = fd.get("relato")||"";
+}
+function correta(q){
+  const r = E.resp[q.id];
+  if(q.tipo==="texto") return String(r||"").trim()===q.ok;
+  if(q.tipo==="check") { const a=[...(r||[])].sort().join(), b=[...q.ok].sort().join(); return a===b; }
+  return r===q.ok;
+}
+function conferir(){
+  lerLaudo(); E.conferencias++;
+  let acertos=0;
+  PERGUNTAS.forEach(q=>{
+    const ok = correta(q); if(ok) acertos++;
+    $(`#fb-${q.id}`).innerHTML = `<div class="fb ${ok?"c":"e"}">${ok?"Correto. ":"Ainda não. "}${ok||E.conferencias>=2?esc(q.porque):"Voltem às evidências e tentem de novo; a explicação aparece na próxima conferência."}</div>`;
+  });
+  const hipOk = HIPOTESES.filter(h=>(E.hip[h.id]||{}).s===(h.id==="h5"?"confirmada":"descartada")).length;
+  const nEv = Object.keys(E.marcadas).length;
+  $("#resultado").innerHTML = `<p><b>${acertos} de ${PERGUNTAS.length}</b> respostas corretas · hipóteses avaliadas corretamente: ${hipOk} de ${HIPOTESES.length} · evidências marcadas: ${nEv} · pistas usadas: ${E.pistas} · conferências: ${E.conferencias}</p>`
+    + (acertos===PERGUNTAS.length ? `<p class="fb c">Caso resolvido! Revisem as justificativas das hipóteses e baixem o laudo.</p>` : "");
+  salvar();
+}
+function laudoTexto(){
+  lerLaudo();
+  const L = ["LAUDO · A REDE PAROU", "", `Equipe: ${$("#equipe").value||"(sem nome)"}`, `Data: ${new Date().toLocaleString("pt-BR")}`,
+    `Pistas usadas: ${E.pistas} · Conferências: ${E.conferencias}`, "", "HIPÓTESES"];
+  HIPOTESES.forEach(h=>{ const st=E.hip[h.id]||{s:"aberta",j:""}; L.push(`- ${h.t}`, `  Situação: ${st.s}. Justificativa: ${st.j||"(sem justificativa)"}`); });
+  L.push("", "LINHA DO TEMPO DAS EVIDÊNCIAS");
+  Object.keys(E.marcadas).map(k=>{ const [f,i]=k.split("#"); const t=linhas(f)[Number(i)]||""; return {f,t,h:horario(t)}; })
+    .sort((a,b)=>(a.h||"9999").localeCompare(b.h||"9999")).forEach(e=>L.push(`- [${e.f}] ${e.t}`));
+  L.push("", "RESPOSTAS");
+  PERGUNTAS.forEach((q,n)=>{
+    const r = E.resp[q.id];
+    const txt = q.tipo==="texto" ? r : q.tipo==="check" ? (r||[]).map(v=>q.ops.find(o=>o[0]===v)[1]).join("; ") : ((q.ops.find(o=>o[0]===r)||[,""])[1]);
+    L.push(`${n+1}. ${q.p}`, `   ${txt||"(sem resposta)"}${E.conferencias?` [${correta(q)?"correta":"rever"}]`:""}`);
+  });
+  L.push("", "RELATO PARA A DIREÇÃO", E.resp.relato||"(vazio)");
+  return L.join("\n");
+}
+
+// ---------- Eventos ----------
+$("#fontes").addEventListener("click", ev=>{ const b=ev.target.closest("[data-fonte]"); if(!b) return; E.fonte=b.dataset.fonte; renderFontes(); renderLog(); salvar(); });
+function alternar(k){ if(E.marcadas[k]) delete E.marcadas[k]; else E.marcadas[k]=true; renderLog(); renderEvidencias(); renderFontes(); salvar(); }
+$("#log").addEventListener("click", ev=>{ const d=ev.target.closest("[data-k]"); if(d) alternar(d.dataset.k); });
+$("#log").addEventListener("keydown", ev=>{ const d=ev.target.closest("[data-k]"); if(d && (ev.key==="Enter"||ev.key===" ")){ ev.preventDefault(); alternar(d.dataset.k); }});
+$("#filtro").addEventListener("input", renderLog);
+$("#btnTodas").onclick = ()=>{
+  const termo = $("#filtro").value.trim();
+  if(!termo){ $("#busca").innerHTML = `<p class="muted">Digite um termo para procurar.</p>`; return; }
+  const res = FONTES.map(([f,n])=>[n, linhas(f).filter(t=>t.toLowerCase().includes(termo.toLowerCase())).length, f]).filter(x=>x[1]);
+  $("#busca").innerHTML = `<p style="margin:8px 0 0">“${esc(termo)}” aparece em: ${res.length ? res.map(([n,c,f])=>`<button data-fonte-busca="${f}">${esc(n)} (${c})</button>`).join(" ") : "nenhum registro"}</p>`;
+};
+$("#busca").addEventListener("click", ev=>{ const b=ev.target.closest("[data-fonte-busca]"); if(!b) return; E.fonte=b.dataset.fonteBusca; renderFontes(); renderLog(); });
+$("#evidencias").addEventListener("click", ev=>{ const b=ev.target.closest("[data-rm]"); if(b) alternar(b.dataset.rm); });
+$("#hipoteses").addEventListener("change", ev=>{
+  const t=ev.target;
+  if(t.dataset.hs){ (E.hip[t.dataset.hs] ||= {s:"aberta",j:""}).s=t.value; renderHipoteses(); salvar(); }
+});
+$("#hipoteses").addEventListener("input", ev=>{ const t=ev.target; if(t.dataset.hj){ (E.hip[t.dataset.hj] ||= {s:"aberta",j:""}).j=t.value; salvar(); } });
+$("#btnPista").onclick = ()=>{ if(E.pistas<PISTAS.length){ E.pistas++; renderPistas(); salvar(); } };
+$("#laudo").addEventListener("change", ()=>{ lerLaudo(); salvar(); });
+$("#laudo").addEventListener("submit", ev=>ev.preventDefault());
+$("#equipe").value = E.equipe||"";
+$("#equipe").addEventListener("input", ()=>{ E.equipe=$("#equipe").value; salvar(); });
+$("#btnConferir").onclick = conferir;
+$("#btnBaixar").onclick = ()=>{
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([laudoTexto()],{type:"text/plain;charset=utf-8"})); a.download="laudo-a-rede-parou.txt";
+  document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+};
+$("#btnLimpar").onclick = ()=>{
+  if(!confirm("Apagar evidências, hipóteses e respostas?")) return;
+  E = {fonte:FONTES[0][0], marcadas:{}, hip:{}, resp:{}, pistas:0, equipe:"", conferencias:0};
+  $("#equipe").value=""; $("#resultado").innerHTML=""; salvar(); renderTudo();
+};
+function renderTudo(){ renderFontes(); renderLog(); renderEvidencias(); renderHipoteses(); renderPistas(); renderLaudo(); }
+renderTudo();
+</script>
+</body>
+</html>
