@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfólio de Jeferson Luiz Pereira: infraestrutura de TI e ensino de Computação alinhado à BNCC.">
+<title>Jeferson Pereira · Portfólio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: coluna única à esquerda; cada trabalho é um "caso" com etiqueta de cabo (código) e quatro campos fixos. Azul = infraestrutura, verde = educação. */
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --fg:#15211F; --muted:#56655F; --line:#D3DCD8;
+  --infra:#1D5BB8; --infra-soft:#E4ECF8; --edu:#23774A; --edu-soft:#E2F1E8; --warn:#9A5B00; --warn-soft:#FBF0DC;
+  --display:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --body:"Public Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101716; --surface:#172120; --fg:#E6EEEB; --muted:#9AABA5; --line:#2A3735;
+  --infra:#7FAEF5; --infra-soft:#18263B; --edu:#6FCB97; --edu-soft:#14291E; --warn:#F0B35A; --warn-soft:#2E2412; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101716; --surface:#172120; --fg:#E6EEEB; --muted:#9AABA5; --line:#2A3735;
+  --infra:#7FAEF5; --infra-soft:#18263B; --edu:#6FCB97; --edu-soft:#14291E; --warn:#F0B35A; --warn-soft:#2E2412; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+.wrap{max-width:1040px;margin:0 auto;padding-block:40px 72px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--infra);outline-offset:3px;border-radius:2px}
+.mono{font-family:var(--mono);font-size:.8rem;letter-spacing:.02em}
+
+body{margin:0}
+*,*::before,*::after{box-sizing:border-box}
+.draft{display:flex;gap:10px;align-items:baseline;background:var(--warn-soft);color:var(--warn);
+  padding:10px 14px;border-radius:6px;font-size:.88rem}
+.draft b{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+
+header{display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing:-.02em}
+.lede{max-width:62ch;font-size:1.12rem;color:var(--muted)}
+.fronts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:8px}
+.front{display:flex;flex-direction:column;gap:6px;padding:18px 20px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none}
+.front:hover{border-color:currentColor}
+.front .k{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.front.infra .k{color:var(--infra)} .front.edu .k{color:var(--edu)}
+.front strong{font-family:var(--display);font-size:1.2rem}
+.front span:last-child{color:var(--muted);font-size:.93rem}
+
+section{display:flex;flex-direction:column;gap:24px}
+.sec-head{display:flex;flex-direction:column;gap:8px;padding-bottom:14px;border-bottom:2px solid var(--line)}
+.sec-head h2{font-size:1.9rem}
+.sec-head p{color:var(--muted);max-width:64ch}
+#infra .sec-head{border-color:var(--infra)} #edu .sec-head{border-color:var(--edu)}
+
+.case{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line)}
+.case:last-child{border-bottom:0}
+.meta{display:flex;flex-direction:column;gap:12px;min-width:0}
+.tag{align-self:flex-start;font-family:var(--mono);font-size:.75rem;font-weight:500;padding:4px 10px 4px 14px;border-radius:3px;position:relative}
+.tag::before{content:"";position:absolute;left:5px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:currentColor}
+.infra-c .tag{background:var(--infra-soft);color:var(--infra)} .edu-c .tag{background:var(--edu-soft);color:var(--edu)}
+.tag.pending{background:var(--warn-soft);color:var(--warn)}
+.meta dl{margin:0;display:flex;flex-direction:column;gap:8px;font-size:.86rem}
+.meta dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.meta dd{margin:0}
+.content{display:flex;flex-direction:column;gap:16px;min-width:0}
+.content h3{font-size:1.45rem}
+.content>p{max-width:68ch}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field h4{margin:0;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.field p,.field ul{font-size:.95rem}
+.field ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.74rem;padding:2px 8px;border:1px solid var(--line);border-radius:3px;color:var(--muted)}
+.hero-links a{color:var(--infra)}
+.links{display:flex;flex-wrap:wrap;gap:8px 20px;font-weight:600;font-size:.93rem}
+.infra-c .links a{color:var(--infra)} .edu-c .links a{color:var(--edu)}
+pre{margin:0;overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;font:.8rem/1.6 var(--mono)}
+pre .c{color:var(--muted)}
+.placeholder{border:1px dashed var(--warn);border-radius:6px;padding:14px 16px;color:var(--warn);font-size:.92rem;background:var(--warn-soft)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.skills div{display:flex;flex-direction:column;gap:8px}
+.skills h3{font-size:1.05rem}
+
+footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px}
+
+@media (max-width:720px){
+  .case{grid-template-columns:1fr;gap:16px}
+  .meta dl{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
+  .fields{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Infraestrutura de TI · Licenciatura em Computação</p>
+    <h1>Jeferson Luiz Pereira</h1>
+    <p class="lede">Analista de infraestrutura que leva o dia a dia de servidores, redes e Wi-Fi para a sala de aula. Trabalho com ambientes críticos de TI e desenvolvo aulas e oficinas de Computação para a rede pública, alinhadas à BNCC.</p>
+    <div class="fronts">
+      <a class="front infra" href="#infra"><span class="k">Frente 1</span><strong>Infraestrutura</strong><span>Autenticação de rede, servidores Linux e Windows, Wi-Fi corporativo e documentação técnica.</span></a>
+      <a class="front edu" href="#edu"><span class="k">Frente 2</span><strong>Educação</strong><span>Ilhas de Racionalidade e oficinas de Computação para professores e alunos.</span></a>
+    </div>
+    <div class="links hero-links"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Abrir o simulador de roteador ↗</a><a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub ↗</a></div>
+  </header>
+
+  <section id="infra">
+    <div class="sec-head">
+      <h2>Infraestrutura de TI</h2>
+      <p>Projetos de produção descritos sem dados internos: endereços, nomes de servidores e credenciais foram omitidos.</p>
+    </div>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">NPS / RADIUS</span>
+        <dl><div><dt>Local</dt><dd>Porto Amazonas – PR</dd></div><div><dt>Tipo</dt><dd>Implantação</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Autenticação centralizada de rede com NPS e RADIUS</h3>
+        <p>Implantação do Network Policy Server (NPS) do Windows Server como servidor RADIUS, para que o acesso à rede passe a ser liberado por usuário ou dispositivo autenticado, em vez de uma senha compartilhada. Estudo de caso completo em breve.</p>
+        <div class="chips"><span class="chip">Windows Server</span><span class="chip">NPS</span><span class="chip">RADIUS</span><span class="chip">Autenticação de rede</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">IT-INFRA-002</span>
+        <dl><div><dt>Ambiente</dt><dd>Centro de distribuição</dd></div><div><dt>Tipo</dt><dd>Instrução de trabalho</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Sessões estáveis para coletores de dados no WMS</h3>
+        <p>Coletores Android de um centro de distribuição perdiam a sessão com o sistema de gestão de armazém (WMS) e acabavam bloqueados pelo próprio servidor. Diagnostiquei a causa, ajustei o servidor Linux e escrevi a instrução de trabalho para padronizar o procedimento.</p>
+        <div class="fields">
+          <div class="field"><h4>Problema</h4><p>O roaming entre antenas Wi-Fi gerava micro-quedas. O aplicativo do coletor perdia a sessão, mas o servidor mantinha o processo vivo. Na reconexão, as tentativas em rajada eram tratadas pelo xinetd como ameaça e o IP do coletor era bloqueado.</p></div>
+          <div class="field"><h4>Diagnóstico</h4><p>Análise de logs do xinetd e monitoramento da rede, cruzando os bloqueios <span class="mono">connections limit per_source</span> com os momentos de troca de antena.</p></div>
+          <div class="field"><h4>Solução</h4><ul><li>Limites do serviço ajustados ao volume real de coletores.</li><li>TCP keep-alive no kernel para derrubar sessões mortas em menos de 2 minutos.</li><li>Plano B documentado: keep-alive no app e emuladores com sessão persistente.</li></ul></div>
+          <div class="field"><h4>Validação</h4><p>Logs passaram a mostrar encerramentos limpos de sessão e nenhum bloqueio por limite de origem.</p></div>
+        </div>
+        <pre><span class="c"># Limpeza de conexões presas: 60 s de espera, sondas a cada 10 s, 3 tentativas</span>
+sysctl -w net.ipv4.tcp_keepalive_time=60
+sysctl -w net.ipv4.tcp_keepalive_intvl=10
+sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
+        <div class="chips"><span class="chip">Linux</span><span class="chip">xinetd</span><span class="chip">TCP keep-alive</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS</span><span class="chip">Documentação técnica</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="edu">
+    <div class="sec-head">
+      <h2>Educação e BNCC da Computação</h2>
+      <p>Materiais produzidos na Licenciatura em Computação, pensados para escolas públicas, inclusive as que têm pouca infraestrutura.</p>
+    </div>
+
+    <article class="case edu-c">
+      <div class="meta">
+        <span class="tag">Mundo Digital · 9º ano</span>
+        <dl><div><dt>Formato</dt><dd>Ilha Interdisciplinar de Racionalidade + oficina de 40 min</dd></div><div><dt>Quando</dt><dd>1º semestre de 2026</dd></div><div><dt>Autoria</dt><dd>Jeferson e grupo</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>A “invisibilidade” do Wi-Fi: por que a internet de 400 Mega trava?</h3>
+        <p>Parte de um problema que todo aluno conhece: o jogo dá lag quando alguém liga o streaming na sala. A turma investiga a física das ondas, a disputa pelo canal e a fila de pacotes no roteador, e termina sabendo diagnosticar e configurar a própria rede.</p>
+        <div class="fields">
+          <div class="field"><h4>Etapas</h4><ul><li>Concepções iniciais e perguntas investigativas</li><li>Mapeamento em cinco dimensões: científica, tecnológica, social, ambiental e ética</li><li>Auditoria Wi-Fi com analisador de espectro (dBm, ping, streaming ligado e desligado)</li><li>Infográfico “A jornada e os gargalos do sinal”</li></ul></div>
+          <div class="field"><h4>Conceitos</h4><ul><li>Atenuação em 2,4 GHz e 5 GHz (Física)</li><li>Pacotes, TCP e UDP, latência e largura de banda (Computação)</li><li>Bits e bytes, divisão de banda e QoS (Matemática)</li><li>Canais 1, 6 e 11 sem sobreposição</li></ul></div>
+        </div>
+        <div class="links"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Simulador de roteador (HTML, CSS e JS) ↗</a><a href="https://drive.google.com/file/d/1y5PUGET-o_UAfKixnomOxO5nb5pLfpK8/view?usp=sharing" target="_blank" rel="noopener">Guia de Sobrevivência do Wi-Fi Doméstico (PDF) ↗</a></div>
+        <div class="chips"><span class="chip">BNCC Computação · Mundo Digital</span><span class="chip">Ensino por investigação</span><span class="chip">Interdisciplinar</span></div>
+      </div>
+    </article>
+
+    <article class="case edu-c">
+      <div class="meta">
+        <span class="tag">Pensamento Computacional</span>
+        <dl><div><dt>Público</dt><dd>Professores do Ensino Fundamental, todas as áreas</dd></div><div><dt>Formato</dt><dd>Oficina presencial, atividades desplugadas</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Letramento e Pensamento Computacional: da BNCC à prática inclusiva</h3>
+        <p>Oficina para professores de escolas com pouca estrutura, sobretudo da zona rural. A proposta mostra que dá para ensinar Computação sem computador, partindo da cultura local dos alunos.</p>
+        <div class="fields">
+          <div class="field"><h4>Roteiro</h4><ul><li>Aquecimento “Meu Sanduíche”: o facilitador vira robô e segue instruções ao pé da letra</li><li>Os três eixos da BNCC e os quatro pilares do PC</li><li>Mão na massa: “Meu Robô Artista”, “Classificando o Nosso Mundo” e “O Algoritmo da Minha Tradição”</li><li>Cada grupo sai com um mini-plano de aula da própria disciplina</li></ul></div>
+          <div class="field"><h4>Diferencial</h4><p>Materiais de baixo custo (copos, papel quadriculado, cartões) e atividades com elementos da cultura regional: artesanato, comidas típicas, brincadeiras, festas.</p></div>
+        </div>
+        <div class="chips"><span class="chip">Computação desplugada</span><span class="chip">Formação docente</span><span class="chip">Escolas rurais</span><span class="chip">Inclusão</span></div>
+      </div>
+    </article>
+
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><h2>Áreas de atuação</h2></div>
+    <div class="skills">
+      <div><h3>Servidores e serviços</h3><div class="chips"><span class="chip">Windows Server</span><span class="chip">Active Directory</span><span class="chip">NPS / RADIUS</span><span class="chip">Linux</span></div></div>
+      <div><h3>Redes</h3><div class="chips"><span class="chip">Switches</span><span class="chip">Firewalls</span><span class="chip">Wi-Fi corporativo</span><span class="chip">TCP/IP</span></div></div>
+      <div><h3>Nuvem e operação</h3><div class="chips"><span class="chip">Nuvem</span><span class="chip">Monitoramento</span><span class="chip">Documentação (IT)</span></div></div>
+      <div><h3>Ensino</h3><div class="chips"><span class="chip">BNCC Computação</span><span class="chip">IIR</span><span class="chip">Oficinas</span><span class="chip">HTML, CSS, JS</span></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Jeferson Luiz Pereira</span>
+    <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">github.com/pereirashouse</a>
+  </footer>
+</div>
+</body>
+</html>
