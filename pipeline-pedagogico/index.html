@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Pedagógico: Infraestrutura &amp; BNCC Computação</title>
+<meta name="description" content="Pipeline Pedagógico: como incidentes reais de infraestrutura de TI viram material didático alinhado à BNCC da Computação.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-bright: #f0f6fc;
+      --accent-blue: #58a6ff;
+      --accent-green: #3fb950;
+      --accent-purple: #bc8cff;
+      --accent-orange: #d29922;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 32px 16px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: var(--text-bright);
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #8b949e;
+      font-size: 0.95rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+      color: #8b949e;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--text-bright); }
+
+    /* Grid do Pipeline */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      position: relative;
+    }
+
+    .step-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-2px);
+      border-color: #8b949e;
+    }
+
+    .step-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .badge-blue { background: rgba(88, 166, 255, 0.15); color: var(--accent-blue); }
+    .badge-purple { background: rgba(188, 140, 255, 0.15); color: var(--accent-purple); }
+    .badge-orange { background: rgba(210, 153, 34, 0.15); color: var(--accent-orange); }
+    .badge-green { background: rgba(63, 185, 80, 0.15); color: var(--accent-green); }
+
+    .step-title {
+      font-size: 1.1rem;
+      color: var(--text-bright);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 0.88rem;
+      color: #8b949e;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .tag-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-item {
+      font-size: 0.75rem;
+      background: #21262d;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: #e6edf3;
+    }
+
+    /* Detalhes de conexões */
+    .bncc-details {
+      margin-top: 32px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .bncc-details h2 {
+      font-size: 1.2rem;
+      color: var(--text-bright);
+      margin-bottom: 16px;
+    }
+
+    .eixos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .eixo-box {
+      background: #0d1117;
+      padding: 14px;
+      border-radius: 6px;
+      border-left: 4px solid;
+    }
+
+    .eixo-1 { border-color: var(--accent-blue); }
+    .eixo-2 { border-color: var(--accent-green); }
+    .eixo-3 { border-color: var(--accent-orange); }
+
+    .eixo-box strong {
+      display: block;
+      color: var(--text-bright);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .eixo-box p {
+      font-size: 0.85rem;
+      color: #8b949e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a class="back-link" href="../">← Voltar ao portfólio</a>
+
+    <header>
+      <h1>Pipeline Pedagógico &amp; Portfólio</h1>
+      <p>Da prática em infraestrutura corporativa ao material didático estruturado na BNCC</p>
+    </header>
+
+    <div class="pipeline-grid">
+      <!-- Etapa 1 -->
+      <div class="step-card">
+        <span class="step-badge badge-blue">Etapa 01</span>
+        <h3 class="step-title">Obsidian Vault</h3>
+        <p class="step-desc">Captura descentralizada de logs, incidentes e notas técnicas em formato Markdown no dia a dia operacional.</p>
+        <ul class="tag-list">
+          <li class="tag-item">Redes &amp; Switches</li>
+          <li class="tag-item">Backups &amp; Storages</li>
+          <li class="tag-item">Virtualização</li>
+        </ul>
+      </div>
+
+      <!-- Etapa 2 -->
+      <div class="step-card">
+        <span class="step-badge badge-purple">Etapa 02</span>
+        <h3 class="step-title">Motor RAG &amp; Sanitização</h3>
+        <p class="step-desc">Indexação vetorial que busca o contexto das notas e aplica filtros para anonimização total de dados sensíveis.</p>
+        <ul class="tag-list">
+          <li class="tag-item">Busca Semântica</li>
+          <li class="tag-item">Anonimização de IPs</li>
+          <li class="tag-item">Remoção de Hostnames</li>
+        </ul>
+      </div>
+
+      <!-- Etapa 3 -->
+      <div class="step-card">
+        <span class="step-badge badge-orange">Etapa 03</span>
+        <h3 class="step-title">Transposição BNCC</h3>
+        <p class="step-desc">A IA reconstrói o incidente técnico como um estudo de caso educativo alinhado às diretrizes oficiais de computação.</p>
+        <ul class="tag-list">
+          <li class="tag-item">Pensamento Computacional</li>
+          <li class="tag-item">Mundo Digital</li>
+          <li class="tag-item">Cultura Digital</li>
+        </ul>
+      </div>
+
+      <!-- Etapa 4 -->
+      <div class="step-card">
+        <span class="step-badge badge-green">Etapa 04</span>
+        <h3 class="step-title">GitHub Portfólio</h3>
+        <p class="step-desc">Publicação automatizada em repositório público com versionamento de código, planos de aula e exercícios práticos.</p>
+        <ul class="tag-list">
+          <li class="tag-item">Casos em .md</li>
+          <li class="tag-item">Rubricas Avaliativas</li>
+          <li class="tag-item">Planos 50 min</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Mapeamento dos Eixos -->
+    <div class="bncc-details">
+      <h2>Mapeamento Prático: Infraestrutura → BNCC</h2>
+      <div class="eixos-grid">
+        <div class="eixo-box eixo-1">
+          <strong>Pensamento Computacional</strong>
+          <p>Isolamento de problemas em camadas OSI, formulação de hipóteses de diagnóstico e algoritmos de troubleshooting.</p>
+        </div>
+        <div class="eixo-box eixo-2">
+          <strong>Mundo Digital</strong>
+          <p>Protocolos de rede (TCP/IP, VLAN, DNS), funcionamento físico de roteamento, hardware de servidores e armazenamento.</p>
+        </div>
+        <div class="eixo-box eixo-3">
+          <strong>Cultura Digital</strong>
+          <p>Ética na gestão de acessos, privacidade de dados corporativos (LGPD), estratégias de mitigação de ransomware e backup.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

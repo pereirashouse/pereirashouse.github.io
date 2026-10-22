@@ -1,0 +1,1153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}</style>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Operação Anzol</title>
+<meta name="description" content="Operação Anzol: laboratório web de perícia contra golpes digitais para o 9º ano, alinhado à BNCC da Computação. Funciona no celular e sem internet.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  /* Layout: faixa de comando no topo, uma tela por missão; Missões 1 e 3 em duas colunas no desktop, uma no celular.
+     Conceito: laboratório de perícia. Pistas são marcadas com caneta marca-texto; o dono real de um endereço vira etiqueta. */
+  :root {
+    --bg: #EDF0F4;
+    --surface: #FFFFFF;
+    --surface-2: #F4F6F9;
+    --ink: #111A27;
+    --muted: #536074;
+    --line: #D3DAE3;
+    --band: #12213A;
+    --band-ink: #F2F5FA;
+    --band-muted: #A9B6CB;
+    --marker: #FFE14A;
+    --marker-ink: #1C1600;
+    --alert: #C21F37;
+    --alert-bg: #FBE7EA;
+    --ok: #13744B;
+    --ok-bg: #DFF2E8;
+    --link: #1C58C9;
+    --focus: #F29D00;
+    --shadow: 0 1px 2px rgba(17, 26, 39, 0.06), 0 8px 24px rgba(17, 26, 39, 0.06);
+    --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+    --f-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0B1119;
+      --surface: #121B26;
+      --surface-2: #172231;
+      --ink: #E5EBF2;
+      --muted: #94A2B5;
+      --line: #263449;
+      --band: #0F1D33;
+      --band-ink: #F2F5FA;
+      --band-muted: #93A3BC;
+      --marker: #F4D53A;
+      --marker-ink: #1C1600;
+      --alert: #FF7D8D;
+      --alert-bg: #3A1820;
+      --ok: #52D39C;
+      --ok-bg: #11342A;
+      --link: #8DB5FF;
+      --focus: #F29D00;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0B1119;
+    --surface: #121B26;
+    --surface-2: #172231;
+    --ink: #E5EBF2;
+    --muted: #94A2B5;
+    --line: #263449;
+    --band: #0F1D33;
+    --band-ink: #F2F5FA;
+    --band-muted: #93A3BC;
+    --marker: #F4D53A;
+    --marker-ink: #1C1600;
+    --alert: #FF7D8D;
+    --alert-bg: #3A1820;
+    --ok: #52D39C;
+    --ok-bg: #11342A;
+    --link: #8DB5FF;
+    --focus: #F29D00;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 30; background: var(--band);
+  }
+  .gutter {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.1; margin: 0; }
+  p { margin: 0; }
+  .mono { font-family: var(--f-mono); }
+  .kicker {
+    font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+  [tabindex="-1"]:focus { outline: none; }
+
+  /* Faixa de comando */
+  .topbar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: var(--band); color: var(--band-ink);
+  }
+  .topbar-in { display: flex; align-items: center; gap: 12px 20px; padding-block: 10px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; background: none; border: 0; color: inherit; cursor: pointer; padding: 0; }
+  .brand-mark { width: 30px; height: 30px; flex: none; }
+  .brand-name { font-family: var(--f-display); font-weight: 900; font-stretch: 80%; font-size: 1.25rem; letter-spacing: 0.02em; text-transform: uppercase; }
+  .nav { display: flex; gap: 4px; overflow-x: auto; min-width: 0; flex: 1 1 auto; scrollbar-width: none; }
+  .nav button {
+    font: inherit; font-size: 0.9rem; color: var(--band-muted); background: transparent; border: 0;
+    padding: 6px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+  }
+  .nav button[aria-current="page"] { color: var(--band-ink); background: rgba(255, 255, 255, 0.1); }
+  .nav button:hover { color: var(--band-ink); }
+  .pontos {
+    font-family: var(--f-mono); font-weight: 600; font-variant-numeric: tabular-nums;
+    background: var(--marker); color: var(--marker-ink); padding: 4px 10px; border-radius: 6px; white-space: nowrap;
+  }
+
+  main { padding-block: 28px 56px; }
+  .stack { display: flex; flex-direction: column; gap: 20px; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px; min-width: 0; box-shadow: var(--shadow);
+  }
+  .btn {
+    font: inherit; font-weight: 700; cursor: pointer; border-radius: 10px; padding: 12px 18px;
+    min-height: 48px; border: 2px solid var(--line); background: var(--surface); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center;
+  }
+  .btn:hover { border-color: var(--muted); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-primary { background: var(--band); color: var(--band-ink); border-color: var(--band); }
+  .btn-primary:hover { border-color: var(--band); filter: brightness(1.15); }
+  .btn-golpe { border-color: var(--alert); color: var(--alert); background: var(--alert-bg); }
+  .btn-legit { border-color: var(--ok); color: var(--ok); background: var(--ok-bg); }
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Início */
+  .hero { display: grid; gap: 28px; align-items: start; }
+  @media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } }
+  .hero h1 {
+    font-size: clamp(2.6rem, 9vw, 5.2rem); font-weight: 900; font-stretch: 72%;
+    text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.92; margin-top: 10px;
+  }
+  .hero h1 em { font-style: normal; background: linear-gradient(104deg, transparent 1%, var(--marker) 3%, var(--marker) 97%, transparent 99%); color: var(--marker-ink); padding: 0 0.08em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .hero .lead { font-size: 1.12rem; color: var(--muted); max-width: 54ch; margin-top: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin-top: 20px; max-width: 360px; }
+  .field label { font-weight: 700; font-size: 0.9rem; }
+  .field input {
+    font: inherit; padding: 10px 12px; border-radius: 10px; border: 2px solid var(--line);
+    background: var(--surface); color: var(--ink);
+  }
+  .abertura h2 { font-size: 1.3rem; }
+  .opcoes-abertura { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .opcoes-abertura .btn { justify-content: flex-start; text-align: left; font-weight: 400; }
+  .opcoes-abertura .btn[aria-pressed="true"] { border-color: var(--ink); }
+  .comentario { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: var(--surface-2); }
+  .missoes { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .missao { display: flex; flex-direction: column; gap: 10px; }
+  .missao h3 { font-size: 1.35rem; font-stretch: 85%; font-weight: 800; }
+  .missao p { color: var(--muted); flex: 1; }
+  .missao-meta { display: flex; justify-content: space-between; gap: 8px; font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); }
+  .num { font-family: var(--f-display); font-weight: 900; font-stretch: 70%; font-size: 2.6rem; line-height: 1; color: var(--line); }
+
+  /* P.A.R.E. */
+  .pare { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+  .pare-item { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: start; }
+  .letra {
+    font-family: var(--f-display); font-weight: 900; font-stretch: 70%; font-size: 2.4rem; line-height: 1;
+    width: 48px; height: 52px; display: grid; place-items: center; border-radius: 10px;
+    background: var(--band); color: var(--marker); grid-row: span 2;
+  }
+  .pare-item strong { font-size: 1.02rem; }
+  .pare-item span:not(.letra) { color: var(--muted); font-size: 0.93rem; }
+  .rodape { color: var(--muted); font-size: 0.85rem; text-align: center; }
+
+  /* Cabeçalho de missão */
+  .missao-head { display: flex; flex-direction: column; gap: 8px; }
+  .missao-head h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 900; font-stretch: 78%; text-transform: uppercase; }
+  .progresso { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .progresso > div { height: 100%; background: var(--band); border-radius: 99px; transition: width 0.3s ease; }
+  :root:not([data-theme="light"]) .progresso > div { background: var(--marker); }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .progresso > div { background: var(--band); } }
+  :root[data-theme="light"] .progresso > div { background: var(--band); }
+
+  .duas { display: grid; gap: 20px; align-items: start; }
+  @media (min-width: 880px) { .duas { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); } }
+
+  /* Aparelho */
+  .device {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden;
+    box-shadow: var(--shadow); min-width: 0;
+  }
+  .dev-bar {
+    display: flex; justify-content: space-between; gap: 8px; padding: 10px 18px;
+    background: var(--surface-2); border-bottom: 1px solid var(--line);
+    font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted);
+  }
+  .phone-from { display: flex; align-items: center; gap: 12px; padding: 16px 18px 6px; }
+  .avatar {
+    width: 40px; height: 40px; border-radius: 50%; flex: none; display: grid; place-items: center;
+    background: var(--band); color: var(--band-ink); font-weight: 700; font-family: var(--f-display);
+  }
+  .from-name { font-weight: 700; overflow-wrap: anywhere; min-width: 0; }
+  .bubble {
+    margin: 10px 18px 22px; padding: 14px 16px; border-radius: 4px 18px 18px 18px;
+    background: var(--surface-2); border: 1px solid var(--line); font-size: 1.06rem; line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+  .mail-head { padding: 14px 18px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; overflow-wrap: anywhere; }
+  .mh-k { display: inline-block; min-width: 64px; font-family: var(--f-mono); font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .mail-body { padding: 18px; font-size: 1.06rem; line-height: 1.75; overflow-wrap: anywhere; }
+
+  /* Trechos marcáveis */
+  .seg { cursor: pointer; border-radius: 3px; border-bottom: 2px dotted transparent; box-decoration-break: clone; -webkit-box-decoration-break: clone; transition: background-color 0.15s; }
+  .seg:hover { border-bottom-color: var(--muted); }
+  .seg-link { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+  .seg.marcado, .seg.achou {
+    background: linear-gradient(100deg, transparent 0.5%, var(--marker) 2%, var(--marker) 98%, transparent 99.5%);
+    color: var(--marker-ink); border-bottom-color: transparent;
+  }
+  .seg.achou { box-shadow: inset 0 -2px 0 var(--ok); }
+  .seg.faltou { outline: 2px dashed var(--alert); outline-offset: 1px; }
+  .seg.falso { text-decoration: line-through; text-decoration-color: var(--muted); color: var(--muted); }
+  .revelado .seg { cursor: default; }
+  .revelado .seg:hover { border-bottom-color: transparent; }
+  .tag {
+    display: inline-block; font-family: var(--f-mono); font-size: 0.68rem; font-weight: 600; line-height: 1.3;
+    padding: 1px 6px; border-radius: 4px; margin: 0 4px; vertical-align: 0.15em; text-transform: uppercase; letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .tag-ok { background: var(--ok-bg); color: var(--ok); }
+  .tag-falta { background: var(--alert-bg); color: var(--alert); }
+  .tag-falso { background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
+
+  .inspetor {
+    margin-top: 14px; border: 1px solid var(--line); border-left: 4px solid var(--link);
+    border-radius: 10px; padding: 12px 14px; background: var(--surface); display: flex; flex-direction: column; gap: 4px;
+  }
+  .inspetor code { font-family: var(--f-mono); font-size: 0.92rem; overflow-wrap: anywhere; }
+
+  .painel { display: flex; flex-direction: column; gap: 14px; }
+  .passos { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .contador { font-family: var(--f-mono); font-size: 0.85rem; color: var(--muted); }
+  .resultado-titulo { font-size: 1.5rem; font-weight: 900; font-stretch: 80%; text-transform: uppercase; }
+  .resultado-titulo.ok { color: var(--ok); }
+  .resultado-titulo.erro { color: var(--alert); }
+  .placar-caso { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .placar-caso div { background: var(--surface-2); border-radius: 10px; padding: 10px; text-align: center; }
+  .placar-caso b { display: block; font-family: var(--f-mono); font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+  .placar-caso span { font-size: 0.78rem; color: var(--muted); }
+  .legenda { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 0.85rem; color: var(--muted); align-items: center; }
+
+  /* Missão 2 */
+  .url {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 4px 2px; font-family: var(--f-mono);
+    font-size: clamp(0.95rem, 2.6vw, 1.15rem); padding: 18px; background: var(--surface-2);
+    border-radius: 12px; border: 1px solid var(--line); margin-top: 12px;
+  }
+  .url .fixo { color: var(--muted); overflow-wrap: anywhere; }
+  .chip {
+    font: inherit; cursor: pointer; padding: 6px 8px; border-radius: 6px; border: 2px solid var(--line);
+    background: var(--surface); color: var(--ink); overflow-wrap: anywhere; max-width: 100%;
+  }
+  .chip:hover:not(:disabled) { border-color: var(--ink); }
+  .chip:disabled { cursor: default; }
+  .chip.dono { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); }
+  .chip.nome { background: var(--ok); border-color: var(--ok); color: var(--surface); font-weight: 600; }
+  .chip.errado { background: var(--alert-bg); border-color: var(--alert); color: var(--alert); text-decoration: line-through; }
+  .anatomia { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .anatomia div { display: flex; flex-direction: column; gap: 4px; }
+  .anatomia code { font-family: var(--f-mono); font-size: 0.85rem; padding: 4px 6px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--line); }
+  .anatomia code.dono { background: var(--ok-bg); border-color: var(--ok); color: var(--ok); font-weight: 600; }
+  .anatomia span { font-size: 0.72rem; color: var(--muted); }
+  .diretorio { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .diretorio td { padding: 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .diretorio td + td { text-align: right; font-family: var(--f-mono); font-size: 0.85rem; overflow-wrap: anywhere; padding-left: 12px; }
+  .nota { padding: 12px 14px; border-radius: 10px; background: var(--surface-2); }
+
+  /* Missão 3 */
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  legend { font-weight: 700; margin-bottom: 8px; padding: 0; }
+  legend small { font-weight: 400; color: var(--muted); }
+  .opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opcoes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .opcoes label {
+    cursor: pointer; padding: 8px 12px; border-radius: 99px; border: 2px solid var(--line);
+    background: var(--surface); font-size: 0.92rem;
+  }
+  .opcoes input:checked + label { background: var(--band); color: var(--band-ink); border-color: var(--band); }
+  .opcoes input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .radar { display: flex; flex-direction: column; gap: 10px; }
+  .radar-row { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; }
+  .radar-row .letra { width: 40px; height: 40px; font-size: 1.7rem; grid-row: auto; }
+  .radar-row.alerta .letra { background: var(--alert); color: var(--surface); }
+  .radar-row.limpo .letra { background: var(--ok); color: var(--surface); }
+  .radar-row ul { margin: 2px 0 0; padding-left: 18px; }
+  .radar-row .st { font-weight: 700; }
+  .medidor { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+  .medidor span { height: 10px; border-radius: 3px; background: var(--line); }
+  .medidor span.on { background: var(--alert); }
+  .medidor.zero span:first-child { background: var(--ok); }
+  .desafios { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .desafio { display: flex; flex-direction: column; gap: 8px; }
+  .selo { align-self: flex-start; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; background: var(--surface-2); color: var(--muted); }
+  .selo.feito { background: var(--ok-bg); color: var(--ok); }
+
+  .overlay {
+    position: fixed; inset: 0; z-index: 50; background: var(--bg); overflow-y: auto;
+    padding-top: calc(24px + env(safe-area-inset-top, 0px)); padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .overlay-in { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+  .relogio { font-family: var(--f-mono); font-size: 3rem; font-weight: 600; text-align: center; font-variant-numeric: tabular-nums; }
+
+  /* Laudo */
+  .laudo-topo { display: grid; gap: 20px; }
+  @media (min-width: 760px) { .laudo-topo { grid-template-columns: auto 1fr; align-items: center; } }
+  .total { font-family: var(--f-display); font-weight: 900; font-stretch: 75%; font-size: clamp(3.4rem, 12vw, 5.5rem); line-height: 0.9; font-variant-numeric: tabular-nums; }
+  .patente { display: inline-block; margin-top: 8px; font-family: var(--f-mono); font-weight: 600; padding: 4px 10px; border-radius: 6px; background: var(--marker); color: var(--marker-ink); }
+  .barras { display: flex; flex-direction: column; gap: 12px; }
+  .barra-cat { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
+  .barra-cat .trilho { grid-column: 1 / -1; height: 10px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
+  .barra-cat .trilho div { height: 100%; background: var(--ok); }
+  .barra-cat .trilho div.baixo { background: var(--alert); }
+  .barra-cat .v { font-family: var(--f-mono); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .ticket { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+
+  .toast {
+    position: fixed; left: 50%; transform: translateX(-50%);
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 60;
+    background: var(--band); color: var(--band-ink); padding: 12px 18px; border-radius: 10px;
+    box-shadow: var(--shadow); max-width: calc(100% - 32px); font-weight: 700;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  [hidden] { display: none !important; }
+</style>
+
+<header class="topbar gutter">
+  <div class="wrap topbar-in">
+    <button type="button" class="brand" data-acao="ir" data-v="inicio" aria-label="Operação Anzol, voltar ao início">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="var(--marker)"></rect>
+        <path d="M16 6v13a5 5 0 1 1-10 0" fill="none" stroke="var(--band)" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M6 19l-2.5-3M6 19l3-2" fill="none" stroke="var(--band)" stroke-width="2.5" stroke-linecap="round"></path>
+        <circle cx="16" cy="6" r="2.2" fill="var(--band)"></circle>
+      </svg>
+      <span class="brand-name">Operação Anzol</span>
+    </button>
+    <nav class="nav" aria-label="Missões">
+      <button type="button" data-acao="ir" data-v="inicio">Início</button>
+      <button type="button" data-acao="ir" data-v="m1">1 · Perícia</button>
+      <button type="button" data-acao="ir" data-v="m2">2 · Links</button>
+      <button type="button" data-acao="ir" data-v="m3">3 · Laboratório</button>
+      <button type="button" data-acao="ir" data-v="laudo">Laudo</button>
+    </nav>
+    <span class="pontos" id="pontos" aria-live="polite">0 pts</span>
+  </div>
+</header>
+
+<main class="gutter">
+  <div class="wrap" id="view"></div>
+</main>
+
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="ov-titulo"></div>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+  /* ---------- Dados ---------- */
+  const CATS = {
+    remetente: { nome: "Remetente suspeito", curto: "remetente", dica: "Confira quem enviou: número comum, perfil sem verificação ou e-mail com domínio estranho." },
+    link: { nome: "Link disfarçado", curto: "link", dica: "Leia o endereço até a primeira barra e encontre o dono real antes de tocar." },
+    pressao: { nome: "Pressão: urgência, medo ou autoridade", curto: "pressão", dica: "Pressa e ameaça servem para você não pensar. Pare antes de agir." },
+    pedido: { nome: "Pedido de dados, código ou dinheiro", curto: "pedido", dica: "Senha, código e Pix nunca são pedidos por mensagem por empresas sérias." },
+    oferta: { nome: "Oferta boa demais", curto: "oferta", dica: "Prêmio que você não pediu e preço muito abaixo do normal são iscas." },
+    oficial: { nome: "Sinal de canal oficial", curto: "canal oficial", dica: "Mensagens legítimas mandam você ao app ou ao telefone que você já conhece." }
+  };
+  const ALERTA = ["remetente", "link", "pressao", "pedido", "oferta"];
+
+  const M1 = [
+    { canal: "sms", hora: "23:47", inicial: "?",
+      de: [{ t: "+55 11 94021-7733", c: "remetente" }],
+      corpo: ["BANCO SOLAR: ", { t: "Sua conta foi bloqueada", c: "pressao" }, " por movimentação suspeita. ", { t: "Regularize em até 2 horas", c: "pressao" }, " em ", { t: "solar-desbloqueio.net/app", c: "link", url: "https://solar-desbloqueio.net/app" }, "."],
+      resposta: "golpe",
+      explicacao: "Banco não avisa bloqueio por SMS vindo de celular comum, e o endereço pertence a solar-desbloqueio.net, não ao banco. Bloqueio com prazo curto é pressão para você agir sem pensar." },
+    { canal: "email", hora: "09:12", assunto: "Pedido #4471 saiu para entrega",
+      de: ["Loja Bom Preço", " <", { t: "pedidos@lojabompreco.com.br", c: "oficial" }, ">"],
+      corpo: ["Olá, Ana. Seu pedido #4471 (fone de ouvido) saiu para entrega e chega na quinta-feira. ", { t: "Acompanhe pelo app da loja", c: "oficial" }, ". ", { t: "Nunca pedimos senha ou pagamento por e-mail", c: "oficial" }, "."],
+      resposta: "legitima",
+      explicacao: "O e-mail vem do domínio oficial, cita um pedido real e manda você ao aplicativo, sem link e sem pedir nada. Mesmo assim, confirme no app se o pedido existe." },
+    { canal: "app", hora: "14:05", inicial: "M",
+      de: [{ t: "Mãe (número novo)", c: "remetente" }],
+      corpo: ["Oi filho, troquei de número. ", { t: "Preciso que você faça um Pix de R$ 300 agora", c: "pedido" }, ", ", { t: "é urgente, depois te explico", c: "pressao" }, "."],
+      resposta: "golpe",
+      explicacao: "É o golpe do falso parente: número novo, pedido de dinheiro e pressa para você não conferir. Ligue para o número antigo ou faça uma pergunta que só a pessoa saberia responder." },
+    { canal: "email", hora: "18:30", assunto: "Você ganhou 5.000 gemas!",
+      de: ["Pixel Hero Suporte", " <", { t: "suporte@pixelhero-premios.com", c: "remetente" }, ">"],
+      corpo: [{ t: "Parabéns! Você foi sorteado com 5.000 gemas grátis", c: "oferta" }, ". Para receber, ", { t: "entre com seu login e senha", c: "pedido" }, " em ", { t: "pixelhero.gg.resgate-gemas.com", c: "link", url: "https://pixelhero.gg.resgate-gemas.com/login" }, ". ", { t: "Oferta válida só hoje", c: "pressao" }, "."],
+      resposta: "golpe",
+      explicacao: "O jogo oficial é pixelhero.gg, mas o dono deste endereço é resgate-gemas.com. Prêmio surpresa, pedido de senha e prazo de um dia formam um golpe clássico de roubo de conta." },
+    { canal: "sms", hora: "12:41", inicial: "B",
+      de: ["Banco Eletrônico Solar"],
+      corpo: ["Compra de R$ 89,90 aprovada no cartão final 4421, em Livraria Central. ", { t: "Não reconhece? Ligue para o número no verso do seu cartão", c: "oficial" }, ". ", { t: "Não enviamos links por SMS", c: "oficial" }, "."],
+      resposta: "legitima",
+      explicacao: "A mensagem informa sem pedir nada e manda você ao telefone impresso no cartão, um canal que você já tem. Não há link para clicar." },
+    { canal: "app", hora: "20:18", inicial: "S",
+      de: [{ t: "Seguranca_VideoMais_Oficial", c: "remetente" }],
+      corpo: [{ t: "Seu canal será excluído em 24 horas", c: "pressao" }, " por violação de direitos autorais. Para contestar, ", { t: "envie o código de 6 dígitos que chegou no seu SMS", c: "pedido" }, "."],
+      resposta: "golpe",
+      explicacao: "Nenhuma plataforma pede seu código de verificação. Quem tem esse código entra na sua conta. O perfil comum com nome de oficial e a ameaça de exclusão completam o golpe." },
+    { canal: "email", hora: "07:55", assunto: "Reunião de pais: sexta, 19h",
+      de: ["Secretaria · Escola Estadual Modelo", " <", { t: "secretaria@escolamodelo.edu.br", c: "oficial" }, ">"],
+      corpo: ["A reunião do 3º bimestre será na sexta-feira, às 19h, no auditório. ", { t: "Confirme presença pelo telefone da secretaria", c: "oficial" }, ", que está na agenda escolar."],
+      resposta: "legitima",
+      explicacao: "Domínio oficial da escola, informação específica e confirmação por um telefone que a família já conhece. Não há link nem pedido de dados." },
+    { canal: "sms", hora: "10:02", inicial: "?",
+      de: [{ t: "+55 21 99830-1022", c: "remetente" }],
+      corpo: ["Encomenda retida na fiscalização. ", { t: "Pague a taxa de R$ 7,90", c: "pedido" }, " em ", { t: "entregasul-taxa.xyz", c: "link", url: "https://entregasul-taxa.xyz/pagar" }, " ", { t: "ou ela será devolvida amanhã", c: "pressao" }, "."],
+      resposta: "golpe",
+      explicacao: "Taxa pequena cobrada por link, vinda de celular comum, com ameaça de devolução. Confira o rastreio no site oficial da loja onde você comprou." },
+    { canal: "email", hora: "16:20", assunto: "Atualização cadastral obrigatória",
+      de: ["Banco Eletrônico Solar", " <", { t: "avisos@bancosolar.com.br.alerta-cliente.com", c: "remetente" }, ">"],
+      corpo: ["Prezado cliente, ", { t: "por determinação do Banco Central", c: "pressao" }, ", seu cadastro precisa ser atualizado. ", { t: "Confirme CPF, agência e senha do cartão", c: "pedido" }, " no ", { t: "portal de atualização", c: "link", url: "https://bancosolar.com.br.alerta-cliente.com/atualizar" }, "."],
+      resposta: "golpe",
+      explicacao: "O endereço começa com bancosolar.com.br, mas o dono real é alerta-cliente.com. O texto usa autoridade para intimidar e pede senha, algo que banco nenhum faz por e-mail." },
+    { canal: "app", hora: "11:37", inicial: "9",
+      de: [{ t: "Coordenação 9º B · grupo oficial da escola", c: "oficial" }],
+      corpo: ["Lembrete: a feira de ciências foi adiada para 14/11. ", { t: "O comunicado completo está no mural e no site da escola", c: "oficial" }, "."],
+      resposta: "legitima",
+      explicacao: "Aviso informativo, sem link e sem pedido, que aponta para dois canais oficiais que você pode conferir por conta própria." },
+    { canal: "sms", hora: "17:03", inicial: "C",
+      de: ["Clínica Vida"],
+      corpo: ["Sua consulta é amanhã, às 9h. ", { t: "Para remarcar, ligue para o número do seu cartão de atendimento", c: "oficial" }, ". Não responda esta mensagem."],
+      resposta: "legitima",
+      explicacao: "Lembrete simples, sem cobrança e sem link, que indica o contato que você já possui." },
+    { canal: "app", hora: "21:59", inicial: "B",
+      de: [{ t: "Bom Preço Ofertas Oficial", c: "remetente" }],
+      corpo: ["LIQUIDAÇÃO: ", { t: "celular de última geração por R$ 199", c: "oferta" }, ", ", { t: "restam 3 unidades", c: "pressao" }, ". ", { t: "Pague no Pix para garantir", c: "pedido" }, ": ", { t: "bompreco-ofertas.shop", c: "link", url: "https://bompreco-ofertas.shop/pix" }, "."],
+      resposta: "golpe",
+      explicacao: "Preço impossível, escassez inventada e pagamento por Pix fora da loja. O dono do endereço é bompreco-ofertas.shop, não lojabompreco.com.br." }
+  ];
+
+  const OFICIAIS = [
+    { empresa: "Banco Eletrônico Solar", dominio: "bancosolar.com.br" },
+    { empresa: "Loja Bom Preço", dominio: "lojabompreco.com.br" },
+    { empresa: "Escola Estadual Modelo", dominio: "escolamodelo.edu.br" },
+    { empresa: "Pixel Hero (jogo)", dominio: "pixelhero.gg" }
+  ];
+
+  const M2 = [
+    { url: "https://bancosolar.com.br/extrato", empresa: 0, nota: "Endereço limpo: o dono é bancosolar.com.br e o caminho /extrato vem depois da barra." },
+    { url: "https://bancosolar.com.br.atualiza-cadastro.net/login", empresa: 0, nota: "O nome do banco aparece no começo, mas é só um prefixo. Quem controla o endereço é atualiza-cadastro.net." },
+    { url: "https://app.lojabompreco.com.br/pedidos", empresa: 1, nota: "O prefixo app. é criado pela própria loja. O dono continua sendo lojabompreco.com.br." },
+    { url: "https://lojabompreco-com-br.shop/promocao", empresa: 1, nota: "Hífens no lugar dos pontos criam outro nome. O dono é lojabompreco-com-br.shop, que não é a loja." },
+    { url: "https://pixelhero.gg/loja", empresa: 3, nota: "Endereço oficial do jogo, com o caminho /loja depois da barra." },
+    { url: "https://pixelhero.gg.resgate-gemas.com/login", empresa: 3, nota: "Golpe de prefixo: pixelhero.gg está à esquerda. O dono real é resgate-gemas.com." },
+    { url: "https://escolamodelo.edu.br/boletim", empresa: 2, nota: "A terminação .edu.br é usada por instituições de ensino, e o dono é a escola." },
+    { url: "https://banc0solar.com.br/login", empresa: 0, nota: "Olhe de perto: banc0solar usa o número zero no lugar da letra o. É outro dono, criado para enganar a leitura rápida." }
+  ];
+  const SUFIXOS = ["com.br", "edu.br", "gov.br", "org.br", "net.br", "com", "net", "org", "gg", "xyz", "shop", "li"];
+
+  const OP = {
+    rem: {
+      _titulo: "Remetente",
+      oficial: { rot: "Canal oficial", txt: "Banco Eletrônico Solar" },
+      parecido: { rot: "Nome parecido", txt: "Banco Eletronico Solar Seguranca", flag: ["A", "Remetente imita o nome oficial"] },
+      desconhecido: { rot: "Número desconhecido", txt: "+55 11 97730-4412", flag: ["A", "Número comum, não é canal do banco"] }
+    },
+    gat: {
+      _titulo: "Gatilho emocional",
+      nenhum: { rot: "Nenhum", txt: "" },
+      urgencia: { rot: "Urgência", txt: "Você tem 30 minutos para resolver.", flag: ["P", "Urgência: prazo curto para impedir que você pense"] },
+      medo: { rot: "Medo", txt: "Sua conta será bloqueada hoje.", flag: ["P", "Medo: ameaça de perder algo"] },
+      recompensa: { rot: "Recompensa", txt: "Você ganhou R$ 500 em pontos!", flag: ["P", "Recompensa: prêmio que você não pediu"] },
+      autoridade: { rot: "Autoridade", txt: "Aviso do setor de segurança, por determinação do Banco Central.", flag: ["P", "Autoridade: usa um órgão importante para intimidar"] },
+      curiosidade: { rot: "Curiosidade", txt: "Veja quem tentou acessar sua conta.", flag: ["P", "Curiosidade: provoca vontade de tocar sem pensar"] }
+    },
+    ped: {
+      _titulo: "Pedido",
+      app: { rot: "Abrir o app oficial", txt: "Confira os detalhes no aplicativo oficial." },
+      clicar: { rot: "Clicar no link", txt: "Acesse o link abaixo.", flag: ["R", "Pede para tocar em um link da mensagem"] },
+      dados: { rot: "Informar dados", txt: "Informe seu CPF e a senha do cartão.", flag: ["R", "Pede CPF e senha"] },
+      codigo: { rot: "Enviar código", txt: "Envie o código de 6 dígitos que chegou por SMS.", flag: ["R", "Pede código de verificação"] },
+      taxa: { rot: "Pagar taxa", txt: "Pague a taxa de R$ 4,90 para liberar.", flag: ["R", "Cobra uma taxa por mensagem"] }
+    },
+    lnk: {
+      _titulo: "Link",
+      nenhum: { rot: "Sem link", txt: "" },
+      oficial: { rot: "Domínio oficial", txt: "bancosolar.com.br/app" },
+      falso: { rot: "Domínio falso", txt: "bancosolar.com.br.libera-acesso.net", flag: ["A", "O dono real do link é libera-acesso.net"] },
+      encurtado: { rot: "Link encurtado", txt: "encurta.li/x8Kq", flag: ["A", "Link encurtado esconde o destino"] }
+    }
+  };
+  const PARE = [
+    { l: "P", t: "Pare", d: "Pressa, medo e prêmio são gatilhos. Golpe quer decisão em minutos." },
+    { l: "A", t: "Analise remetente e link", d: "Quem enviou? Leia o endereço e encontre o dono real." },
+    { l: "R", t: "Reveja o pedido", d: "Senha, código, dados e dinheiro não se pedem por mensagem." },
+    { l: "E", t: "Entre pelo canal oficial", d: "App instalado, site digitado por você ou telefone do cartão." }
+  ];
+
+  /* ---------- Estado ---------- */
+  function novoEstado() {
+    const cat = {};
+    Object.keys(CATS).forEach((k) => { cat[k] = { f: 0, t: 0 }; });
+    return {
+      view: "inicio", dupla: "", pontos: 0, abertura: null,
+      m1: { idx: 0, marks: new Set(), revelado: false, veredito: null, prep: null, inspetor: null, ultimo: null, resultados: [] },
+      m2: { idx: 0, etapa: "dominio", tocado: null, okDom: false, resp: null, okOf: false, resultados: [] },
+      m3: { cfg: { rem: "desconhecido", gat: "urgencia", ped: "dados", lnk: "falso" }, desafioA: false, desafioB: false },
+      cat, confirmarReset: false
+    };
+  }
+  let S = novoEstado();
+  let timer = null;
+
+  const view = document.getElementById("view");
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.hidden = false;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => { t.hidden = true; }, 2600);
+  }
+  function somar(p) {
+    S.pontos += p;
+    document.getElementById("pontos").textContent = S.pontos + " pts";
+  }
+
+  /* ---------- Navegação ---------- */
+  function ir(v) {
+    S.view = v;
+    S.confirmarReset = false;
+    render();
+    window.scrollTo({ top: 0 });
+    const h = view.querySelector("h1");
+    if (h) h.focus({ preventScroll: true });
+  }
+  function render() {
+    const telas = { inicio: telaInicio, m1: telaM1, m2: telaM2, m3: telaM3, laudo: telaLaudo };
+    view.innerHTML = telas[S.view]();
+    document.querySelectorAll(".nav button").forEach((b) => {
+      if (b.dataset.v === S.view) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+    });
+    document.getElementById("pontos").textContent = S.pontos + " pts";
+    if (S.view === "m3") m3Atualizar();
+  }
+
+  /* ---------- Início ---------- */
+  function telaInicio() {
+    const ab = [
+      { k: "link", t: "Toco no link para cancelar o Pix.", c: "É exatamente o que o golpista quer. O link leva a uma página que imita o banco e captura seus dados." },
+      { k: "ignorar", t: "Ignoro a mensagem.", c: "Melhor do que tocar no link. Mas e se fosse verdade? Ainda falta confirmar por um canal seguro." },
+      { k: "app", t: "Abro o app do banco que já está no meu celular.", c: "Atitude de perito: você confere pelo canal oficial sem usar nada que veio na mensagem." }
+    ];
+    const escolhida = ab.find((o) => o.k === S.abertura);
+    const prog1 = S.m1.resultados.length, prog2 = S.m2.resultados.length;
+    const prog3 = (S.m3.desafioA ? 1 : 0) + (S.m3.desafioB ? 1 : 0);
+    return `
+    <div class="stack" style="gap:32px">
+      <section class="hero">
+        <div>
+          <p class="kicker">Laboratório de perícia digital · Mundo Digital · 9º ano</p>
+          <h1 tabindex="-1">Operação <em>Anzol</em></h1>
+          <p class="lead">Golpe digital é isca: parece comida, mas esconde um anzol. Nesta operação, sua dupla vai periciar mensagens, ler endereços como especialista e desmontar os gatilhos que fazem alguém morder a isca.</p>
+          <div class="field">
+            <label for="dupla">Nome da dupla</label>
+            <input id="dupla" type="text" maxlength="40" autocomplete="off" placeholder="Ex.: Ana e Leo" value="${esc(S.dupla)}">
+          </div>
+        </div>
+        <div class="card abertura">
+          <p class="kicker">Caso de abertura</p>
+          <div class="device" style="margin-top:12px">
+            <div class="dev-bar"><span>SMS</span><span>23:47</span></div>
+            <div class="phone-from"><span class="avatar" aria-hidden="true">?</span><div class="from-name">+55 11 93315-0087</div></div>
+            <div class="bubble">Seu Pix de R$ 1.200,00 foi agendado para 08h. Não reconhece? Cancele em 10 minutos: <span class="seg-link">pix-cancela.com</span></div>
+          </div>
+          <h2 style="margin-top:16px">O que você faria agora?</h2>
+          <div class="opcoes-abertura">
+            ${ab.map((o) => `<button type="button" class="btn" data-acao="abertura" data-k="${o.k}" aria-pressed="${S.abertura === o.k}">${esc(o.t)}</button>`).join("")}
+          </div>
+          ${escolhida ? `<p class="comentario" role="status">${esc(escolhida.c)}</p>` : ""}
+        </div>
+      </section>
+
+      <section class="stack" aria-labelledby="t-missoes">
+        <h2 id="t-missoes" style="font-size:1.5rem">Missões</h2>
+        <div class="missoes">
+          ${cardMissao("1", "Perícia de mensagens", "Marque as pistas no próprio texto antes de dar o veredito. Vale mais quem prova do que quem chuta.", "≈ 18 min", `${prog1}/${M1.length} casos`, "m1")}
+          ${cardMissao("2", "Anatomia do link", "Encontre o dono real de cada endereço e decida se ele pertence mesmo à empresa.", "≈ 10 min", `${prog2}/${M2.length} endereços`, "m2")}
+          ${cardMissao("3", "Laboratório de gatilhos", "Troque de lado: monte uma mensagem, veja o radar acusar cada gatilho e desafie outra dupla.", "≈ 13 min", `${prog3}/2 desafios`, "m3")}
+        </div>
+      </section>
+
+      <section class="card stack" aria-labelledby="t-pare">
+        <div><p class="kicker">Protocolo da operação</p><h2 id="t-pare" style="font-size:1.5rem;margin-top:6px">Diante de qualquer mensagem: P.A.R.E.</h2></div>
+        <div class="pare">${PARE.map((p) => `<div class="pare-item"><span class="letra" aria-hidden="true">${p.l}</span><strong>${esc(p.t)}</strong><span>${esc(p.d)}</span></div>`).join("")}</div>
+      </section>
+
+      <p class="rodape">Todos os nomes, números e endereços desta atividade são fictícios e não abrem nenhum site.</p>
+    </div>`;
+  }
+  function cardMissao(n, titulo, desc, tempo, prog, v) {
+    return `<article class="card missao">
+      <span class="num" aria-hidden="true">${n}</span>
+      <h3>${esc(titulo)}</h3>
+      <p>${esc(desc)}</p>
+      <div class="missao-meta"><span>${tempo}</span><span>${prog}</span></div>
+      <button type="button" class="btn btn-primary" data-acao="ir" data-v="${v}">Entrar na missão ${n}</button>
+    </article>`;
+  }
+
+  /* ---------- Missão 1 ---------- */
+  function isRel(c, resp) {
+    if (!c) return false;
+    return resp === "golpe" ? ALERTA.includes(c) : c === "oficial";
+  }
+  function preparar(m) {
+    let n = 0;
+    const mk = (arr) => arr.map((s) => {
+      const o = typeof s === "string" ? { t: s, c: null } : Object.assign({}, s);
+      o.id = "s" + n++;
+      o.tap = typeof s !== "string" || s.trim().length > 3;
+      return o;
+    });
+    return { idx: S.m1.idx, de: mk(m.de), corpo: mk(m.corpo) };
+  }
+  function segHtml(sg, m) {
+    if (!sg.tap) return esc(sg.t);
+    const lead = sg.t.match(/^\s*/)[0], trail = sg.t.match(/\s*$/)[0], txt = sg.t.trim();
+    const marked = S.m1.marks.has(sg.id);
+    let cls = "seg" + (sg.url ? " seg-link" : "");
+    let tag = "";
+    if (S.m1.revelado) {
+      const rel = isRel(sg.c, m.resposta);
+      if (rel && marked) { cls += " achou"; tag = `<span class="tag tag-ok">✓ ${esc(CATS[sg.c].curto)}</span>`; }
+      else if (rel) { cls += " faltou"; tag = `<span class="tag tag-falta">faltou · ${esc(CATS[sg.c].curto)}</span>`; }
+      else if (marked) { cls += " falso"; tag = `<span class="tag tag-falso">não era pista</span>`; }
+    } else if (marked) cls += " marcado";
+    const attrs = S.m1.revelado ? `aria-disabled="true"` : `role="button" tabindex="0" data-acao="seg"`;
+    return `${esc(lead)}<span class="${cls}" ${attrs} data-id="${sg.id}" aria-pressed="${marked}">${esc(txt)}</span>${tag}${esc(trail)}`;
+  }
+  function deviceHtml(m, prep) {
+    const de = prep.de.map((s) => segHtml(s, m)).join("");
+    const corpo = prep.corpo.map((s) => segHtml(s, m)).join("");
+    const cls = "device" + (S.m1.revelado ? " revelado" : "");
+    if (m.canal === "email") {
+      return `<div class="${cls}">
+        <div class="dev-bar"><span>Caixa de entrada</span><span>${esc(m.hora)}</span></div>
+        <div class="mail-head"><div><span class="mh-k">De</span> ${de}</div><div><span class="mh-k">Assunto</span> <strong>${esc(m.assunto)}</strong></div></div>
+        <div class="mail-body">${corpo}</div></div>`;
+    }
+    const rotulo = m.canal === "sms" ? "SMS" : "Mensagem de aplicativo";
+    return `<div class="${cls}">
+      <div class="dev-bar"><span>${rotulo}</span><span>${esc(m.hora)}</span></div>
+      <div class="phone-from"><span class="avatar" aria-hidden="true">${esc(m.inicial || "?")}</span><div class="from-name">${de}</div></div>
+      <div class="bubble">${corpo}</div></div>`;
+  }
+  function casoHtml(m) {
+    if (!S.m1.prep || S.m1.prep.idx !== S.m1.idx) S.m1.prep = preparar(m);
+    const insp = S.m1.inspetor
+      ? `<div class="inspetor" role="status"><span class="kicker">Inspetor de link · endereço completo</span><code>${esc(S.m1.inspetor)}</code><span style="font-size:0.9rem;color:var(--muted)">Antes de tocar num link de verdade, segure o dedo sobre ele para ver o endereço. Quem é o dono deste?</span></div>`
+      : "";
+    return deviceHtml(m, S.m1.prep) + insp;
+  }
+  function painelHtml(m) {
+    if (!S.m1.revelado) {
+      const n = S.m1.marks.size;
+      return `<div class="card painel">
+        <p class="kicker">Procedimento</p>
+        <ol class="passos">
+          <li>Toque nos trechos da mensagem que são <strong>pistas</strong> do que ela é. Toque de novo para desmarcar.</li>
+          <li>Links mostram o endereço completo no inspetor.</li>
+          <li>Dê o veredito. Cada pista certa vale pontos; marcar o que não é pista tira pontos.</li>
+        </ol>
+        <p class="contador" aria-live="polite">${n} ${n === 1 ? "trecho marcado" : "trechos marcados"}</p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-golpe" data-acao="veredito" data-v="golpe">É golpe</button>
+          <button type="button" class="btn btn-legit" data-acao="veredito" data-v="legitima">É legítima</button>
+        </div>
+      </div>`;
+    }
+    const r = S.m1.ultimo;
+    const ultimo = S.m1.idx === M1.length - 1;
+    return `<div class="card painel" role="status">
+      <p class="resultado-titulo ${r.ok ? "ok" : "erro"}">${r.ok ? "Veredito correto" : "Veredito incorreto"}</p>
+      <p><strong>${m.resposta === "golpe" ? "Esta mensagem é golpe." : "Esta mensagem é legítima."}</strong> ${esc(m.explicacao)}</p>
+      <div class="placar-caso">
+        <div><b>${r.found}/${r.total}</b><span>pistas achadas</span></div>
+        <div><b>${r.falsos}</b><span>marcas erradas</span></div>
+        <div><b>+${r.pts}</b><span>pontos</span></div>
+      </div>
+      <div class="legenda"><span class="tag tag-ok">✓ achou</span><span class="tag tag-falta">faltou</span><span class="tag tag-falso">não era pista</span></div>
+      <button type="button" class="btn btn-primary" data-acao="proximo1">${ultimo ? "Concluir missão" : "Próximo caso"}</button>
+    </div>`;
+  }
+  function telaM1() {
+    const total = M1.length;
+    if (S.m1.idx >= total) {
+      const certos = S.m1.resultados.filter((r) => r.ok).length;
+      const achou = S.m1.resultados.reduce((a, r) => a + r.found, 0);
+      const tot = S.m1.resultados.reduce((a, r) => a + r.total, 0);
+      return `<div class="stack">
+        <div class="missao-head"><p class="kicker">Missão 1 · Perícia de mensagens</p><h1 tabindex="-1">Missão concluída</h1></div>
+        <div class="card stack">
+          <p style="font-size:1.15rem">${certos} de ${total} vereditos corretos e ${achou} de ${tot} pistas encontradas.</p>
+          <div class="btn-row"><button type="button" class="btn btn-primary" data-acao="ir" data-v="m2">Ir para a Missão 2</button><button type="button" class="btn" data-acao="ir" data-v="laudo">Ver laudo</button></div>
+        </div></div>`;
+    }
+    const m = M1[S.m1.idx];
+    return `<div class="stack">
+      <div class="missao-head">
+        <p class="kicker">Missão 1 · Perícia de mensagens</p>
+        <h1 tabindex="-1">Caso ${String(S.m1.idx + 1).padStart(2, "0")} de ${total}</h1>
+        <div class="progresso" aria-hidden="true"><div style="width:${pct(S.m1.idx, total)}%"></div></div>
+      </div>
+      <div class="duas">
+        <div id="caso">${casoHtml(m)}</div>
+        <div id="painel">${painelHtml(m)}</div>
+      </div>
+    </div>`;
+  }
+  function m1Parcial(focoId) {
+    const m = M1[S.m1.idx];
+    document.getElementById("caso").innerHTML = casoHtml(m);
+    document.getElementById("painel").innerHTML = painelHtml(m);
+    if (focoId) { const el = view.querySelector(`[data-id="${focoId}"]`); if (el) el.focus(); }
+  }
+  function m1Toggle(id) {
+    if (S.m1.revelado) return;
+    const prep = S.m1.prep;
+    const sg = prep.de.concat(prep.corpo).find((s) => s.id === id);
+    if (!sg) return;
+    if (S.m1.marks.has(id)) S.m1.marks.delete(id); else S.m1.marks.add(id);
+    if (sg.url) S.m1.inspetor = sg.url;
+    m1Parcial(id);
+  }
+  function m1Veredito(v) {
+    if (S.m1.revelado) return;
+    const m = M1[S.m1.idx];
+    const ok = v === m.resposta;
+    let found = 0, missed = 0, falsos = 0;
+    S.m1.prep.de.concat(S.m1.prep.corpo).forEach((sg) => {
+      if (!sg.tap) return;
+      const rel = isRel(sg.c, m.resposta);
+      const marked = S.m1.marks.has(sg.id);
+      if (rel) {
+        S.cat[sg.c].t++;
+        if (marked) { found++; S.cat[sg.c].f++; } else missed++;
+      } else if (marked) falsos++;
+    });
+    const pts = Math.max(0, (ok ? 100 : 0) + found * 30 - falsos * 10);
+    S.m1.ultimo = { ok, found, total: found + missed, falsos, pts };
+    S.m1.resultados.push(S.m1.ultimo);
+    S.m1.revelado = true;
+    somar(pts);
+    m1Parcial();
+    const p = document.getElementById("painel");
+    if (p && window.matchMedia("(max-width: 879px)").matches) p.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function m1Proximo() {
+    S.m1.idx++;
+    S.m1.marks = new Set();
+    S.m1.revelado = false;
+    S.m1.prep = null;
+    S.m1.inspetor = null;
+    ir("m1");
+  }
+
+  /* ---------- Missão 2 ---------- */
+  function analisar(u) {
+    const mt = u.match(/^(https?:\/\/)([^\/]+)(.*)$/);
+    const labels = mt[2].split(".");
+    let suf = 1;
+    SUFIXOS.forEach((s) => {
+      const n = s.split(".").length;
+      if (labels.length > n && labels.slice(-n).join(".") === s) suf = Math.max(suf, n);
+    });
+    const nome = labels.length - suf - 1;
+    return { proto: mt[1], labels, path: mt[3], nome, dominio: labels.slice(nome).join(".") };
+  }
+  function telaM2() {
+    const total = M2.length;
+    if (S.m2.idx >= total) {
+      const dom = S.m2.resultados.filter((r) => r.okDom).length;
+      const of = S.m2.resultados.filter((r) => r.okOf).length;
+      return `<div class="stack">
+        <div class="missao-head"><p class="kicker">Missão 2 · Anatomia do link</p><h1 tabindex="-1">Missão concluída</h1></div>
+        <div class="card stack">
+          <p style="font-size:1.15rem">Dono real identificado em ${dom} de ${total} endereços. Decisão sobre o oficial correta em ${of} de ${total}.</p>
+          <div class="btn-row"><button type="button" class="btn btn-primary" data-acao="ir" data-v="m3">Ir para a Missão 3</button><button type="button" class="btn" data-acao="ir" data-v="laudo">Ver laudo</button></div>
+        </div></div>`;
+    }
+    const it = M2[S.m2.idx];
+    const a = analisar(it.url);
+    const emp = OFICIAIS[it.empresa];
+    const st = S.m2;
+    const chips = a.labels.map((l, i) => {
+      let cls = "chip";
+      if (st.etapa !== "dominio") {
+        if (i === a.nome) cls += " nome";
+        else if (i > a.nome) cls += " dono";
+        if (i === st.tocado && i !== a.nome) cls += " errado";
+      }
+      return `<button type="button" class="${cls}" data-acao="chip" data-i="${i}" ${st.etapa !== "dominio" ? "disabled" : ""}>${esc(l)}</button>`;
+    }).join(`<span class="fixo" aria-hidden="true">.</span>`);
+
+    let etapaHtml = "";
+    if (st.etapa === "dominio") {
+      etapaHtml = `<p><strong>Etapa 1.</strong> Toque no nome que identifica o <strong>dono real</strong> do endereço.</p>`;
+    } else {
+      let fb;
+      if (st.okDom) fb = `Certo. O dono real é <strong class="mono">${esc(a.dominio)}</strong>.`;
+      else if (st.tocado > a.nome) fb = `Isso é só a terminação. O dono é o nome logo antes dela: <strong class="mono">${esc(a.dominio)}</strong>.`;
+      else fb = `Isso fica à esquerda do dono, e qualquer pessoa pode criar esse prefixo. O dono real é <strong class="mono">${esc(a.dominio)}</strong>.`;
+      etapaHtml = `<p class="nota" role="status">${fb}</p>`;
+      if (st.etapa === "oficial") {
+        etapaHtml += `<p><strong>Etapa 2.</strong> Este endereço pertence mesmo a ${esc(emp.empresa)}?</p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-legit" data-acao="oficial" data-v="sim">Sim, é oficial</button>
+          <button type="button" class="btn btn-golpe" data-acao="oficial" data-v="nao">Não é oficial</button>
+        </div>`;
+      } else {
+        const oficial = a.dominio === emp.dominio;
+        etapaHtml += `<p class="resultado-titulo ${st.okOf ? "ok" : "erro"}" role="status">${st.okOf ? "Decisão correta" : "Decisão incorreta"}</p>
+        <p><strong>${oficial ? "É o endereço oficial." : "Não é oficial."}</strong> ${esc(it.nota)}</p>
+        <button type="button" class="btn btn-primary" data-acao="proximo2">${S.m2.idx === total - 1 ? "Concluir missão" : "Próximo endereço"}</button>`;
+      }
+    }
+    return `<div class="stack">
+      <div class="missao-head">
+        <p class="kicker">Missão 2 · Anatomia do link</p>
+        <h1 tabindex="-1">Endereço ${String(S.m2.idx + 1).padStart(2, "0")} de ${total}</h1>
+        <div class="progresso" aria-hidden="true"><div style="width:${pct(S.m2.idx, total)}%"></div></div>
+      </div>
+      <div class="duas">
+        <div class="card stack" style="gap:14px">
+          <p>A mensagem diz ser de <strong>${esc(emp.empresa)}</strong> e traz este endereço:</p>
+          <div class="url"><span class="fixo">${esc(a.proto)}</span>${chips}<span class="fixo">${esc(a.path)}</span></div>
+          ${etapaHtml}
+        </div>
+        <aside class="stack">
+          <div class="card">
+            <p class="kicker">Como ler um endereço</p>
+            <div class="anatomia" aria-label="Exemplo: https://app.bancosolar.com.br/extrato">
+              <div><code>https://</code><span>protocolo</span></div>
+              <div><code>app.</code><span>prefixo</span></div>
+              <div><code class="dono">bancosolar</code><span>dono</span></div>
+              <div><code>.com.br</code><span>terminação</span></div>
+              <div><code>/extrato</code><span>caminho</span></div>
+            </div>
+            <p style="margin-top:12px;font-size:0.93rem;color:var(--muted)">Leia da primeira barra <span class="mono">/</span> para trás. O dono é o nome logo antes da terminação. Tudo à esquerda dele é prefixo, e qualquer um cria.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">Diretório oficial</p>
+            <table class="diretorio"><tbody>${OFICIAIS.map((o) => `<tr><td>${esc(o.empresa)}</td><td>${esc(o.dominio)}</td></tr>`).join("")}</tbody></table>
+          </div>
+        </aside>
+      </div>
+    </div>`;
+  }
+  function m2Chip(i) {
+    if (S.m2.etapa !== "dominio") return;
+    const a = analisar(M2[S.m2.idx].url);
+    S.m2.tocado = i;
+    S.m2.okDom = i === a.nome;
+    if (S.m2.okDom) somar(50);
+    S.m2.etapa = "oficial";
+    render();
+    const b = view.querySelector('[data-acao="oficial"]');
+    if (b) b.focus();
+  }
+  function m2Oficial(v) {
+    if (S.m2.etapa !== "oficial") return;
+    const it = M2[S.m2.idx];
+    const a = analisar(it.url);
+    const oficial = a.dominio === OFICIAIS[it.empresa].dominio;
+    S.m2.okOf = (v === "sim") === oficial;
+    if (S.m2.okOf) somar(50);
+    S.m2.resultados.push({ okDom: S.m2.okDom, okOf: S.m2.okOf });
+    S.m2.etapa = "feito";
+    render();
+    const b = view.querySelector('[data-acao="proximo2"]');
+    if (b) b.focus();
+  }
+  function m2Proximo() {
+    S.m2.idx++;
+    S.m2.etapa = "dominio";
+    S.m2.tocado = null;
+    ir("m2");
+  }
+
+  /* ---------- Missão 3 ---------- */
+  function m3Flags() {
+    const c = S.m3.cfg, out = [];
+    [["rem", c.rem], ["gat", c.gat], ["ped", c.ped], ["lnk", c.lnk]].forEach(([g, v]) => {
+      const f = OP[g][v].flag;
+      if (f) out.push({ l: f[0], t: f[1] });
+    });
+    return out;
+  }
+  function m3Mensagem() {
+    const c = S.m3.cfg;
+    const corpo = ["Olá, cliente.", OP.gat[c.gat].txt, OP.ped[c.ped].txt].filter(Boolean).join(" ");
+    const link = OP.lnk[c.lnk].txt;
+    return { de: OP.rem[c.rem].txt, corpo, link };
+  }
+  function phoneHtml(msg) {
+    return `<div class="device">
+      <div class="dev-bar"><span>SMS</span><span>agora</span></div>
+      <div class="phone-from"><span class="avatar" aria-hidden="true">${esc(msg.de.trim().charAt(0))}</span><div class="from-name">${esc(msg.de)}</div></div>
+      <div class="bubble">${esc(msg.corpo)}${msg.link ? `<br><span class="seg-link">${esc(msg.link)}</span>` : ""}</div>
+    </div>`;
+  }
+  function radarHtml(flags) {
+    const c = S.m3.cfg;
+    const linhas = ["P", "A", "R"].map((l) => {
+      const fs = flags.filter((f) => f.l === l);
+      const nome = PARE.find((p) => p.l === l).t;
+      return `<div class="radar-row ${fs.length ? "alerta" : "limpo"}"><span class="letra" aria-hidden="true">${l}</span><div><span class="st">${esc(nome)}: ${fs.length ? "alerta" : "sem alerta"}</span>${fs.length ? `<ul>${fs.map((f) => `<li>${esc(f.t)}</li>`).join("")}</ul>` : ""}</div></div>`;
+    }).join("");
+    const canal = c.ped === "app" && (c.lnk === "nenhum" || c.lnk === "oficial");
+    const e = `<div class="radar-row ${canal ? "limpo" : "alerta"}"><span class="letra" aria-hidden="true">E</span><div><span class="st">Entre pelo canal oficial: ${canal ? "indicado" : "ausente"}</span><ul><li>${canal ? "A mensagem manda você ao aplicativo oficial." : "Antes de agir, confirme no app ou no telefone do cartão."}</li></ul></div></div>`;
+    const n = flags.length;
+    const nivel = n === 0 ? "Comunicação legítima" : n <= 2 ? "Suspeita" : "Golpe clássico";
+    const cells = [0, 1, 2, 3, 4].map((i) => `<span class="${i < n ? "on" : ""}"></span>`).join("");
+    return `<div class="stack" style="gap:12px">
+      <div><p class="kicker">Radar P.A.R.E.</p><p style="font-size:1.25rem;font-weight:700;margin-top:4px">${n} ${n === 1 ? "alerta" : "alertas"} · ${nivel}</p></div>
+      <div class="medidor ${n === 0 ? "zero" : ""}" aria-hidden="true">${cells}</div>
+      <div class="radar">${linhas}${e}</div>
+    </div>`;
+  }
+  function telaM3() {
+    const grupos = ["rem", "gat", "ped", "lnk"].map((g) => {
+      const ops = Object.keys(OP[g]).filter((k) => k !== "_titulo");
+      return `<fieldset><legend>${esc(OP[g]._titulo)}</legend><div class="opcoes">${ops.map((k) => `<input type="radio" id="op-${g}-${k}" name="${g}" value="${k}" ${S.m3.cfg[g] === k ? "checked" : ""}><label for="op-${g}-${k}">${esc(OP[g][k].rot)}</label>`).join("")}</div></fieldset>`;
+    }).join("");
+    return `<div class="stack">
+      <div class="missao-head">
+        <p class="kicker">Missão 3 · Laboratório de gatilhos</p>
+        <h1 tabindex="-1">Troque de lado</h1>
+        <p style="color:var(--muted);max-width:70ch">Golpistas montam mensagens com peças: um remetente, um gatilho emocional, um pedido e um link. Mude as peças e veja o radar reagir. O golpe abaixo chegou para a turma.</p>
+      </div>
+      <div class="duas">
+        <div class="card stack">${grupos}</div>
+        <div class="stack">
+          <div id="m3-preview"></div>
+          <div class="card" id="m3-radar"></div>
+        </div>
+      </div>
+      <div class="desafios">
+        <div class="card desafio">
+          <span class="selo" id="selo-a">${S.m3.desafioA ? "Concluído · +100" : "Desafio A · 100 pts"}</span>
+          <h2 style="font-size:1.2rem">Desarme</h2>
+          <p style="color:var(--muted)">Transforme o golpe em um aviso legítimo: zero alertas no radar e um pedido que leve ao canal oficial.</p>
+        </div>
+        <div class="card desafio">
+          <span class="selo ${S.m3.desafioB ? "feito" : ""}" id="selo-b">${S.m3.desafioB ? "Concluído · +50" : "Desafio B · 50 pts"}</span>
+          <h2 style="font-size:1.2rem">Troca de aparelho</h2>
+          <p style="color:var(--muted)">Monte um golpe com pelo menos 3 alertas e entregue o aparelho para outra dupla. Ela tem 30 segundos para apontar todos os gatilhos.</p>
+          <button type="button" class="btn btn-primary" data-acao="desafioB" id="btn-b">Iniciar troca</button>
+        </div>
+      </div>
+    </div>`;
+  }
+  function m3Atualizar() {
+    const flags = m3Flags();
+    document.getElementById("m3-preview").innerHTML = phoneHtml(m3Mensagem());
+    document.getElementById("m3-radar").innerHTML = radarHtml(flags);
+    const btnB = document.getElementById("btn-b");
+    if (btnB) {
+      btnB.disabled = flags.length < 3;
+      btnB.textContent = flags.length < 3 ? `Faltam ${3 - flags.length} alerta(s) para a troca` : "Iniciar troca";
+    }
+    if (!S.m3.desafioA && flags.length === 0 && S.m3.cfg.ped === "app") {
+      S.m3.desafioA = true;
+      somar(100);
+      const s = document.getElementById("selo-a");
+      if (s) { s.textContent = "Concluído · +100"; s.classList.add("feito"); }
+      toast("Desafio A concluído: golpe desarmado. +100 pts");
+    }
+    const sA = document.getElementById("selo-a");
+    if (sA && S.m3.desafioA) sA.classList.add("feito");
+  }
+  function abrirTroca() {
+    const flags = m3Flags();
+    if (flags.length < 3) return;
+    const ov = document.getElementById("overlay");
+    let seg = 30;
+    ov.innerHTML = `<div class="overlay-in">
+      <p class="kicker">Desafio B · troca de aparelho</p>
+      <h2 id="ov-titulo" style="font-size:1.6rem">Dupla visitante: encontrem os gatilhos</h2>
+      <p style="color:var(--muted)">Apontem em voz alta cada gatilho desta mensagem. Quando o tempo acabar, toquem em Revelar.</p>
+      ${phoneHtml(m3Mensagem())}
+      <p class="relogio" id="relogio" aria-live="off">00:30</p>
+      <div id="ov-revela" hidden class="card">
+        <p class="kicker">Gatilhos montados pela dupla</p>
+        <ul style="margin:8px 0 0;padding-left:20px">${flags.map((f) => `<li><strong class="mono">${f.l}</strong> · ${esc(f.t)}</li>`).join("")}</ul>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="ov-revelar">Revelar</button>
+        <button type="button" class="btn btn-primary" id="ov-fechar">Concluir troca</button>
+      </div>
+    </div>`;
+    ov.hidden = false;
+    document.body.style.overflow = "hidden";
+    const rel = document.getElementById("relogio");
+    const revelar = () => { clearInterval(timer); document.getElementById("ov-revela").hidden = false; rel.textContent = "Tempo!"; };
+    clearInterval(timer);
+    timer = setInterval(() => {
+      seg--;
+      rel.textContent = "00:" + String(Math.max(seg, 0)).padStart(2, "0");
+      if (seg <= 0) revelar();
+    }, 1000);
+    document.getElementById("ov-revelar").addEventListener("click", revelar);
+    document.getElementById("ov-fechar").addEventListener("click", fecharTroca);
+    document.getElementById("ov-revelar").focus();
+  }
+  function fecharTroca() {
+    clearInterval(timer);
+    const ov = document.getElementById("overlay");
+    ov.hidden = true;
+    ov.innerHTML = "";
+    document.body.style.overflow = "";
+    if (!S.m3.desafioB) {
+      S.m3.desafioB = true;
+      somar(50);
+      toast("Desafio B concluído. +50 pts");
+    }
+    if (S.view === "m3") { render(); const b = document.getElementById("btn-b"); if (b) b.focus(); }
+  }
+
+  /* ---------- Laudo ---------- */
+  function maxPontos() {
+    const m1 = M1.reduce((a, m) => {
+      const segs = m.de.concat(m.corpo).filter((s) => typeof s !== "string" && isRel(s.c, m.resposta)).length;
+      return a + 100 + segs * 30;
+    }, 0);
+    return m1 + M2.length * 100 + 150;
+  }
+  function telaLaudo() {
+    const max = maxPontos();
+    const p = pct(S.pontos, max);
+    const patente = p >= 80 ? "Perito(a) forense" : p >= 50 ? "Analista" : "Recruta";
+    const cats = Object.keys(CATS).map((k) => ({ k, ...S.cat[k], r: pct(S.cat[k].f, S.cat[k].t) }));
+    const avaliadas = cats.filter((c) => c.t > 0);
+    const fraca = avaliadas.length ? avaliadas.slice().sort((a, b) => a.r - b.r)[0] : null;
+    const m1c = S.m1.resultados.filter((r) => r.ok).length;
+    const m2d = S.m2.resultados.filter((r) => r.okDom).length;
+    const m2o = S.m2.resultados.filter((r) => r.okOf).length;
+    const barras = cats.map((c) => `<div class="barra-cat">
+      <span>${esc(CATS[c.k].nome)}</span><span class="v">${c.t ? `${c.f}/${c.t} · ${c.r}%` : "sem dados"}</span>
+      <div class="trilho" aria-hidden="true"><div class="${c.t && c.r < 50 ? "baixo" : ""}" style="width:${c.r}%"></div></div>
+    </div>`).join("");
+    return `<div class="stack">
+      <div class="missao-head"><p class="kicker">Laudo da perícia${S.dupla ? " · " + esc(S.dupla) : ""}</p><h1 tabindex="-1">Laudo final</h1></div>
+      <div class="card laudo-topo">
+        <div><div class="total">${S.pontos}</div><span class="patente">${patente}</span></div>
+        <div class="stack" style="gap:6px">
+          <p><strong>${p}%</strong> da pontuação máxima de ${max} pontos.</p>
+          <p style="color:var(--muted)">Missão 1: ${m1c} de ${S.m1.resultados.length} vereditos corretos · Missão 2: ${m2d} donos e ${m2o} decisões corretas em ${S.m2.resultados.length} endereços · Missão 3: ${(S.m3.desafioA ? 1 : 0) + (S.m3.desafioB ? 1 : 0)} de 2 desafios.</p>
+        </div>
+      </div>
+      <div class="duas">
+        <div class="card stack">
+          <div><p class="kicker">Pistas encontradas por categoria</p><p style="color:var(--muted);font-size:0.93rem;margin-top:4px">Calculado a partir das marcações da Missão 1.</p></div>
+          <div class="barras">${barras}</div>
+        </div>
+        <div class="stack">
+          <div class="card stack" style="gap:8px">
+            <p class="kicker">Ponto de atenção</p>
+            ${fraca ? `<p><strong>${esc(CATS[fraca.k].nome)}</strong> foi a categoria com menos pistas encontradas (${fraca.r}%).</p><p style="color:var(--muted)">${esc(CATS[fraca.k].dica)}</p>` : `<p style="color:var(--muted)">Complete casos da Missão 1 para gerar o diagnóstico.</p>`}
+          </div>
+          <div class="card stack" style="gap:8px">
+            <p class="kicker">Ticket de saída</p>
+            <ol class="ticket">
+              <li>Qual tipo de pista sua dupla mais deixou passar? Por quê?</li>
+              <li>Quem é o dono real de <span class="mono">bancosolar.com.br.seguro.net</span>?</li>
+              <li>Explique o P.A.R.E. para alguém da sua família em uma frase.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="card stack" style="gap:10px">
+        <p class="kicker">Nova rodada</p>
+        <p style="color:var(--muted)">Apaga a pontuação e o progresso deste aparelho.</p>
+        <button type="button" class="btn ${S.confirmarReset ? "btn-golpe" : ""}" data-acao="reset" style="align-self:flex-start">${S.confirmarReset ? "Confirmar: apagar tudo e recomeçar" : "Recomeçar operação"}</button>
+      </div>
+    </div>`;
+  }
+
+  /* ---------- Eventos ---------- */
+  const acoes = {
+    ir: (el) => ir(el.dataset.v),
+    abertura: (el) => { S.abertura = el.dataset.k; render(); const b = view.querySelector(`[data-k="${el.dataset.k}"]`); if (b) b.focus(); },
+    seg: (el) => m1Toggle(el.dataset.id),
+    veredito: (el) => m1Veredito(el.dataset.v),
+    proximo1: () => m1Proximo(),
+    chip: (el) => m2Chip(Number(el.dataset.i)),
+    oficial: (el) => m2Oficial(el.dataset.v),
+    proximo2: () => m2Proximo(),
+    desafioB: () => abrirTroca(),
+    reset: () => {
+      if (!S.confirmarReset) { S.confirmarReset = true; render(); const b = view.querySelector('[data-acao="reset"]'); if (b) b.focus(); return; }
+      S = novoEstado();
+      ir("inicio");
+      toast("Operação reiniciada.");
+    }
+  };
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-acao]");
+    if (!el || el.disabled) return;
+    const fn = acoes[el.dataset.acao];
+    if (fn) fn(el);
+  });
+  document.addEventListener("keydown", (e) => {
+    const el = e.target.closest && e.target.closest('[role="button"][data-acao]');
+    if (el && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); acoes[el.dataset.acao](el); }
+    if (e.key === "Escape" && !document.getElementById("overlay").hidden) fecharTroca();
+  });
+  view.addEventListener("input", (e) => {
+    if (e.target.id === "dupla") S.dupla = e.target.value;
+  });
+  view.addEventListener("change", (e) => {
+    const t = e.target;
+    if (t.type === "radio" && S.m3.cfg[t.name] !== undefined) { S.m3.cfg[t.name] = t.value; m3Atualizar(); }
+  });
+
+  render();
+</script>
+
+</html>

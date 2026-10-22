@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfólio de Jeferson Luiz Pereira: infraestrutura de TI e ensino de Computação alinhado à BNCC.">
+<title>Jeferson Pereira · Portfólio</title>
+<link rel="canonical" href="https://pereirashouse.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Jeferson Luiz Pereira · Infraestrutura de TI e Computação">
+<meta property="og:description" content="Casos reais de redes, Wi-Fi corporativo, virtualização e automação, e materiais de Computação para a rede pública alinhados à BNCC.">
+<meta property="og:url" content="https://pereirashouse.github.io/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Jeferson Luiz Pereira","jobTitle":"Analista de Infraestrutura de TI Sênior","url":"https://pereirashouse.github.io/","sameAs":["https://github.com/pereirashouse","https://www.linkedin.com/in/jefersonluizpereira"],"knowsAbout":["Infraestrutura de TI","Redes","Wi-Fi corporativo","802.1X","Virtualização","Active Directory","BNCC Computação","Pensamento Computacional"],"alumniOf":{"@type":"CollegeOrUniversity","name":"UTFPR"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: coluna única à esquerda; cada trabalho é um "caso" com etiqueta de cabo (código) e quatro campos fixos. Azul = infraestrutura, verde = educação. */
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --fg:#15211F; --muted:#56655F; --line:#D3DCD8;
+  --infra:#1D5BB8; --infra-soft:#E4ECF8; --edu:#23774A; --edu-soft:#E2F1E8; --warn:#9A5B00; --warn-soft:#FBF0DC;
+  --display:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --body:"Public Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101716; --surface:#172120; --fg:#E6EEEB; --muted:#9AABA5; --line:#2A3735;
+  --infra:#7FAEF5; --infra-soft:#18263B; --edu:#6FCB97; --edu-soft:#14291E; --warn:#F0B35A; --warn-soft:#2E2412; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101716; --surface:#172120; --fg:#E6EEEB; --muted:#9AABA5; --line:#2A3735;
+  --infra:#7FAEF5; --infra-soft:#18263B; --edu:#6FCB97; --edu-soft:#14291E; --warn:#F0B35A; --warn-soft:#2E2412; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+.wrap{max-width:1040px;margin:0 auto;padding-block:40px 72px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--infra);outline-offset:3px;border-radius:2px}
+.mono{font-family:var(--mono);font-size:.8rem;letter-spacing:.02em}
+
+body{margin:0}
+*,*::before,*::after{box-sizing:border-box}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:16px;top:-48px;background:var(--infra);color:#fff;padding:8px 14px;border-radius:4px;z-index:20;text-decoration:none}
+.skip:focus{top:8px}
+.topnav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.topnav ul{max-width:1040px;margin:0 auto;list-style:none;display:flex;flex-wrap:wrap;gap:4px 22px;
+  padding:10px max(16px,env(safe-area-inset-left,0px));font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.topnav a{text-decoration:none;color:var(--muted)}
+.topnav a:hover{color:var(--fg)}
+section{scroll-margin-top:56px}
+.result{font-weight:600;max-width:68ch;border-left:3px solid currentColor;padding-left:12px}
+.infra-c .result{color:var(--infra)} .edu-c .result{color:var(--edu)}
+details.more>summary{cursor:pointer;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:6px 0;list-style-position:inside}
+details.more>summary:focus-visible{outline:2px solid var(--infra);outline-offset:3px}
+details.more[open]>summary{margin-bottom:12px}
+
+header{display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing:-.02em}
+.lede{max-width:62ch;font-size:1.12rem;color:var(--muted)}
+.fronts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:8px}
+.front{display:flex;flex-direction:column;gap:6px;padding:18px 20px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none}
+.front:hover{border-color:currentColor}
+.front .k{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.front.infra .k{color:var(--infra)} .front.edu .k{color:var(--edu)}
+.front strong{font-family:var(--display);font-size:1.2rem}
+.front span:last-child{color:var(--muted);font-size:.93rem}
+
+section{display:flex;flex-direction:column;gap:24px}
+.sec-head{display:flex;flex-direction:column;gap:8px;padding-bottom:14px;border-bottom:2px solid var(--line)}
+.sec-head h2{font-size:1.9rem}
+.sec-head p{color:var(--muted);max-width:64ch}
+#infra .sec-head{border-color:var(--infra)} #edu .sec-head{border-color:var(--edu)}
+
+.case{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line)}
+.case:last-child{border-bottom:0}
+.meta{display:flex;flex-direction:column;gap:12px;min-width:0}
+.tag{align-self:flex-start;font-family:var(--mono);font-size:.75rem;font-weight:500;padding:4px 10px 4px 14px;border-radius:3px;position:relative}
+.tag::before{content:"";position:absolute;left:5px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:currentColor}
+.infra-c .tag{background:var(--infra-soft);color:var(--infra)} .edu-c .tag{background:var(--edu-soft);color:var(--edu)}
+.meta dl{margin:0;display:flex;flex-direction:column;gap:8px;font-size:.86rem}
+.meta dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.meta dd{margin:0}
+.content{display:flex;flex-direction:column;gap:16px;min-width:0;overflow-wrap:anywhere}
+.content h3{font-size:1.45rem}
+.content>p{max-width:68ch}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field h4{margin:0;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.field p,.field ul{font-size:.95rem}
+.field ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:.74rem;padding:2px 8px;border:1px solid var(--line);border-radius:3px;color:var(--muted)}
+.hero-links a{color:var(--infra)}
+.links{display:flex;flex-wrap:wrap;gap:8px 20px;font-weight:600;font-size:.93rem}
+.infra-c .links a{color:var(--infra)} .edu-c .links a{color:var(--edu)}
+pre{margin:0;overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;font:.8rem/1.6 var(--mono)}
+pre .c{color:var(--muted)}
+
+
+/* Sobre mim */
+.sobre-grid{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start}
+.tl{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0}
+.tl li{position:relative;padding:0 0 20px 20px;border-left:2px solid var(--line)}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:-5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--line)}
+.tl li.ativo::before{background:var(--infra)}
+.tl li.ativo{border-left-color:var(--infra)}
+.tl-per{font-family:var(--mono);font-size:.72rem;color:var(--muted);display:block;margin-bottom:2px;letter-spacing:.03em}
+.tl li strong{font-size:.95rem;display:block;line-height:1.3}
+.tl-place{font-size:.83rem;color:var(--muted);display:block;margin-bottom:4px}
+.tl li p{font-size:.87rem;color:var(--muted);margin-top:3px}
+.edu-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:14px}
+.edu-list li{display:flex;flex-direction:column;gap:2px;font-size:.92rem}
+.edu-list span{font-size:.83rem;color:var(--muted)}
+.sk-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.sk-group h4{font-size:.83rem;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+@media (max-width:720px){.sobre-grid{grid-template-columns:1fr}}
+
+footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px}
+
+@media (max-width:720px){
+  .case{grid-template-columns:1fr;gap:16px}
+  .meta dl{flex-direction:row;flex-wrap:wrap;gap:8px 20px}
+  .fields{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Seções"><ul>
+  <li><a href="#sobre">Sobre</a></li>
+  <li><a href="#infra">Infraestrutura</a></li>
+  <li><a href="#edu">Educação</a></li>
+  <li><a href="#contato">Contato</a></li>
+</ul></nav>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Analista de Infraestrutura de TI Sênior · Licenciando em Computação</p>
+    <h1>Jeferson Luiz Pereira</h1>
+    <p class="lede">Analista de infraestrutura que leva o dia a dia de servidores, redes e Wi-Fi para a sala de aula. Trabalho com ambientes críticos de TI e desenvolvo aulas e oficinas de Computação para a rede pública, alinhadas à BNCC.</p>
+    <div class="fronts">
+      <a class="front infra" href="#infra"><span class="k">Frente 1</span><strong>Infraestrutura</strong><span>Autenticação de rede, servidores Linux e Windows, Wi-Fi corporativo e documentação técnica.</span></a>
+      <a class="front edu" href="#edu"><span class="k">Frente 2</span><strong>Educação</strong><span>Ilhas de Racionalidade e oficinas de Computação para professores e alunos.</span></a>
+    </div>
+    <div class="links hero-links"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Abrir o simulador de roteador ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
+  </header>
+
+  <main id="conteudo" style="display:flex;flex-direction:column;gap:64px">
+
+  <section id="sobre">
+    <div class="sec-head">
+      <h2>Sobre mim</h2>
+      <p>Analista Sênior de Infraestrutura de TI com foco em virtualização, redes e automação — e licenciando em Computação para levar esse universo para a sala de aula.</p>
+    </div>
+    <div class="sobre-grid">
+      <div>
+        <h3 style="margin-bottom:20px">Trajetória</h3>
+        <ol class="tl">
+          <li class="ativo">
+            <span class="tl-per">Mai 2026 – atual</span>
+            <strong>Analista de Infraestrutura Sênior</strong>
+            <span class="tl-place">Indústria · Paraná</span>
+            <p>Condução da prova de conceito (PoC) VMware → Sangfor HCI, com critérios de rollback formalizados antes da implantação e executados quando o risco se confirmou. Análise de rede Wi-Fi com Python e API do UniFi. Automação com PowerShell e GPO. Backup Veeam e Dell PowerProtect. PoC Proxmox VE.</p>
+          </li>
+          <li>
+            <span class="tl-per">Set 2022 – Mai 2026</span>
+            <strong>Analista de TI Pleno</strong>
+            <span class="tl-place">Indústria · Paraná</span>
+            <p>Infraestrutura de TI para 3 fábricas e 10 centros de distribuição: switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware + KVM, monitoramento Zabbix/Grafana e backup Dell PowerProtect.</p>
+          </li>
+          <li>
+            <span class="tl-per">Ago 2021 – Set 2022</span>
+            <strong>Analista de TI Júnior</strong>
+            <span class="tl-place">Indústria · Paraná</span>
+            <p>Suporte de infraestrutura, gestão de usuários AD, antivírus, Wi-Fi Ubiquiti, VMware vSphere e KVM Oracle, monitoramento com Zabbix e Grafana.</p>
+          </li>
+          <li>
+            <span class="tl-per">Mar 2014 – Set 2019</span>
+            <strong>Analista Financeiro</strong>
+            <span class="tl-place">Multinacional de embalagens · Palmeira, PR</span>
+            <p>Crédito PF/PJ, câmbio, contas a receber/pagar e relatórios gerenciais — antes da transição definitiva para TI.</p>
+          </li>
+          <li>
+            <span class="tl-per">Jan 2012 – Abr 2014</span>
+            <strong>Assistente de TI</strong>
+            <span class="tl-place">Empresa de fundição · Palmeira, PR</span>
+            <p>Help Desk N1/N2, manutenção de computadores e rede local.</p>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="margin-bottom:16px">Formação</h3>
+        <ul class="edu-list">
+          <li>
+            <strong>Licenciatura em Computação</strong> <span style="font-weight:400">(cursando)</span>
+            <span>UTFPR · desde fev. 2024</span>
+          </li>
+          <li>
+            <strong>Técnico em Administração</strong>
+          </li>
+        </ul>
+
+        <h3 style="margin:28px 0 16px">Competências técnicas</h3>
+        <div class="sk-group">
+          <h4>Virtualização</h4>
+          <div class="chips"><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">KVM Oracle</span><span class="chip">Proxmox VE</span><span class="chip">Hyper-V</span></div>
+        </div>
+        <div class="sk-group">
+          <h4>Sistemas e identidade</h4>
+          <div class="chips"><span class="chip">Windows Server</span><span class="chip">Linux</span><span class="chip">Active Directory</span><span class="chip">Azure AD</span></div>
+        </div>
+        <div class="sk-group">
+          <h4>Redes e segurança</h4>
+          <div class="chips"><span class="chip">Aruba / TP-Link</span><span class="chip">Wi-Fi Ubiquiti</span><span class="chip">FortiGate</span><span class="chip">802.1X / RADIUS</span><span class="chip">VLAN</span></div>
+        </div>
+        <div class="sk-group">
+          <h4>Backup e monitoramento</h4>
+          <div class="chips"><span class="chip">Veeam</span><span class="chip">Dell PowerProtect</span><span class="chip">Zabbix</span><span class="chip">Grafana</span></div>
+        </div>
+        <div class="sk-group">
+          <h4>Automação</h4>
+          <div class="chips"><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">GPO</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="infra">
+    <div class="sec-head">
+      <h2>Infraestrutura de TI</h2>
+      <p>Projetos de produção descritos sem dados internos: endereços, nomes de servidores e credenciais foram omitidos.</p>
+    </div>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Wi-Fi corporativo · 802.1X</span>
+        <dl><div><dt>Local</dt><dd>Filial industrial · PR</dd></div><div><dt>Tipo</dt><dd>Implantação · Em produção</dd></div><div><dt>Quando</dt><dd>Ago – Out 2026, concluído</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Wi-Fi corporativo com autenticação de máquina (802.1X PEAP-MSCHAPv2)</h3>
+        <p class="result">60 access points com autenticação por conta de máquina do AD: dispositivos pessoais bloqueados automaticamente e nenhum rollback.</p>
+        <p>O Wi-Fi corporativo usava senha compartilhada, o que permitia que celulares e tablets pessoais entrassem com as credenciais de um funcionário. A solução foi mudar o sujeito da autenticação: em vez de <em>quem é você</em>, passou a valer <em>esta máquina pertence ao domínio</em>. Um celular, por não ter conta de computador no Active Directory, simplesmente não consegue apresentar a credencial exigida — independentemente de saber a senha do usuário.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Por que a autenticação de máquina bloqueia celulares</h4><p>PEAP-MSCHAPv2 abre um túnel TLS externo e, dentro dele, envia a credencial. Com a política de <em>Grupos de Computadores</em> no NPS, a credencial aceita é a conta de máquina do domínio. Essa senha fica armazenada na LSA da estação e nunca sai dela — um celular não tem como obtê-la.</p></div>
+          <div class="field"><h4>Decisão arquitetural: NPS local</h4><p>O servidor NPS foi mantido na própria filial, e não na matriz. Motivo: a autenticação RADIUS usa UDP com payloads grandes, e o túnel VPN entre os sites tem uma restrição de MTU herdada do protocolo de VPN (IKEv1). UDP não fragmenta, o que derruba a autenticação. Com o NPS local, nenhum fluxo de autenticação precisa atravessar a VPN.</p></div>
+          <div class="field"><h4>Mitigação Blast-RADIUS (CVE-2024-3596)</h4><p>Cada access point UniFi foi cadastrado como cliente RADIUS independente. Em todos eles, a opção <em>Solicitações devem conter o atributo Message Authenticator</em> foi ativada. Esse atributo impede o ataque de forja de resposta do Blast-RADIUS, que afeta servidores RADIUS sem essa proteção.</p></div>
+          <div class="field"><h4>Política de negação explícita</h4><p>Além da política que libera as máquinas do grupo, foi criada uma segunda política — a última da lista — que nega qualquer requisição de Wi-Fi não capturada pela primeira. Sem ela, uma política permissiva mais antiga poderia aceitar os celulares rejeitados.</p></div>
+          <div class="field"><h4>GPO de perfil sem fio</h4><p>Uma Política de Grupo distribui o perfil de Wi-Fi para as estações do grupo, configurando a autenticação de computador e apontando para a CA emissora do certificado do NPS. Isso elimina o prompt de confiança e garante que o Wi-Fi já esteja conectado na tela de logon.</p></div>
+          <div class="field"><h4>Fases de implantação</h4><ul><li>Inventário de todos os dispositivos no SSID (impressoras, coletores, câmeras) antes de qualquer mudança</li><li>Emissão de novo certificado para o servidor NPS (o anterior estava expirado)</li><li>Criação de grupo de computadores autorizados, com reinicialização obrigatória após a inclusão</li><li>Configuração de clientes RADIUS, políticas de conexão e de rede no NPS</li><li>SSID piloto apenas nos APs de teste; rollback previsto em menos de 5 min</li></ul></div>
+          <div class="field"><h4>Resultado em produção</h4><p>Implantação concluída e estável em 60 APs, cobrindo toda a planta produtiva. A rede corporativa passou a exigir conta de máquina do Active Directory para associação ao SSID — dispositivos pessoais (celulares, tablets) são bloqueados silenciosamente pelo NPS sem qualquer intervenção manual. Nenhum rollback foi necessário após a migração completa. O ambiente permanece monitorado via logs de autenticação do NPS, que registram cada tentativa aceita ou rejeitada com timestamp, identidade e AP de origem.</p></div>
+          <div class="field"><h4>O que veio depois</h4><p>Em outubro, uma atualização do Windows passou a bloquear a credencial derivada de NTLMv1 que o PEAP-MSCHAPv2 usa. O diagnóstico e o próximo passo (EAP-TLS) estão no caso a seguir.</p></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">Windows Server / NPS</span><span class="chip">802.1X</span><span class="chip">PEAP-MSCHAPv2</span><span class="chip">Active Directory</span><span class="chip">UniFi</span><span class="chip">GPO</span><span class="chip">Blast-RADIUS CVE-2024-3596</span></div>
+      </div>
+    </article>
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">802.1X · Incidente</span>
+        <dl><div><dt>Ambiente</dt><dd>Rede corporativa Wi-Fi</dd></div><div><dt>Tipo</dt><dd>Análise de incidente</dd></div><div><dt>Quando</dt><dd>Outubro de 2026</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Notebook parou de autenticar no Wi-Fi depois de uma atualização do Windows</h3>
+        <p class="result">Causa isolada em um dia cruzando quatro fontes de log: a atualização de outubro do Windows. Contorno aplicado e migração para EAP-TLS recomendada.</p>
+        <p>Continuação do caso anterior. Um notebook deixou de entrar na rede corporativa, que usa login de domínio via 802.1X. A suspeita inicial era sinal ou antena. Cruzando os logs do cliente, do NTLM, do RADIUS e do Active Directory, mostrei que a causa era a atualização de segurança de outubro do Windows.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Linha do tempo</h4><ul><li>Última conexão boa às 13:48.</li><li>Às 14:01 o notebook reinicia sozinho para instalar a atualização.</li><li>Às 14:03 vem a primeira recusa. Nenhuma tentativa passou depois disso.</li></ul></div>
+          <div class="field"><h4>Causa</h4><p>A rede usa PEAP-MSCHAPv2 com a credencial da máquina, sem pedir senha. A atualização passou a bloquear o login automático baseado em NTLMv1 (SSO). O túnel TLS com o servidor de autenticação abria, mas o Windows não enviava mais a credencial.</p></div>
+          <div class="field"><h4>Evidência</h4><p>Nas 13 falhas do dia, no mesmo segundo de cada uma, o log do NTLM registrou: <span class="mono">“An attempt to use NTLMv1-derived credentials for Single Sign-On was blocked due to policy”</span>.</p></div>
+          <div class="field"><h4>O que descartei</h4><ul><li>Controladora Wi-Fi e RADIUS: nenhuma mudança na janela da falha.</li><li>AD: mesma OU e grupos dos notebooks que conectavam, canal seguro íntegro.</li><li>Conta do usuário: ativa, sem bloqueio, senha válida.</li></ul></div>
+          <div class="field"><h4>Contorno imediato</h4><p>Conectar digitando usuário e senha de domínio, que a atualização não bloqueia, e aceitar o certificado do servidor de autenticação.</p></div>
+          <div class="field"><h4>Correção definitiva</h4><p>Os demais notebooks com login por credencial de máquina cairiam ao receber a mesma atualização. Recomendei migrar a rede para EAP-TLS, com certificado de máquina, eliminando a dependência do NTLMv1.</p></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">802.1X</span><span class="chip">PEAP-MSCHAPv2</span><span class="chip">EAP-TLS</span><span class="chip">NPS / RADIUS</span><span class="chip">Active Directory</span><span class="chip">NTLM</span><span class="chip">Análise de logs</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Projeto de rede</span>
+        <dl><div><dt>Local</dt><dd>Filial industrial · PR</dd></div><div><dt>Tipo</dt><dd>Levantamento e modernização</dd></div><div><dt>Quando</dt><dd>Ago – Out 2026, em andamento</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Modernização e documentação da rede de uma filial industrial</h3>
+        <p class="result">Rede da filial levantada do zero, com inconsistências de VLAN e redundância identificadas e um roteiro de regularização por risco.</p>
+        <p>A rede da filial havia crescido sem documentação: switches de distribuição sem configuração-padrão, VLANs com três tratamentos diferentes para o mesmo propósito, cabos sem identificação e nenhuma autenticação centralizada nos equipamentos. O trabalho cobriu levantamento físico, auditoria de backups de configuração, plano de VLANs e identificação de achados de segurança.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Topologia</h4><ul><li>Firewall de borda com SD-WAN agregando dois links de 100 Mb de provedores distintos</li><li>Core com par de switches em pilha (VSF), raiz do spanning tree</li><li>Distribuição: onze switches de acesso, cada um com uplink direto no core</li><li>Switch PoE separado para os access points do site</li></ul></div>
+          <div class="field"><h4>Problemas encontrados</h4><ul><li>Dois switches do mesmo modelo com VLAN de CFTV ausente; um terceiro com a VLAN declarada mas fora do tronco — câmera aparece conectada mas não sai do switch</li><li>Uplinks do firewall concentrados em um único membro da pilha, reduzindo a redundância</li><li>Padrões de gerência e de certificados fora do recomendado, tratados no roteiro de regularização</li></ul></div>
+          <div class="field"><h4>Entregas</h4><ul><li>Mapeamento completo de todos os switches com portas, VLANs e IPs</li><li>Diagrama de backbone com ligações confirmadas por LLDP e visita de campo</li><li>Plano de VLANs com o estado real de cada VLAN em cada equipamento</li><li>Roteiro de regularização priorizado por risco</li></ul></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">FortiGate</span><span class="chip">SD-WAN</span><span class="chip">HPE Aruba</span><span class="chip">UniFi</span><span class="chip">VLAN</span><span class="chip">Spanning Tree</span><span class="chip">Documentação técnica</span></div>
+      </div>
+    </article>
+
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Virtualização</span>
+        <dl><div><dt>Ambiente</dt><dd>Dois datacenters corporativos</dd></div><div><dt>Tipo</dt><dd>Prova de conceito + relatório executivo</dd></div><div><dt>Quando</dt><dd>Jun – Ago 2026</dd></div><div><dt>Papel</dt><dd>Responsável técnico</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Prova de conceito de virtualização: VMware para Sangfor HCI, com rollback planejado</h3>
+        <p class="result">Riscos e critérios de rollback formalizados na PoC antes da implantação; quando a incompatibilidade de storage se confirmou, o rollback foi executado conforme o plano.</p>
+        <p>Com a licença VMware prestes a vencer, a organização iniciou uma Prova de Conceito para migrar o ambiente de virtualização para o Sangfor HCI. Conduzi o levantamento completo da infraestrutura, liderei a PoC e formalizei os riscos técnicos e o plano de rollback antes da implantação.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Relatório executivo de infraestrutura</h4><p>Antes da PoC, elaborei um diagnóstico consolidado do ecossistema híbrido VMware + KVM, entregue à gestão de TI. O diagnóstico identificou VMs com sistema operacional em fim de suporte e pendências de licenciamento, priorizadas por risco para o plano de modernização.</p></div>
+          <div class="field"><h4>PoC com prazo crítico</h4><p>A licença VMware venceria em semanas. A PoC foi realizada em host isolado, fora do datacenter principal, o que impediu a validação de 40% dos itens de avaliação contra o ambiente real de produção — incluindo compatibilidade de storage e integração com o backup existente (Veeam).</p></div>
+          <div class="field"><h4>Ressalvas e rollback formalizados na PoC</h4><p>Antes da implantação, documentei os pontos que a PoC não conseguiu validar (entre eles a compatibilidade com o storage de produção), o risco de cada um e o critério objetivo para voltar ao VMware. A implantação seguiu como teste controlado em produção, com o caminho de volta já definido.</p></div>
+          <div class="field"><h4>Implantação controlada e rollback</h4><p>Em produção, o Sangfor se mostrou incompatível com o storage SAS do datacenter principal, exatamente um dos riscos registrados. O critério de rollback foi acionado: dois hosts foram reformatados e retornaram ao VMware, sem improviso. Um terceiro host com lentidão por discos mecânicos no datastore principal foi tratado com rebalanceamento de VMs entre datastores.</p></div>
+          <div class="field"><h4>Por que isso foi a decisão certa</h4><p>Testar com escopo limitado, identificar o risco cedo e voltar atrás com um plano pronto é boa prática de engenharia: o problema apareceu em poucos hosts, não no ambiente inteiro, e a decisão sobre o storage definitivo passou a ser tomada com dados reais.</p></div>
+          <div class="field"><h4>Integração com backup</h4><p>O plugin oficial do Veeam para Sangfor ainda não tinha versão estável (GA). A saída foi redesenhar a arquitetura de backup: migrar o servidor Veeam para Linux e usar a API nativa do Sangfor em vez do plugin, eliminando o risco do prazo e simplificando o licenciamento do servidor de backup.</p></div>
+          <div class="field"><h4>Contexto de modernização</h4><ul><li>Programa com 35 riscos mapeados (12 críticos / 23 altos) e matriz RACI de 38 atividades</li><li>Critério de Go/No-Go por janela: backup com evidência recente, restore testado, rollback documentado, dono de negócio disponível</li></ul></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">KVM</span><span class="chip">Proxmox</span><span class="chip">Veeam Backup</span><span class="chip">Windows Server</span><span class="chip">Relatório executivo</span><span class="chip">Gestão de riscos</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Segurança · Runbook</span>
+        <dl><div><dt>Tipo</dt><dd>Runbook · boas práticas</dd></div><div><dt>Quando</dt><dd>Set – Out 2026</dd></div><div><dt>Papel</dt><dd>Autor e responsável técnico</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Offboarding seguro: bloqueio de acessos no desligamento de colaborador</h3>
+        <p class="result">Runbook de 7 blocos que revoga todos os acessos durante a conversa de desligamento, com evidência auditável e cuidado extra para contas privilegiadas.</p>
+        <p>Runbook estruturado em sete blocos para garantir que, quando um colaborador é desligado, todos os acessos sejam revogados de forma consistente e auditável — do Active Directory aos hypervisors e storages. O procedimento distingue o perfil comum do colaborador com acesso privilegiado (TI), onde os riscos são significativamente maiores.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Princípio central</h4><p>O bloqueio acontece <strong>durante</strong> a conversa de desligamento, não depois. Cada minuto de janela entre a comunicação e o bloqueio é risco real. O chamado do RH formaliza o horário; o analista de infraestrutura fica de prontidão nesse horário.</p></div>
+          <div class="field"><h4>Blocos 1 a 5 — qualquer colaborador</h4><ul><li>Exportar grupos do AD como evidência antes de qualquer alteração</li><li>Trocar a senha por valor aleatório e desabilitar a conta; em ambientes com M365/Entra ID, bloquear na nuvem e revogar tokens de sessão imediatamente (a sincronização leva até 30 min)</li><li>Derrubar sessões ativas: RDP, VPN no firewall, Wi-Fi 802.1X (a sessão atual persiste até a próxima reautenticação do NPS)</li><li>Sistemas externos ao AD: ERP, WMS, logins no banco de dados, portais SaaS, ramal VoIP, código de impressão e acesso físico</li><li>No AD: preencher a descrição com data, chamado e executor; remover de todos os grupos; mover para OU de Inativos; agendar exclusão definitiva em 90 dias</li></ul></div>
+          <div class="field"><h4>Bloco 6 — colaborador da TI ou com acesso privilegiado</h4><p>O risco aqui não é apenas a conta, mas <strong>tudo o que a pessoa sabe</strong>. Senhas de contas de serviço, break-glass, firewall, switches, iDRAC, storage, hypervisors, banco de dados, PSKs de Wi-Fi — tudo que ela conhecia precisa ser rotacionado. Adicionalmente:</p><ul><li>Auditoria de contas criadas e mudanças em grupos privilegiados nos últimos 30 a 90 dias (detecção de backdoors)</li><li>Verificar tarefas agendadas, serviços e scripts rodando com a credencial dela — o ideal é migrar para conta de serviço antes do D0</li><li>Revisar logs do firewall, do AD e dos hypervisors: acessos fora do horário, exportações de dados, mudanças de regras</li><li>Rotacionar senhas LAPS das máquinas que ela consultou recentemente</li><li>Remover chaves SSH, tokens de API e acessos a cofres de senha</li></ul></div>
+          <div class="field"><h4>Contas nominais fora do AD</h4><p>iDRAC, storages, hosts ESXi e servidores KVM têm contas locais que o AD não gerencia. Cada uma precisa ser bloqueada equipamento por equipamento, via CLI ou interface web. O runbook mantém um inventário dessas contas com os comandos específicos por plataforma — incluindo o cuidado de não remover contas de contingência que o ambiente de gerenciamento usa por SSH.</p></div>
+        </div>
+        </details>
+        <pre><span class="c"># Bloco AD: evidência de grupos, bloqueio e movimentação para OU Inativos</span>
+$u = Get-ADUser $sam -Properties MemberOf
+$u.MemberOf | Out-File "C:\Offboarding\$sam-grupos-$(Get-Date -f yyyyMMdd).txt"
+
+<span class="c"># Senha aleatória com gerador criptográfico (não usar $pwd: é variável automática)</span>
+$bytes = [byte[]]::new(32)
+[Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+$novaSenha = [Convert]::ToBase64String($bytes)
+Set-ADAccountPassword $sam -Reset -NewPassword (ConvertTo-SecureString $novaSenha -AsPlainText -Force)
+Disable-ADAccount $sam
+Set-ADUser $sam -Description "Desligado $(Get-Date -f dd/MM/yyyy) - $chamado - $env:USERNAME"
+$u.MemberOf | ForEach-Object { Remove-ADGroupMember $_ -Members $sam -Confirm:$false }
+Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
+        <div class="chips"><span class="chip">Active Directory</span><span class="chip">PowerShell</span><span class="chip">FortiGate</span><span class="chip">NPS / 802.1X</span><span class="chip">Segurança</span><span class="chip">Offboarding</span><span class="chip">ESXi / KVM</span><span class="chip">iDRAC</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Documentação de rede</span>
+        <dl><div><dt>Local</dt><dd>Filial industrial · PR</dd></div><div><dt>Tipo</dt><dd>Processo implantado</dd></div><div><dt>Quando</dt><dd>Ago – Out 2026, em andamento</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Mapeamento de rede a partir do zero: da visita de campo ao inventário vivo</h3>
+        <p class="result">14 configurações analisadas por script, drift detectado entre agosto e outubro e 52 portas sem VLAN encontradas como causa de estações sem DHCP.</p>
+        <p>A filial não tinha documentação de rede: a topologia era conhecida parcialmente por quem trabalhou lá, e nenhum diagrama ou inventário estava atualizado. Este trabalho criou a documentação completa — da borda até cada switch de distribuição — usando uma abordagem de coleta progressiva: campo, backups, parser e confronto.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Ponto de partida</h4><p>Sem documentação. O switch de núcleo tinha descrições herdadas de um firewall anterior e rótulos que não correspondiam ao cabeamento real. Seis das onze portas do rack de distribuição no núcleo carregavam nomes de outros destinos.</p></div>
+          <div class="field"><h4>Levantamento de campo</h4><p>Visita presencial para confirmar os uplinks fisicamente, porta a porta, no rack de distribuição. Resultado: os switches sobem diretamente no núcleo (hipótese de cascata descartada), cada um com link único. Esse dado foi a âncora que permitiu reconciliar os backups com a topologia real.</p></div>
+          <div class="field"><h4>Coleta e parser de backups</h4><p>14 arquivos de configuração coletados dos switches. Em vez de ler manualmente, foi escrito um script que extrai automaticamente: portas de acesso, troncos, VLANs presentes, portas sem configuração, modelo, firmware e endereço IP de gerência. O resultado vira uma tabela comparativa que mostra de imediato as divergências entre equipamentos do mesmo modelo e lote.</p></div>
+          <div class="field"><h4>Detecção de drift</h4><p>Cruzar o levantamento de campo (agosto) com os backups (outubro) revelou mudanças que não foram documentadas: um switch perdeu 11 portas de acesso configuradas entre as duas datas, e outro perdeu 2 portas. Esse drift é exatamente o tipo de alteração que, sem documentação, gera sintomas difíceis de diagnosticar — "estações sem DHCP" sem causa aparente.</p></div>
+          <div class="field"><h4>Documentação viva no Obsidian</h4><p>Uma nota por equipamento, com modelo, firmware, portas, VLANs e observações. Diagrama de backbone em Mermaid atualizado a cada nova informação. Pendências rastreadas como checklist. Quando uma hipótese é confirmada ou descartada, o registro é atualizado com a fonte — não substituído, para preservar o histórico de raciocínio.</p></div>
+          <div class="field"><h4>Achados consolidados</h4><ul><li>52 portas soltas na VLAN padrão em 10 switches — causa direta de estações sem DHCP de usuário</li><li>Três versões de firmware em equipamentos do mesmo site</li><li>Certificados de gerência a renovar nos switches do rack</li><li>VLAN de CFTV com três estados diferentes nos switches: correta em cinco, ausente em três, criada mas fora do tronco em um</li><li>Switch com todas as portas em tronco e 11 VLANs por porta — sem nenhuma segmentação por ponto</li></ul></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">HPE Aruba</span><span class="chip">Documentação técnica</span><span class="chip">Obsidian</span><span class="chip">Parser / automação</span><span class="chip">VLAN</span><span class="chip">Spanning Tree</span><span class="chip">Levantamento de campo</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Automação · Python</span>
+        <dl><div><dt>Local</dt><dd>Centro de distribuição industrial</dd></div><div><dt>Tipo</dt><dd>Ferramenta open source</dd></div><div><dt>Quando</dt><dd>Out 2026</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Monitor automático de quedas Wi-Fi de coletores WMS</h3>
+        <p class="result">Agente Python open source com 14 testes que transformou relatos de queda em métrica por coletor, AP e hora.</p>
+        <p>Coletores de dados (Urovo e Skorpio) em um SSID dedicado ao WMS apresentavam quedas cuja frequência e padrão eram difíceis de medir objetivamente. Sem métrica, era impossível saber se uma mudança na configuração do Wi-Fi havia melhorado ou piorado o cenário. Desenvolvi um agente Python que polea a API do UniFi, detecta quando cada coletor some e volta e registra duração, AP e RSSI em CSV.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Problema de diagnóstico</h4><p>As quedas eram relatadas pelos operadores de armazém, mas sem dados objetivos: não se sabia quantas quedas por hora ocorriam, qual coletor caía mais, em qual AP, com que RSSI. Sem uma linha de base, qualquer ajuste no rádio era um chute.</p></div>
+          <div class="field"><h4>Arquitetura do agente</h4><p>O script consulta a API legada do UniFi a cada 60 segundos e compara o estado anterior com o atual. Quando um coletor desaparece, grava um evento de queda com o AP e o RSSI do último registro. Na reconexão, calcula a duração. Toda saída vai para um CSV em <span class="mono">dados/eventos.csv</span>; um segundo comando gera um relatório Markdown diário com top coletores, quedas por hora e alertas configuráveis. Sem dependências externas — stdlib Python 3.10 apenas.</p></div>
+          <div class="field"><h4>Classificação automática</h4><p>Coletores são identificados por prefixo OUI (Urovo <span class="mono">b4:29:3d</span>, Skorpio <span class="mono">04:7b:cb</span> / <span class="mono">3c:e1:a1</span>) ou por um inventário em <span class="mono">config.json</span>. Dispositivos Android com MAC aleatório são sinalizados separadamente — importante para não confundir quedas de coletor com dispositivos pessoais no mesmo SSID.</p></div>
+          <div class="field"><h4>Resultado operacional</h4><p>Com a linha de base em mãos, foi possível correlacionar as quedas com métricas de rádio (TX Retry por AP, Canal Busy) e validar, com dados, o efeito de cada ajuste de configuração — canais, largura de banda e taxas mínimas. O script ficou genérico o suficiente para qualquer ambiente UniFi com coletores no Wi-Fi.</p></div>
+          <div class="field"><h4>Testes automatizados</h4><p>14 testes unitários cobrindo classificação por OUI, detecção de queda e reconexão, SSID com espaço extra (comportamento real da API), geração de CSV, cálculo de duração e geração de alertas no relatório. Desenvolvidos antes da primeira execução em campo.</p></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">Python</span><span class="chip">UniFi API</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS / coletores</span><span class="chip">Open source</span><span class="chip">Testes unitários</span><span class="chip">CSV / Markdown</span></div>
+        <p style="margin-top:12px;font-size:.9rem"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener" style="color:var(--infra)">↗ github.com/pereirashouse/monitoramentowificompython<span class="sr-only"> (abre em nova aba)</span></a></p>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Wi-Fi industrial</span>
+        <dl><div><dt>Ambiente</dt><dd>Planta industrial · área de silos</dd></div><div><dt>Tipo</dt><dd>Análise de incidente · Solução em produção</dd></div><div><dt>Quando</dt><dd>Outubro de 2026</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Alarme falso de robô industrial — congestionamento de canal Wi-Fi 2,4 GHz</h3>
+        <p class="result">Causa raiz em canal 2,4 GHz saturado por celulares distantes; RSSI mínimo em −80 dBm e os alarmes não se repetiram.</p>
+        <p>Quatro robôs industriais (ESP32) na área de silos geravam alarmes recorrentes de "fora da rede" no sistema de monitoramento. Os eventos vinham se repetindo por dias, com avisos de lentidão de ping e perda de pacotes — mesmo com o sinal Wi-Fi ótimo, entre −53 e −58 dBm, e sem qualquer reinicialização da antena.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>O alarme e sua regra</h4><p>O sistema de monitoramento testava a porta de aplicação de cada robô a cada 30 segundos. Dois testes consecutivos sem resposta (1 minuto) abriam um card de "fora da rede". O card só fechava após quatro respostas positivas com menos de quatro mudanças em 30 minutos — regra pensada para evitar oscilação, mas que esticava o alarme muito além da falha real.</p></div>
+          <div class="field"><h4>O que foi descartado</h4><ul><li><strong>Queda de Wi-Fi:</strong> a controladora registrava todos os robôs conectados sem interrupção, sinal estável entre −53 e −58 dBm.</li><li><strong>Falha de antena:</strong> sem reinicializações no período; 100 % dos pings do monitor respondidos.</li><li><strong>Mudança de configuração:</strong> logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li><li><strong>Defeito em um robô:</strong> os quatro ficaram lentos exatamente ao mesmo tempo, descartando problema isolado de hardware.</li></ul></div>
+          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, provocando as falhas consecutivas e o alarme.</p></div>
+          <div class="field"><h4>Como foi apurado</h4><p>Análise inteiramente passiva: leitura da controladora Wi-Fi (somente leitura) para estado dos robôs, log de conexões da antena e log de administração; monitoramento com dados de ping (a cada 3 min), teste TCP de porta (a cada 30 s) e ocupação do canal 2,4 GHz (a cada 1 min). Nenhuma configuração foi alterada durante a investigação.</p></div>
+          <div class="field"><h4>Solução implantada em produção</h4><p>Ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados e reconectam a uma antena mais próxima. Os robôs industriais, com sinal entre −53 e −58 dBm, não são afetados. Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">UniFi</span><span class="chip">Zabbix</span><span class="chip">Wi-Fi 2,4 GHz</span><span class="chip">ESP32</span><span class="chip">Sistemas industriais</span><span class="chip">Análise de causa raiz</span><span class="chip">Congestionamento de canal</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
+        <span class="tag">Linux · WMS</span>
+        <dl><div><dt>Ambiente</dt><dd>Centro de distribuição</dd></div><div><dt>Tipo</dt><dd>Instrução de trabalho</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Sessões estáveis para coletores de dados no WMS</h3>
+        <p class="result">Fim dos bloqueios de coletores pelo servidor: sessões mortas encerradas em menos de 2 minutos com TCP keep-alive.</p>
+        <p>Coletores Android de um centro de distribuição perdiam a sessão com o sistema de gestão de armazém (WMS) e acabavam bloqueados pelo próprio servidor. Diagnostiquei a causa, ajustei o servidor Linux e escrevi a instrução de trabalho para padronizar o procedimento.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Problema</h4><p>O roaming entre antenas Wi-Fi gerava micro-quedas. O aplicativo do coletor perdia a sessão, mas o servidor mantinha o processo vivo. Na reconexão, as tentativas em rajada eram tratadas pelo xinetd como ameaça e o IP do coletor era bloqueado.</p></div>
+          <div class="field"><h4>Diagnóstico</h4><p>Análise de logs do xinetd e monitoramento da rede, cruzando os bloqueios <span class="mono">connections limit per_source</span> com os momentos de troca de antena.</p></div>
+          <div class="field"><h4>Solução</h4><ul><li>Limites do serviço ajustados ao volume real de coletores.</li><li>TCP keep-alive no kernel para derrubar sessões mortas em menos de 2 minutos.</li><li>Plano B documentado: keep-alive no app e emuladores com sessão persistente.</li></ul></div>
+          <div class="field"><h4>Validação</h4><p>Logs passaram a mostrar encerramentos limpos de sessão e nenhum bloqueio por limite de origem.</p></div>
+        </div>
+        </details>
+        <pre><span class="c"># Limpeza de conexões presas: 60 s de espera, sondas a cada 10 s, 3 tentativas</span>
+sysctl -w net.ipv4.tcp_keepalive_time=60
+sysctl -w net.ipv4.tcp_keepalive_intvl=10
+sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
+        <div class="chips"><span class="chip">Linux</span><span class="chip">xinetd</span><span class="chip">TCP keep-alive</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS</span><span class="chip">Documentação técnica</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="edu">
+    <div class="sec-head">
+      <h2>Educação e BNCC da Computação</h2>
+      <p>Materiais produzidos na Licenciatura em Computação, pensados para escolas públicas, inclusive as que têm pouca infraestrutura.</p>
+    </div>
+
+    <article class="case edu-c">
+      <div class="meta">
+        <span class="tag">Mundo Digital · 9º ano</span>
+        <dl><div><dt>Formato</dt><dd>Ilha Interdisciplinar de Racionalidade + oficina de 40 min</dd></div><div><dt>Quando</dt><dd>1º semestre de 2026</dd></div><div><dt>Autoria</dt><dd>Jeferson e grupo</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>A “invisibilidade” do Wi-Fi: por que a internet de 400 Mega trava?</h3>
+        <p class="result">Investigação interdisciplinar em que a turma do 9º ano mede o próprio Wi-Fi e aprende a configurar um roteador num simulador web.</p>
+        <p>Parte de um problema que todo aluno conhece: o jogo dá lag quando alguém liga o streaming na sala. A turma investiga a física das ondas, a disputa pelo canal e a fila de pacotes no roteador, e termina sabendo diagnosticar e configurar a própria rede.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Etapas</h4><ul><li>Concepções iniciais e perguntas investigativas</li><li>Mapeamento em cinco dimensões: científica, tecnológica, social, ambiental e ética</li><li>Auditoria Wi-Fi com analisador de espectro (dBm, ping, streaming ligado e desligado)</li><li>Infográfico “A jornada e os gargalos do sinal”</li></ul></div>
+          <div class="field"><h4>Conceitos</h4><ul><li>Atenuação em 2,4 GHz e 5 GHz (Física)</li><li>Pacotes, TCP e UDP, latência e largura de banda (Computação)</li><li>Bits e bytes, divisão de banda e QoS (Matemática)</li><li>Canais 1, 6 e 11 sem sobreposição</li></ul></div>
+        </div>
+        </details>
+        <div class="links"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Simulador de roteador (HTML, CSS e JS) ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://drive.google.com/file/d/1y5PUGET-o_UAfKixnomOxO5nb5pLfpK8/view?usp=sharing" target="_blank" rel="noopener">Guia de Sobrevivência do Wi-Fi Doméstico (PDF) ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
+        <div class="chips"><span class="chip">BNCC Computação · Mundo Digital</span><span class="chip">Ensino por investigação</span><span class="chip">Interdisciplinar</span></div>
+      </div>
+    </article>
+
+    <article class="case edu-c">
+      <div class="meta">
+        <span class="tag">Mundo Digital · 9º ano</span>
+        <dl><div><dt>Formato</dt><dd>Objeto de aprendizagem web + aula de 60 min</dd></div><div><dt>Quando</dt><dd>Outubro de 2026</dd></div><div><dt>Habilidades</dt><dd>EF09CO04 · EF09CO10</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Operação Anzol: laboratório de perícia contra golpes digitais</h3>
+        <p class="result">Jogo web de 60 minutos para o 9º ano que funciona no celular e offline, com 12 mensagens para periciar e laudo final.</p>
+        <p>Uma página web em que estudantes do 9º ano atuam como peritos de segurança. Em duplas, eles marcam pistas em mensagens fictícias, descobrem o dono real de endereços da internet e, no papel do golpista, montam mensagens para entender os gatilhos de manipulação. Funciona no celular, sem instalação, sem cadastro e até sem internet.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Missões</h4><ul><li>Perícia de 12 mensagens: SMS, e-mail e aplicativo, com marcação de pistas antes do veredito</li><li>Anatomia do link: 8 endereços com prefixos enganosos, hífens e troca de letras</li><li>Laboratório de gatilhos: urgência, medo, autoridade, recompensa e curiosidade, com radar em tempo real</li><li>Laudo final com desempenho por tipo de pista</li></ul></div>
+          <div class="field"><h4>Metodologia e avaliação</h4><ul><li>Três Momentos Pedagógicos em 60 minutos</li><li>Papéis alternados de operador e relator</li><li>Protocolo P.A.R.E.: Pare, Analise remetente e link, Reveja o pedido, Entre pelo canal oficial</li><li>Avaliação formativa com laudo, rubrica e ticket de saída</li></ul></div>
+        </div>
+        </details>
+        <div class="links"><a href="operacao-anzol/" target="_blank" rel="noopener">Jogar a Operação Anzol ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
+        <div class="chips"><span class="chip">Segurança digital</span><span class="chip">Engenharia social</span><span class="chip">Gamificação</span><span class="chip">Acessibilidade</span><span class="chip">HTML, CSS, JS</span></div>
+      </div>
+    </article>
+
+    <article class="case edu-c">
+      <div class="meta">
+        <span class="tag">Artigo técnico-pedagógico</span>
+        <dl><div><dt>Público</dt><dd>Docentes de Computação e tecnologia</dd></div><div><dt>Formato</dt><dd>Artigo + visualização interativa</dd></div><div><dt>Quando</dt><dd>Out 2026</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Do Planejamento à Prática: IA e o pipeline que transforma casos de infraestrutura em material BNCC</h3>
+        <p class="result">Como usar IA como copiloto para produzir material BNCC, e o pipeline que transforma incidentes reais em estudos de caso.</p>
+        <p>Artigo técnico-pedagógico sobre o uso da Inteligência Artificial como copilota na criação de material didático para a BNCC de Computação. Aborda desde o bloqueio criativo do docente até a construção de um portfólio técnico a partir de casos reais de infraestrutura.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Onde a IA realmente ajuda</h4><ul><li><strong>Fim do bloqueio criativo:</strong> estruturação instantânea de rascunhos para sequências didáticas e oficinas temáticas.</li><li><strong>Contextualização:</strong> tradução de conceitos abstratos em analogias ligadas a jogos, rotina escolar e vivências comunitárias.</li><li><strong>Diferenciação pedagógica:</strong> adaptação rápida do mesmo conteúdo para abordagens plugadas ou desplugadas.</li><li><strong>Avaliação formativa:</strong> geração de rubricas com critérios claros de proficiência e roteiros de autoavaliação.</li></ul></div>
+          <div class="field"><h4>Os 3 eixos da BNCC com IA</h4><ul><li><strong>Pensamento Computacional:</strong> gincanas desplugadas, labirintos lógicos e desafios de ordenação passo a passo.</li><li><strong>Mundo Digital:</strong> roteiros para Scratch/Python comentados, simulações de placas e sensores escolares.</li><li><strong>Cultura Digital:</strong> estudos de caso sobre pegada digital, algoritmos de redes e combate à desinformação.</li></ul></div>
+                    <div class="field"><h4>Pipeline pedagógico em 4 etapas</h4><ol><li><strong>Obsidian Vault:</strong> captura de logs, incidentes e notas técnicas em Markdown.</li><li><strong>Motor RAG &amp; Sanitização:</strong> indexação vetorial com filtros de anonimização (IPs, hostnames, credenciais).</li><li><strong>Transposição BNCC:</strong> IA reconstrói o incidente como estudo de caso educativo (PC, Mundo Digital, Cultura Digital).</li><li><strong>GitHub Portfólio:</strong> publicação com versionamento de código, planos de aula e rubricas avaliativas.</li></ol></div>
+          <div class="field"><h4>Engenharia de prompt para aula</h4><p>Fórmula: Papel + Público + Habilidade BNCC + Formato do entregável. Exemplo: <em>"Atue como especialista em didática da computação. Crie um plano de aula de 50 minutos para o 7º ano sobre Decomposição de Problemas (PC — BNCC). Inclua: caso prático de infraestrutura escolar desplugada, atividade em grupos, roteiro para debate e rubrica de autoavaliação."</em></p></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">IA generativa</span><span class="chip">BNCC Computação</span><span class="chip">Material didático</span><span class="chip">Portfólio docente</span><span class="chip">RAG</span><span class="chip">GitHub</span><span class="chip">Obsidian</span><span class="chip">Transposição didática</span></div>
+        <div class="links"><a href="pipeline-pedagogico/" target="_blank" rel="noopener">Abrir a visualização do pipeline ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
+      </div>
+    </article>
+
+
+    <article class="case edu-c">
+      <div class="meta">
+        <span class="tag">Pensamento Computacional</span>
+        <dl><div><dt>Público</dt><dd>Professores do Ensino Fundamental, todas as áreas</dd></div><div><dt>Formato</dt><dd>Oficina presencial, atividades desplugadas</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Letramento e Pensamento Computacional: da BNCC à prática inclusiva</h3>
+        <p class="result">Oficina desplugada para professores de escolas rurais: cada grupo sai com um mini-plano de aula da própria disciplina.</p>
+        <p>Oficina para professores de escolas com pouca estrutura, sobretudo da zona rural. A proposta mostra que dá para ensinar Computação sem computador, partindo da cultura local dos alunos.</p>
+        <details class="more"><summary>Ver como foi feito</summary>
+        <div class="fields">
+          <div class="field"><h4>Roteiro</h4><ul><li>Aquecimento “Meu Sanduíche”: o facilitador vira robô e segue instruções ao pé da letra</li><li>Os três eixos da BNCC e os quatro pilares do PC</li><li>Mão na massa: “Meu Robô Artista”, “Classificando o Nosso Mundo” e “O Algoritmo da Minha Tradição”</li><li>Cada grupo sai com um mini-plano de aula da própria disciplina</li></ul></div>
+          <div class="field"><h4>Diferencial</h4><p>Materiais de baixo custo (copos, papel quadriculado, cartões) e atividades com elementos da cultura regional: artesanato, comidas típicas, brincadeiras, festas.</p></div>
+        </div>
+        </details>
+        <div class="chips"><span class="chip">Computação desplugada</span><span class="chip">Formação docente</span><span class="chip">Escolas rurais</span><span class="chip">Inclusão</span></div>
+      </div>
+    </article>
+
+  </section>
+
+
+  </main>
+
+  <footer id="contato">
+    <span>Jeferson Luiz Pereira</span>
+    <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">github.com/pereirashouse<span class="sr-only"> (abre em nova aba)</span></a>
+    <a href="tel:+5542988842215">(42) 98884-2215</a>
+    <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  </footer>
+</div>
+</body>
+</html>
