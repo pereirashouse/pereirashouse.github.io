@@ -98,6 +98,29 @@ section{display:flex;flex-direction:column;gap:24px}
 .ill svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ill .f{fill:currentColor;fill-opacity:.16} .ill .s{fill:currentColor;stroke:none}
 .ill .bg{fill:var(--surface)} .ill .m{opacity:.5} .ill .d{stroke-dasharray:4 4}
+.diagram{margin:0;display:flex;flex-direction:column;gap:8px;max-width:760px}
+.diagram svg{display:block;width:100%;height:auto;min-width:520px;font-family:var(--body);background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.diagram-scroll{overflow-x:auto}
+.diagram figcaption{font-size:.86rem;color:var(--muted);max-width:68ch}
+.dg-node rect{fill:var(--surface);stroke:var(--infra);stroke-width:1.5}
+.dg-node.dg-key rect{fill:var(--infra-soft)}
+.dg-node.dg-bad rect{stroke:var(--warn);fill:var(--warn-soft)}
+.dg-node.dg-off rect{stroke:var(--line);stroke-dasharray:5 4}
+.dg-node text{fill:var(--fg);font-size:15px;font-weight:600;text-anchor:middle}
+.dg-node text.dg-sub{font-size:13px;font-weight:400;fill:var(--muted)}
+.dg-lab{fill:var(--infra);font:500 12px var(--mono);text-anchor:middle}
+.dg-note{fill:var(--muted);font-size:12px;text-anchor:middle}
+.dg-note.dg-left{text-anchor:start} .dg-note.dg-right{text-anchor:end}
+.dg-warnt{fill:var(--warn)}
+.dg-line{fill:none;stroke:var(--infra);stroke-width:1.6}
+.dg-dash{stroke-dasharray:5 4}
+.dg-offl{stroke:var(--muted)}
+.dg-warnl{stroke:var(--warn);stroke-width:2.2}
+.dg-x{stroke:var(--warn);stroke-width:2.4;stroke-linecap:round}
+.dg-head{fill:var(--infra)}
+.dg-group{fill:none;stroke:var(--muted);stroke-dasharray:3 4}
+.dg-acc rect{fill:var(--surface);stroke:var(--infra);stroke-width:1.2}
+.dg-fan{fill:none;stroke:var(--infra);stroke-opacity:.45;stroke-width:1}
 .content{display:flex;flex-direction:column;gap:16px;min-width:0;overflow-wrap:anywhere}
 .content h3{font-size:1.45rem}
 .content>p{max-width:68ch}
@@ -261,6 +284,37 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
         <h3>Wi-Fi corporativo com autenticação de máquina (802.1X PEAP-MSCHAPv2)</h3>
         <p class="result">60 access points com autenticação por conta de máquina do AD: dispositivos pessoais bloqueados automaticamente e nenhum rollback.</p>
         <p>O Wi-Fi corporativo usava senha compartilhada, o que permitia que celulares e tablets pessoais entrassem com as credenciais de um funcionário. A solução foi mudar o sujeito da autenticação: em vez de <em>quem é você</em>, passou a valer <em>esta máquina pertence ao domínio</em>. Um celular, por não ter conta de computador no Active Directory, simplesmente não consegue apresentar a credencial exigida — independentemente de saber a senha do usuário.</p>
+        <figure class="diagram">
+          <div class="diagram-scroll">
+          <svg viewBox="0 0 680 284" role="img" aria-labelledby="dg8021x-t">
+            <title id="dg8021x-t">Fluxo de autenticação 802.1X: o notebook do domínio passa pelo access point até o NPS local, que valida a conta de máquina no Active Directory; o celular pessoal é negado; o NPS fica na filial para a autenticação não atravessar a VPN.</title>
+            <defs><marker id="dg-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dg-head"/></marker></defs>
+            <g class="dg-node"><rect x="8" y="40" width="134" height="62" rx="6"/><text x="75" y="66">Notebook</text><text x="75" y="86" class="dg-sub">do domínio</text></g>
+            <g class="dg-node"><rect x="190" y="40" width="134" height="62" rx="6"/><text x="257" y="66">Access point</text><text x="257" y="86" class="dg-sub">cliente RADIUS</text></g>
+            <g class="dg-node dg-key"><rect x="372" y="40" width="134" height="62" rx="6"/><text x="439" y="66">NPS na filial</text><text x="439" y="86" class="dg-sub">RADIUS local</text></g>
+            <g class="dg-node"><rect x="546" y="40" width="126" height="62" rx="6"/><text x="609" y="66">Active</text><text x="609" y="86" class="dg-sub">Directory</text></g>
+            <path class="dg-line" d="M142 71H186" marker-end="url(#dg-arr)"/>
+            <path class="dg-line" d="M324 71H368" marker-end="url(#dg-arr)"/>
+            <path class="dg-line" d="M506 71H542" marker-end="url(#dg-arr)"/>
+            <text x="164" y="30" class="dg-lab">PEAP</text>
+            <text x="346" y="30" class="dg-lab">RADIUS</text>
+            <text x="524" y="30" class="dg-lab">grupo</text>
+            <text x="75" y="122" class="dg-note">perfil Wi-Fi via GPO</text>
+            <text x="212" y="122" class="dg-note dg-left">Message-Authenticator</text>
+            <text x="439" y="122" class="dg-note">aceita conta de máquina</text>
+            <g class="dg-node dg-bad"><rect x="8" y="170" width="134" height="62" rx="6"/><text x="75" y="196">Celular</text><text x="75" y="216" class="dg-sub">pessoal</text></g>
+            <path class="dg-line dg-dash" d="M142 201C180 201 194 160 196 108" marker-end="url(#dg-arr)"/>
+            <g class="dg-node dg-bad"><rect x="372" y="170" width="134" height="62" rx="6"/><text x="439" y="196">Política final</text><text x="439" y="216" class="dg-sub">nega o restante</text></g>
+            <path class="dg-line dg-dash" d="M439 106V166" marker-end="url(#dg-arr)"/>
+            <text x="447" y="150" class="dg-note dg-left">sem conta de máquina</text>
+            <g class="dg-node dg-off"><rect x="546" y="170" width="126" height="62" rx="6"/><text x="609" y="196">Matriz</text><text x="609" y="216" class="dg-sub">via VPN</text></g>
+            <path class="dg-line dg-dash dg-offl" d="M506 201H542"/>
+            <path class="dg-x" d="M518 193l12 16M530 193l-12 16"/>
+            <text x="609" y="252" class="dg-note">fora do caminho:</text><text x="609" y="268" class="dg-note">MTU da VPN (IKEv1)</text>
+          </svg>
+          </div>
+          <figcaption>Fluxo da autenticação. A rede só aceita a conta de máquina do domínio; o celular cai na política final de negação, e o NPS fica na filial para nenhum pacote RADIUS atravessar a VPN.</figcaption>
+        </figure>
         <details class="more"><summary>Ver como foi feito</summary>
         <div class="fields">
           <div class="field"><h4>Por que a autenticação de máquina bloqueia celulares</h4><p>PEAP-MSCHAPv2 abre um túnel TLS externo e, dentro dele, envia a credencial. Com a política de <em>Grupos de Computadores</em> no NPS, a credencial aceita é a conta de máquina do domínio. Essa senha fica armazenada na LSA da estação e nunca sai dela — um celular não tem como obtê-la.</p></div>
@@ -310,6 +364,32 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
         <h3>Modernização e documentação da rede de uma filial industrial</h3>
         <p class="result">Rede da filial levantada do zero, com inconsistências de VLAN e redundância identificadas e um roteiro de regularização por risco.</p>
         <p>A rede da filial havia crescido sem documentação: switches de distribuição sem configuração-padrão, VLANs com três tratamentos diferentes para o mesmo propósito, cabos sem identificação e nenhuma autenticação centralizada nos equipamentos. O trabalho cobriu levantamento físico, auditoria de backups de configuração, plano de VLANs e identificação de achados de segurança.</p>
+        <figure class="diagram">
+          <div class="diagram-scroll">
+          <svg viewBox="0 0 680 330" role="img" aria-labelledby="dgtopo-t">
+            <title id="dgtopo-t">Topologia sanitizada da filial: dois links de provedores distintos chegam ao firewall com SD-WAN, que liga a uma pilha de dois switches de núcleo; onze switches de acesso e um switch PoE dos access points sobem direto no núcleo. Os uplinks do firewall estão concentrados em um único membro da pilha.</title>
+            <defs><marker id="dg-arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="dg-head"/></marker></defs>
+            <g class="dg-node dg-off"><rect x="150" y="8" width="150" height="40" rx="6"/><text x="225" y="33">Link A · 100 Mb</text></g>
+            <g class="dg-node dg-off"><rect x="380" y="8" width="150" height="40" rx="6"/><text x="455" y="33">Link B · 100 Mb</text></g>
+            <path class="dg-line" d="M225 48L318 76"/><path class="dg-line" d="M455 48L362 76"/>
+            <g class="dg-node dg-key"><rect x="250" y="76" width="180" height="54" rx="6"/><text x="340" y="100">Firewall de borda</text><text x="340" y="119" class="dg-sub">SD-WAN</text></g>
+            <g class="dg-node"><rect x="214" y="176" width="120" height="50" rx="6"/><text x="274" y="198">Core 1</text><text x="274" y="216" class="dg-sub">raiz STP</text></g>
+            <g class="dg-node"><rect x="346" y="176" width="120" height="50" rx="6"/><text x="406" y="198">Core 2</text><text x="406" y="216" class="dg-sub">mesma pilha</text></g>
+            <rect class="dg-group" x="204" y="166" width="272" height="70" rx="8"/>
+            <text x="484" y="182" class="dg-note dg-left">pilha VSF</text>
+            <path class="dg-line dg-warnl" d="M318 130L282 174"/><path class="dg-line dg-warnl" d="M330 130L292 174"/>
+            <text x="248" y="152" class="dg-note dg-warnt dg-right">uplinks em um só membro</text>
+            <g class="dg-acc">
+              <rect x="20" y="282" width="40" height="30" rx="4"/><rect x="72" y="282" width="40" height="30" rx="4"/><rect x="124" y="282" width="40" height="30" rx="4"/><rect x="176" y="282" width="40" height="30" rx="4"/><rect x="228" y="282" width="40" height="30" rx="4"/><rect x="280" y="282" width="40" height="30" rx="4"/><rect x="332" y="282" width="40" height="30" rx="4"/><rect x="384" y="282" width="40" height="30" rx="4"/><rect x="436" y="282" width="40" height="30" rx="4"/><rect x="488" y="282" width="40" height="30" rx="4"/><rect x="540" y="282" width="40" height="30" rx="4"/>
+            </g>
+            <path class="dg-fan" d="M40 282L300 236M92 282L304 236M144 282L308 236M196 282L312 236M248 282L316 236M300 282L320 236M352 282L360 236M404 282L364 236M456 282L368 236M508 282L372 236M560 282L376 236"/>
+            <text x="300" y="327" class="dg-note">11 switches de acesso, cada um com uplink direto no núcleo</text>
+            <g class="dg-node"><rect x="598" y="270" width="76" height="46" rx="6"/><text x="636" y="290">PoE</text><text x="636" y="307" class="dg-sub">APs</text></g>
+            <path class="dg-line dg-dash" d="M636 270L440 236"/>
+          </svg>
+          </div>
+          <figcaption>Topologia levantada em campo e confirmada por LLDP (sem endereços nem nomes). O achado de redundância aparece em destaque: os dois uplinks do firewall chegam ao mesmo membro da pilha.</figcaption>
+        </figure>
         <details class="more"><summary>Ver como foi feito</summary>
         <div class="fields">
           <div class="field"><h4>Topologia</h4><ul><li>Firewall de borda com SD-WAN agregando dois links de 100 Mb de provedores distintos</li><li>Core com par de switches em pilha (VSF), raiz do spanning tree</li><li>Distribuição: onze switches de acesso, cada um com uplink direto no core</li><li>Switch PoE separado para os access points do site</li></ul></div>
