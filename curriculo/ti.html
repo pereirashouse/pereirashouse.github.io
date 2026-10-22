@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeferson Luiz Pereira · Currículo · Infraestrutura de TI</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Public+Sans:wght@400;600&display=swap">
+<style>:root{--c:#1D5BB8}
+@page{size:A4;margin:16mm 16mm 14mm}
+*{box-sizing:border-box}
+body{margin:0;color:#15211F;font:10pt/1.45 "Public Sans",Arial,sans-serif;background:#fff}
+.pg{max-width:780px;margin:0 auto;padding:24px 16px}
+@media print{.pg{padding:0;max-width:none}}
+h1{font:700 21pt/1.1 "Familjen Grotesk",Arial,sans-serif;margin:0}
+.cargo{margin:4px 0 6px;font-weight:600;color:var(--c)}
+.contato{font-size:9pt;color:#56655F;display:flex;flex-wrap:wrap;gap:2px 14px}
+.contato a{color:inherit;text-decoration:none}
+h2{font:700 11pt "Familjen Grotesk",Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--c);
+   border-bottom:1.5px solid var(--c);padding-bottom:2px;margin:16px 0 8px}
+p{margin:0 0 6px}
+ul{margin:0;padding-left:16px}
+li{margin-bottom:3px}
+.item{margin-bottom:8px;break-inside:avoid}
+.item .t{display:flex;justify-content:space-between;gap:12px;font-weight:600}
+.item .t span{font-weight:400;color:#56655F;font-size:9pt;white-space:nowrap}
+.item .l{font-size:9pt;color:#56655F}
+.sk{display:grid;grid-template-columns:150px 1fr;gap:3px 12px;font-size:9.5pt}
+.sk b{font-weight:600}
+.nota{font-size:8.5pt;color:#56655F;margin-top:14px}
+</style></head>
+<body><div class="pg">
+<h1>Jeferson Luiz Pereira</h1>
+<p class="cargo">Analista de Infraestrutura de TI Sênior · Licenciando em Computação (UTFPR)</p>
+<p class="contato"><span>Paraná, Brasil</span><a href="tel:+5542988842215">(42) 98884-2215</a>
+<a href="https://www.linkedin.com/in/jefersonluizpereira">linkedin.com/in/jefersonluizpereira</a>
+<a href="https://pereirashouse.github.io/">pereirashouse.github.io</a>
+<a href="https://github.com/pereirashouse">github.com/pereirashouse</a></p>
+<h2>Resumo</h2>
+<p>Analista de infraestrutura com mais de cinco anos em TI industrial (3 fábricas e 10 centros de distribuição): redes e Wi-Fi corporativo, identidade e 802.1X, virtualização, backup, monitoramento e automação com Python e PowerShell. Trabalho com hipóteses, evidências e critérios de rollback definidos antes da mudança.</p>
+<p>A docência é a evolução da mentoria técnica: orientar colegas, escrever instruções de trabalho e runbooks e explicar incidentes para quem não é da área. Casos reais de infraestrutura, sem dados internos, viram material didático alinhado à BNCC.</p>
+<h2>Experiência</h2>
+<div class="item"><p class="t">Analista de Infraestrutura Sênior <span>mai. 2026 – atual</span></p><p class="l">Indústria · Paraná</p>
+<ul><li>Conduziu a PoC de substituição do VMware (Sangfor HCI e Proxmox VE), com critérios de rollback formalizados antes da implantação e executados quando o risco se confirmou.</li>
+<li>Implantou autenticação 802.1X por conta de máquina (NPS, Active Directory, GPO) em 60 access points UniFi.</li>
+<li>Análise de Wi-Fi com Python e API UniFi; automação com PowerShell e GPO; backup Veeam e Dell PowerProtect.</li></ul></div>
+<div class="item"><p class="t">Analista de TI Pleno <span>set. 2022 – mai. 2026</span></p><p class="l">Indústria · Paraná</p>
+<ul><li>Infraestrutura para 3 fábricas e 10 centros de distribuição: switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware e KVM, Zabbix/Grafana, Dell PowerProtect.</li></ul></div>
+<div class="item"><p class="t">Analista de TI Júnior <span>ago. 2021 – set. 2022</span></p><p class="l">Indústria · Paraná</p>
+<ul><li>Suporte de infraestrutura, usuários no AD, antivírus, Wi-Fi Ubiquiti, VMware vSphere e KVM Oracle, monitoramento com Zabbix e Grafana.</li></ul></div>
+<div class="item"><p class="t">Analista Financeiro <span>mar. 2014 – set. 2019</span></p><p class="l">Multinacional de embalagens · Paraná</p></div>
+<div class="item"><p class="t">Assistente de TI <span>jan. 2012 – abr. 2014</span></p><p class="l">Empresa de fundição · Paraná · Help Desk N1/N2 e rede local</p></div>
+
+<h2>Projetos selecionados</h2><ul>
+<li><b>Wi-Fi corporativo com 802.1X:</b> autenticação por conta de máquina em 60 APs, bloqueando dispositivos pessoais.</li>
+<li><b>Incidente 802.1X após atualização do Windows:</b> quatro fontes de log, causa raiz, contorno e correção definitiva.</li>
+<li><b>Modernização de rede de filial industrial:</b> levantamento sem documentação, parser de configurações em Python, drift, VLANs e roteiro por risco.</li>
+<li><b>Monitor de quedas Wi-Fi de coletores WMS:</b> agente Python open source com 20 testes automatizados e CI.</li>
+<li><b>Alarme falso de robôs industriais:</b> causa raiz em canal 2,4 GHz saturado; RSSI mínimo resolveu sem afetar os robôs.</li>
+<li><b>Offboarding seguro:</b> runbook de 7 blocos com evidência auditável e tratamento de contas privilegiadas.</li>
+</ul>
+<h2>Competências técnicas</h2><div class="sk">
+<b>Virtualização</b><span>VMware vSphere · Sangfor HCI · KVM Oracle · Proxmox VE · Hyper-V</span>
+<b>Sistemas e identidade</b><span>Windows Server · Linux · Active Directory · Azure AD</span>
+<b>Redes e segurança</b><span>Aruba / TP-Link · Wi-Fi Ubiquiti · FortiGate · 802.1X / RADIUS · VLAN</span>
+<b>Backup e monitoramento</b><span>Veeam · Dell PowerProtect · Zabbix · Grafana</span>
+<b>Automação</b><span>Python · PowerShell · GPO</span>
+</div>
+<h2>Formação</h2>
+<div class="item"><p class="t">Licenciatura em Computação (cursando) <span>UTFPR · desde fev. 2024</span></p></div>
+<div class="item"><p class="t">Técnico em Administração</p></div>
+
+<p class="nota">Endereços, nomes de servidores, domínios e nomes de empresas omitidos por confidencialidade. Estudos de caso completos em pereirashouse.github.io.</p>
+</div></body></html>
