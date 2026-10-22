@@ -179,6 +179,26 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
 
     <article class="case infra-c">
       <div class="meta">
+        <span class="tag">Virtualização</span>
+        <dl><div><dt>Ambiente</dt><dd>Dois datacenters corporativos</dd></div><div><dt>Tipo</dt><dd>Migração de plataforma + relatório executivo</dd></div><div><dt>Quando</dt><dd>Jun – Ago 2026</dd></div><div><dt>Papel</dt><dd>Responsável técnico</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Migração de plataforma de virtualização: VMware para Sangfor HCI</h3>
+        <p>Com a licença VMware prestes a vencer, a organização iniciou uma Prova de Conceito para migrar o ambiente de virtualização — 12 hosts físicos e 156 VMs distribuídas em dois datacenters — para o Sangfor HCI. Conduzi o levantamento completo da infraestrutura, liderei a PoC e registrei formalmente os riscos técnicos antes da decisão de prosseguir.</p>
+        <div class="fields">
+          <div class="field"><h4>Relatório executivo de infraestrutura</h4><p>Antes da PoC, elaborei um diagnóstico consolidado entregue à gestão de TI: 12 hosts, 156 VMs, 372 vCPUs lógicas, ecossistema híbrido VMware + KVM. Identifiquei 25 VMs com sistema operacional em fim de suporte (Server 2008 e 2012) e 8 VMs críticas com desconformidade de licenciamento Microsoft — 4 delas sem rearm disponível e com risco imediato de desligamento automático.</p></div>
+          <div class="field"><h4>PoC com prazo crítico</h4><p>A licença VMware venceria em semanas. A PoC foi realizada em host isolado, fora do datacenter principal, o que impediu a validação de 40% dos itens de avaliação contra o ambiente real de produção — incluindo compatibilidade de storage e integração com o backup existente (Veeam).</p></div>
+          <div class="field"><h4>Registro formal de ressalvas</h4><p>Antes da decisão de prosseguir, documentei formalmente os pontos não validados e os riscos. Esse registro, entregue à liderança, comprovou depois que os riscos foram comunicados antes da decisão — não descobertos depois.</p></div>
+          <div class="field"><h4>Incompatibilidade de storage confirmada em produção</h4><p>Na operação real, o Sangfor se mostrou incompatível com o storage SAS já instalado no datacenter principal. Foi necessário fazer rollback: reformatar dois hosts e retornar ao VMware. Um terceiro host apresentou lentidão residual por operar com discos mecânicos no datastore principal — problema que a PoC em ambiente isolado não havia revelado.</p></div>
+          <div class="field"><h4>Integração com backup</h4><p>O plugin oficial do Veeam para Sangfor ainda não tinha versão estável (GA). A saída foi redesenhar a arquitetura de backup: migrar o servidor Veeam para Linux e usar a API nativa do Sangfor em vez do plugin, eliminando tanto o risco do prazo quanto uma desconformidade de licenciamento do servidor de backup.</p></div>
+          <div class="field"><h4>Contexto de modernização</h4><ul><li>Programa com 35 riscos mapeados (12 críticos / 23 altos) e matriz RACI de 38 atividades</li><li>Critério de Go/No-Go por janela: backup com evidência recente, restore testado, rollback documentado, dono de negócio disponível</li><li>Ação corretiva em andamento: rebalanceamento de VMs entre datastores enquanto a decisão de storage definitivo é tomada</li></ul></div>
+        </div>
+        <div class="chips"><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">KVM</span><span class="chip">Proxmox</span><span class="chip">Veeam Backup</span><span class="chip">Windows Server</span><span class="chip">Relatório executivo</span><span class="chip">Gestão de riscos</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
         <span class="tag">IT-INFRA-002</span>
         <dl><div><dt>Ambiente</dt><dd>Centro de distribuição</dd></div><div><dt>Tipo</dt><dd>Instrução de trabalho</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
       </div>
@@ -261,7 +281,7 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
   <section id="skills">
     <div class="sec-head"><h2>Áreas de atuação</h2></div>
     <div class="skills">
-      <div><h3>Servidores e serviços</h3><div class="chips"><span class="chip">Windows Server</span><span class="chip">Active Directory</span><span class="chip">NPS / RADIUS</span><span class="chip">Linux</span></div></div>
+      <div><h3>Servidores e serviços</h3><div class="chips"><span class="chip">Windows Server</span><span class="chip">Active Directory</span><span class="chip">NPS / RADIUS</span><span class="chip">Linux</span><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">Proxmox</span><span class="chip">Veeam</span></div></div>
       <div><h3>Redes</h3><div class="chips"><span class="chip">Switches</span><span class="chip">Firewalls</span><span class="chip">FortiGate / SD-WAN</span><span class="chip">Wi-Fi corporativo</span><span class="chip">VLAN</span><span class="chip">TCP/IP</span></div></div>
       <div><h3>Nuvem e operação</h3><div class="chips"><span class="chip">Nuvem</span><span class="chip">Monitoramento</span><span class="chip">Documentação (IT)</span></div></div>
       <div><h3>Ensino</h3><div class="chips"><span class="chip">BNCC Computação</span><span class="chip">IIR</span><span class="chip">Oficinas</span><span class="chip">HTML, CSS, JS</span></div></div>
