@@ -199,6 +199,34 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
 
     <article class="case infra-c">
       <div class="meta">
+        <span class="tag">IT-INFRA-014</span>
+        <dl><div><dt>Tipo</dt><dd>Runbook · boas práticas</dd></div><div><dt>Quando</dt><dd>Set – Out 2026</dd></div><div><dt>Papel</dt><dd>Autor e responsável técnico</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Offboarding seguro: bloqueio de acessos no desligamento de colaborador</html>
+        <p>Runbook estruturado em sete blocos para garantir que, quando um colaborador é desligado, todos os acessos sejam revogados de forma consistente e auditável — do Active Directory aos hypervisors e storages. O procedimento distingue o perfil comum do colaborador com acesso privilegiado (TI), onde os riscos são significativamente maiores.</p>
+        <div class="fields">
+          <div class="field"><h4>Princípio central</h4><p>O bloqueio acontece <strong>durante</strong> a conversa de desligamento, não depois. Cada minuto de janela entre a comunicação e o bloqueio é risco real. O chamado do RH formaliza o horário; o analista de infraestrutura fica de prontidão nesse horário.</p></div>
+          <div class="field"><h4>Blocos 1 a 5 — qualquer colaborador</h4><ul><li>Exportar grupos do AD como evidência antes de qualquer alteração</li><li>Trocar a senha por valor aleatório e desabilitar a conta; em ambientes com M365/Entra ID, bloquear na nuvem e revogar tokens de sessão imediatamente (a sincronização leva até 30 min)</li><li>Derrubar sessões ativas: RDP, VPN no firewall, Wi-Fi 802.1X (a sessão atual persiste até a próxima reautenticação do NPS)</li><li>Sistemas externos ao AD: ERP, WMS, logins no banco de dados, portais SaaS, ramal VoIP, código de impressão e acesso físico</li><li>No AD: preencher a descrição com data, chamado e executor; remover de todos os grupos; mover para OU de Inativos; agendar exclusão definitiva em 90 dias</li></ul></div>
+          <div class="field"><h4>Bloco 6 — colaborador da TI ou com acesso privilegiado</h4><p>O risco aqui não é apenas a conta, mas <strong>tudo o que a pessoa sabe</strong>. Senhas de contas de serviço, break-glass, firewall, switches, iDRAC, storage, hypervisors, banco de dados, PSKs de Wi-Fi — tudo que ela conhecia precisa ser rotacionado. Adicionalmente:</p><ul><li>Auditoria de contas criadas e mudanças em grupos privilegiados nos últimos 30 a 90 dias (detecção de backdoors)</li><li>Verificar tarefas agendadas, serviços e scripts rodando com a credencial dela — o ideal é migrar para conta de serviço antes do D0</li><li>Revisar logs do firewall, do AD e dos hypervisors: acessos fora do horário, exportações de dados, mudanças de regras</li><li>Rotacionar senhas LAPS das máquinas que ela consultou recentemente</li><li>Remover chaves SSH, tokens de API e acessos a cofres de senha</li></ul></div>
+          <div class="field"><h4>Contas nominais fora do AD</h4><p>iDRAC, storages, hosts ESXi e servidores KVM têm contas locais que o AD não gerencia. Cada uma precisa ser bloqueada equipamento por equipamento, via CLI ou interface web. O runbook mantém um inventário dessas contas com os comandos específicos por plataforma — incluindo o cuidado de não remover contas de contingência que o ambiente de gerenciamento usa por SSH.</p></div>
+        </div>
+        <pre><span class="c"># Bloco AD: evidência de grupos, bloqueio e movimentação para OU Inativos</span>
+$u = Get-ADUser $sam -Properties MemberOf
+$u.MemberOf | Out-File "C:\Offboarding\$sam-grupos-$(Get-Date -f yyyyMMdd).txt"
+
+$pwd = -join ((33..126) | Get-Random -Count 32 | % {[char]$_})
+Set-ADAccountPassword $sam -Reset -NewPassword (ConvertTo-SecureString $pwd -AsPlainText -Force)
+Disable-ADAccount $sam
+Set-ADUser $sam -Description "Desligado $(Get-Date -f dd/MM/yyyy) - $chamado - $env:USERNAME"
+$u.MemberOf | ForEach-Object { Remove-ADGroupMember $_ -Members $sam -Confirm:$false }
+Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
+        <div class="chips"><span class="chip">Active Directory</span><span class="chip">PowerShell</span><span class="chip">FortiGate</span><span class="chip">NPS / 802.1X</span><span class="chip">Segurança</span><span class="chip">Offboarding</span><span class="chip">ESXi / KVM</span><span class="chip">iDRAC</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
         <span class="tag">IT-INFRA-002</span>
         <dl><div><dt>Ambiente</dt><dd>Centro de distribuição</dd></div><div><dt>Tipo</dt><dd>Instrução de trabalho</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
       </div>
