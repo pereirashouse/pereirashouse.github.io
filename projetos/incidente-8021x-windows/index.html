@@ -73,7 +73,7 @@
       <li>levantamento da linha do tempo da falha;</li>
       <li>formulação e teste das hipóteses;</li>
       <li>coleta e correlação dos logs do cliente, do NTLM, do RADIUS e do Active Directory;</li>
-      <li>definição do contorno imediato;</li>
+      <li>definição do contorno imediato (rede temporária);</li>
       <li>recomendação da correção definitiva e da análise de impacto para os demais notebooks.</li>
     </ul>
   </div>
@@ -81,7 +81,7 @@
     <h3>Resultado</h3>
     <ul>
       <li>Causa raiz identificada e comprovada por evidência de log em todas as falhas do dia.</li>
-      <li>Usuário reconectado com um contorno que não exigiu mudança na infraestrutura.</li>
+      <li>Usuário reconectado por uma rede temporária, mantendo a política 802.1X intacta para os demais equipamentos.</li>
       <li>Risco antecipado: os demais notebooks com autenticação por credencial de máquina cairiam ao receber a mesma atualização.</li>
       <li>Migração para EAP-TLS recomendada como correção definitiva.</li>
     </ul>
@@ -143,14 +143,14 @@
     <h4>Causa raiz</h4>
     <p>A rede usa PEAP-MSCHAPv2 com a credencial da máquina, sem pedir senha. A atualização de segurança de outubro passou a bloquear o login automático (SSO) baseado em credenciais derivadas de NTLMv1. O túnel TLS com o servidor de autenticação era estabelecido, mas o Windows deixava de enviar a credencial dentro dele.</p>
     <h4>Contorno imediato</h4>
-    <p>Conectar digitando usuário e senha de domínio, que a atualização não bloqueia, e aceitar o certificado do servidor de autenticação.</p>
+    <p>Criação de uma rede temporária para o equipamento afetado, enquanto os ajustes para voltar a autenticar via RADIUS eram alinhados. A política 802.1X da rede corporativa não foi afrouxada.</p>
     <h4>Correção definitiva</h4>
     <p>Migrar a rede para EAP-TLS com certificado de máquina, eliminando a dependência de MSCHAPv2 e NTLMv1. A migração já constava como próximo passo no projeto original.</p>
   </div>
   <div class="blk">
     <h3>Limitações</h3>
     <ul>
-      <li>O contorno depende de ação manual do usuário e não escala para muitos equipamentos.</li>
+      <li>A rede temporária é um contorno operacional: não tem o mesmo controle de acesso do 802.1X e precisa ser desativada assim que a autenticação via RADIUS voltar.</li>
       <li>A correção definitiva depende de uma PKI com emissão, renovação e revogação de certificados de máquina, que exige planejamento próprio.</li>
       <li>Os logs reais não são publicados; a evidência abaixo é uma reconstrução sintética do padrão observado.</li>
     </ul>
