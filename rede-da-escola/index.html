@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rede da Escola</title>
+<meta name="description" content="Simulador didático: monte a rede de uma escola fictícia com VLANs, endereços IP, gateway, equipamentos e regras de firewall.">
+<style>
+:root{
+  --bg:#f6f7f9;--card:#fff;--ink:#1d232b;--muted:#5b6673;--line:#d9dee5;
+  --acc:#1f6feb;--acc-ink:#fff;--ok:#1a7f37;--warn:#9a6700;--err:#cf222e;
+  --ok-bg:#dafbe1;--warn-bg:#fff4d4;--err-bg:#ffebe9;--chip:#eef1f5;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1318;--card:#171c23;--ink:#e6e9ee;--muted:#9aa5b1;--line:#2c343e;
+  --acc:#4c8dff;--acc-ink:#0b0f14;--ok:#3fb950;--warn:#d29922;--err:#f85149;
+  --ok-bg:#12261a;--warn-bg:#2a2210;--err-bg:#2d1416;--chip:#222a33;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1318;--card:#171c23;--ink:#e6e9ee;--muted:#9aa5b1;--line:#2c343e;
+  --acc:#4c8dff;--acc-ink:#0b0f14;--ok:#3fb950;--warn:#d29922;--err:#f85149;
+  --ok-bg:#12261a;--warn-bg:#2a2210;--err-bg:#2d1416;--chip:#222a33;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1100px;margin:auto}
+h1{font-size:1.5rem;margin:0 0 4px}
+h2{font-size:1.1rem;margin:0 0 10px}
+h3{font-size:1rem;margin:0}
+main{max-width:1100px;margin:auto;padding:0 16px 40px;display:grid;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.muted{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,input{font:inherit;color:inherit}
+button{background:var(--chip);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+button.primary{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+select,input{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:4px 6px;min-width:0}
+input.ip{width:9.5em;font-family:ui-monospace,Consolas,monospace}
+input.num{width:4.5em}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:6px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:.85rem;color:var(--muted);font-weight:600}
+.missao{border-left:4px solid var(--acc)}
+.amb-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.amb{border:1px solid var(--line);border-radius:8px;padding:12px;border-top:6px solid var(--vc,var(--line))}
+.amb .meta{font-size:.85rem;color:var(--muted);margin:2px 0 8px}
+.amb label{font-size:.85rem}
+.dev{display:grid;grid-template-columns:1fr;gap:4px;border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.dev .nome{font-weight:600;font-size:.9rem}
+.fw td,.fw th{text-align:center;padding:4px}
+.fw th.r{text-align:left}
+.prob{border-radius:8px;padding:10px;margin:8px 0;border:1px solid var(--line)}
+.prob.erro{background:var(--err-bg);border-color:var(--err)}
+.prob.aviso{background:var(--warn-bg);border-color:var(--warn)}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;padding:1px 6px;border-radius:99px;margin-right:6px}
+.erro .tag{background:var(--err);color:#fff}
+.aviso .tag{background:var(--warn);color:#fff}
+.dica{margin:6px 0 0;padding-left:10px;border-left:3px solid var(--line)}
+.ok-banner{background:var(--ok-bg);border:1px solid var(--ok);border-radius:8px;padding:10px}
+.hops{list-style:none;padding:0;margin:8px 0 0;font-family:ui-monospace,Consolas,monospace;font-size:.9rem}
+.hops li{padding:2px 0}
+.hops .s{color:var(--ok)} .hops .f{color:var(--err)}
+svg text{fill:var(--ink);font-family:system-ui,sans-serif}
+svg .sub{fill:var(--muted)}
+.diag{width:100%;height:auto;display:block}
+.custo{font-variant-numeric:tabular-nums}
+@media print{.noprint{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Rede da Escola</h1>
+  <p class="muted">Simulador didático. Escola, endereços e preços são fictícios. Monte a rede, clique em <b>Verificar rede</b> e teste a conectividade.</p>
+</header>
+<main>
+  <section class="card noprint">
+    <div class="row">
+      <label for="selMissao"><b>Missão</b></label>
+      <select id="selMissao"></select>
+      <label for="aluno">Nome ou dupla</label>
+      <input id="aluno" placeholder="ex.: Ana e Bruno" style="width:14em">
+    </div>
+    <div class="row" style="margin-top:10px">
+      <button class="primary" id="btnVerificar">Verificar rede</button>
+      <button id="btnRelatorio">Relatório final</button>
+      <button id="btnExportar">Salvar projeto (.json)</button>
+      <label class="row" style="gap:4px"><span>Abrir projeto</span><input type="file" id="arqImport" accept=".json,application/json" style="width:12em"></label>
+      <button id="btnReiniciar">Recomeçar missão</button>
+    </div>
+  </section>
+
+  <section class="card missao" id="missaoTexto" aria-live="polite"></section>
+
+  <section class="card">
+    <h2>Mapa da rede</h2>
+    <svg id="diag" class="diag" viewBox="0 0 960 430" role="img" aria-label="Diagrama da rede da escola"></svg>
+    <p class="muted" style="font-size:.85rem;margin:6px 0 0">A cor de cada ambiente é a cor da VLAN. Ambientes com a mesma cor estão na mesma rede. Os números em vermelho e amarelo vêm da última verificação.</p>
+  </section>
+
+  <section class="card">
+    <h2>1. VLANs e redes</h2>
+    <p class="muted">Cada VLAN é uma rede separada. O roteador da escola tem um endereço (o <i>gateway</i>) em cada uma.</p>
+    <div class="scroll"><table id="tabVlans"></table></div>
+    <button id="btnAddVlan" style="margin-top:8px">+ Nova VLAN</button>
+  </section>
+
+  <section class="card">
+    <h2>2. Ambientes, equipamentos e dispositivos</h2>
+    <p class="muted">Escolha a VLAN, o switch e os access points de cada ambiente. Configure o endereço dos dispositivos.</p>
+    <div class="amb-grid" id="ambientes"></div>
+    <p class="custo" id="custo" style="margin:12px 0 0"></p>
+  </section>
+
+  <section class="card">
+    <h2>3. Regras do firewall</h2>
+    <p class="muted">Marque quem pode <b>iniciar</b> conexão com quem. O que não está marcado é bloqueado. As regras só valem entre VLANs diferentes: dentro da mesma VLAN o tráfego não passa pelo firewall.</p>
+    <div class="scroll"><table class="fw" id="tabFw"></table></div>
+  </section>
+
+  <section class="card">
+    <h2>4. Teste de conectividade (ping)</h2>
+    <div class="row">
+      <label for="pingO">De</label><select id="pingO"></select>
+      <label for="pingD">para</label><select id="pingD"></select>
+      <button class="primary" id="btnPing">Testar</button>
+    </div>
+    <div id="pingRes" aria-live="polite"></div>
+  </section>
+
+  <section class="card" id="secProblemas">
+    <h2>5. Resultado da verificação</h2>
+    <div id="problemas" aria-live="polite"><p class="muted">Clique em <b>Verificar rede</b>.</p></div>
+  </section>
+</main>
+<footer style="max-width:1100px;margin:auto;padding:0 16px 32px;font-size:.85rem" class="muted">Plano de aula, material do professor e do aluno: <a href="https://github.com/pereirashouse/computacao-bncc/tree/main/projetos/01-simulador-rede-escola" style="color:var(--acc)">github.com/pereirashouse/computacao-bncc</a> · Conteúdo sob CC BY 4.0 · Jeferson Luiz Pereira</footer>
+
+<script>
+"use strict";
+// ---------- Catálogo (valores fictícios, só para estimar) ----------
+const SW = {
+  "":     {n:"Nenhum", p:0, c:0},
+  "8":    {n:"Switch 8 portas", p:8, c:300},
+  "16":   {n:"Switch 16 portas", p:16, c:600},
+  "24":   {n:"Switch 24 portas", p:24, c:1100},
+  "48":   {n:"Switch 48 portas", p:48, c:2400},
+  "8poe": {n:"Switch PoE 8 portas", p:8, c:900, poe:true},
+  "16poe":{n:"Switch PoE 16 portas", p:16, c:1600, poe:true}
+};
+const AP = {c:700, cap:30};
+const CABO_POR_PONTO = 40;
+
+// ---------- Ambientes da escola fictícia ----------
+const AMB = [
+  {k:"lab",  nome:"Laboratório de informática", cabo:21, wifi:0},
+  {k:"sec",  nome:"Secretaria e direção", cabo:4, wifi:2},
+  {k:"prof", nome:"Sala dos professores", cabo:2, wifi:15},
+  {k:"bib",  nome:"Biblioteca", cabo:3, wifi:30},
+  {k:"srv",  nome:"Servidores", cabo:3, wifi:0},
+  {k:"imp",  nome:"Impressoras", cabo:3, wifi:0},
+  {k:"cam",  nome:"Câmeras", cabo:6, wifi:0, poe:true},
+  {k:"vis",  nome:"Visitantes", cabo:0, wifi:40}
+];
+const AMBK = Object.fromEntries(AMB.map(a=>[a.k,a]));
+const DESTINOS = [...AMB.map(a=>a.k), "internet"];
+const nomeDe = k => k==="internet" ? "Internet" : AMBK[k].nome;
+
+// ---------- Política de segurança usada na verificação ----------
+// proibido: conexões que expõem dados ou equipamentos. necessario: sem elas a escola não funciona.
+const PROIBIDO = [
+  {de:"vis", para:"*", sev:"erro", msg:"Visitantes conseguem iniciar conexão com a rede interna.", dica:"Visitantes só precisam de internet. Qualquer outro acesso abre a porta para quem está no pátio com o celular."},
+  {de:"lab", para:"sec", sev:"erro", msg:"O laboratório dos alunos alcança a secretaria.", dica:"Na secretaria estão dados pessoais de alunos e famílias (LGPD). Alunos não precisam chegar lá."},
+  {de:"bib", para:"sec", sev:"erro", msg:"A biblioteca alcança a secretaria.", dica:"Os computadores da biblioteca são de uso público. Bloqueie o acesso à secretaria."},
+  {de:"*", para:"cam", exceto:["sec"], sev:"aviso", msg:"Mais ambientes do que o necessário alcançam as câmeras.", dica:"Só a direção precisa ver as imagens. Câmeras com acesso livre são um alvo conhecido de invasão."},
+  {de:"cam", para:"internet", sev:"aviso", msg:"As câmeras saem para a internet.", dica:"Câmeras quase nunca recebem atualização. Deixe-as falar só com o gravador e com a direção."},
+  {de:"lab", para:"srv", sev:"aviso", msg:"O laboratório alcança os servidores.", dica:"Pode ser aceitável para salvar trabalhos no servidor de arquivos, mas lá também está o sistema de notas. Justifique no relatório."}
+];
+const NECESSARIO = [
+  ["lab","internet"],["sec","internet"],["prof","internet"],["bib","internet"],["vis","internet"],
+  ["sec","srv"],["prof","srv"],["sec","imp"],["prof","imp"],["sec","cam"]
+];
+
+// ---------- Utilitários de IP ----------
+function ip2n(s){
+  if(typeof s!=="string") return null;
+  const m = s.trim().match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+  if(!m) return null;
+  const o = m.slice(1).map(Number);
+  if(o.some(x=>x>255)) return null;
+  return ((o[0]<<24)>>>0)+(o[1]<<16)+(o[2]<<8)+o[3];
+}
+const n2ip = n => [n>>>24,(n>>>16)&255,(n>>>8)&255,n&255].join(".");
+const mascara = p => p===0 ? 0 : (0xFFFFFFFF << (32-p))>>>0;
+const redeDe = (n,p) => (n & mascara(p))>>>0;
+const broadcastDe = (n,p) => (redeDe(n,p) | (~mascara(p)>>>0))>>>0;
+
+// ---------- Cenário base (rede bem planejada) ----------
+function base(){
+  const v = (id,nome,o3,dhcp)=>({id, nome, rede:`192.168.${o3}.0`, pref:24, gw:`192.168.${o3}.1`, dhcp});
+  return {
+    vlans:[v(10,"LAB",10,true),v(20,"SECRETARIA",20,false),v(30,"PROFESSORES",30,true),v(40,"BIBLIOTECA",40,true),
+           v(50,"SERVIDORES",50,false),v(60,"IMPRESSORAS",60,false),v(70,"CAMERAS",70,false),v(90,"VISITANTES",90,true)],
+    ambVlan:{lab:10,sec:20,prof:30,bib:40,srv:50,imp:60,cam:70,vis:90},
+    equip:{lab:{sw:"24",ap:0},sec:{sw:"8",ap:1},prof:{sw:"8",ap:1},bib:{sw:"8",ap:1},srv:{sw:"8",ap:0},imp:{sw:"8",ap:0},cam:{sw:"8poe",ap:0},vis:{sw:"8",ap:2}},
+    disp:[
+      {nome:"PC-LAB-01", amb:"lab", modo:"dhcp", ip:"", gw:""},
+      {nome:"PC-LAB-02", amb:"lab", modo:"dhcp", ip:"", gw:""},
+      {nome:"PC-SEC-01", amb:"sec", modo:"estatico", ip:"192.168.20.10", gw:"192.168.20.1"},
+      {nome:"PC-DIRECAO", amb:"sec", modo:"estatico", ip:"192.168.20.11", gw:"192.168.20.1"},
+      {nome:"NOTE-PROF-01", amb:"prof", modo:"dhcp", ip:"", gw:""},
+      {nome:"PC-PROF-01", amb:"prof", modo:"estatico", ip:"192.168.30.10", gw:"192.168.30.1"},
+      {nome:"PC-BIB-01", amb:"bib", modo:"estatico", ip:"192.168.40.10", gw:"192.168.40.1"},
+      {nome:"PC-BIB-02", amb:"bib", modo:"estatico", ip:"192.168.40.11", gw:"192.168.40.1"},
+      {nome:"SRV-ARQUIVOS", amb:"srv", modo:"estatico", ip:"192.168.50.10", gw:"192.168.50.1"},
+      {nome:"SRV-NOTAS", amb:"srv", modo:"estatico", ip:"192.168.50.11", gw:"192.168.50.1"},
+      {nome:"IMP-SECRETARIA", amb:"imp", modo:"estatico", ip:"192.168.60.10", gw:"192.168.60.1"},
+      {nome:"IMP-PROFESSORES", amb:"imp", modo:"estatico", ip:"192.168.60.11", gw:"192.168.60.1"},
+      {nome:"CAM-PATIO", amb:"cam", modo:"estatico", ip:"192.168.70.10", gw:"192.168.70.1"},
+      {nome:"GRAVADOR-NVR", amb:"cam", modo:"estatico", ip:"192.168.70.5", gw:"192.168.70.1"},
+      {nome:"CELULAR-VISITANTE", amb:"vis", modo:"dhcp", ip:"", gw:""}
+    ],
+    fw:Object.fromEntries(NECESSARIO.map(([a,b])=>[`${a}>${b}`,true]))
+  };
+}
+const achar = (s,nome) => s.disp.find(d=>d.nome===nome);
+const vlanCfg = (s,id) => s.vlans.find(v=>v.id===id);
+
+const MISSOES = [
+  {id:"m1", titulo:"Missão 1 · Conflito na biblioteca",
+   texto:"A bibliotecária reclama: “um dos computadores perde a rede toda hora, e às vezes é o outro”. Descubra o que está errado e corrija.",
+   meta:"Zerar os erros. Depois teste o ping de PC-BIB-01 para a Internet.",
+   montar(){ const s=base(); achar(s,"PC-BIB-02").ip="192.168.40.10"; return s; }},
+  {id:"m2", titulo:"Missão 2 · A impressora que ninguém acha",
+   texto:"A impressora da secretaria foi trocada no fim de semana. Desde então ninguém consegue imprimir nela.",
+   meta:"Zerar os erros. Teste o ping de PC-SEC-01 para IMP-SECRETARIA.",
+   montar(){ const s=base(); const d=achar(s,"IMP-SECRETARIA"); d.ip="192.168.20.50"; d.gw=""; return s; }},
+  {id:"m3", titulo:"Missão 3 · Visitantes no servidor",
+   texto:"Na reunião de pais, um visitante conectado no Wi-Fi conseguiu abrir a pasta compartilhada da secretaria. A direção pediu uma correção urgente.",
+   meta:"Zerar os erros. O ping de CELULAR-VISITANTE para SRV-NOTAS precisa falhar, e para a Internet precisa funcionar.",
+   montar(){ const s=base(); s.ambVlan.vis=20; vlanCfg(s,20).dhcp=true; s.fw["vis>srv"]=true; return s; }},
+  {id:"m4", titulo:"Missão 4 · Equipamentos para a reforma",
+   texto:"Com a reforma, o laboratório passou a ter 20 computadores e a sala dos professores ganhou notebooks. A lista de compras foi feita às pressas.",
+   meta:"Zerar os erros e os avisos de equipamento, gastando o mínimo possível.",
+   montar(){ const s=base(); s.equip.lab.sw="8"; s.equip.prof.ap=0; s.equip.cam.sw="8"; return s; }},
+  {id:"m5", titulo:"Missão 5 · Laboratório sem internet",
+   texto:"Segunda-feira cedo, nenhum computador do laboratório navega. A tela mostra o endereço 169.254.x.x.",
+   meta:"Zerar os erros. Teste o ping de PC-LAB-01 para a Internet.",
+   montar(){ const s=base(); vlanCfg(s,10).dhcp=false; delete s.fw["lab>internet"]; return s; }},
+  {id:"livre", titulo:"Projeto do zero",
+   texto:"A escola vai ganhar rede nova. Você é a equipe de infraestrutura: crie as VLANs, escolha os equipamentos, configure os endereços e as regras do firewall.",
+   meta:"Zerar os erros e explicar no relatório cada aviso que decidir manter.",
+   montar(){
+     const s=base();
+     s.vlans=[]; s.ambVlan={}; s.fw={};
+     for(const k in s.equip) s.equip[k]={sw:"",ap:0};
+     s.disp.forEach(d=>{ if(d.modo==="estatico"){ d.ip=""; d.gw=""; } });
+     return s;
+   }}
+];
+
+// ---------- Estado ----------
+let missao = MISSOES[0];
+let S = missao.montar();
+let inicial = null;      // problemas no início da missão
+let ultimos = null;      // problemas da última verificação
+let verificacoes = 0, dicasUsadas = 0, pings = 0;
+const dicaNivel = {};
+
+const CHAVE = "rede-da-escola-v1";
+function salvar(){
+  try{ localStorage.setItem(CHAVE, JSON.stringify({missao:missao.id,S,verificacoes,dicasUsadas,pings,aluno:$("#aluno").value})); }catch(e){}
+}
+function carregar(){
+  try{
+    const j = JSON.parse(localStorage.getItem(CHAVE)||"null");
+    if(j && j.S){ missao = MISSOES.find(m=>m.id===j.missao)||MISSOES[0]; S=j.S; verificacoes=j.verificacoes||0; dicasUsadas=j.dicasUsadas||0; pings=j.pings||0; $("#aluno").value=j.aluno||""; return true; }
+  }catch(e){}
+  return false;
+}
+const $ = q => document.querySelector(q);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// ---------- Endereço efetivo de cada dispositivo ----------
+function efetivo(s,d){
+  const v = vlanCfg(s, s.ambVlan[d.amb]);
+  if(d.modo==="dhcp"){
+    if(!v || !v.dhcp) return {ip:null, gw:null, apipa:true};
+    const r = ip2n(v.rede); if(r===null) return {ip:null,gw:null,apipa:true};
+    const irmaos = s.disp.filter(x=>x.modo==="dhcp" && s.ambVlan[x.amb]===v.id);
+    return {ip: r+100+irmaos.indexOf(d), gw: ip2n(v.gw), dhcp:true};
+  }
+  return {ip: ip2n(d.ip), gw: ip2n(d.gw)};
+}
+
+// ---------- Verificação ----------
+function verificar(s){
+  const P = [];
+  const add = (sev, area, onde, msg, dicas) => P.push({sev, area, onde, msg, dicas, chave:`${area}|${onde}|${msg}`});
+  // VLANs
+  const ids = new Set();
+  s.vlans.forEach(v=>{
+    const onde = `VLAN ${v.id}`;
+    if(!Number.isInteger(v.id) || v.id<1 || v.id>4094) add("erro","VLAN",onde,"Número de VLAN inválido.",["O número de uma VLAN vai de 1 a 4094."]);
+    if(ids.has(v.id)) add("erro","VLAN",onde,"Há duas linhas com o mesmo número de VLAN.",["Cada VLAN precisa de um número único."]);
+    ids.add(v.id);
+    if(v.id===1) add("aviso","VLAN",onde,"A VLAN 1 é a VLAN padrão de todo switch.",["Qualquer porta esquecida sem configuração cai na VLAN 1. Use outro número para os usuários."]);
+    const r = ip2n(v.rede), g = ip2n(v.gw), p = Number(v.pref);
+    if(!(p>=16 && p<=30)) { add("erro","Endereçamento",onde,"Prefixo (máscara) fora do intervalo /16 a /30.",["Para salas de aula, /24 (255.255.255.0) dá 254 endereços e é o mais usado."]); return; }
+    if(r===null) { add("erro","Endereçamento",onde,"Endereço de rede inválido.",["Escreva quatro números de 0 a 255 separados por ponto, como 192.168.10.0."]); return; }
+    if(redeDe(r,p)!==r) add("erro","Endereçamento",onde,`O endereço ${v.rede} não é o início de uma rede /${p}.`,[`Com /${p}, a rede começa em ${n2ip(redeDe(r,p))}.`]);
+    if(g===null) add("erro","Gateway",onde,"A VLAN não tem gateway.",["O gateway é o endereço do roteador nesta rede. Sem ele, ninguém sai da VLAN.","Costuma ser o primeiro endereço utilizável, como x.x.x.1."]);
+    else if(redeDe(g,p)!==redeDe(r,p)) add("erro","Gateway",onde,`O gateway ${v.gw} está fora da rede ${n2ip(redeDe(r,p))}/${p}.`,["O roteador precisa ter um endereço dentro da própria rede da VLAN."]);
+    else if(g===redeDe(r,p) || g===broadcastDe(r,p)) add("erro","Gateway",onde,"O gateway usa o endereço da rede ou de broadcast.",["O primeiro e o último endereço de cada rede são reservados."]);
+  });
+  // Redes sobrepostas
+  for(let i=0;i<s.vlans.length;i++) for(let j=i+1;j<s.vlans.length;j++){
+    const a=s.vlans[i], b=s.vlans[j], ra=ip2n(a.rede), rb=ip2n(b.rede);
+    if(ra===null||rb===null) continue;
+    const p = Math.min(Number(a.pref),Number(b.pref));
+    if(redeDe(ra,p)===redeDe(rb,p)) add("erro","Endereçamento",`VLAN ${a.id} e VLAN ${b.id}`,"As duas VLANs usam a mesma faixa de endereços.",["O roteador não sabe para qual VLAN mandar um pacote se as redes se repetem.","Troque o terceiro número: por exemplo 192.168.10.0 e 192.168.20.0."]);
+  }
+  // Ambientes: VLAN, segmentação e equipamentos
+  const porVlan = {};
+  AMB.forEach(a=>{
+    const id = s.ambVlan[a.k];
+    if(id===undefined || id===null || id===""){ add("erro","VLAN",a.nome,"O ambiente não está em nenhuma VLAN.",["Escolha uma VLAN no quadro do ambiente."]); }
+    else if(!vlanCfg(s,id)) add("erro","VLAN",a.nome,`A VLAN ${id} não existe na tabela.`,["Crie a VLAN na seção 1 ou escolha outra."]);
+    else (porVlan[id] ||= []).push(a.k);
+    const e = s.equip[a.k] || {sw:"",ap:0};
+    const sw = SW[e.sw] || SW[""];
+    const aps = Math.max(0, Number(e.ap)||0);
+    const portas = a.cabo + aps + (a.cabo+aps>0 ? 1 : 0);
+    if(portas>0 && sw.p===0) add("erro","Equipamento",a.nome,"O ambiente não tem switch.",[`São ${a.cabo} pontos de cabo e ${aps} access point(s), mais 1 porta para ligar no switch central.`]);
+    else if(sw.p < portas) add("erro","Equipamento",a.nome,`Faltam portas: precisa de ${portas}, o switch tem ${sw.p}.`,["Conte os pontos de cabo, os access points e 1 porta de ligação (uplink) com o switch central."]);
+    else if(sw.p >= portas*2 && sw.p>8) add("aviso","Equipamento",a.nome,`O switch tem ${sw.p} portas para ${portas} necessárias.`,["Sobra é bom para crescer, mas talvez um modelo menor resolva com custo menor."]);
+    if(a.poe && !sw.poe) add("aviso","Equipamento",a.nome,"Câmeras precisam de energia pelo cabo (PoE).",["Sem um switch PoE, cada câmera precisa de uma fonte na tomada, no alto do muro."]);
+    if(a.wifi>0 && aps===0) add("erro","Equipamento",a.nome,`Há ${a.wifi} pessoas usando Wi-Fi e nenhum access point.`,["Notebooks e celulares não têm cabo: sem access point eles não se conectam."]);
+    else if(a.wifi>0 && aps*AP.cap < a.wifi) add("aviso","Equipamento",a.nome,`${aps} access point(s) para ${a.wifi} pessoas.`,[`Cada access point atende bem cerca de ${AP.cap} pessoas ao mesmo tempo.`]);
+  });
+  // Segmentação: ambientes que dividem a mesma VLAN
+  Object.entries(porVlan).forEach(([id,ks])=>{
+    if(ks.length<2) return;
+    const nomes = ks.map(nomeDe).join(", ");
+    const tem = k => ks.includes(k);
+    if(tem("vis")) add("erro","Segurança",`VLAN ${id}`,`Visitantes estão na mesma VLAN que: ${ks.filter(k=>k!=="vis").map(nomeDe).join(", ")}.`,["Na mesma VLAN não existe firewall no caminho: o visitante enxerga tudo o que estiver ali.","Dê aos visitantes uma VLAN só deles."]);
+    else if((tem("lab")||tem("bib")) && (tem("sec")||tem("srv"))) add("erro","Segurança",`VLAN ${id}`,`Computadores de uso dos alunos dividem a VLAN com dados sensíveis (${nomes}).`,["Separe o que é de uso público do que guarda dados pessoais e notas."]);
+    else if(tem("cam")) add("aviso","Segurança",`VLAN ${id}`,`As câmeras dividem a VLAN com: ${nomes}.`,["Câmeras costumam ter falhas de segurança. Isole-as numa VLAN própria."]);
+    else add("aviso","Segurança",`VLAN ${id}`,`Ambientes diferentes na mesma VLAN: ${nomes}.`,["Funciona, mas um problema em um ambiente (vírus, laço de cabo) atinge os outros."]);
+  });
+  // Dispositivos
+  const usados = {};
+  s.disp.forEach(d=>{
+    const v = vlanCfg(s, s.ambVlan[d.amb]);
+    const ef = efetivo(s,d);
+    if(d.modo==="dhcp"){
+      if(ef.apipa) add("erro","DHCP",d.nome,"O dispositivo pede endereço automático (DHCP), mas a VLAN não tem DHCP.",["Sem resposta do DHCP, o computador se dá um endereço 169.254.x.x e não sai da própria máquina.","Ative o DHCP na VLAN ou configure um IP fixo."]);
+    } else if(v){
+      const r = ip2n(v.rede), p = Number(v.pref), g = ip2n(v.gw);
+      if(!d.ip) add("erro","Endereçamento",d.nome,"Sem endereço IP.",["Dispositivos com IP fixo precisam de um endereço dentro da rede da VLAN."]);
+      else if(ef.ip===null) add("erro","Endereçamento",d.nome,`“${d.ip}” não é um endereço IP válido.`,["Quatro números de 0 a 255 separados por ponto."]);
+      else if(r!==null && redeDe(ef.ip,p)!==redeDe(r,p)) add("erro","Endereçamento",d.nome,`O IP ${d.ip} está fora da rede da VLAN ${v.id} (${v.rede}/${p}).`,["O dispositivo está fisicamente neste ambiente, então o endereço precisa ser da rede deste ambiente.","Compare os três primeiros números do IP com os da rede da VLAN."]);
+      else if(r!==null && (ef.ip===redeDe(r,p) || ef.ip===broadcastDe(r,p))) add("erro","Endereçamento",d.nome,"O IP é o endereço da rede ou de broadcast.",["Esses dois endereços são reservados e não podem ir para dispositivos."]);
+      else if(g!==null && ef.ip===g) add("erro","Conflito de IP",d.nome,"O dispositivo usa o mesmo IP do gateway.",["Agora há dois equipamentos respondendo como roteador. A VLAN inteira para de navegar."]);
+      else if(v.dhcp && r!==null && ef.ip>=r+100 && ef.ip<=r+199) add("aviso","DHCP",d.nome,`O IP fixo ${d.ip} está dentro da faixa que o DHCP distribui (.100 a .199).`,["Um dia o DHCP pode entregar esse mesmo número para outro aparelho e criar um conflito."]);
+      if(d.ip){
+        if(!d.gw) add("erro","Gateway",d.nome,"Sem gateway configurado.",["Sem gateway, o dispositivo só conversa com quem está na mesma VLAN.","Use o endereço do roteador na VLAN do ambiente."]);
+        else if(ef.gw===null) add("erro","Gateway",d.nome,`“${d.gw}” não é um gateway válido.`,["Escreva o gateway no formato x.x.x.x."]);
+        else if(g!==null && ef.gw!==g) add("erro","Gateway",d.nome,`O gateway ${d.gw} não é o roteador da VLAN ${v.id} (${v.gw}).`,["O dispositivo manda tudo que é de fora para um endereço onde não existe roteador."]);
+      }
+    }
+    if(ef.ip!==null && ef.ip!==undefined) (usados[ef.ip] ||= []).push(d.nome);
+  });
+  Object.entries(usados).forEach(([n,nomes])=>{
+    if(nomes.length>1) add("erro","Conflito de IP",nomes.join(" e "),`Conflito de IP: ${n2ip(Number(n))} está em ${nomes.length} dispositivos.`,["Dois aparelhos com o mesmo endereço disputam as respostas: a rede cai e volta nos dois.","Dê um número diferente a cada um e anote numa planilha de endereços."]);
+  });
+  // Firewall
+  const fw = (a,b) => !!s.fw[`${a}>${b}`];
+  PROIBIDO.forEach(r=>{
+    const origens = r.de==="*" ? AMB.map(a=>a.k).filter(k=>!(r.exceto||[]).includes(k) && k!==r.para) : [r.de];
+    const destinos = r.para==="*" ? AMB.map(a=>a.k).filter(k=>k!==r.de) : [r.para];
+    const viol = [];
+    origens.forEach(o=>destinos.forEach(d=>{ if(fw(o,d)) viol.push(`${nomeDe(o)} → ${nomeDe(d)}`); }));
+    if(viol.length) add(r.sev,"Segurança","Firewall",`${r.msg} (${viol.join("; ")})`,[r.dica]);
+  });
+  NECESSARIO.forEach(([a,b])=>{ if(!fw(a,b)) add("aviso","Firewall",`${nomeDe(a)} → ${nomeDe(b)}`,"Regra bloqueia um acesso de que a escola precisa.",[`Sem essa regra, ${nomeDe(a)} não chega em ${nomeDe(b)}.`]); });
+  return P;
+}
+
+// ---------- Ping ----------
+function ping(s, oNome, dNome){
+  const passos = [];
+  const ok = t => passos.push({ok:true,t}), falha = t => { passos.push({ok:false,t}); return {sucesso:false,passos}; };
+  const o = achar(s,oNome); const vo = vlanCfg(s, s.ambVlan[o.amb]); const eo = efetivo(s,o);
+  if(!vo) return falha(`${o.nome}: o ambiente não está em nenhuma VLAN.`);
+  if(eo.ip===null) return falha(eo.apipa ? `${o.nome}: sem resposta do DHCP, ficou com 169.254.x.x.` : `${o.nome}: sem endereço IP válido.`);
+  const po = Number(vo.pref), ro = ip2n(vo.rede);
+  if(ro===null || redeDe(eo.ip,po)!==redeDe(ro,po)) return falha(`${o.nome} (${n2ip(eo.ip)}): o endereço não pertence à rede da VLAN ${vo.id}. Nada sai daqui.`);
+  const conflitos = s.disp.filter(x=>x!==o && efetivo(s,x).ip===eo.ip);
+  if(conflitos.length) passos.push({ok:false,t:`Atenção: ${n2ip(eo.ip)} também está em ${conflitos.map(c=>c.nome).join(", ")}. As respostas podem ir para o aparelho errado.`});
+  ok(`${o.nome} (${n2ip(eo.ip)}) → switch do ambiente ${nomeDe(o.amb)} → switch central (VLAN ${vo.id})`);
+  const gwOk = (v,e) => e.gw!==null && e.gw!==undefined && e.gw===ip2n(v.gw);
+  if(dNome==="internet"){
+    if(!gwOk(vo,eo)) return falha(`${o.nome}: gateway ausente ou errado. O pacote para a internet não tem para onde ir.`);
+    ok(`Roteador/firewall recebe pelo gateway ${vo.gw}`);
+    if(!s.fw[`${o.amb}>internet`]) return falha(`Firewall bloqueou: ${nomeDe(o.amb)} → Internet não está liberado.`);
+    ok("Firewall liberou → provedor → Internet");
+    ok("Resposta voltou. Ping OK.");
+    return {sucesso:true,passos};
+  }
+  const d = achar(s,dNome); const vd = vlanCfg(s, s.ambVlan[d.amb]); const ed = efetivo(s,d);
+  if(!vd) return falha(`${d.nome}: o ambiente não está em nenhuma VLAN.`);
+  if(ed.ip===null) return falha(`${d.nome} não tem endereço válido, então não há para onde enviar.`);
+  if(vo.id===vd.id){
+    if(redeDe(ed.ip,po)!==redeDe(ro,po)) return falha(`${d.nome} (${n2ip(ed.ip)}) está na mesma VLAN, mas com IP de outra rede. Não responde.`);
+    const dup = s.disp.filter(x=>x!==d && efetivo(s,x).ip===ed.ip);
+    if(dup.length) return falha(`Conflito: ${n2ip(ed.ip)} está em ${d.nome} e ${dup.map(x=>x.nome).join(", ")}. Responde quem chegar primeiro.`);
+    ok(`Mesma VLAN ${vo.id}: entrega direta, sem passar pelo firewall`);
+    ok(`${d.nome} (${n2ip(ed.ip)}) respondeu. Ping OK.`);
+    return {sucesso:true,passos};
+  }
+  if(!gwOk(vo,eo)) return falha(`${o.nome}: o destino é de outra rede e o gateway está ausente ou errado.`);
+  ok(`Destino em outra rede: pacote vai para o gateway ${vo.gw}`);
+  if(!s.fw[`${o.amb}>${d.amb}`]) return falha(`Firewall bloqueou: ${nomeDe(o.amb)} → ${nomeDe(d.amb)} não está liberado.`);
+  ok(`Firewall liberou e encaminhou para a VLAN ${vd.id}`);
+  const pd = Number(vd.pref), rd = ip2n(vd.rede);
+  if(rd===null || redeDe(ed.ip,pd)!==redeDe(rd,pd)) return falha(`${d.nome} (${n2ip(ed.ip)}) não está na rede da VLAN ${vd.id}. O roteador não o encontra.`);
+  const dup = s.disp.filter(x=>x!==d && efetivo(s,x).ip===ed.ip);
+  if(dup.length) return falha(`Conflito de IP no destino: ${n2ip(ed.ip)} também está em ${dup.map(x=>x.nome).join(", ")}.`);
+  ok(`${d.nome} (${n2ip(ed.ip)}) recebeu o pedido`);
+  if(!gwOk(vd,ed)) return falha(`${d.nome} recebeu, mas não consegue responder: o gateway dele está ausente ou errado. A resposta também precisa de caminho de volta!`);
+  ok(`Resposta volta pelo gateway ${vd.gw}. Ping OK.`);
+  return {sucesso:true,passos};
+}
+
+// ---------- Desenho ----------
+const PALETA = ["#2f81f7","#1a7f37","#bf3989","#d4a72c","#8250df","#0e8a8a","#e16f24","#57606a","#cf222e","#3b5bdb"];
+const corVlan = id => { if(id===undefined||id===null||id==="") return "#8c959f"; const i=S.vlans.findIndex(v=>v.id===id); return PALETA[(i<0?0:i)%PALETA.length]; };
+
+function desenhar(){
+  const W=960, svg=$("#diag");
+  const cont = {};
+  (ultimos||[]).forEach(p=>{
+    const m = /^VLAN (\d+)$/.exec(p.onde);
+    const alvo = m ? AMB.filter(a=>S.ambVlan[a.k]===Number(m[1])) :
+      AMB.filter(a=>p.onde===a.nome || s_disp(p.onde)===a.k || p.onde.split(" e ").some(n=>s_disp(n)===a.k)).slice(0,1);
+    alvo.forEach(a=>{ cont[a.k] ||= {erro:0,aviso:0}; cont[a.k][p.sev]++; });
+  });
+  let h = "";
+  // Internet e roteador
+  h += `<g><ellipse cx="480" cy="34" rx="70" ry="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--muted)"/><text x="480" y="39" text-anchor="middle" font-size="15" font-weight="600">Internet</text></g>`;
+  h += `<line x1="480" y1="58" x2="480" y2="86" stroke="#8c959f" stroke-width="2"/>`;
+  h += `<rect x="390" y="86" width="180" height="40" rx="8" fill="none" stroke="#8c959f" stroke-width="1.5"/><text x="480" y="111" text-anchor="middle" font-size="14" font-weight="600">Roteador / firewall</text>`;
+  h += `<line x1="480" y1="126" x2="480" y2="150" stroke="#8c959f" stroke-width="2"/>`;
+  h += `<rect x="390" y="150" width="180" height="40" rx="8" fill="none" stroke="#8c959f" stroke-width="1.5"/><text x="480" y="175" text-anchor="middle" font-size="14" font-weight="600">Switch central</text>`;
+  const bw=210, bh=92, gx=(W-4*bw)/5;
+  let linhas="", caixas="";
+  AMB.forEach((a,i)=>{
+    const col=i%4, lin=Math.floor(i/4);
+    const x=gx+col*(bw+gx), y=226+lin*(bh+20);
+    const id=S.ambVlan[a.k], v=vlanCfg(S,id), c=corVlan(id);
+    const e=S.equip[a.k]||{sw:"",ap:0};
+    // a 2ª fileira desce pelo corredor entre as caixas para não cruzar a 1ª
+    const cx=x+bw/2, xg=x-gx/2, yc=y-10;
+    linhas += lin===0 ? `<path d="M480 190 L480 206 L${cx} 206 L${cx} ${y}" fill="none" stroke="${c}" stroke-width="2" opacity=".8"/>`
+      : `<path d="M480 190 L480 206 L${xg} 206 L${xg} ${yc} L${cx} ${yc} L${cx} ${y}" fill="none" stroke="${c}" stroke-width="2" opacity=".8"/>`;
+    caixas += `<g class="box" data-k="${a.k}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${c}" fill-opacity=".12" stroke="${c}" stroke-width="2"/>`;
+    caixas += `<text x="${x+10}" y="${y+22}" font-size="13.5" font-weight="700">${esc(a.nome)}</text>`;
+    caixas += `<text class="sub" x="${x+10}" y="${y+42}" font-size="12">${v?`VLAN ${v.id} · ${esc(v.rede)}/${esc(v.pref)}`:"sem VLAN"}</text>`;
+    caixas += `<text class="sub" x="${x+10}" y="${y+60}" font-size="12">${e.sw?esc(SW[e.sw].n):"sem switch"}${Number(e.ap)?` · ${Number(e.ap)} AP`:""}</text>`;
+    caixas += `<text class="sub" x="${x+10}" y="${y+78}" font-size="12">${a.cabo} cabo · ${a.wifi} Wi-Fi</text>`;
+    const ct = cont[a.k];
+    if(ct){
+      let bx=x+bw-12;
+      if(ct.aviso){ caixas+=`<circle cx="${bx}" cy="${y+14}" r="11" fill="#9a6700"/><text x="${bx}" y="${y+18.5}" text-anchor="middle" font-size="12" font-weight="700" style="fill:#fff">${ct.aviso}</text>`; bx-=26; }
+      if(ct.erro){ caixas+=`<circle cx="${bx}" cy="${y+14}" r="11" fill="#cf222e"/><text x="${bx}" y="${y+18.5}" text-anchor="middle" font-size="12" font-weight="700" style="fill:#fff">${ct.erro}</text>`; }
+    }
+    caixas += `</g>`;
+  });
+  h += linhas + caixas;
+  svg.innerHTML = h;
+  svg.querySelectorAll(".box").forEach(g=>g.addEventListener("click",()=>{ const el=document.getElementById("amb-"+g.dataset.k); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); }));
+}
+function s_disp(nome){ const d=S.disp.find(x=>x.nome===nome); return d?d.amb:null; }
+
+// ---------- Formulários ----------
+function render(){
+  renderMissao(); renderVlans(); renderAmbientes(); renderFw(); renderPing(); desenhar(); renderCusto();
+}
+function renderMissao(){
+  $("#missaoTexto").innerHTML = `<h2>${esc(missao.titulo)}</h2><p>${esc(missao.texto)}</p><p><b>Objetivo:</b> ${esc(missao.meta)}</p>`;
+}
+function renderVlans(){
+  let h = `<tr><th>VLAN</th><th>Nome</th><th>Rede</th><th>Prefixo</th><th>Gateway</th><th>DHCP</th><th></th></tr>`;
+  S.vlans.forEach((v,i)=>{
+    h += `<tr><td><input class="num" type="number" min="1" max="4094" data-v="${i}" data-f="id" value="${esc(v.id)}" aria-label="Número da VLAN"></td>
+      <td><input data-v="${i}" data-f="nome" value="${esc(v.nome)}" style="width:9em" aria-label="Nome da VLAN"></td>
+      <td><input class="ip" data-v="${i}" data-f="rede" value="${esc(v.rede)}" aria-label="Rede"></td>
+      <td><select data-v="${i}" data-f="pref" aria-label="Prefixo">${[16,20,22,23,24,25,26,27,28,29,30].map(p=>`<option ${Number(v.pref)===p?"selected":""}>${p}</option>`).join("")}</select></td>
+      <td><input class="ip" data-v="${i}" data-f="gw" value="${esc(v.gw)}" aria-label="Gateway"></td>
+      <td><input type="checkbox" data-v="${i}" data-f="dhcp" ${v.dhcp?"checked":""} aria-label="DHCP ativo"></td>
+      <td><button data-del="${i}" aria-label="Remover VLAN">Remover</button></td></tr>`;
+  });
+  if(!S.vlans.length) h += `<tr><td colspan="7" class="muted">Nenhuma VLAN criada.</td></tr>`;
+  $("#tabVlans").innerHTML = h;
+}
+function opcoesVlan(sel){
+  return `<option value="">—</option>` + S.vlans.map(v=>`<option value="${esc(v.id)}" ${v.id===sel?"selected":""}>VLAN ${esc(v.id)} · ${esc(v.nome)}</option>`).join("");
+}
+function renderAmbientes(){
+  $("#ambientes").innerHTML = AMB.map(a=>{
+    const e = S.equip[a.k]||{sw:"",ap:0};
+    const devs = S.disp.filter(d=>d.amb===a.k).map(d=>{
+      const i = S.disp.indexOf(d), ef = efetivo(S,d);
+      const auto = d.modo==="dhcp" ? `<span class="muted" style="font-size:.85rem">${ef.apipa?"sem resposta do DHCP (169.254.x.x)":`recebe ${n2ip(ef.ip)}, gateway ${n2ip(ef.gw)}`}</span>` :
+        `<div class="row"><label>IP <input class="ip" data-d="${i}" data-f="ip" value="${esc(d.ip)}" placeholder="x.x.x.x"></label>
+         <label>Gateway <input class="ip" data-d="${i}" data-f="gw" value="${esc(d.gw)}" placeholder="x.x.x.x"></label></div>`;
+      return `<div class="dev"><div class="row"><span class="nome">${esc(d.nome)}</span>
+        <select data-d="${i}" data-f="modo" aria-label="Modo de endereço de ${esc(d.nome)}"><option value="estatico" ${d.modo==="estatico"?"selected":""}>IP fixo</option><option value="dhcp" ${d.modo==="dhcp"?"selected":""}>Automático (DHCP)</option></select></div>${auto}</div>`;
+    }).join("");
+    return `<div class="amb" id="amb-${a.k}" style="--vc:${corVlan(S.ambVlan[a.k])}">
+      <h3>${esc(a.nome)}</h3>
+      <div class="meta">${a.cabo} pontos de cabo · ${a.wifi} pessoas no Wi-Fi${a.poe?" · equipamentos alimentados pelo cabo":""}</div>
+      <div class="row"><label>VLAN <select data-a="${a.k}" data-f="vlan">${opcoesVlan(S.ambVlan[a.k])}</select></label></div>
+      <div class="row" style="margin-top:6px"><label>Switch <select data-a="${a.k}" data-f="sw">${Object.entries(SW).map(([k,s])=>`<option value="${k}" ${e.sw===k?"selected":""}>${s.n}</option>`).join("")}</select></label>
+      <label>Access points <input class="num" type="number" min="0" max="10" data-a="${a.k}" data-f="ap" value="${Number(e.ap)||0}"></label></div>
+      ${devs}</div>`;
+  }).join("");
+}
+function renderFw(){
+  let h = `<tr><th class="r">De ↓ / Para →</th>${DESTINOS.map(d=>`<th>${esc(d==="internet"?"Internet":AMBK[d].nome.split(" ")[0])}</th>`).join("")}</tr>`;
+  AMB.forEach(a=>{
+    h += `<tr><th class="r">${esc(a.nome)}</th>` + DESTINOS.map(d=> d===a.k ? `<td class="muted">—</td>` :
+      `<td><input type="checkbox" data-fw="${a.k}>${d}" ${S.fw[`${a.k}>${d}`]?"checked":""} aria-label="${esc(a.nome)} para ${esc(nomeDe(d))}"></td>`).join("") + `</tr>`;
+  });
+  $("#tabFw").innerHTML = h;
+}
+function renderPing(){
+  const o=$("#pingO"), d=$("#pingD"), vo=o.value, vd=d.value;
+  const ops = S.disp.map(x=>`<option value="${esc(x.nome)}">${esc(x.nome)}</option>`).join("");
+  o.innerHTML = ops; d.innerHTML = `<option value="internet">Internet</option>` + ops;
+  if(vo) o.value=vo; if(vd) d.value=vd;
+}
+function renderCusto(){
+  let total=0, linhas=[];
+  AMB.forEach(a=>{ const e=S.equip[a.k]||{sw:"",ap:0}; const c=(SW[e.sw]||SW[""]).c + (Number(e.ap)||0)*AP.c + a.cabo*CABO_POR_PONTO; total+=c; });
+  $("#custo").innerHTML = `<b>Estimativa de equipamentos:</b> R$ ${total.toLocaleString("pt-BR")} <span class="muted">(preços fictícios: switches, access points a R$ ${AP.c} e cabeamento a R$ ${CABO_POR_PONTO} por ponto)</span>`;
+}
+function renderProblemas(){
+  const P = ultimos, div = $("#problemas");
+  const erros = P.filter(p=>p.sev==="erro").length, avisos = P.length-erros;
+  let h = `<p><b>${erros}</b> erro(s) e <b>${avisos}</b> aviso(s). Verificações feitas: ${verificacoes}.</p>`;
+  if(erros===0) h += `<div class="ok-banner"><b>Nenhum erro!</b> ${avisos?"Ainda há avisos: decida se corrige ou justifique no relatório.":"Rede sem erros nem avisos."} Gere o relatório final.</div>`;
+  P.forEach((p,i)=>{
+    const n = dicaNivel[p.chave]||0;
+    const dicas = p.dicas.slice(0,n).map(t=>`<p class="dica">${esc(t)}</p>`).join("");
+    h += `<div class="prob ${p.sev}"><span class="tag">${p.sev==="erro"?"ERRO":"AVISO"}</span><b>${esc(p.area)}</b> · ${esc(p.onde)}<br>${esc(p.msg)}${dicas}
+      ${n<p.dicas.length?`<div><button data-dica="${i}" style="margin-top:6px">Ver dica ${n+1} de ${p.dicas.length}</button></div>`:""}</div>`;
+  });
+  div.innerHTML = h;
+}
+
+// ---------- Eventos ----------
+document.addEventListener("change", ev=>{
+  const t = ev.target, f = t.dataset.f;
+  if(t.dataset.v!==undefined){
+    const v = S.vlans[Number(t.dataset.v)];
+    if(f==="id"){ const old=v.id; v.id=Number(t.value); for(const k in S.ambVlan) if(S.ambVlan[k]===old) S.ambVlan[k]=v.id; renderAmbientes(); }
+    else if(f==="dhcp") v.dhcp=t.checked; else if(f==="pref") v.pref=Number(t.value); else v[f]=t.value.trim();
+    renderAmbientes();
+  } else if(t.dataset.a){
+    const k=t.dataset.a; S.equip[k] ||= {sw:"",ap:0};
+    if(f==="vlan") S.ambVlan[k] = t.value===""?"":Number(t.value);
+    else if(f==="sw") S.equip[k].sw=t.value; else if(f==="ap") S.equip[k].ap=Math.max(0,Number(t.value)||0);
+    if(f==="vlan") renderAmbientes();
+    renderCusto();
+  } else if(t.dataset.d!==undefined){
+    const d = S.disp[Number(t.dataset.d)];
+    if(f==="modo"){ d.modo=t.value; renderAmbientes(); } else d[f]=t.value.trim();
+  } else if(t.dataset.fw){
+    if(t.checked) S.fw[t.dataset.fw]=true; else delete S.fw[t.dataset.fw];
+  } else if(t.id==="selMissao"){
+    if(confirm("Trocar de missão apaga o que você fez nesta. Continuar?")) iniciarMissao(MISSOES.find(m=>m.id===t.value));
+    else t.value = missao.id;
+    return;
+  } else if(t.id==="arqImport"){ importar(t.files[0]); t.value=""; return; }
+  desenhar(); salvar();
+});
+$("#aluno").addEventListener("input", salvar);
+document.addEventListener("click", ev=>{
+  const t=ev.target;
+  if(t.dataset.del!==undefined){ const v=S.vlans.splice(Number(t.dataset.del),1)[0]; for(const k in S.ambVlan) if(S.ambVlan[k]===v.id) S.ambVlan[k]=""; render(); salvar(); }
+  if(t.dataset.dica!==undefined){ const p=ultimos[Number(t.dataset.dica)]; dicaNivel[p.chave]=(dicaNivel[p.chave]||0)+1; dicasUsadas++; renderProblemas(); salvar(); }
+});
+$("#btnAddVlan").onclick = ()=>{
+  const usados = new Set(S.vlans.map(v=>v.id)); let id=10; while(usados.has(id)) id+=10;
+  S.vlans.push({id, nome:"NOVA", rede:"", pref:24, gw:"", dhcp:false}); render(); salvar();
+};
+$("#btnVerificar").onclick = ()=>{ verificacoes++; ultimos=verificar(S); renderProblemas(); desenhar(); salvar(); };
+$("#btnPing").onclick = ()=>{
+  pings++;
+  const r = ping(S, $("#pingO").value, $("#pingD").value);
+  $("#pingRes").innerHTML = `<ul class="hops">${r.passos.map(p=>`<li class="${p.ok?"s":"f"}">${p.ok?"✓":"✗"} ${esc(p.t)}</li>`).join("")}</ul><p><b>${r.sucesso?"Ping OK":"Ping falhou"}</b></p>`;
+  salvar();
+};
+$("#btnReiniciar").onclick = ()=>{ if(confirm("Recomeçar a missão do início?")) iniciarMissao(missao); };
+$("#btnExportar").onclick = ()=>{
+  baixar(`rede-escola-${missao.id}.json`, JSON.stringify({app:"rede-da-escola", versao:1, missao:missao.id, aluno:$("#aluno").value, S}, null, 2), "application/json");
+};
+function importar(arq){
+  if(!arq) return;
+  arq.text().then(t=>{
+    const j = JSON.parse(t);
+    if(j.app!=="rede-da-escola" || !j.S) throw new Error("formato");
+    missao = MISSOES.find(m=>m.id===j.missao)||MISSOES[MISSOES.length-1];
+    S=j.S; $("#aluno").value=j.aluno||""; $("#selMissao").value=missao.id;
+    inicial = verificar(missao.montar()); ultimos=null; $("#problemas").innerHTML=`<p class="muted">Projeto aberto. Clique em <b>Verificar rede</b>.</p>`;
+    render(); salvar();
+  }).catch(()=>alert("Não consegui abrir esse arquivo. Ele precisa ser um projeto salvo por este simulador."));
+}
+$("#btnRelatorio").onclick = ()=>{
+  const atual = verificar(S);
+  const chavesAtual = new Set(atual.map(p=>p.chave));
+  const corrigidos = (inicial||[]).filter(p=>!chavesAtual.has(p.chave));
+  const linhas = [];
+  linhas.push("RELATÓRIO · REDE DA ESCOLA", "", `Missão: ${missao.titulo}`, `Estudante(s): ${$("#aluno").value||"(sem nome)"}`, `Data: ${new Date().toLocaleString("pt-BR")}`,
+    `Verificações: ${verificacoes} · Dicas usadas: ${dicasUsadas} · Testes de ping: ${pings}`, "");
+  linhas.push(`Situação final: ${atual.filter(p=>p.sev==="erro").length} erro(s), ${atual.filter(p=>p.sev==="aviso").length} aviso(s)`, "");
+  linhas.push("O QUE VOCÊ CORRIGIU");
+  if(corrigidos.length) corrigidos.forEach(p=>linhas.push(`- [${p.area}] ${p.onde}: ${p.msg}`, `  Por que importa: ${p.dicas[0]}`)); else linhas.push("- Nada do que havia no início foi corrigido ainda.");
+  linhas.push("", "O QUE AINDA ESTÁ PENDENTE");
+  if(atual.length) atual.forEach(p=>linhas.push(`- ${p.sev.toUpperCase()} [${p.area}] ${p.onde}: ${p.msg}`, `  Dica: ${p.dicas[0]}`)); else linhas.push("- Nada pendente.");
+  linhas.push("", "PLANO DE ENDEREÇAMENTO");
+  S.vlans.forEach(v=>linhas.push(`- VLAN ${v.id} ${v.nome}: rede ${v.rede}/${v.pref}, gateway ${v.gw}, DHCP ${v.dhcp?"sim":"não"} · ambientes: ${AMB.filter(a=>S.ambVlan[a.k]===v.id).map(a=>a.nome).join(", ")||"nenhum"}`));
+  linhas.push("", "REGRAS DO FIREWALL LIBERADAS");
+  Object.keys(S.fw).filter(k=>S.fw[k]).forEach(k=>{ const [a,b]=k.split(">"); linhas.push(`- ${nomeDe(a)} → ${nomeDe(b)}`); });
+  linhas.push("", "JUSTIFICATIVA DOS AVISOS MANTIDOS (preencha)", "- ");
+  baixar(`relatorio-rede-escola-${missao.id}.txt`, linhas.join("\n"), "text/plain");
+};
+function baixar(nome, texto, tipo){
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([texto],{type:tipo+";charset=utf-8"})); a.download=nome;
+  document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+}
+function iniciarMissao(m){
+  missao=m; S=m.montar(); verificacoes=0; dicasUsadas=0; pings=0; ultimos=null;
+  for(const k in dicaNivel) delete dicaNivel[k];
+  inicial = verificar(S);
+  $("#selMissao").value=m.id; $("#pingRes").innerHTML="";
+  $("#problemas").innerHTML=`<p class="muted">Clique em <b>Verificar rede</b>.</p>`;
+  render(); salvar();
+}
+
+// ---------- Início ----------
+$("#selMissao").innerHTML = MISSOES.map(m=>`<option value="${m.id}">${esc(m.titulo)}</option>`).join("");
+if(carregar()){ inicial = verificar(missao.montar()); $("#selMissao").value=missao.id; render(); }
+else iniciarMissao(MISSOES[0]);
+</script>
+</body>
+</html>
