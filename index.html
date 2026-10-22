@@ -365,6 +365,25 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
 
     <article class="case infra-c">
       <div class="meta">
+        <span class="tag">IT-INFRA-018</span>
+        <dl><div><dt>Ambiente</dt><dd>Planta industrial · área de silos</dd></div><div><dt>Tipo</dt><dd>Análise de incidente · Solução em produção</dd></div><div><dt>Quando</dt><dd>Outubro de 2026</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Alarme falso de robô industrial — congestionamento de canal Wi-Fi 2,4 GHz</h3>
+        <p>Quatro robôs industriais (ESP32) na área de silos geravam alarmes recorrentes de "fora da rede" no sistema de monitoramento. Os eventos vinham se repetindo por dias, com avisos de lentidão de ping e perda de pacotes — mesmo com o sinal Wi-Fi ótimo, entre −53 e −58 dBm, e sem qualquer reinicialização da antena.</p>
+        <div class="fields">
+          <div class="field"><h4>O alarme e sua regra</h4><p>O sistema de monitoramento testava a porta de aplicação de cada robô a cada 30 segundos. Dois testes consecutivos sem resposta (1 minuto) abriam um card de "fora da rede". O card só fechava após quatro respostas positivas com menos de quatro mudanças em 30 minutos — regra pensada para evitar oscilação, mas que esticava o alarme muito além da falha real.</p></div>
+          <div class="field"><h4>O que foi descartado</h4><ul><li><strong>Queda de Wi-Fi:</strong> a controladora registrava todos os robôs conectados sem interrupção, sinal estável entre −53 e −58 dBm.</li><li><strong>Falha de antena:</strong> sem reinicializações no período; 100 % dos pings do monitor respondidos.</li><li><strong>Mudança de configuração:</strong> logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li><li><strong>Defeito em um robô:</strong> os quatro ficaram lentos exatamente ao mesmo tempo, descartando problema isolado de hardware.</li></ul></div>
+          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, provocando as falhas consecutivas e o alarme.</p></div>
+          <div class="field"><h4>Como foi apurado</h4><p>Análise inteiramente passiva: leitura da controladora Wi-Fi (somente leitura) para estado dos robôs, log de conexões da antena e log de administração; monitoramento com dados de ping (a cada 3 min), teste TCP de porta (a cada 30 s) e ocupação do canal 2,4 GHz (a cada 1 min). Nenhuma configuração foi alterada durante a investigação.</p></div>
+          <div class="field"><h4>Solução implantada em produção</h4><p>Ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados e reconectam a uma antena mais próxima. Os robôs industriais, com sinal entre −53 e −58 dBm, não são afetados. Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p></div>
+        </div>
+        <div class="chips"><span class="chip">UniFi</span><span class="chip">Zabbix</span><span class="chip">Wi-Fi 2,4 GHz</span><span class="chip">ESP32</span><span class="chip">Sistemas industriais</span><span class="chip">Análise de causa raiz</span><span class="chip">Congestionamento de canal</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
         <span class="tag">IT-INFRA-002</span>
         <dl><div><dt>Ambiente</dt><dd>Centro de distribuição</dd></div><div><dt>Tipo</dt><dd>Instrução de trabalho</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
       </div>
