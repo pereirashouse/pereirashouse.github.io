@@ -227,6 +227,26 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
 
     <article class="case infra-c">
       <div class="meta">
+        <span class="tag">Documentação de rede</span>
+        <dl><div><dt>Local</dt><dd>Porto Amazonas – PR</dd></div><div><dt>Tipo</dt><dd>Processo implantado</dd></div><div><dt>Quando</dt><dd>Ago – Out 2026, em andamento</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
+      </div>
+      <div class="content">
+        <h3>Mapeamento de rede a partir do zero: da visita de campo ao inventário vivo</h3>
+        <p>A filial não tinha documentação de rede: a topologia era conhecida parcialmente por quem trabalhou lá, e nenhum diagrama ou inventário estava atualizado. Este trabalho criou a documentação completa — da borda até cada switch de distribuição — usando uma abordagem de coleta progressiva: campo, backups, parser e confronto.</p>
+        <div class="fields">
+          <div class="field"><h4>Ponto de partida</h4><p>Sem documentação. O switch de núcleo tinha descrições herdadas de um firewall anterior e rótulos que não correspondiam ao cabeamento real. Seis das onze portas do rack de distribuição no núcleo carregavam nomes de outros destinos.</p></div>
+          <div class="field"><h4>Levantamento de campo</h4><p>Visita presencial para confirmar os uplinks fisicamente, porta a porta, no rack de distribuição. Resultado: os switches sobem diretamente no núcleo (hipótese de cascata descartada), cada um com link único. Esse dado foi a âncora que permitiu reconciliar os backups com a topologia real.</p></div>
+          <div class="field"><h4>Coleta e parser de backups</h4><p>14 arquivos de configuração coletados dos switches. Em vez de ler manualmente, foi escrito um script que extrai automaticamente: portas de acesso, troncos, VLANs presentes, portas sem configuração, modelo, firmware e endereço IP de gerência. O resultado vira uma tabela comparativa que mostra de imediato as divergências entre equipamentos do mesmo modelo e lote.</p></div>
+          <div class="field"><h4>Detecção de drift</h4><p>Cruzar o levantamento de campo (agosto) com os backups (outubro) revelou mudanças que não foram documentadas: um switch perdeu 11 portas de acesso configuradas entre as duas datas, e outro perdeu 2 portas. Esse drift é exatamente o tipo de alteração que, sem documentação, gera sintomas difíceis de diagnosticar — "estações sem DHCP" sem causa aparente.</p></div>
+          <div class="field"><h4>Documentação viva no Obsidian</h4><p>Uma nota por equipamento, com modelo, firmware, portas, VLANs e observações. Diagrama de backbone em Mermaid atualizado a cada nova informação. Pendências rastreadas como checklist. Quando uma hipótese é confirmada ou descartada, o registro é atualizado com a fonte — não substituído, para preservar o histórico de raciocínio.</p></div>
+          <div class="field"><h4>Achados consolidados</h4><ul><li>52 portas soltas na VLAN padrão em 10 switches — causa direta de estações sem DHCP de usuário</li><li>Três versões de firmware em equipamentos do mesmo site</li><li>Certificados autoassinados vencidos em todos os switches do rack</li><li>VLAN de CFTV com três estados diferentes nos switches: correta em cinco, ausente em três, criada mas fora do tronco em um</li><li>Switch com todas as portas em tronco e 11 VLANs por porta — sem nenhuma segmentação por ponto</li></ul></div>
+        </div>
+        <div class="chips"><span class="chip">HPE Aruba</span><span class="chip">Documentação técnica</span><span class="chip">Obsidian</span><span class="chip">Parser / automação</span><span class="chip">VLAN</span><span class="chip">Spanning Tree</span><span class="chip">Levantamento de campo</span></div>
+      </div>
+    </article>
+
+    <article class="case infra-c">
+      <div class="meta">
         <span class="tag">IT-INFRA-002</span>
         <dl><div><dt>Ambiente</dt><dd>Centro de distribuição</dd></div><div><dt>Tipo</dt><dd>Instrução de trabalho</dd></div><div><dt>Papel</dt><dd>Analista de infraestrutura</dd></div></dl>
       </div>
