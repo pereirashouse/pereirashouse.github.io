@@ -414,7 +414,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
       </div>
       <div class="content">
         <h3>Monitor automático de quedas Wi-Fi de coletores WMS</h3>
-        <p class="result">Agente Python open source com 14 testes que transformou relatos de queda em métrica por coletor, AP e hora.</p>
+        <p class="result">Agente Python open source com 20 testes automatizados que transformou relatos de queda em métrica por coletor, AP e hora.</p>
         <p>Coletores de dados (Urovo e Skorpio) em um SSID dedicado ao WMS apresentavam quedas cuja frequência e padrão eram difíceis de medir objetivamente. Sem métrica, era impossível saber se uma mudança na configuração do Wi-Fi havia melhorado ou piorado o cenário. Desenvolvi um agente Python que polea a API do UniFi, detecta quando cada coletor some e volta e registra duração, AP e RSSI em CSV.</p>
         <details class="more"><summary>Ver como foi feito</summary>
         <div class="fields">
@@ -422,7 +422,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
           <div class="field"><h4>Arquitetura do agente</h4><p>O script consulta a API legada do UniFi a cada 60 segundos e compara o estado anterior com o atual. Quando um coletor desaparece, grava um evento de queda com o AP e o RSSI do último registro. Na reconexão, calcula a duração. Toda saída vai para um CSV em <span class="mono">dados/eventos.csv</span>; um segundo comando gera um relatório Markdown diário com top coletores, quedas por hora e alertas configuráveis. Sem dependências externas — stdlib Python 3.10 apenas.</p></div>
           <div class="field"><h4>Classificação automática</h4><p>Coletores são identificados por prefixo OUI (Urovo <span class="mono">b4:29:3d</span>, Skorpio <span class="mono">04:7b:cb</span> / <span class="mono">3c:e1:a1</span>) ou por um inventário em <span class="mono">config.json</span>. Dispositivos Android com MAC aleatório são sinalizados separadamente — importante para não confundir quedas de coletor com dispositivos pessoais no mesmo SSID.</p></div>
           <div class="field"><h4>Resultado operacional</h4><p>Com a linha de base em mãos, foi possível correlacionar as quedas com métricas de rádio (TX Retry por AP, Canal Busy) e validar, com dados, o efeito de cada ajuste de configuração — canais, largura de banda e taxas mínimas. O script ficou genérico o suficiente para qualquer ambiente UniFi com coletores no Wi-Fi.</p></div>
-          <div class="field"><h4>Testes automatizados</h4><p>14 testes unitários cobrindo classificação por OUI, detecção de queda e reconexão, SSID com espaço extra (comportamento real da API), geração de CSV, cálculo de duração e geração de alertas no relatório. Desenvolvidos antes da primeira execução em campo.</p></div>
+          <div class="field"><h4>Testes automatizados</h4><p>20 testes unitários cobrindo classificação por OUI, detecção de queda e reconexão, SSID com espaço extra (comportamento real da API), geração e migração do CSV, cálculo de duração, alertas sem repetição e nome das APs. O GitHub Actions roda a suíte a cada alteração, em Python 3.10 a 3.13.</p></div>
         </div>
         </details>
         <div class="chips"><span class="chip">Python</span><span class="chip">UniFi API</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS / coletores</span><span class="chip">Open source</span><span class="chip">Testes unitários</span><span class="chip">CSV / Markdown</span></div>
