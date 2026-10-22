@@ -74,7 +74,7 @@ footer.site{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)
 .ill .bg{fill:var(--surface)} .ill .m{opacity:.5} .ill .d{stroke-dasharray:4 4}
 
 /* Destaques: lista compacta */
-.hl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.hl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .hl a{display:flex;flex-direction:column;gap:6px;height:100%;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none}
 .hl a:hover{border-color:currentColor}
 .hl .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
