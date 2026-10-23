@@ -45,7 +45,7 @@
     <div><dt>Papel</dt><dd>Analista de infraestrutura, responsável pelo diagnóstico</dd></div>
     <div><dt>Tempo até a causa</dt><dd>Um dia de análise</dd></div>
   </dl>
-  <p class="summary">Cruzando quatro fontes de log, isolei a causa em um dia: a atualização de outubro do Windows passou a bloquear a credencial derivada de NTLMv1 usada pelo PEAP-MSCHAPv2. Apliquei um contorno e recomendei a migração para EAP-TLS antes que os demais notebooks fossem afetados.</p>
+  <p class="summary">Cruzando quatro fontes de log, isolei a causa em um dia: o fluxo de autenticação automática da estação dependia de credenciais derivadas de NTLM, e a política aplicada pela atualização de outubro do Windows bloqueou esse mecanismo no cenário analisado. Apliquei um contorno e recomendei a migração para EAP-TLS antes que os demais notebooks fossem afetados.</p>
   <p class="updated">Última atualização: 22 de outubro de 2026</p>
 </header>
 
@@ -141,7 +141,7 @@
   </div>
   <div class="blk">
     <h4>Causa raiz</h4>
-    <p>A rede usa PEAP-MSCHAPv2 com a credencial da máquina, sem pedir senha. A atualização de segurança de outubro passou a bloquear o login automático (SSO) baseado em credenciais derivadas de NTLMv1. O túnel TLS com o servidor de autenticação era estabelecido, mas o Windows deixava de enviar a credencial dentro dele.</p>
+    <p>A rede usa PEAP-MSCHAPv2 com a credencial da máquina, sem pedir senha. No cenário analisado, esse fluxo de autenticação automática dependia de credenciais derivadas de NTLM, e a política aplicada pela atualização de segurança de outubro bloqueou esse mecanismo: o log operacional de NTLM do cliente registrou o bloqueio de credenciais derivadas de NTLMv1 no mesmo segundo de cada falha. O túnel TLS com o servidor de autenticação era estabelecido, mas o Windows deixava de enviar a credencial dentro dele. Não se trata de uma afirmação geral sobre todo PEAP-MSCHAPv2, e sim do comportamento observado nesta estação e nesta configuração.</p>
     <h4>Contorno imediato</h4>
     <p>Criação de uma rede temporária para o equipamento afetado, enquanto os ajustes para voltar a autenticar via RADIUS eram alinhados. A política 802.1X da rede corporativa não foi afrouxada.</p>
     <h4>Correção definitiva</h4>
