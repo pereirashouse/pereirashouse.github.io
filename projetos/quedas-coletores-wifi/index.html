@@ -187,6 +187,12 @@
 <section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
   <h2 class="ph">Evidências</h2>
   <p class="callout">Nomes de antenas, endereços IP e MAC, VLANs, hostnames e modelos dos coletores foram substituídos por descrições genéricas ou marcadores (modelo A, modelo B, P1, P2). Contagens, horários e valores de sinal são os observados; o formato das linhas foi simplificado.</p>
+  <div class="blk wide">
+    <h3>Código público e validação automatizada do monitor</h3>
+    <p>O <a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">repositório do monitor ↗<span class="sr-only"> (abre em nova aba)</span></a> publica a implementação, a demonstração sem controladora e os testes. Em 23 de outubro de 2026, o commit <span class="mono">646e216</span> da <span class="mono">main</span> teve <strong>39 testes aprovados em Python 3.10, 3.11, 3.12 e 3.13</strong>, incluindo regressões de TLS seguro por padrão.</p>
+    <p>A <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/runs/39954078292" target="_blank" rel="noopener">execução registrada do CI ↗<span class="sr-only"> (abre em nova aba)</span></a> comprova o resultado dessa versão. As <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">execuções posteriores na main ↗<span class="sr-only"> (abre em nova aba)</span></a> podem usar uma suíte diferente.</p>
+    <p>Esses testes usam API simulada e inspecionam os contextos SSL; não validam o certificado da controladora real nem comprovam, por si, as métricas e os resultados operacionais relatados neste estudo de caso.</p>
+  </div>
   <figure class="diag">
     <svg viewBox="0 0 860 300" role="img" aria-labelledby="dqt dqd">
       <title id="dqt">Um sintoma, seis frentes de investigação</title>
