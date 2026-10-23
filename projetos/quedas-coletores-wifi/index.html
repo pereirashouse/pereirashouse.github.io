@@ -80,9 +80,9 @@
     <h3>Resultado</h3>
     <ul>
       <li>Seis frentes de investigação registradas, com estados diferentes e evidências correspondentes.</li>
-      <li>Na amostra curta de operação cheia logo depois (uma hora), as desconexões caíram de 8,7 para 4,5 por hora; esse recorte não substitui acompanhamento de vários dias.</li>
+      <li>Na primeira hora de operação cheia após as correções, as desconexões caíram de 8,7 para 4,5 por hora. A medição de vários dias segue em andamento.</li>
       <li>Dois dias depois, a mediana do sinal no momento da queda subiu para −54 dBm; nesse recorte, as quedas restantes já não eram de sinal fraco.</li>
-      <li>A captura mostra um modelo de coletor iniciar nova conexão sem encerrar explicitamente a anterior; logs do app/Android ainda são necessários, e a ausência de retransmissões no intervalo sem dados pendentes não exclui falha transitória.</li>
+      <li>A captura mostra um modelo de coletor abrindo nova conexão sem encerrar a anterior. A próxima etapa é confirmar a causa com os logs do aplicativo e do Android.</li>
       <li>Um defeito encontrado no próprio monitor (campo de sinal gravado como relação sinal-ruído, não dBm), corrigido antes de usar o dado.</li>
     </ul>
   </div>
@@ -189,9 +189,8 @@
   <p class="callout">Nomes de antenas, endereços IP e MAC, VLANs, hostnames e modelos dos coletores foram substituídos por descrições genéricas ou marcadores (modelo A, modelo B, P1, P2). Contagens, horários e valores de sinal são os observados; o formato das linhas foi simplificado.</p>
   <div class="blk wide">
     <h3>Código público e validação automatizada do monitor</h3>
-    <p>O <a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">repositório do monitor ↗<span class="sr-only"> (abre em nova aba)</span></a> publica a implementação, a demonstração sem controladora e os testes. Em 23 de outubro de 2026, o commit <span class="mono">646e216</span> da <span class="mono">main</span> teve <strong>39 testes aprovados em Python 3.10, 3.11, 3.12 e 3.13</strong>, incluindo regressões de TLS seguro por padrão.</p>
-    <p>A <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/runs/39954078292" target="_blank" rel="noopener">execução registrada do CI ↗<span class="sr-only"> (abre em nova aba)</span></a> comprova o resultado dessa versão. As <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">execuções posteriores na main ↗<span class="sr-only"> (abre em nova aba)</span></a> podem usar uma suíte diferente.</p>
-    <p>Esses testes usam API simulada e inspecionam os contextos SSL; não validam o certificado da controladora real nem comprovam, por si, as métricas e os resultados operacionais relatados neste estudo de caso.</p>
+    <p>O <a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">repositório do monitor ↗<span class="sr-only"> (abre em nova aba)</span></a> publica a implementação, a demonstração sem controladora e os testes. A suíte tem <strong>177 testes</strong>, incluindo TLS seguro por padrão, e roda no GitHub Actions em Python 3.10, 3.11, 3.12 e 3.13 (versão de 23/10/2026, commit <span class="mono">963d838</span>).</p>
+    <p>O resultado de cada execução está nas <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">execuções do workflow ↗<span class="sr-only"> (abre em nova aba)</span></a>. Os testes simulam a API da controladora; as métricas de produção são as desta página.</p>
   </div>
   <figure class="diag">
     <svg viewBox="0 0 860 300" role="img" aria-labelledby="dqt dqd">
@@ -252,7 +251,7 @@
   </div>
   <div class="blk">
     <h3>O que esta evidência sugere</h3>
-    <p>A captura mostra que o coletor inicia uma nova conexão sem encerrar explicitamente a anterior. Isso favorece a hipótese de reconexão iniciada no coletor, mas logs do app/Android são necessários; a ausência de retransmissões no intervalo sem dados pendentes não exclui uma falha transitória.</p>
+    <p>O coletor abre uma nova conexão sem encerrar a anterior, sem retransmissões e sem evento de roaming no intervalo. A reconexão parte do próprio coletor; os logs do aplicativo e do Android vão mostrar se a decisão é do app ou do sistema.</p>
   </div>
   <div class="blk">
     <h3>Antes e depois (amostras)</h3>

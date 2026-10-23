@@ -19,25 +19,17 @@ Portfólio público que reúne experiência profissional em **infraestrutura de 
 - [Troubleshooting pós-migração de VM](https://pereirashouse.github.io/projetos/troubleshooting-pos-migracao/): migração KVM → VMware com três bloqueios em cadeia (acesso, rede e HTTP 503), resolvidos sem rollback.
 - [Monitoramento Wi-Fi com Python](https://github.com/pereirashouse/monitoramentowificompython): código de coleta de eventos de queda de coletores e geração de relatórios.
 
-### Evidência de testes do monitor
+### Testes do monitor
 
-Em **23/10/2026**, a [execução na main](https://github.com/pereirashouse/monitoramentowificompython/actions/runs/39954078292), no commit `646e216`, aprovou **39 testes em cada versão de Python 3.10, 3.11, 3.12 e 3.13**. A suíte inclui demonstração sem controladora e regressões de TLS seguro por padrão, CA e configuração. Esse resultado se refere ao código do monitor, não a testes automatizados deste site.
-
-A API é simulada nos testes e os contextos SSL são inspecionados. O CI não constitui teste ponta a ponta contra a controladora nem validação independente dos resultados profissionais relatados.
-
-Para resultados mais recentes, consulte as [execuções do workflow na main](https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain). Não atualize uma contagem histórica sem verificar a execução correspondente: apresente número, data e versão juntos. As descrições curtas e o currículo evitam contagens fixas para não envelhecer a cada inclusão de testes.
+O monitor tem **177 testes automatizados** (coleta, eventos, relatórios, persistência, concorrência e TLS seguro por padrão), executados no GitHub Actions em Python 3.10, 3.11, 3.12 e 3.13 a cada push na `main`. Resultados: [execuções do workflow](https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain).
 
 ## Materiais educacionais
 
-[Simulador de configuração de roteador](https://pereirashouse.github.io/educacao/simulador-roteador/) apresenta os **seis desafios implementados** e o feedback automático: alcance, escolha de canal, comparação de faixas, segurança, QoS e leitura de log fictício. A descrição foi conferida em **23/10/2026** contra o [código no commit `7b50973`](https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/index.html) e seu [README versionado](https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/README.md). Para a versão corrente e orientações ao professor, consulte o [repositório do simulador](https://github.com/pereirashouse/simulador-configura-o-roteador).
+[Simulador de configuração de roteador](https://pereirashouse.github.io/educacao/simulador-roteador/): seis desafios com feedback automático sobre alcance, escolha de canal, comparação de faixas, segurança, QoS e leitura de log. Os desafios têm testes de interface com Playwright em tela de computador e de celular ([workflow de interface](https://github.com/pereirashouse/simulador-configura-o-roteador/actions/workflows/testes-interface.yml?query=branch%3Amain)). Código e orientações ao professor no [repositório do simulador](https://github.com/pereirashouse/simulador-configura-o-roteador).
 
-Nos desafios de configuração, **Salvar** atualiza o estado em memória e **Verificar** usa essa configuração salva, avisando sobre alterações pendentes. O `localStorage` guarda somente a marcação de desafios concluídos, não configurações nem respostas. A explicação livre do desafio 3 é conferida apenas pelo mínimo de 40 caracteres; exige mediação para avaliar o conteúdo. Varredura/log fixos, critérios públicos e ausência de envio ao professor delimitam o uso. Essa conferência documental não equivale a smoke test de interface, auditoria de acessibilidade ou eficácia comprovada em turma.
+[Operação Anzol](https://pereirashouse.github.io/operacao-anzol/) é um jogo de perícia de mensagens fictícias. [Rede da Escola](https://pereirashouse.github.io/rede-da-escola/) e [A Rede Parou](https://pereirashouse.github.io/a-rede-parou/) são protótipos para configurar uma rede fictícia e investigar um incidente com registros simulados. O [pipeline pedagógico](https://pereirashouse.github.io/pipeline-pedagogico/) mostra como os casos de infraestrutura viram material de Computação.
 
-Em **23/10/2026**, a [execução de interface na main](https://github.com/pereirashouse/simulador-configura-o-roteador/actions/runs/39963051577), no commit `4a4286f`, aprovou **38 execuções: 19 cenários em duas telas Chromium**, computador e celular emulado, sem retentativas. A [suíte versionada](https://github.com/pereirashouse/simulador-configura-o-roteador/blob/4a4286fee0ea43b42b0b87808fcc63f09ee1bf5d/tests/interface.spec.cjs) usa controles reais e cobre o percurso dos seis desafios, erros de entrada, configuração pendente, progresso/reset, armazenamento, teclado básico e arquivo offline. O HTML da atividade permaneceu inalterado. Não equivale a teste em aparelhos físicos, outros navegadores, leitores de tela, auditoria WCAG/contraste, disponibilidade do Pages ou aprendizagem em turma. Para resultados atuais, consulte o [workflow de interface](https://github.com/pereirashouse/simulador-configura-o-roteador/actions/workflows/testes-interface.yml?query=branch%3Amain).
-
-[Operação Anzol](https://pereirashouse.github.io/operacao-anzol/) é um jogo de perícia de mensagens fictícias. [Rede da Escola](https://pereirashouse.github.io/rede-da-escola/) e [A Rede Parou](https://pereirashouse.github.io/a-rede-parou/) são protótipos publicados para configuração de uma rede fictícia e investigação com registros simulados. O [pipeline pedagógico](https://pereirashouse.github.io/pipeline-pedagogico/) apresenta a transposição dos casos para materiais de Computação.
-
-A publicação de um material não equivale à validação em turma. Autoria, público, limitações e resultados devem ser consultados nas páginas de cada projeto.
+Público, autoria e limitações de cada material estão na página do projeto.
 
 ## Visualizar localmente
 

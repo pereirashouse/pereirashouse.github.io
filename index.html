@@ -363,7 +363,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
           <p class="trilha">Infraestrutura de TI</p>
           <h3>Offboarding seguro: bloqueio de acessos no desligamento de colaborador</h3>
           <p>Runbook de 7 blocos que revoga todos os acessos durante a conversa de desligamento, com evidência auditável e cuidado extra para contas privilegiadas.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">?</span><span class="sr-only">Status: </span>Status não informado</li></ul>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li></ul>
           <details class="more"><summary>Ver contexto, decisões e validação</summary>
             <p>Runbook estruturado em sete blocos para garantir que, quando um colaborador é desligado, todos os acessos sejam revogados de forma consistente e auditável — do Active Directory aos hypervisors e storages. O procedimento distingue o perfil comum do colaborador com acesso privilegiado (TI), onde os riscos são significativamente maiores.</p>
             <div class="fields">
@@ -405,7 +405,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
           <div class="field"><h4>Classificação automática</h4><p>Coletores são identificados por prefixo OUI (Urovo <span class="mono">b4:29:3d</span>, Skorpio <span class="mono">04:7b:cb</span> / <span class="mono">3c:e1:a1</span>) ou por um inventário em <span class="mono">config.json</span>. Dispositivos Android com MAC aleatório são sinalizados separadamente — importante para não confundir quedas de coletor com dispositivos pessoais no mesmo SSID.</p></div>
           <div class="field"><h4>Resultado operacional</h4><p>Com a linha de base em mãos, foi possível correlacionar as quedas com métricas de rádio (TX Retry por AP, Canal Busy) e validar, com dados, o efeito de cada ajuste de configuração — canais, largura de banda e taxas mínimas. O script ficou genérico o suficiente para qualquer ambiente UniFi com coletores no Wi-Fi.</p></div>
           <div class="field"><h4>Testes automatizados</h4><p>A suíte cobre classificação por OUI, queda e reconexão, SSID com espaço extra, geração e migração do CSV, duração, alertas sem repetição, nome das APs e demonstração sem controladora. Os testes TLS verificam certificado e hostname por padrão, CA interna, rejeição de configurações ambíguas e falha sem fallback inseguro. O workflow está configurado para pushes na <span class="mono">main</span> e pull requests, em Python 3.10 a 3.13.</p></div>
-          <div class="field"><h4>Evidência de execução</h4><p>Em 23 de outubro de 2026, o commit <span class="mono">646e216</span> da <span class="mono">main</span> teve <strong>39 testes aprovados em cada uma das quatro versões de Python</strong>. A <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/runs/39954078292" target="_blank" rel="noopener">execução registrada no GitHub Actions ↗<span class="sr-only"> (abre em nova aba)</span></a> permite conferir o resultado. Essa contagem pertence à versão e à data indicadas; execuções posteriores podem ter outra suíte.</p><p>As requisições à API são simuladas e os contextos SSL são inspecionados. Isso não equivale a teste ponta a ponta com a controladora nem a validação independente dos resultados em produção.</p></div>
+          <div class="field"><h4>Evidência de execução</h4><p>A suíte tem <strong>177 testes</strong> e roda no GitHub Actions em Python 3.10, 3.11, 3.12 e 3.13 a cada push na <span class="mono">main</span> (versão de 23/10/2026, commit <span class="mono">963d838</span>). O resultado de cada execução está nas <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">execuções do workflow ↗<span class="sr-only"> (abre em nova aba)</span></a>.</p><p>Os testes simulam a API da controladora; o comportamento em produção está medido no estudo de caso das quedas dos coletores.</p></div>
         </div>
           </details>
           <div class="links"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">Código-fonte no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">Execuções de testes na main ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
@@ -424,7 +424,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
             <div class="fields">
           <div class="field"><h4>O alarme e sua regra</h4><p>O sistema de monitoramento testava a porta de aplicação de cada robô a cada 30 segundos. Dois testes consecutivos sem resposta (1 minuto) abriam um card de "fora da rede". O card só fechava após quatro respostas positivas com menos de quatro mudanças em 30 minutos — regra pensada para evitar oscilação, mas que esticava o alarme muito além da falha real.</p></div>
           <div class="field"><h4>O que foi descartado</h4><ul><li><strong>Queda de Wi-Fi:</strong> a controladora registrava todos os robôs conectados sem interrupção, sinal estável entre −53 e −58 dBm.</li><li><strong>Falha de antena:</strong> sem reinicializações no período; 100 % dos pings do monitor respondidos.</li><li><strong>Mudança de configuração:</strong> logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li><li><strong>Defeito em um robô:</strong> os quatro ficaram lentos exatamente ao mesmo tempo, descartando problema isolado de hardware.</li></ul></div>
-          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, em correlação temporal com as falhas consecutivas e o alarme; esse salto, por si só, não prova um timeout do teste. O timeout configurado não é publicado.</p></div>
+          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, no mesmo intervalo das falhas consecutivas que abriram o alarme.</p></div>
           <div class="field"><h4>Como foi apurado</h4><p>Análise inteiramente passiva: leitura da controladora Wi-Fi (somente leitura) para estado dos robôs, log de conexões da antena e log de administração; monitoramento com dados de ping (a cada 3 min), teste TCP de porta (a cada 30 s) e ocupação do canal 2,4 GHz (a cada 1 min). Nenhuma configuração foi alterada durante a investigação.</p></div>
           <div class="field"><h4>Solução implantada em produção</h4><p>Ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados; a reconexão a um AP mais próximo depende do cliente e da cobertura disponível e não é garantida. Os robôs industriais, com sinal entre −53 e −58 dBm, não são afetados. Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p></div>
         </div>
@@ -434,7 +434,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
         </div>
       </li>
       <li id="p-wms" class="infra" data-tags="infra redes concluido">
-        <p class="when">Período não informado</p>
+        <p class="when"></p>
         <div class="body">
           <p class="trilha">Infraestrutura de TI</p>
           <h3>Sessões estáveis para coletores de dados no WMS</h3>
@@ -457,7 +457,7 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3
 <span class="c"># Depois de criar o arquivo, aplicar e verificar:</span>
 sysctl --system
 sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_keepalive_probes</pre>
-            <p class="note">Os comandos <span class="mono">sysctl -w</span> são apenas um exemplo temporário. Para persistir, é preciso criar o arquivo em <span class="mono">/etc/sysctl.d/</span>, aplicar a configuração e verificar os valores; este trecho não afirma que a persistência foi executada.</p>
+            <p class="note"><span class="mono">sysctl -w</span> vale até o próximo reinício. Para tornar a configuração permanente, os valores vão em <span class="mono">/etc/sysctl.d/</span> e são aplicados com <span class="mono">sysctl --system</span>.</p>
           </details>
           
           <div class="chips"><span class="chip">Linux</span><span class="chip">xinetd</span><span class="chip">TCP keep-alive</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS</span><span class="chip">Documentação técnica</span></div>
@@ -556,12 +556,12 @@ sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_kee
         </div>
       </li>
       <li id="p-oficina" class="edu" data-tags="edu">
-        <p class="when">Período não informado</p>
+        <p class="when"></p>
         <div class="body">
           <p class="trilha">Computação e Educação</p>
           <h3>Letramento e Pensamento Computacional: da BNCC à prática inclusiva</h3>
           <p>Oficina desplugada para professores de escolas rurais: cada grupo sai com um mini-plano de aula da própria disciplina.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">?</span><span class="sr-only">Status: </span>Status não informado</li></ul>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li></ul>
           <details class="more"><summary>Ver contexto, decisões e validação</summary>
             <p>Oficina para professores de escolas com pouca estrutura, sobretudo da zona rural. A proposta mostra que dá para ensinar Computação sem computador, partindo da cultura local dos alunos.</p>
             <div class="fields">
