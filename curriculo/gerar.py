@@ -40,7 +40,7 @@ EXPERIENCIA = """
 <li>802.1X por conta de máquina (NPS, Active Directory, GPO) em 60 APs UniFi.</li>
 <li>Análise de Wi-Fi com Python/API UniFi; automação PowerShell/GPO; backup Veeam e Dell PowerProtect.</li></ul></div>
 <div class="item"><p class="t">Analista de TI Pleno <span>set. 2022 – mai. 2026</span></p><p class="l">Indústria · Paraná</p>
-<ul><li>Infraestrutura para 3 fábricas e 10 centros de distribuição: switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware/KVM, Zabbix/Grafana e Dell PowerProtect.</li></ul></div>
+<ul><li>Infraestrutura de várias unidades industriais (fábricas e centros de distribuição): switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware/KVM, Zabbix/Grafana e Dell PowerProtect.</li></ul></div>
 <div class="item"><p class="t">Analista de TI Júnior <span>ago. 2021 – set. 2022</span></p><p class="l">Indústria · Paraná</p>
 <ul><li>Suporte de infraestrutura e usuários no AD; antivírus, Wi-Fi Ubiquiti, VMware vSphere, KVM Oracle, Zabbix e Grafana.</li></ul></div>
 <div class="item"><p class="t">Analista Financeiro <span>mar. 2014 – set. 2019</span></p><p class="l">Multinacional de embalagens · Paraná</p></div>
@@ -81,7 +81,7 @@ VARIANTES = {
         titulo="Currículo · Infraestrutura de TI", cor="#1D5BB8",
         cargo="Analista de Infraestrutura de TI Sênior · Licenciando em Computação (UTFPR)",
         corpo=f"""<h2>Resumo</h2>
-<p>Analista de infraestrutura com mais de cinco anos em TI industrial, atuando em 3 fábricas e 10 centros de distribuição, com foco em redes e Wi-Fi, identidade/802.1X, virtualização, backup, monitoramento e automação Python/PowerShell. Atua com hipóteses, evidências e rollback definido antes da mudança.</p>
+<p>Analista de infraestrutura com mais de cinco anos em TI industrial, atuando em várias fábricas e centros de distribuição, com foco em redes e Wi-Fi, identidade/802.1X, virtualização, backup, monitoramento e automação Python/PowerShell. Atua com hipóteses, evidências e rollback definido antes da mudança.</p>
 {PONTE}
 <h2>Experiência</h2>{EXPERIENCIA}
 <h2>Projetos selecionados</h2>{PROJ_TI}
