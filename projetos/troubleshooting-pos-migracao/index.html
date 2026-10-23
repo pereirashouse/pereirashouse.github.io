@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Troubleshooting pós-migração de máquina virtual · Jeferson Pereira</title>
+<meta name="description" content="Estudo de caso de troubleshooting: máquina virtual de aplicação crítica migrada de KVM para VMware com três bloqueios em sequência (acesso administrativo, rede e HTTP 503), resolvidos sem perda de dados e sem rollback.">
+<link rel="canonical" href="https://pereirashouse.github.io/projetos/troubleshooting-pos-migracao/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Troubleshooting pós-migração de máquina virtual: acesso, rede e aplicação">
+<meta property="og:description" content="Três bloqueios em cadeia depois de uma migração a frio de KVM para VMware: senha de root, interface de rede renomeada com Port Group divergente e proxy reverso respondendo 503.">
+<meta property="og:url" content="https://pereirashouse.github.io/projetos/troubleshooting-pos-migracao/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="stylesheet" href="../../assets/fonts.css">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../">Início</a></li>
+  <li><a href="../../#destaques">Destaques</a></li>
+  <li><a href="../../#infra">Infraestrutura</a></li>
+  <li><a href="../../#edu">Educação</a></li>
+  <li><a href="../../#arquivo">Todos os projetos</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head infra">
+  <p class="crumb"><a href="../../#infra">Infraestrutura de TI</a> / Estudo de caso</p>
+  <h1>Troubleshooting pós-migração de máquina virtual: acesso, rede e aplicação</h1>
+  <p class="lede">Uma máquina virtual de aplicação crítica foi migrada a frio de um hipervisor KVM para VMware e não voltou ao ar. Por trás de “o sistema não abre” havia três bloqueios em sequência, cada um escondendo o seguinte: sem acesso administrativo, sem rede e, por fim, o site respondendo HTTP 503.</p>
+  <ul class="badges" aria-label="Etiquetas">
+    <li class="badge tipo">Profissional</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">✓</span>Concluído</li>
+    <li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li>
+    <li class="badge">Troubleshooting</li><li class="badge">Virtualização</li><li class="badge">Linux</li>
+  </ul>
+  <dl class="facts">
+    <div><dt>Ambiente</dt><dd>Máquina virtual Linux de produção com aplicação web em contêiner Docker, atrás de proxy reverso</dd></div>
+    <div><dt>Período</dt><dd>Outubro de 2026</dd></div>
+    <div><dt>Papel</dt><dd>Analista de infraestrutura, responsável pelo diagnóstico e pelo restabelecimento</dd></div>
+    <div><dt>Severidade</dt><dd>Crítica (P1)</dd></div>
+  </dl>
+  <p class="summary">Tratei a recuperação em camadas, de baixo para cima: primeiro recuperar o acesso ao sistema pelo console do hipervisor, depois a conectividade (interface, rota e camada 2 no switch virtual) e só então a aplicação. O serviço voltou 100% operacional sem perda de dados e sem precisar desfazer a migração, e o caso terminou com três recomendações para evitar que o mesmo aconteça nas próximas.</p>
+  <p class="updated">Última atualização: 23 de outubro de 2026</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Modo de leitura">
+  <button role="tab" id="t-resumo" aria-controls="resumo" aria-selected="true">Resumo executivo</button>
+  <button role="tab" id="t-tecnico" aria-controls="tecnico" aria-selected="false" tabindex="-1">Detalhes técnicos</button>
+  <button role="tab" id="t-evidencias" aria-controls="evidencias" aria-selected="false" tabindex="-1">Evidências</button>
+  <button role="tab" id="t-didatica" aria-controls="didatica" aria-selected="false" tabindex="-1">Versão didática</button>
+</div>
+
+<main id="conteudo">
+<section class="panel" id="resumo" role="tabpanel" aria-labelledby="t-resumo">
+  <h2 class="ph">Resumo executivo</h2>
+  <div class="blk">
+    <h3>Contexto</h3>
+    <p>Uma aplicação web crítica roda em uma máquina virtual Linux: o backend Java/Spring fica em um contêiner Docker e o Apache, instalado no próprio sistema, publica o serviço em HTTPS como proxy reverso. A máquina foi migrada a frio do cluster de origem, baseado em KVM, para o ambiente VMware.</p>
+  </div>
+  <div class="blk">
+    <h3>Problema</h3>
+    <p>Depois da conversão, a máquina ligava, mas ninguém conseguia usá-la. A senha de root não funcionava, o SSH não respondia e, depois de resolvidos esses dois pontos, o site mostrava <strong>HTTP 503 Service Unavailable</strong>. Cada bloqueio só aparecia quando o anterior era resolvido.</p>
+  </div>
+  <div class="blk">
+    <h3>Meu papel</h3>
+    <ul>
+      <li>recuperar o acesso administrativo sem depender de rede, pelo console do hipervisor;</li>
+      <li>isolar a falha de rede entre sistema operacional, rota e switch virtual;</li>
+      <li>separar falha da aplicação de falha do proxy reverso no erro 503;</li>
+      <li>registrar causa raiz e ação de cada fase e propor as correções preventivas.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Resultado</h3>
+    <ul>
+      <li>Serviço 100% operacional, sem perda de dados e sem rollback da migração.</li>
+      <li>Três causas raiz independentes identificadas, uma por camada (acesso, rede, aplicação).</li>
+      <li>Três recomendações de arquitetura: adaptador de rede paravirtualizado, VMware Tools no convidado e dependência de inicialização entre Apache e contêiner.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>O que este caso demonstra</h3>
+    <ul class="comp">
+      <li>Troubleshooting em camadas</li><li>Linux: boot, GRUB e recuperação</li><li>Redes virtuais: vSwitch e Port Group</li>
+      <li>Migração entre hipervisores</li><li>Proxy reverso e contêineres</li><li>Análise pós-incidente</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="tecnico" role="tabpanel" aria-labelledby="t-tecnico">
+  <h2 class="ph">Detalhes técnicos</h2>
+  <div class="blk wide">
+    <h3>Roteiro da investigação</h3>
+    <ol class="flow" aria-label="Etapas da investigação">
+      <li>Sintoma</li><li>Acesso pelo console</li><li>Senha de root</li><li>Interface e rota</li><li>Camada 2</li><li>Backend</li><li>Proxy reverso</li><li>Prevenção</li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h4>Fase 1: acesso administrativo</h4>
+    <p>Sem credencial válida e com o SSH inacessível, o único caminho era o console do hipervisor. A senha de root não foi aceita depois da conversão.</p>
+    <ol>
+      <li>Interrompi a inicialização no menu do GRUB.</li>
+      <li>Na linha do kernel, troquei a montagem para leitura e escrita e pedi um shell como processo inicial: <code>rw init=/bin/bash</code>.</li>
+      <li>O sistema subiu direto em shell de root, sem serviços.</li>
+      <li>Redefini a senha com <code>passwd root</code>, gravei em disco com <code>sync</code> e reiniciei com <code>reboot -f</code>.</li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h4>Fase 2: conectividade</h4>
+    <p>O sistema subiu com endereço estático, mas sem nenhum tráfego de saída.</p>
+    <ul>
+      <li><strong>Interface renomeada:</strong> no KVM a placa era VirtIO e se chamava <code>ens3</code>; no VMware virou um adaptador emulado, com outro nome (<code>ens32</code>). A configuração de rede apontava para a interface antiga.</li>
+      <li><strong>Rota conferida:</strong> depois de ajustar a interface, a rota padrão estava correta. Isso descartou a tabela de rotas do kernel.</li>
+      <li><strong>Camada 2:</strong> ainda sem resposta, nem a ARP. A causa estava fora da máquina: o Port Group do switch virtual não correspondia à VLAN da rede de origem. Ajustado o Port Group, a resolução ARP e a comunicação externa voltaram.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h4>Fase 3: HTTP 503</h4>
+    <p>Com a rede de pé, o Apache respondia na porta 443, mas com 503.</p>
+    <ul>
+      <li><strong>Ordem de inicialização:</strong> o Apache subiu logo no boot, enquanto o backend Java/Spring do contêiner ainda carregava o contexto.</li>
+      <li><strong>Backend saudável:</strong> os logs mostraram o pool de conexões com o banco (HikariCP/JPA) conectado e as transações fluindo. O problema não estava na aplicação.</li>
+      <li><strong>Proxy:</strong> as primeiras tentativas falharam e o Apache marcou o destino interno como indisponível por um tempo. Um <code>systemctl restart apache2</code> limpou esse estado e restabeleceu o encaminhamento para a porta interna.</li>
+    </ul>
+  </div>
+  <div class="blk wide">
+    <h4>Causa raiz por fase</h4>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Fase</th><th scope="col">Sintoma</th><th scope="col">Causa raiz</th><th scope="col">Solução</th></tr></thead>
+      <tbody>
+        <tr><td>1. Acesso</td><td>Senha de root recusada, SSH fora do ar</td><td>Credencial de root não compatível ou redefinida na conversão</td><td>Boot interrompido no GRUB e senha redefinida pelo console</td></tr>
+        <tr><td>2. Rede</td><td>IP configurado, nenhum tráfego</td><td>Troca de VirtIO para adaptador emulado (novo nome de interface) e Port Group em VLAN divergente</td><td>Configuração da nova interface, rota conferida e Port Group corrigido</td></tr>
+        <tr><td>3. Aplicação</td><td>HTTP 503 na porta 443</td><td>Proxy reverso iniciado antes do backend; destino marcado como indisponível</td><td>Backend validado pelos logs e reinício limpo do Apache</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk wide">
+    <h3>Recomendações preventivas</h3>
+    <div class="fields">
+      <div class="field"><h4>Adaptador VMXNET3</h4><p>O adaptador emulado funciona, mas custa mais CPU no host. Agendar janela para trocar pelo VMXNET3, paravirtualizado, que reduz interrupções e aumenta a vazão. A troca muda o nome da interface de novo, então entra no checklist com a configuração de rede.</p></div>
+      <div class="field"><h4>VMware Tools no convidado</h4><p>Garantir o <code>open-vm-tools</code> ativo, para desligamento limpo, sincronismo de relógio e snapshots consistentes. É a contrapartida do agente de convidado que a plataforma de origem usava.</p></div>
+      <div class="field"><h4>Apache depois do contêiner</h4><p>Fazer o serviço do Apache esperar o contêiner ficar <em>healthy</em> antes de abrir a porta 443, por exemplo com uma verificação de saúde antes da inicialização no systemd. Assim um reboot programado não mostra 503 ao usuário.</p></div>
+    </div>
+  </div>
+  <div class="blk">
+    <h3>Lições para a próxima migração</h3>
+    <ul>
+      <li>Antes de migrar, confirmar uma credencial local de recuperação e testar o acesso pelo console de destino.</li>
+      <li>Registrar o nome e o tipo da interface de rede e a VLAN de origem; conferir os dois logo depois da conversão.</li>
+      <li>Validar a aplicação de fora para dentro: porta pública, proxy, backend e banco, nessa ordem.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Limitações</h3>
+    <ul>
+      <li>A Fase 1 mostra que quem tem console do hipervisor tem root na máquina. Proteger o GRUB com senha e restringir o acesso ao console reduzem esse risco, mas não fizeram parte deste atendimento.</li>
+      <li>As recomendações preventivas foram propostas no relatório; a implantação depende de janela de manutenção.</li>
+      <li>Endereços, máscara, gateway, VLANs, nomes de servidores e da aplicação e identificadores do ambiente não são publicados.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
+  <h2 class="ph">Evidências</h2>
+  <p class="callout">Endereços IP, MAC, máscara, gateway, VLAN, hostnames e nome da aplicação foram omitidos ou trocados por marcadores. Os blocos abaixo são reconstruções sintéticas a partir do relatório: os comandos e as etapas são os do atendimento, e a saída foi simplificada.</p>
+  <figure class="diag">
+    <svg viewBox="0 0 860 260" role="img" aria-labelledby="dpt dpd">
+      <title id="dpt">Três bloqueios em cadeia depois da migração</title>
+      <desc id="dpd">Uma sequência de três etapas, da esquerda para a direita. Acesso: senha de root recusada, resolvida pelo GRUB. Rede: interface renomeada e Port Group divergente, resolvida ajustando a interface e o Port Group. Aplicação: HTTP 503 porque o proxy subiu antes do backend, resolvida com reinício do Apache. Cada etapa só ficou visível depois que a anterior foi resolvida. Ao final, serviço operacional sem rollback.</desc>
+      <rect class="dg-box" x="20" y="20" width="240" height="40" rx="6"/><text class="dg-t" x="140" y="45" text-anchor="middle">1. Acesso</text>
+      <rect class="dg-box" x="310" y="20" width="240" height="40" rx="6"/><text class="dg-t" x="430" y="45" text-anchor="middle">2. Rede</text>
+      <rect class="dg-box" x="600" y="20" width="240" height="40" rx="6"/><text class="dg-t" x="720" y="45" text-anchor="middle">3. Aplicação</text>
+      <path class="dg" d="M260 40 H310 M550 40 H600 M140 60 V80 M430 60 V80 M720 60 V80"/>
+      <rect class="dg-dash" x="20" y="80" width="240" height="80" rx="6"/>
+      <text class="dg-s" x="140" y="106" text-anchor="middle">senha de root recusada</text>
+      <text class="dg-s" x="140" y="126" text-anchor="middle">SSH inacessível</text>
+      <text class="dg-s" x="140" y="146" text-anchor="middle">console do hipervisor</text>
+      <rect class="dg-dash" x="310" y="80" width="240" height="80" rx="6"/>
+      <text class="dg-s" x="430" y="106" text-anchor="middle">ens3 (VirtIO) → ens32</text>
+      <text class="dg-s" x="430" y="126" text-anchor="middle">rota correta, sem ARP</text>
+      <text class="dg-s" x="430" y="146" text-anchor="middle">Port Group divergente</text>
+      <rect class="dg-dash" x="600" y="80" width="240" height="80" rx="6"/>
+      <text class="dg-s" x="720" y="106" text-anchor="middle">HTTP 503 na porta 443</text>
+      <text class="dg-s" x="720" y="126" text-anchor="middle">proxy subiu antes</text>
+      <text class="dg-s" x="720" y="146" text-anchor="middle">do backend</text>
+      <path class="dg" d="M140 160 V180 M430 160 V180 M720 160 V180"/>
+      <rect class="dg-ok" x="20" y="180" width="240" height="34" rx="6"/><text class="dg-okt" x="140" y="202" text-anchor="middle">GRUB: init=/bin/bash</text>
+      <rect class="dg-ok" x="310" y="180" width="240" height="34" rx="6"/><text class="dg-okt" x="430" y="202" text-anchor="middle">interface e Port Group</text>
+      <rect class="dg-ok" x="600" y="180" width="240" height="34" rx="6"/><text class="dg-okt" x="720" y="202" text-anchor="middle">backend ok, Apache reiniciado</text>
+      <text class="dg-s" x="430" y="246" text-anchor="middle">cada bloqueio só apareceu depois que o anterior foi resolvido</text>
+    </svg>
+    <figcaption>Mapa das fases: o usuário via um único sintoma (“o sistema não abre”), com três causas em camadas diferentes.</figcaption>
+  </figure>
+  <div class="blk wide">
+    <h3>Recuperação de acesso pelo console</h3>
+<pre><span class="c"># menu do GRUB: tecla e na entrada padrão, linha do kernel</span>
+linux /boot/vmlinuz-5.15... root=<span class="c">[DISCO]</span> <strong>rw init=/bin/bash</strong>
+<span class="c"># Ctrl+X para iniciar</span>
+root@(none):/# passwd root
+root@(none):/# sync
+root@(none):/# reboot -f</pre>
+  </div>
+  <div class="blk wide">
+    <h3>Rede depois da conversão</h3>
+<pre><span class="c"># a interface mudou de nome com a troca de adaptador</span>
+$ ip -br link
+lo      UNKNOWN
+ens32   UP        <span class="c">[MAC do fabricante do hipervisor]</span>
+<span class="c"># rota padrão correta: a tabela do kernel não era o problema</span>
+$ ip route
+default via <span class="c">[GATEWAY]</span> dev ens32
+<span class="c"># sem resposta ARP até corrigir o Port Group no switch virtual</span></pre>
+  </div>
+  <div class="blk wide">
+    <h3>Erro 503 e validação do backend</h3>
+<pre><span class="c"># porta pública: proxy responde, destino interno indisponível</span>
+$ curl -sk -o /dev/null -w '%{http_code}\n' https://localhost/
+503
+<span class="c"># logs do contêiner: backend terminou de subir e conectou ao banco</span>
+HikariPool-1 - Start completed.
+Initialized JPA EntityManagerFactory for persistence unit 'default'
+<span class="c"># proxy ainda com o destino marcado como indisponível: reinício limpo</span>
+$ systemctl restart apache2
+$ curl -sk -o /dev/null -w '%{http_code}\n' https://localhost/
+200</pre>
+    <p class="note">Linhas de log e chamadas de teste reconstruídas a partir do relatório, no formato padrão das ferramentas; nomes de contêiner, banco e aplicação omitidos.</p>
+  </div>
+  <div class="blk">
+    <h3>Matriz de ações</h3>
+    <div class="tbl"><table>
+      <thead><tr><th scope="col">Ação</th><th scope="col">Prioridade</th><th scope="col">Status</th></tr></thead>
+      <tbody>
+        <tr><td>Redefinir senha de root</td><td>Crítica</td><td>Concluído</td></tr>
+        <tr><td>Interface e Port Group</td><td>Crítica</td><td>Concluído</td></tr>
+        <tr><td>Reinício limpo do proxy</td><td>Crítica</td><td>Concluído</td></tr>
+        <tr><td>Trocar adaptador para VMXNET3</td><td>Média</td><td>Recomendado</td></tr>
+        <tr><td>open-vm-tools ativo</td><td>Média</td><td>Recomendado</td></tr>
+        <tr><td>Apache esperar contêiner saudável</td><td>Alta</td><td>Recomendado</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section class="panel" id="didatica" role="tabpanel" aria-labelledby="t-didatica">
+  <h2 class="ph">Versão didática</h2>
+  <div class="blk">
+    <h3>Como eu ensinaria este conceito</h3>
+    <p>O caso mostra que um sistema funciona em camadas e que um único sintoma pode esconder vários problemas empilhados. A turma aprende a testar de baixo para cima: primeiro “consigo entrar?”, depois “tenho rede?” e só então “o programa responde?”.</p>
+    <div class="cols2">
+      <div><h4>Público</h4><p>Ensino Médio técnico, cursos de redes e suporte e formação de professores de Computação.</p></div>
+      <div><h4>Pré-requisitos</h4><p>Noção de sistema operacional, endereço IP e site na internet.</p></div>
+      <div><h4>Analogia</h4><p>Mudança de casa: a chave antiga não abre a porta nova, o endereço no correio ainda é o antigo e, quando a loja abre, o estoque ainda está nas caixas. Cada problema só aparece quando o anterior é resolvido.</p></div>
+      <div><h4>Experimento mínimo</h4><p>Com uma máquina virtual de laboratório, a turma desliga a placa de rede, para o serviço web e anota o erro que o navegador mostra em cada caso. Depois tenta descobrir, só pelo erro, qual camada falhou.</p></div>
+      <div><h4>Erro comum</h4><p>Ver “erro 503” e concluir que o programa travou, sem conferir se o problema está no meio do caminho, no servidor que repassa os pedidos.</p></div>
+      <div><h4>Pergunta de reflexão</h4><p>Se quem tem acesso ao console consegue trocar a senha de root, como proteger um servidor contra isso?</p></div>
+    </div>
+    <p>O laboratório <a href="../../a-rede-parou/">A Rede Parou</a> usa o mesmo método de investigação com registros fictícios de uma escola.</p>
+  </div>
+</section>
+</main>
+
+<nav class="pager" aria-label="Outros estudos de caso">
+  <a href="../poc-virtualizacao/"><span>Caso anterior</span><strong>Avaliação de plataformas de virtualização</strong></a>
+  <a href="../../educacao/simulador-roteador/" style="text-align:right"><span>Trilha de educação</span><strong>Simulador de configuração de roteador</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
