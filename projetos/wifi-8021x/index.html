@@ -117,7 +117,7 @@
     <h4>1. Autenticar a máquina, não a pessoa</h4>
     <p>A autenticação baseada em conta de máquina foi escolhida porque celulares e tablets não possuem uma conta de computador no Active Directory. No PEAP-MSCHAPv2, um túnel TLS externo protege a credencial enviada dentro dele; com a condição de <em>grupo de computadores</em> no NPS, a única credencial aceita é a da conta de máquina, cuja senha fica armazenada na própria estação e nunca é conhecida pelo usuário. Saber a senha de um funcionário deixa de ser suficiente.</p>
     <h4>2. NPS local, e não na matriz</h4>
-    <p>O NPS foi mantido localmente porque a autenticação RADIUS atravessaria uma VPN com restrição de MTU herdada do protocolo de VPN (IKEv1). As mensagens EAP carregam certificados e geram pacotes UDP grandes; com a fragmentação comprometida, a autenticação falharia de forma intermitente. Com o NPS na filial, nenhum fluxo de autenticação depende da VPN.</p>
+    <p>O fluxo RADIUS utiliza UDP e, com um servidor central, atravessaria uma VPN com restrição de MTU. As mensagens EAP carregam a cadeia de certificados do servidor e geram pacotes grandes; somado ao overhead do túnel, esse tamanho provocava problemas de transmissão e, por consequência, de autenticação. Manter o NPS na filial eliminou esse trecho do caminho e a dependência de fragmentação, PMTUD e transporte pela VPN: nenhum fluxo de autenticação passa pelo túnel.</p>
     <h4>3. Um cliente RADIUS por access point, com Message-Authenticator obrigatório</h4>
     <p>Cada access point foi cadastrado como cliente RADIUS independente e, em todos, foi exigido o atributo <em>Message-Authenticator</em>. Isso mitiga o Blast-RADIUS (CVE-2024-3596), ataque de forja de resposta que afeta servidores RADIUS sem essa verificação.</p>
     <h4>4. Política de negação explícita</h4>
@@ -158,7 +158,7 @@
       <li>Equipamentos sem conta de máquina exigiram inventário e tratamento separados.</li>
       <li>A solução foi definida desde o início como etapa intermediária.</li>
     </ul>
-    <p>Essa limitação se confirmou em outubro, quando uma atualização do Windows passou a bloquear a credencial derivada de NTLMv1 usada pelo PEAP-MSCHAPv2. O diagnóstico está no <a href="../incidente-8021x-windows/">estudo de caso do incidente</a>.</p>
+    <p>Essa limitação se confirmou em outubro, quando uma atualização do Windows passou a bloquear o mecanismo do qual a autenticação automática da estação dependia: no cenário analisado, o fluxo usava credenciais derivadas de NTLM, e a política aplicada pela atualização bloqueou esse uso. O diagnóstico está no <a href="../incidente-8021x-windows/">estudo de caso do incidente</a>.</p>
     <p><strong>Próximo passo:</strong> migrar para EAP-TLS com certificados de máquina e reforçar o ciclo de emissão, renovação e revogação de certificados.</p>
   </div>
 </section>

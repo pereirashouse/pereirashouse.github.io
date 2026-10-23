@@ -56,6 +56,8 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 .edu-list li{display:flex;flex-direction:column;gap:2px;font-size:.92rem}
 .edu-list span{font-size:.83rem;color:var(--muted)}
 .sk-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.sk-group .sk-desc{margin:0;font-size:.9rem;color:var(--muted);max-width:68ch}
+.sk-group .sk-link{font-size:.86rem;align-self:flex-start}
 .sk-group h4{font-size:.83rem;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
 .cta{display:flex;flex-wrap:wrap;gap:10px}
 .btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font-weight:600;font-size:.93rem;text-decoration:none}
@@ -106,11 +108,12 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
   <section id="destaques" aria-labelledby="h-destaques">
     <div class="sec-head">
       <h2 id="h-destaques">Projetos em destaque</h2>
-      <p>Três estudos de caso para começar, cada um com página própria: problema, papel, decisões técnicas, validação e resultado. Os demais estão nas trilhas abaixo.</p>
+      <p>Quatro projetos para começar: três estudos de caso com página própria (problema, papel, decisões técnicas, validação e resultado) e a ferramenta em Python com código aberto. Os demais estão nas trilhas abaixo.</p>
     </div>
     <ul class="hl">
       <li class="infra"><a href="projetos/wifi-8021x/"><span class="k">Infraestrutura</span><strong>Wi-Fi corporativo com 802.1X</strong><span>Autenticação de máquinas, NPS, Active Directory e UniFi</span></a></li>
       <li class="infra"><a href="projetos/incidente-8021x-windows/"><span class="k">Infraestrutura</span><strong>Diagnóstico de incidente 802.1X</strong><span>Análise de logs após atualização do Windows</span></a></li>
+      <li class="infra"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener"><span class="k">Infraestrutura · Python</span><strong>Monitoramento de quedas de coletores Android em rede Wi-Fi</strong><span>Ferramenta em Python que coleta dados da controladora Wi-Fi a cada minuto e analisa as quedas, investigando a indisponibilidade de dispositivos móveis em ambiente corporativo. Código no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></span></a></li>
       <li class="edu"><a href="educacao/simulador-roteador/"><span class="k">Educação</span><strong>Simulador de configuração de roteador</strong><span>Projeto didático para aprendizagem de redes</span></a></li>
     </ul>
   </section>
@@ -595,24 +598,28 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
 
         <h3 style="margin:28px 0 16px">Competências técnicas</h3>
         <div class="sk-group">
-          <h4>Virtualização</h4>
-          <div class="chips"><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">KVM Oracle</span><span class="chip">Proxmox VE</span><span class="chip">Hyper-V</span></div>
-        </div>
-        <div class="sk-group">
-          <h4>Sistemas e identidade</h4>
-          <div class="chips"><span class="chip">Windows Server</span><span class="chip">Linux</span><span class="chip">Active Directory</span><span class="chip">Azure AD</span></div>
-        </div>
-        <div class="sk-group">
           <h4>Redes e segurança</h4>
-          <div class="chips"><span class="chip">Aruba / TP-Link</span><span class="chip">Wi-Fi Ubiquiti</span><span class="chip">FortiGate</span><span class="chip">802.1X / RADIUS</span><span class="chip">VLAN</span></div>
+          <p class="sk-desc">Desenho e operação de redes corporativas e Wi-Fi, segmentação por VLAN, autenticação 802.1X/RADIUS integrada ao Active Directory e firewalls.</p>
+          <div class="chips"><span class="chip">Aruba / TP-Link</span><span class="chip">Wi-Fi Ubiquiti</span><span class="chip">FortiGate</span><span class="chip">802.1X / RADIUS</span><span class="chip">VLAN</span><span class="chip">Active Directory</span><span class="chip">Azure AD</span></div>
+          <a class="sk-link" href="projetos/wifi-8021x/">Na prática: Wi-Fi corporativo com 802.1X <span aria-hidden="true">→</span></a>
         </div>
         <div class="sk-group">
-          <h4>Backup e monitoramento</h4>
-          <div class="chips"><span class="chip">Veeam</span><span class="chip">Dell PowerProtect</span><span class="chip">Zabbix</span><span class="chip">Grafana</span></div>
+          <h4>Virtualização e servidores</h4>
+          <p class="sk-desc">Avaliação, operação e migração de hipervisores e servidores Windows e Linux, com critérios de teste e plano de rollback.</p>
+          <div class="chips"><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">Proxmox VE</span><span class="chip">KVM Oracle</span><span class="chip">Hyper-V</span><span class="chip">Windows Server</span><span class="chip">Linux</span></div>
+          <a class="sk-link" href="projetos/poc-virtualizacao/">Na prática: PoC de virtualização <span aria-hidden="true">→</span></a>
         </div>
         <div class="sk-group">
-          <h4>Automação</h4>
-          <div class="chips"><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">GPO</span></div>
+          <h4>Proteção e observabilidade</h4>
+          <p class="sk-desc">Backup e recuperação de dados, monitoramento com alertas e análise de logs para separar falha real de alarme falso.</p>
+          <div class="chips"><span class="chip">Veeam</span><span class="chip">Dell PowerProtect</span><span class="chip">Zabbix</span><span class="chip">Grafana</span><span class="chip">Análise de logs</span></div>
+          <a class="sk-link" href="#p-alarme">Na prática: alarme falso com Zabbix <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="sk-group">
+          <h4>Automação e diagnóstico</h4>
+          <p class="sk-desc">Scripts para coletar dados, padronizar tarefas e diagnosticar falhas, incluindo integração com APIs de equipamentos.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">GPO</span><span class="chip">API UniFi</span></div>
+          <a class="sk-link" href="#p-monitor">Na prática: monitor de quedas Wi-Fi em Python <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
