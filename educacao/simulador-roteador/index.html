@@ -137,7 +137,7 @@
       <li>No desafio 3, a explicação livre é conferida somente pelo mínimo de 40 caracteres; seu conteúdo precisa de comparação com a referência e discussão com o professor.</li>
       <li>O professor não recebe respostas ou relatórios; a marcação de conclusão não comprova aprendizagem nem preserva a resposta que a originou.</li>
       <li>Respostas e critérios estão públicos no JavaScript e no README. Não há separação protegida entre versão do aluno e gabarito do professor.</li>
-      <li>Não há DHCP configurável, firewall, VLAN, rotas ou atualização de firmware. Testes automatizados de interface e auditoria de acessibilidade ainda são etapas pendentes.</li>
+      <li>Não há DHCP configurável, firewall, VLAN, rotas ou atualização de firmware. A suíte de interface cobre Chromium e duas telas emuladas, não aparelhos físicos, outros navegadores ou auditoria completa de acessibilidade.</li>
     </ul>
   </div>
   <div class="blk">
@@ -146,7 +146,7 @@
       <li>Cenários variados de varredura e log, sem apresentar o cenário fixo como medição real.</li>
       <li>Exportação das respostas para avaliação formativa pelo professor.</li>
       <li>Painel DHCP e desafio de rede de convidados isolada.</li>
-      <li>Smoke tests de interface, revisão de acessibilidade e organização dos materiais de aluno e professor.</li>
+      <li>Revisão de acessibilidade e organização dos materiais de aluno e professor.</li>
     </ul>
   </div>
 </section>
@@ -156,6 +156,11 @@
   <div class="blk">
     <p>O simulador está publicado: <a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">abrir a atividade<span class="sr-only"> (abre em nova aba)</span></a>. Esta descrição foi conferida em 23/10/2026 contra o <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/index.html" target="_blank" rel="noopener">código no commit <code>7b50973</code><span class="sr-only"> (abre em nova aba)</span></a> e seu <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/README.md" target="_blank" rel="noopener">README versionado<span class="sr-only"> (abre em nova aba)</span></a>.</p>
     <p class="note">A conferência desta página é documental, baseada na implementação. Não substitui um teste ponta a ponta de interface, auditoria de acessibilidade ou avaliação de aprendizagem em turma.</p>
+  </div>
+  <div class="blk">
+    <h3>Testes automatizados de interface</h3>
+    <p>Em 23/10/2026, a <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/actions/runs/39963051577" target="_blank" rel="noopener">execução na main<span class="sr-only"> (abre em nova aba)</span></a>, no commit <code>4a4286f</code>, aprovou <strong>38 execuções: 19 cenários em duas telas Chromium</strong>, computador (1280 × 800) e celular emulado (390 × 844), sem retentativas. A <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/4a4286fee0ea43b42b0b87808fcc63f09ee1bf5d/tests/interface.spec.cjs" target="_blank" rel="noopener">suíte versionada<span class="sr-only"> (abre em nova aba)</span></a> completa os seis desafios pelos controles reais e verifica feedback, configuração não salva, campos inválidos, progresso, reset, falhas de armazenamento, teclado básico e abertura do arquivo offline.</p>
+    <p class="note">O HTML da atividade permaneceu inalterado. Os testes usam dados fictícios e não acessam equipamentos ou respostas de alunos. O resultado valida o artefato local, não disponibilidade do Pages, aparelhos físicos, leitores de tela, contraste/WCAG completos ou aprendizagem em turma. Para a evidência mais recente, consulte o <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/actions/workflows/testes-interface.yml?query=branch%3Amain" target="_blank" rel="noopener">workflow de interface na main<span class="sr-only"> (abre em nova aba)</span></a>.</p>
   </div>
   <figure class="diag">
     <svg viewBox="0 0 860 300" role="img" aria-labelledby="d5t d5d">
