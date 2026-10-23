@@ -63,7 +63,7 @@ COMPETENCIAS = """<div class="sk">
 PROJ_TI = """<ul>
 <li><b>Wi-Fi corporativo com 802.1X:</b> política de conta de máquina, NPS/AD/GPO, piloto com rollback e bloqueio de dispositivos pessoais.</li>
 <li><b>Modernização de rede de filial industrial:</b> levantamento sem documentação, parser de configurações em Python, drift, VLANs e roteiro por risco.</li>
-<li><b>Monitor de quedas Wi-Fi de coletores WMS:</b> agente Python open source com 20 testes automatizados e CI.</li>
+<li><b>Monitor de quedas Wi-Fi de coletores WMS:</b> agente Python open source com testes automatizados, CI multiversão e TLS seguro por padrão.</li>
 <li><b>Alarme falso de robôs industriais:</b> causa raiz em canal 2,4 GHz saturado; RSSI mínimo resolveu sem afetar os robôs.</li>
 </ul>"""
 

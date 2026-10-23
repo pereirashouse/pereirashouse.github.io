@@ -19,6 +19,14 @@ Portfólio público que reúne experiência profissional em **infraestrutura de 
 - [Troubleshooting pós-migração de VM](https://pereirashouse.github.io/projetos/troubleshooting-pos-migracao/): migração KVM → VMware com três bloqueios em cadeia (acesso, rede e HTTP 503), resolvidos sem rollback.
 - [Monitoramento Wi-Fi com Python](https://github.com/pereirashouse/monitoramentowificompython): código de coleta de eventos de queda de coletores e geração de relatórios.
 
+### Evidência de testes do monitor
+
+Em **23/10/2026**, a [execução na main](https://github.com/pereirashouse/monitoramentowificompython/actions/runs/39954078292), no commit `646e216`, aprovou **39 testes em cada versão de Python 3.10, 3.11, 3.12 e 3.13**. A suíte inclui demonstração sem controladora e regressões de TLS seguro por padrão, CA e configuração. Esse resultado se refere ao código do monitor, não a testes automatizados deste site.
+
+A API é simulada nos testes e os contextos SSL são inspecionados. O CI não constitui teste ponta a ponta contra a controladora nem validação independente dos resultados profissionais relatados.
+
+Para resultados mais recentes, consulte as [execuções do workflow na main](https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain). Não atualize uma contagem histórica sem verificar a execução correspondente: apresente número, data e versão juntos. As descrições curtas e o currículo evitam contagens fixas para não envelhecer a cada inclusão de testes.
+
 ## Materiais educacionais
 
 [Simulador de configuração de roteador](https://pereirashouse.github.io/educacao/simulador-roteador/) apresenta o contexto, os desafios e as limitações do objeto de aprendizagem. Sua implementação está no [repositório do simulador](https://github.com/pereirashouse/simulador-configura-o-roteador).
