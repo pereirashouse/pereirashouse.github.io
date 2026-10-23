@@ -20,9 +20,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Jeferson Luiz Pereira","jobTitle":"Analista de Infraestrutura de TI Sênior","url":"https://pereirashouse.github.io/","sameAs":["https://github.com/pereirashouse","https://www.linkedin.com/in/jefersonluizpereira"],"knowsAbout":["Infraestrutura de TI","Redes","Wi-Fi corporativo","802.1X","Virtualização","Active Directory","BNCC Computação","Pensamento Computacional"],"alumniOf":{"@type":"CollegeOrUniversity","name":"UTFPR"}}
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
 <style>
 /* Página principal: entrada, trilhas e seção Sobre */
@@ -108,14 +106,15 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
   <section id="destaques" aria-labelledby="h-destaques">
     <div class="sec-head">
       <h2 id="h-destaques">Projetos em destaque</h2>
-      <p>Quatro projetos para começar: três estudos de caso com página própria (problema, papel, decisões técnicas, validação e resultado) e a ferramenta em Python com código aberto. Os demais estão nas trilhas abaixo.</p>
+      <p>Quatro projetos para começar: dois estudos de caso de infraestrutura, um monitor em Python com estudo de caso próprio e um projeto de Computação e Educação. Os demais estão nas trilhas abaixo.</p>
     </div>
     <ul class="hl">
       <li class="infra"><a href="projetos/wifi-8021x/"><span class="k">Infraestrutura</span><strong>Wi-Fi corporativo com 802.1X</strong><span>Autenticação de máquinas, NPS, Active Directory e UniFi</span></a></li>
       <li class="infra"><a href="projetos/incidente-8021x-windows/"><span class="k">Infraestrutura</span><strong>Diagnóstico de incidente 802.1X</strong><span>Análise de logs após atualização do Windows</span></a></li>
-      <li class="infra"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener"><span class="k">Infraestrutura · Python</span><strong>Monitoramento de quedas de coletores Android em rede Wi-Fi</strong><span>Ferramenta em Python que coleta dados da controladora Wi-Fi a cada minuto e analisa as quedas, investigando a indisponibilidade de dispositivos móveis em ambiente corporativo. Código no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></span></a></li>
+      <li class="infra"><a href="projetos/quedas-coletores-wifi/"><span class="k">Infraestrutura · Python</span><strong>Monitoramento de quedas de coletores Android em rede Wi-Fi</strong><span>Agente Python para medir quedas via API UniFi, com testes automatizados e relatórios.</span></a></li>
       <li class="edu"><a href="educacao/simulador-roteador/"><span class="k">Educação</span><strong>Simulador de configuração de roteador</strong><span>Projeto didático para aprendizagem de redes</span></a></li>
     </ul>
+    <p class="links"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">Ver código do monitor Python ↗<span class="sr-only"> (abre em nova aba)</span></a></p>
   </section>
 
   <section id="infra" aria-labelledby="h-infra">
@@ -141,7 +140,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
         <h3><a href="projetos/wifi-8021x/">Wi-Fi corporativo com autenticação 802.1X</a></h3>
         <p class="desc">Implantação de autenticação por conta de máquina em rede Wi-Fi corporativa, cobrindo 60 access points e bloqueando dispositivos pessoais.</p>
         <div class="row"><span>Tecnologias</span><p class="tech">NPS · Active Directory · UniFi · GPO · PEAP-MSCHAPv2</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Implantação concluída</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
         <a class="go" href="projetos/wifi-8021x/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Wi-Fi corporativo com autenticação 802.1X</span></a>
       </article>
       <article class="card infra-c">
@@ -163,7 +162,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
       <article class="card infra-c">
         <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="30" y="30" width="40" height="72" rx="5"/><rect x="36" y="38" width="28" height="30" rx="2"/><path class="m" d="M40 76h20M40 84h20M40 92h12"/><path d="M78 30a26 26 0 0 1 0 30M86 22a38 38 0 0 1 0 46"/><path d="M96 45H120" stroke-dasharray="4 4"/><circle class="bg" cx="146" cy="50" r="22"/><path d="M134 50l8 8l14-16"/><path d="M162 66L182 88" stroke-width="6"/><circle class="s" cx="120" cy="45" r="3"/></svg></figure>
         <h3><a href="projetos/quedas-coletores-wifi/">Troubleshooting de quedas dos coletores Wi-Fi</a></h3>
-        <p class="desc">Um sintoma, seis causas: rádio, roaming, RSSI mínimo, aplicativo do coletor, temporizador e cobertura, isoladas com controladora, logs e captura de pacotes.</p>
+        <p class="desc">Um sintoma, seis frentes de investigação, com correções e hipóteses em estados diferentes.</p>
         <div class="row"><span>Tecnologias</span><p class="tech">UniFi · tcpdump · Linux · Python · análise de RF</p></div>
         <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
         <a class="go" href="projetos/quedas-coletores-wifi/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Troubleshooting de quedas dos coletores Wi-Fi</span></a>
@@ -220,7 +219,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
         <p class="desc">Simulador em que a turma monta a rede de uma escola fictícia: VLANs, endereços IP, gateway, equipamentos e firewall, em cinco missões com defeitos reais.</p>
         <div class="row"><span>Tecnologias</span><p class="tech">HTML · CSS · JavaScript · funciona offline</p></div>
         <div class="row"><span>Público e BNCC</span><p class="alc">Desenvolvido para turmas do 8º e 9º ano · alinhado às habilidades EF07CO06, EF07CO07, EF08CO06 e EF08CO10</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul></div>
         <a class="go" href="rede-da-escola/">Abrir o simulador <span aria-hidden="true">→</span><span class="sr-only">: Rede da Escola</span></a>
       </article>
       <article class="card edu-c">
@@ -229,7 +228,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
         <p class="desc">Laboratório de investigação: a partir de registros fictícios, estudantes descobrem por que a rede de uma escola parou, testando hipóteses com evidências.</p>
         <div class="row"><span>Tecnologias</span><p class="tech">HTML · CSS · JavaScript · logs fictícios</p></div>
         <div class="row"><span>Público e BNCC</span><p class="alc">Desenvolvido para o 9º ano e o Ensino Médio · alinhado às habilidades EF07CO06, EF07CO07 e EF08CO06</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul></div>
         <a class="go" href="a-rede-parou/">Investigar o caso <span aria-hidden="true">→</span><span class="sr-only">: A Rede Parou</span></a>
       </article>
       <article class="card edu-c">
@@ -285,7 +284,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
           <p class="trilha">Infraestrutura · também na trilha de Educação</p>
           <h3><a href="projetos/wifi-8021x/">Autenticação de máquinas em Wi-Fi corporativo com NPS e Active Directory</a></h3>
           <p>802.1X em 60 access points, substituindo senha compartilhada; inclui versão didática sobre autenticação de rede.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Implantação concluída</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
           <div class="links"><a href="projetos/wifi-8021x/">Ver estudo de caso →</a></div>
         </div>
       </li>
@@ -314,7 +313,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
         <div class="body">
           <p class="trilha">Infraestrutura de TI</p>
           <h3><a href="projetos/quedas-coletores-wifi/">Troubleshooting de quedas dos coletores Wi-Fi em operação logística</a></h3>
-          <p>Seis causas independentes para um mesmo sintoma, separadas com hipóteses, cinco fontes de evidência e correções em rodadas com rollback.</p>
+          <p>Seis frentes de investigação para um mesmo sintoma, com hipóteses, cinco fontes de evidência e correções em rodadas com rollback.</p>
           <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
           <div class="links"><a href="projetos/quedas-coletores-wifi/">Ver estudo de caso →</a></div>
         </div>
@@ -345,7 +344,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
           <p class="trilha">Infraestrutura de TI</p>
           <h3>Offboarding seguro: bloqueio de acessos no desligamento de colaborador</h3>
           <p>Runbook de 7 blocos que revoga todos os acessos durante a conversa de desligamento, com evidência auditável e cuidado extra para contas privilegiadas.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li></ul>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">?</span><span class="sr-only">Status: </span>Status não informado</li></ul>
           <details class="more"><summary>Ver contexto, decisões e validação</summary>
             <p>Runbook estruturado em sete blocos para garantir que, quando um colaborador é desligado, todos os acessos sejam revogados de forma consistente e auditável — do Active Directory aos hypervisors e storages. O procedimento distingue o perfil comum do colaborador com acesso privilegiado (TI), onde os riscos são significativamente maiores.</p>
             <div class="fields">
@@ -405,9 +404,9 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
             <div class="fields">
           <div class="field"><h4>O alarme e sua regra</h4><p>O sistema de monitoramento testava a porta de aplicação de cada robô a cada 30 segundos. Dois testes consecutivos sem resposta (1 minuto) abriam um card de "fora da rede". O card só fechava após quatro respostas positivas com menos de quatro mudanças em 30 minutos — regra pensada para evitar oscilação, mas que esticava o alarme muito além da falha real.</p></div>
           <div class="field"><h4>O que foi descartado</h4><ul><li><strong>Queda de Wi-Fi:</strong> a controladora registrava todos os robôs conectados sem interrupção, sinal estável entre −53 e −58 dBm.</li><li><strong>Falha de antena:</strong> sem reinicializações no período; 100 % dos pings do monitor respondidos.</li><li><strong>Mudança de configuração:</strong> logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li><li><strong>Defeito em um robô:</strong> os quatro ficaram lentos exatamente ao mesmo tempo, descartando problema isolado de hardware.</li></ul></div>
-          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, provocando as falhas consecutivas e o alarme.</p></div>
+          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, em correlação temporal com as falhas consecutivas e o alarme; esse salto, por si só, não prova um timeout do teste. O timeout configurado não é publicado.</p></div>
           <div class="field"><h4>Como foi apurado</h4><p>Análise inteiramente passiva: leitura da controladora Wi-Fi (somente leitura) para estado dos robôs, log de conexões da antena e log de administração; monitoramento com dados de ping (a cada 3 min), teste TCP de porta (a cada 30 s) e ocupação do canal 2,4 GHz (a cada 1 min). Nenhuma configuração foi alterada durante a investigação.</p></div>
-          <div class="field"><h4>Solução implantada em produção</h4><p>Ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados e reconectam a uma antena mais próxima. Os robôs industriais, com sinal entre −53 e −58 dBm, não são afetados. Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p></div>
+          <div class="field"><h4>Solução implantada em produção</h4><p>Ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados; a reconexão a um AP mais próximo depende do cliente e da cobertura disponível e não é garantida. Os robôs industriais, com sinal entre −53 e −58 dBm, não são afetados. Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p></div>
         </div>
           </details>
           
@@ -415,7 +414,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
         </div>
       </li>
       <li id="p-wms" class="infra" data-tags="infra redes concluido">
-        <p class="when">Sem data</p>
+        <p class="when">Período não informado</p>
         <div class="body">
           <p class="trilha">Infraestrutura de TI</p>
           <h3>Sessões estáveis para coletores de dados no WMS</h3>
@@ -426,13 +425,19 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
             <div class="fields">
           <div class="field"><h4>Problema</h4><p>O roaming entre antenas Wi-Fi gerava micro-quedas. O aplicativo do coletor perdia a sessão, mas o servidor mantinha o processo vivo. Na reconexão, as tentativas em rajada eram tratadas pelo xinetd como ameaça e o IP do coletor era bloqueado.</p></div>
           <div class="field"><h4>Diagnóstico</h4><p>Análise de logs do xinetd e monitoramento da rede, cruzando os bloqueios <span class="mono">connections limit per_source</span> com os momentos de troca de antena.</p></div>
-          <div class="field"><h4>Solução</h4><ul><li>Limites do serviço ajustados ao volume real de coletores.</li><li>TCP keep-alive no kernel para derrubar sessões mortas em menos de 2 minutos.</li><li>Plano B documentado: keep-alive no app e emuladores com sessão persistente.</li></ul></div>
+          <div class="field"><h4>Solução</h4><ul><li>Limites do serviço ajustados ao volume real de coletores.</li><li>Parâmetros de TCP keep-alive para sockets do serviço com <span class="mono">SO_KEEPALIVE</span> habilitado, visando encerrar sessões mortas em menos de 2 minutos.</li><li>Plano B documentado: keep-alive no app e emuladores com sessão persistente.</li></ul></div>
           <div class="field"><h4>Validação</h4><p>Logs passaram a mostrar encerramentos limpos de sessão e nenhum bloqueio por limite de origem.</p></div>
         </div>
-            <pre><span class="c"># Limpeza de conexões presas: 60 s de espera, sondas a cada 10 s, 3 tentativas</span>
+            <pre><span class="c"># Exemplo temporário; o serviço precisa habilitar SO_KEEPALIVE no socket</span>
 sysctl -w net.ipv4.tcp_keepalive_time=60
 sysctl -w net.ipv4.tcp_keepalive_intvl=10
-sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
+sysctl -w net.ipv4.tcp_keepalive_probes=3
+
+<span class="c"># Persistência: /etc/sysctl.d/99-wms-keepalive.conf</span>
+<span class="c"># Depois de criar o arquivo, aplicar e verificar:</span>
+sysctl --system
+sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_keepalive_probes</pre>
+            <p class="note">Os comandos <span class="mono">sysctl -w</span> são apenas um exemplo temporário. Para persistir, é preciso criar o arquivo em <span class="mono">/etc/sysctl.d/</span>, aplicar a configuração e verificar os valores; este trecho não afirma que a persistência foi executada.</p>
           </details>
           
           <div class="chips"><span class="chip">Linux</span><span class="chip">xinetd</span><span class="chip">TCP keep-alive</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS</span><span class="chip">Documentação técnica</span></div>
@@ -480,7 +485,7 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
           <p class="trilha">Computação e Educação</p>
           <h3>Rede da Escola: simulador de redes para o Ensino Fundamental</h3>
           <p>Simulador web para o 8º e o 9º ano montarem e corrigirem a rede de uma escola fictícia, com teste de conectividade e relatório final.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul>
           <details class="more"><summary>Ver contexto, decisões e validação</summary>
             <p>A turma atua como equipe de infraestrutura de uma escola com laboratório, secretaria, biblioteca, sala dos professores, visitantes, servidores, impressoras e câmeras. O simulador aponta conflito de IP, ausência de gateway, segmentação inadequada e equipamento subdimensionado, e o teste de ping mostra em que ponto o pacote parou. Funciona no celular e sem internet.</p>
             <div class="fields">
@@ -498,7 +503,7 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
           <p class="trilha">Computação e Educação</p>
           <h3>A Rede Parou: investigação de incidente com logs</h3>
           <p>Laboratório web em que grupos do 9º ano e do Ensino Médio investigam, com registros fictícios, por que a rede de uma escola parou.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul>
           <details class="more"><summary>Ver contexto, decisões e validação</summary>
             <p>Os estudantes recebem chamados, registro de mudanças e logs do servidor DHCP, do firewall, do switch, do sistema de notas e do servidor de arquivos. A causa é um servidor DHCP indevido, e o caso traz cinco pistas falsas plausíveis. O grupo marca evidências, a linha do tempo se monta sozinha e cada hipótese precisa ser confirmada ou descartada antes do laudo.</p>
             <div class="fields">
@@ -531,12 +536,12 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
         </div>
       </li>
       <li id="p-oficina" class="edu" data-tags="edu">
-        <p class="when">Sem data</p>
+        <p class="when">Período não informado</p>
         <div class="body">
           <p class="trilha">Computação e Educação</p>
           <h3>Letramento e Pensamento Computacional: da BNCC à prática inclusiva</h3>
           <p>Oficina desplugada para professores de escolas rurais: cada grupo sai com um mini-plano de aula da própria disciplina.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li></ul>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">?</span><span class="sr-only">Status: </span>Status não informado</li></ul>
           <details class="more"><summary>Ver contexto, decisões e validação</summary>
             <p>Oficina para professores de escolas com pouca estrutura, sobretudo da zona rural. A proposta mostra que dá para ensinar Computação sem computador, partindo da cultura local dos alunos.</p>
             <div class="fields">
@@ -618,7 +623,7 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
         <div class="sk-group">
           <h4>Redes e segurança</h4>
           <p class="sk-desc">Desenho e operação de redes corporativas e Wi-Fi, segmentação por VLAN, autenticação 802.1X/RADIUS integrada ao Active Directory e firewalls.</p>
-          <div class="chips"><span class="chip">Aruba / TP-Link</span><span class="chip">Wi-Fi Ubiquiti</span><span class="chip">FortiGate</span><span class="chip">802.1X / RADIUS</span><span class="chip">VLAN</span><span class="chip">Active Directory</span><span class="chip">Azure AD</span></div>
+          <div class="chips"><span class="chip">Aruba / TP-Link</span><span class="chip">Wi-Fi Ubiquiti</span><span class="chip">FortiGate</span><span class="chip">802.1X / RADIUS</span><span class="chip">VLAN</span><span class="chip">Active Directory</span><span class="chip">Microsoft Entra ID (Azure AD)</span></div>
           <a class="sk-link" href="projetos/wifi-8021x/">Na prática: Wi-Fi corporativo com 802.1X <span aria-hidden="true">→</span></a>
         </div>
         <div class="sk-group">
@@ -653,7 +658,7 @@ sysctl -w net.ipv4.tcp_keepalive_probes=3</pre>
     <a href="curriculo/jeferson-pereira-curriculo-ti.pdf" download>Currículo TI (PDF)</a>
     <a href="curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Currículo Educação (PDF)</a>
   </footer>
-  <p class="updated">Última atualização: 22 de outubro de 2026</p>
+  <p class="updated">Última atualização: 23 de outubro de 2026</p>
 </div>
 <script src="assets/site.js"></script>
 </body>

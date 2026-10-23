@@ -3,29 +3,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jeferson Luiz Pereira · Currículo · Computação e Educação</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/fonts.css">
 <style>:root{--c:#23774A}
-@page{size:A4;margin:16mm 16mm 14mm}
+@page{size:A4;margin:12mm 14mm 10mm}
 *{box-sizing:border-box}
-body{margin:0;color:#15211F;font:10pt/1.45 "Public Sans",Arial,sans-serif;background:#fff}
-.pg{max-width:780px;margin:0 auto;padding:24px 16px}
+body{margin:0;color:#15211F;font:10.5pt/1.28 "Public Sans",Arial,sans-serif;background:#fff}
+.pg{max-width:780px;margin:0 auto;padding:20px 12px}
 @media print{.pg{padding:0;max-width:none}}
-h1{font:700 21pt/1.1 "Familjen Grotesk",Arial,sans-serif;margin:0}
-.cargo{margin:4px 0 6px;font-weight:600;color:var(--c)}
-.contato{font-size:9pt;color:#56655F;display:flex;flex-wrap:wrap;gap:2px 14px}
+h1{font:700 20pt/1.05 "Familjen Grotesk",Arial,sans-serif;margin:0}
+.cargo{margin:2px 0 4px;font-weight:600;color:var(--c)}
+.contato{font-size:8.8pt;line-height:1.25;color:#56655F;display:flex;flex-wrap:wrap;gap:1px 10px}
 .contato a{color:inherit;text-decoration:none}
-h2{font:700 11pt "Familjen Grotesk",Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:var(--c);
-   border-bottom:1.5px solid var(--c);padding-bottom:2px;margin:16px 0 8px}
-p{margin:0 0 6px}
-ul{margin:0;padding-left:16px}
-li{margin-bottom:3px}
-.item{margin-bottom:8px;break-inside:avoid}
-.item .t{display:flex;justify-content:space-between;gap:12px;font-weight:600}
-.item .t span{font-weight:400;color:#56655F;font-size:9pt;white-space:nowrap}
-.item .l{font-size:9pt;color:#56655F}
-.sk{display:grid;grid-template-columns:150px 1fr;gap:3px 12px;font-size:9.5pt}
+h2{font:700 10.8pt/1.1 "Familjen Grotesk",Arial,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:var(--c);
+   border-bottom:1.5px solid var(--c);padding-bottom:2px;margin:10px 0 5px}
+p{margin:0 0 4px}
+ul{margin:0;padding-left:15px}
+li{margin-bottom:1px}
+.item{margin-bottom:5px;break-inside:avoid}
+.item .t{display:flex;justify-content:space-between;gap:8px;font-weight:600;line-height:1.2}
+.item .t span{font-weight:400;color:#56655F;font-size:8.8pt;white-space:nowrap}
+.item .l{font-size:8.8pt;color:#56655F}
+.sk{display:grid;grid-template-columns:138px 1fr;gap:2px 9px;font-size:9.3pt;line-height:1.2}
 .sk b{font-weight:600}
-.nota{font-size:8.5pt;color:#56655F;margin-top:14px}
+.extra{font-size:9.5pt;margin-top:4px}
+.nota{font-size:8.2pt;line-height:1.1;color:#56655F;margin-top:2px}
 </style></head>
 <body><div class="pg">
 <h1>Jeferson Luiz Pereira</h1>
@@ -35,38 +36,35 @@ li{margin-bottom:3px}
 <a href="https://pereirashouse.github.io/">pereirashouse.github.io</a>
 <a href="https://github.com/pereirashouse">github.com/pereirashouse</a></p>
 <h2>Resumo</h2>
-<p>Licenciando em Computação com prática profissional em infraestrutura de TI. Produzo materiais para a rede pública alinhados à BNCC da Computação, pensados para escolas com pouca infraestrutura: simuladores que funcionam offline e no celular, laboratórios com casos reais e atividades desplugadas.</p>
-<p>A docência é a evolução da mentoria técnica: orientar colegas, escrever instruções de trabalho e runbooks e explicar incidentes para quem não é da área. Casos reais de infraestrutura, sem dados internos, viram material didático alinhado à BNCC.</p>
-<h2>Materiais didáticos</h2><ul>
-<li><b>Rede da Escola</b> (simulador web, offline): desenvolvido para o 8º e 9º ano; alinhado a EF07CO06, EF07CO07, EF08CO06 e EF08CO10.</li>
-<li><b>A Rede Parou</b> (laboratório de investigação com logs fictícios): 9º ano e Ensino Médio; alinhado a EF07CO06, EF07CO07 e EF08CO06.</li>
-<li><b>Operação Anzol</b> (jogo de perícia contra golpes digitais, 60 min): 9º ano; alinhado a EF09CO04 e EF09CO10.</li>
-<li><b>Simulador de configuração de roteador</b> e IIR “A invisibilidade do Wi-Fi”: 9º ano, eixo Mundo Digital, interdisciplinar com Física e Matemática.</li>
-<li><b>Oficina de Letramento e Pensamento Computacional:</b> formação desplugada para professores de escolas rurais.</li>
-<li><b>Versão didática do 802.1X:</b> atividade desplugada sobre senha, usuário e conta de máquina.</li>
-</ul>
+<p>Licenciando em Computação e analista sênior de infraestrutura. Desenvolve materiais de Computação alinhados à BNCC para contextos de pouca infraestrutura, com versões offline/desplugadas, planejamento por investigação e avaliação formativa.</p>
+<h2>Materiais e método</h2><ul>
+<li><b>Rede da Escola</b> (protótipo publicado, offline): simulador para 8º/9º ano; hipótese, verificação e ping; relatório e rubrica de endereçamento, diagnóstico, segurança e comunicação; EF07CO06, EF07CO07, EF08CO06 e EF08CO10.</li>
+<li><b>A Rede Parou</b> (protótipo publicado): laboratório com logs fictícios para 9º ano/Ensino Médio; método científico, papéis, três pistas graduais e versão impressa; EF07CO06, EF07CO07 e EF08CO06.</li>
+<li><b>Operação Anzol</b> (publicado): jogo de perícia de 60 min para 9º ano; Três Momentos Pedagógicos, papéis alternados, protocolo P.A.R.E. e avaliação formativa com laudo, rubrica e ticket de saída; EF09CO04 e EF09CO10.</li>
+<li><b>Do Planejamento à Prática</b> (artigo publicado): pipeline em quatro etapas — captura, seleção/sanitização com revisão humana, transposição BNCC e publicação versionada de planos de aula e rubricas.</li>
+</ul><p class="extra"><b>Outros materiais:</b> simulador de configuração de roteador e IIR “A invisibilidade do Wi-Fi” (9º ano, Mundo Digital, Física e Matemática); oficina desplugada de Letramento e Pensamento Computacional; versão didática do 802.1X.</p>
 <h2>Formação</h2>
 <div class="item"><p class="t">Licenciatura em Computação (cursando) <span>UTFPR · desde fev. 2024</span></p></div>
 <div class="item"><p class="t">Técnico em Administração</p></div>
 
 <h2>Experiência profissional</h2>
 <div class="item"><p class="t">Analista de Infraestrutura Sênior <span>mai. 2026 – atual</span></p><p class="l">Indústria · Paraná</p>
-<ul><li>Conduziu a PoC de substituição do VMware (Sangfor HCI e Proxmox VE), com critérios de rollback formalizados antes da implantação e executados quando o risco se confirmou.</li>
-<li>Implantou autenticação 802.1X por conta de máquina (NPS, Active Directory, GPO) em 60 access points UniFi.</li>
-<li>Análise de Wi-Fi com Python e API UniFi; automação com PowerShell e GPO; backup Veeam e Dell PowerProtect.</li></ul></div>
+<ul><li>PoC de substituição do VMware por Sangfor HCI e Proxmox VE, com critérios de rollback definidos antes da implantação e executados quando o risco se confirmou.</li>
+<li>802.1X por conta de máquina (NPS, Active Directory, GPO) em 60 APs UniFi.</li>
+<li>Análise de Wi-Fi com Python/API UniFi; automação PowerShell/GPO; backup Veeam e Dell PowerProtect.</li></ul></div>
 <div class="item"><p class="t">Analista de TI Pleno <span>set. 2022 – mai. 2026</span></p><p class="l">Indústria · Paraná</p>
-<ul><li>Infraestrutura para 3 fábricas e 10 centros de distribuição: switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware e KVM, Zabbix/Grafana, Dell PowerProtect.</li></ul></div>
+<ul><li>Infraestrutura para 3 fábricas e 10 centros de distribuição: switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware/KVM, Zabbix/Grafana e Dell PowerProtect.</li></ul></div>
 <div class="item"><p class="t">Analista de TI Júnior <span>ago. 2021 – set. 2022</span></p><p class="l">Indústria · Paraná</p>
-<ul><li>Suporte de infraestrutura, usuários no AD, antivírus, Wi-Fi Ubiquiti, VMware vSphere e KVM Oracle, monitoramento com Zabbix e Grafana.</li></ul></div>
+<ul><li>Suporte de infraestrutura e usuários no AD; antivírus, Wi-Fi Ubiquiti, VMware vSphere, KVM Oracle, Zabbix e Grafana.</li></ul></div>
 <div class="item"><p class="t">Analista Financeiro <span>mar. 2014 – set. 2019</span></p><p class="l">Multinacional de embalagens · Paraná</p></div>
 <div class="item"><p class="t">Assistente de TI <span>jan. 2012 – abr. 2014</span></p><p class="l">Empresa de fundição · Paraná · Help Desk N1/N2 e rede local</p></div>
 
 <h2>Competências técnicas</h2><div class="sk">
 <b>Virtualização</b><span>VMware vSphere · Sangfor HCI · KVM Oracle · Proxmox VE · Hyper-V</span>
-<b>Sistemas e identidade</b><span>Windows Server · Linux · Active Directory · Azure AD</span>
+<b>Sistemas e identidade</b><span>Windows Server · Linux · Active Directory · Microsoft Entra ID (Azure AD)</span>
 <b>Redes e segurança</b><span>Aruba / TP-Link · Wi-Fi Ubiquiti · FortiGate · 802.1X / RADIUS · VLAN</span>
 <b>Backup e monitoramento</b><span>Veeam · Dell PowerProtect · Zabbix · Grafana</span>
 <b>Automação</b><span>Python · PowerShell · GPO</span>
 </div>
-<p class="nota">Endereços, nomes de servidores, domínios e nomes de empresas omitidos por confidencialidade. Estudos de caso completos em pereirashouse.github.io.</p>
+<p class="nota">Confidencialidade: endereços, nomes de servidores, domínios e empresas omitidos. Estudos completos: pereirashouse.github.io.</p>
 </div></body></html>

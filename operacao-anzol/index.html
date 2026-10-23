@@ -6,11 +6,9 @@
 <style>body{margin:0}</style>
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>Operação Anzol</title>
-<meta name="description" content="Operação Anzol: laboratório web de perícia contra golpes digitais para o 9º ano, alinhado à BNCC da Computação. Funciona no celular e sem internet.">
+<meta name="description" content="Operação Anzol: laboratório web de perícia contra golpes digitais para o 9º ano, alinhado à BNCC da Computação. Funciona no celular e offline por arquivo HTML local.">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/fonts.css">
 <style>
   /* Layout: faixa de comando no topo, uma tela por missão; Missões 1 e 3 em duas colunas no desktop, uma no celular.
      Conceito: laboratório de perícia. Pistas são marcadas com caneta marca-texto; o dono real de um endereço vira etiqueta. */
@@ -380,6 +378,13 @@
 <main class="gutter">
   <div class="wrap" id="view"></div>
 </main>
+
+<footer class="gutter">
+  <div class="wrap" style="padding:20px 0;color:var(--muted);font-size:.9rem">
+    <p><a href="../#edu">Voltar ao portfólio</a> · <a href="index.html" download>Baixar HTML para uso offline</a></p>
+    <p>Abra o arquivo baixado no navegador. Sem os arquivos de fontes, a atividade usa fontes de sistema. Reabrir a URL hospedada continua exigindo conexão.</p>
+  </div>
+</footer>
 
 <div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="ov-titulo"></div>
 <div class="toast" id="toast" hidden role="status"></div>

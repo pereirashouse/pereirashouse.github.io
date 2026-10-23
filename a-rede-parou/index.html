@@ -68,6 +68,7 @@ textarea{width:100%;min-height:3.2em;resize:vertical}
 </head>
 <body>
 <header>
+  <p style="margin:0 0 8px"><a href="../" style="color:var(--acc)">← Voltar ao portfólio</a></p>
   <h1>A Rede Parou</h1>
   <p class="muted">Laboratório de investigação com registros fictícios. Nenhum dado aqui é de uma escola real.</p>
 </header>
@@ -81,7 +82,7 @@ textarea{width:100%;min-height:3.2em;resize:vertical}
 
   <section class="card">
     <h2>1. Registros coletados</h2>
-    <div class="fontes" id="fontes" role="tablist"></div>
+    <div class="fontes" id="fontes" role="group" aria-label="Filtrar registros por fonte"></div>
     <p class="desc muted" id="descFonte"></p>
     <div class="row" style="margin-bottom:8px">
       <label for="filtro">Procurar</label>
@@ -214,10 +215,11 @@ function destacar(texto, termo){
 function renderFontes(){
   $("#fontes").innerHTML = FONTES.map(([f,n])=>{
     const qtd = Object.keys(E.marcadas).filter(k=>k.startsWith(f+"#")).length;
-    return `<button role="tab" aria-pressed="${f===E.fonte}" data-fonte="${f}">${esc(n)}${qtd?` (${qtd})`:""}</button>`;
+    return `<button type="button" aria-pressed="${f===E.fonte}" data-fonte="${f}" aria-label="Filtrar por ${esc(n)}">${esc(n)}${qtd?` (${qtd})`:""}</button>`;
   }).join("");
   const fo = FONTES.find(x=>x[0]===E.fonte);
   $("#descFonte").textContent = `${fo[2]} Arquivo: ${fo[0]}`;
+  document.querySelectorAll("[data-fonte-busca]").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.fonteBusca===E.fonte)));
 }
 function renderLog(){
   const termo = $("#filtro").value.trim();
@@ -316,7 +318,7 @@ $("#btnTodas").onclick = ()=>{
   const termo = $("#filtro").value.trim();
   if(!termo){ $("#busca").innerHTML = `<p class="muted">Digite um termo para procurar.</p>`; return; }
   const res = FONTES.map(([f,n])=>[n, linhas(f).filter(t=>t.toLowerCase().includes(termo.toLowerCase())).length, f]).filter(x=>x[1]);
-  $("#busca").innerHTML = `<p style="margin:8px 0 0">“${esc(termo)}” aparece em: ${res.length ? res.map(([n,c,f])=>`<button data-fonte-busca="${f}">${esc(n)} (${c})</button>`).join(" ") : "nenhum registro"}</p>`;
+  $("#busca").innerHTML = `<p style="margin:8px 0 0">“${esc(termo)}” aparece em: ${res.length ? res.map(([n,c,f])=>`<button type="button" data-fonte-busca="${f}" aria-pressed="${f===E.fonte}" aria-label="Filtrar por ${esc(n)}">${esc(n)} (${c})</button>`).join(" ") : "nenhum registro"}</p>`;
 };
 $("#busca").addEventListener("click", ev=>{ const b=ev.target.closest("[data-fonte-busca]"); if(!b) return; E.fonte=b.dataset.fonteBusca; renderFontes(); renderLog(); });
 $("#evidencias").addEventListener("click", ev=>{ const b=ev.target.closest("[data-rm]"); if(b) alternar(b.dataset.rm); });

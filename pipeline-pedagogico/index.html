@@ -64,6 +64,21 @@
 
     .back-link:hover { color: var(--text-bright); }
 
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 8px;
+      z-index: 10;
+      padding: 8px 12px;
+      color: var(--bg);
+      background: var(--accent-blue);
+      border-radius: 4px;
+    }
+
+    .skip-link:focus {
+      left: 8px;
+    }
+
     /* Grid do Pipeline */
     .pipeline-grid {
       display: grid;
@@ -180,6 +195,7 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
   <div class="container">
     <a class="back-link" href="../">← Voltar ao portfólio</a>
 
@@ -188,6 +204,7 @@
       <p>Da prática em infraestrutura corporativa ao material didático estruturado na BNCC</p>
     </header>
 
+    <main id="conteudo">
     <div class="pipeline-grid">
       <!-- Etapa 1 -->
       <div class="step-card">
@@ -256,6 +273,7 @@
         </div>
       </div>
     </div>
+    </main>
   </div>
 
 </body>

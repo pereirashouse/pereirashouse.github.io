@@ -1,6 +1,18 @@
 // Comportamentos progressivos: sem JavaScript, todas as seções aparecem em sequência.
 document.documentElement.classList.remove('no-js');
 
+// A altura do menu muda quando os links quebram em várias linhas no celular.
+(function () {
+  var nav = document.querySelector('.topnav');
+  if (!nav) return;
+  function updateHeight() {
+    document.documentElement.style.setProperty('--nav-height', Math.ceil(nav.getBoundingClientRect().height) + 'px');
+  }
+  updateHeight();
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(updateHeight).observe(nav);
+  else window.addEventListener('resize', updateHeight);
+})();
+
 // Abas de modo de leitura (Resumo executivo, Detalhes técnicos, Evidências, Versão didática)
 (function () {
   var list = document.querySelector('[role="tablist"]');

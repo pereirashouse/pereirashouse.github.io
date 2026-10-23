@@ -32,9 +32,9 @@ main{display:flex;flex-direction:column;gap:72px}
 .topnav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
 .topnav ul{max-width:1040px;margin:0 auto;list-style:none;display:flex;flex-wrap:wrap;gap:4px 22px;
   padding:10px max(16px,env(safe-area-inset-left,0px));font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
-.topnav a{text-decoration:none;color:var(--muted)}
+.topnav a{display:inline-flex;align-items:center;min-height:32px;padding:3px 0;text-decoration:none;color:var(--muted)}
 .topnav a:hover,.topnav a[aria-current]{color:var(--fg)}
-section{scroll-margin-top:56px;display:flex;flex-direction:column;gap:24px}
+section{scroll-margin-top:calc(var(--nav-height,56px) + 16px);display:flex;flex-direction:column;gap:24px}
 .eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .lede{max-width:64ch;font-size:1.12rem;color:var(--muted)}
 .sec-head{display:flex;flex-direction:column;gap:8px;padding-bottom:14px;border-bottom:2px solid var(--line)}
@@ -55,7 +55,7 @@ footer.site{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)
 .badge.conf{border-style:dashed;border-color:var(--warn);color:var(--warn);background:var(--warn-soft)}
 
 /* Cartões de projeto */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:18px}
 .card{display:flex;flex-direction:column;gap:12px;padding:20px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-width:0}
 .card.infra-c{border-top:3px solid var(--infra)} .card.edu-c{border-top:3px solid var(--edu)}
 .card h3{font-size:1.2rem}
@@ -88,7 +88,7 @@ footer.site{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)
 .filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .filters button[aria-pressed="true"]::before{content:"✓ "}
 .arch{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
-.arch>li{display:grid;grid-template-columns:120px 1fr;gap:6px 24px;padding:18px 0;border-bottom:1px solid var(--line);scroll-margin-top:64px}
+.arch>li{display:grid;grid-template-columns:120px 1fr;gap:6px 24px;padding:18px 0;border-bottom:1px solid var(--line);scroll-margin-top:calc(var(--nav-height,56px) + 16px)}
 .arch>li[hidden]{display:none}
 .arch .when{font-family:var(--mono);font-size:.75rem;color:var(--muted);padding-top:4px}
 .arch .body{display:flex;flex-direction:column;gap:8px;min-width:0;overflow-wrap:anywhere}
@@ -123,12 +123,12 @@ pre .c{color:var(--muted)}
 .edu-page .summary{border-color:var(--edu)}
 .updated{font-size:.82rem;color:var(--muted)}
 
-.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);position:sticky;top:41px;background:var(--bg);z-index:5;padding-top:8px}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);position:sticky;top:var(--nav-height,56px);background:var(--bg);z-index:5;padding-top:8px}
 .tabs [role="tab"]{font:600 .9rem var(--body);padding:10px 14px;border:0;border-bottom:3px solid transparent;background:none;color:var(--muted);cursor:pointer;margin-bottom:-1px}
 .tabs [role="tab"][aria-selected="true"]{color:var(--fg);border-bottom-color:var(--infra)}
 .edu-page .tabs [role="tab"][aria-selected="true"]{border-bottom-color:var(--edu)}
 .no-js .tabs{display:none}
-.panel{display:flex;flex-direction:column;gap:40px;scroll-margin-top:110px}
+.panel{display:flex;flex-direction:column;gap:40px;scroll-margin-top:calc(var(--nav-height,56px) + 76px)}
 .panel[hidden]{display:none}
 .panel>h2.ph{font-size:.8rem;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .blk{display:flex;flex-direction:column;gap:12px;max-width:76ch}
@@ -180,5 +180,6 @@ figure.diag figcaption{font-size:.85rem;color:var(--muted)}
   .arch>li{grid-template-columns:1fr}
   .pager a{max-width:100%}
   .tabs{top:0;position:static}
+  .panel{scroll-margin-top:calc(var(--nav-height,56px) + 16px)}
 }
 @media print{.topnav,.tabs,.skip{display:none}.panel[hidden]{display:flex!important}}

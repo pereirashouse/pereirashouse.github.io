@@ -71,8 +71,10 @@ svg .sub{fill:var(--muted)}
 </head>
 <body>
 <header>
+  <p style="margin:0 0 8px"><a href="../" style="color:var(--acc)">← Voltar ao portfólio</a></p>
   <h1>Rede da Escola</h1>
   <p class="muted">Simulador didático. Escola, endereços e preços são fictícios. Monte a rede, clique em <b>Verificar rede</b> e teste a conectividade.</p>
+  <p class="muted">Estado: <b>Protótipo publicado</b>. Uso offline: baixar HTML e abrir localmente, sem depender da reabertura da URL.</p>
 </header>
 <main>
   <section class="card noprint">
@@ -95,7 +97,7 @@ svg .sub{fill:var(--muted)}
 
   <section class="card">
     <h2>Mapa da rede</h2>
-    <svg id="diag" class="diag" viewBox="0 0 960 430" role="img" aria-label="Diagrama da rede da escola"></svg>
+    <svg id="diag" class="diag" viewBox="0 0 960 430" role="group" aria-label="Mapa interativo da rede da escola; cada ambiente pode ser aberto para configurar seus equipamentos"></svg>
     <p class="muted" style="font-size:.85rem;margin:6px 0 0">A cor de cada ambiente é a cor da VLAN. Ambientes com a mesma cor estão na mesma rede. Os números em vermelho e amarelo vêm da última verificação.</p>
   </section>
 
@@ -464,7 +466,7 @@ function desenhar(){
     const cx=x+bw/2, xg=x-gx/2, yc=y-10;
     linhas += lin===0 ? `<path d="M480 190 L480 206 L${cx} 206 L${cx} ${y}" fill="none" stroke="${c}" stroke-width="2" opacity=".8"/>`
       : `<path d="M480 190 L480 206 L${xg} 206 L${xg} ${yc} L${cx} ${yc} L${cx} ${y}" fill="none" stroke="${c}" stroke-width="2" opacity=".8"/>`;
-    caixas += `<g class="box" data-k="${a.k}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${c}" fill-opacity=".12" stroke="${c}" stroke-width="2"/>`;
+    caixas += `<g class="box" data-k="${a.k}" tabindex="0" role="button" aria-label="Abrir configuração de ${esc(a.nome)}" style="cursor:pointer;outline:none"><rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="8" fill="${c}" fill-opacity=".12" stroke="${c}" stroke-width="2"/>`;
     caixas += `<text x="${x+10}" y="${y+22}" font-size="13.5" font-weight="700">${esc(a.nome)}</text>`;
     caixas += `<text class="sub" x="${x+10}" y="${y+42}" font-size="12">${v?`VLAN ${v.id} · ${esc(v.rede)}/${esc(v.pref)}`:"sem VLAN"}</text>`;
     caixas += `<text class="sub" x="${x+10}" y="${y+60}" font-size="12">${e.sw?esc(SW[e.sw].n):"sem switch"}${Number(e.ap)?` · ${Number(e.ap)} AP`:""}</text>`;
@@ -479,7 +481,19 @@ function desenhar(){
   });
   h += linhas + caixas;
   svg.innerHTML = h;
-  svg.querySelectorAll(".box").forEach(g=>g.addEventListener("click",()=>{ const el=document.getElementById("amb-"+g.dataset.k); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); }));
+  svg.querySelectorAll(".box").forEach(g=>{
+    const abrir = ()=>{ const el=document.getElementById("amb-"+g.dataset.k); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); };
+    const foco = ativo=>{
+      const rect=g.querySelector("rect");
+      g.style.outline=ativo ? "2px solid var(--acc)" : "none";
+      g.style.outlineOffset=ativo ? "3px" : "0";
+      if(rect) rect.style.strokeWidth=ativo ? "4" : "2";
+    };
+    g.addEventListener("click", abrir);
+    g.addEventListener("keydown", ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); abrir(); } });
+    g.addEventListener("focus", ()=>foco(true));
+    g.addEventListener("blur", ()=>foco(false));
+  });
 }
 function s_disp(nome){ const d=S.disp.find(x=>x.nome===nome); return d?d.amb:null; }
 
