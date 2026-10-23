@@ -29,6 +29,8 @@ O monitor tem **177 testes automatizados** (coleta, eventos, relatórios, persis
 
 [Operação Anzol](https://pereirashouse.github.io/operacao-anzol/) é um jogo de perícia de mensagens fictícias. [Rede da Escola](https://pereirashouse.github.io/rede-da-escola/) e [A Rede Parou](https://pereirashouse.github.io/a-rede-parou/) são protótipos para configurar uma rede fictícia e investigar um incidente com registros simulados. O [pipeline pedagógico](https://pereirashouse.github.io/pipeline-pedagogico/) mostra como os casos de infraestrutura viram material de Computação.
 
+A revisão de acessibilidade dos seis desafios implementados, no commit `e54bbd7` em **23/10/2026**, reforçou contraste, foco, atalhos e mensagens. A [execução na main](https://github.com/pereirashouse/simulador-configura-o-roteador/actions/runs/39971280418) aprovou **58 execuções: 29 cenários em duas telas Chromium**, sem retentativas. A [suíte de acessibilidade](https://github.com/pereirashouse/simulador-configura-o-roteador/blob/e54bbd707a92e54072cdd336815a09ac995e59f4/tests/acessibilidade.spec.cjs) acrescenta 10 cenários por tela, incluindo análise axe-core A/AA nos estados examinados, teclado, erros associados, 320 px e movimento reduzido. Os critérios didáticos foram preservados. A avaliação com tecnologias assistivas e usuários é uma etapa manual futura; os relatórios mantêm itens inconclusivos para revisão humana.
+
 Público, autoria e limitações de cada material estão na página do projeto.
 
 ## Visualizar localmente
