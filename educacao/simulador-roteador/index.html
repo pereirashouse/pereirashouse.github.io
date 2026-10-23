@@ -117,7 +117,7 @@
       <li><strong>Salvar</strong> valida os campos do painel e atualiza a configuração em memória: SSID até 32 caracteres, senha de 8 a 63 caracteres e banda de QoS em números inteiros.</li>
       <li><strong>Verificar</strong> confere o desafio. Nos exercícios de configuração, usa os valores salvos e avisa se a tela contém alterações ainda não salvas; nos questionários, lê as respostas selecionadas.</li>
       <li><code>localStorage</code> guarda somente os índices dos desafios concluídos. Configurações, respostas e justificativas não são restauradas ao recarregar a página.</li>
-      <li>Atalhos de salto, foco visível e preservado nos botões de desafio, mensagens em região estável e erros associados aos campos apoiam navegação por teclado. Há contraste reforçado e suporte a tela de 320 px/movimento reduzido; a revisão é delimitada, não conformidade integral de WCAG.</li>
+      <li>Atalhos de salto, foco visível e preservado nos botões de desafio, mensagens em região estável e erros associados aos campos apoiam navegação por teclado. Há contraste reforçado e suporte a tela de 320 px/movimento reduzido.</li>
     </ul>
   </div>
   <div class="blk">
@@ -135,7 +135,7 @@
       <li>Não calcula fisicamente interferência, alcance, velocidade ou comportamento de pacotes. São critérios didáticos, não um modelo de desempenho de rede.</li>
       <li>A varredura e o log são fixos: todos recebem o mesmo cenário. Canal 11 e potência alta são respostas desse laboratório, não recomendações universais de produção.</li>
       <li>No desafio 3, a explicação livre é conferida somente pelo mínimo de 40 caracteres; seu conteúdo precisa de comparação com a referência e discussão com o professor.</li>
-      <li>O professor não recebe respostas ou relatórios; a marcação de conclusão não comprova aprendizagem nem preserva a resposta que a originou.</li>
+      <li>O professor não recebe respostas ou relatórios; a marcação de conclusão registra só que o desafio foi resolvido.</li>
       <li>Respostas e critérios estão públicos no JavaScript e no README. Não há separação protegida entre versão do aluno e gabarito do professor.</li>
       <li>Não há DHCP configurável, firewall, VLAN, rotas ou atualização de firmware. A suíte de interface cobre Chromium e duas telas emuladas, não aparelhos físicos, outros navegadores ou auditoria completa de acessibilidade.</li>
     </ul>
@@ -155,7 +155,7 @@
   <h2 class="ph">Evidências</h2>
   <div class="blk">
     <p>O simulador está publicado: <a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">abrir a atividade<span class="sr-only"> (abre em nova aba)</span></a>. Esta descrição foi conferida em 23/10/2026 contra o <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/index.html" target="_blank" rel="noopener">código no commit <code>7b50973</code><span class="sr-only"> (abre em nova aba)</span></a> e seu <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/README.md" target="_blank" rel="noopener">README versionado<span class="sr-only"> (abre em nova aba)</span></a>.</p>
-    <p class="note">A conferência desta página é documental, baseada na implementação. Não substitui um teste ponta a ponta de interface, auditoria de acessibilidade ou avaliação de aprendizagem em turma.</p>
+    <p>Os seis desafios têm testes de interface automatizados com Playwright, executados no GitHub Actions em tela de computador e de celular: <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/actions/workflows/testes-interface.yml?query=branch%3Amain" target="_blank" rel="noopener">ver execuções<span class="sr-only"> (abre em nova aba)</span></a>.</p>
   </div>
   <div class="blk">
     <h3>Testes automatizados de interface</h3>
