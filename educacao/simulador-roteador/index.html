@@ -117,7 +117,7 @@
       <li><strong>Salvar</strong> valida os campos do painel e atualiza a configuração em memória: SSID até 32 caracteres, senha de 8 a 63 caracteres e banda de QoS em números inteiros.</li>
       <li><strong>Verificar</strong> confere o desafio. Nos exercícios de configuração, usa os valores salvos e avisa se a tela contém alterações ainda não salvas; nos questionários, lê as respostas selecionadas.</li>
       <li><code>localStorage</code> guarda somente os índices dos desafios concluídos. Configurações, respostas e justificativas não são restauradas ao recarregar a página.</li>
-      <li>Botões no menu, foco visível, campos com rótulos, região <code>aria-live</code> e regras CSS para telas menores estão implementados; isso não equivale a auditoria completa de acessibilidade.</li>
+      <li>Atalhos de salto, foco visível e preservado nos botões de desafio, mensagens em região estável e erros associados aos campos apoiam navegação por teclado. Há contraste reforçado e suporte a tela de 320 px/movimento reduzido; a revisão é delimitada, não conformidade integral de WCAG.</li>
     </ul>
   </div>
   <div class="blk">
@@ -146,7 +146,7 @@
       <li>Cenários variados de varredura e log, sem apresentar o cenário fixo como medição real.</li>
       <li>Exportação das respostas para avaliação formativa pelo professor.</li>
       <li>Painel DHCP e desafio de rede de convidados isolada.</li>
-      <li>Revisão de acessibilidade e organização dos materiais de aluno e professor.</li>
+      <li>Validação com tecnologias assistivas e usuários, além de organização dos materiais de aluno e professor.</li>
     </ul>
   </div>
 </section>
@@ -160,7 +160,13 @@
   <div class="blk">
     <h3>Testes automatizados de interface</h3>
     <p>Em 23/10/2026, a <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/actions/runs/39963051577" target="_blank" rel="noopener">execução na main<span class="sr-only"> (abre em nova aba)</span></a>, no commit <code>4a4286f</code>, aprovou <strong>38 execuções: 19 cenários em duas telas Chromium</strong>, computador (1280 × 800) e celular emulado (390 × 844), sem retentativas. A <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/4a4286fee0ea43b42b0b87808fcc63f09ee1bf5d/tests/interface.spec.cjs" target="_blank" rel="noopener">suíte versionada<span class="sr-only"> (abre em nova aba)</span></a> completa os seis desafios pelos controles reais e verifica feedback, configuração não salva, campos inválidos, progresso, reset, falhas de armazenamento, teclado básico e abertura do arquivo offline.</p>
-    <p class="note">O HTML da atividade permaneceu inalterado. Os testes usam dados fictícios e não acessam equipamentos ou respostas de alunos. O resultado valida o artefato local, não disponibilidade do Pages, aparelhos físicos, leitores de tela, contraste/WCAG completos ou aprendizagem em turma. Para a evidência mais recente, consulte o <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/actions/workflows/testes-interface.yml?query=branch%3Amain" target="_blank" rel="noopener">workflow de interface na main<span class="sr-only"> (abre em nova aba)</span></a>.</p>
+    <p class="note">Na adição dessa suíte de interface, o HTML da atividade permaneceu inalterado. Os testes usam dados fictícios e não acessam equipamentos ou respostas de alunos. O resultado valida o artefato local, não disponibilidade do Pages, aparelhos físicos, leitores de tela, contraste/WCAG completos ou aprendizagem em turma. Para a evidência mais recente, consulte o <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/actions/workflows/testes-interface.yml?query=branch%3Amain" target="_blank" rel="noopener">workflow de interface na main<span class="sr-only"> (abre em nova aba)</span></a>.</p>
+  </div>
+  <div class="blk">
+    <h3>Revisão delimitada de acessibilidade</h3>
+    <p>Em 23/10/2026, o commit <code>e54bbd7</code> corrigiu contraste, perda de foco ao trocar de desafio, identificação de painéis/campos e mensagens instáveis. A <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/actions/runs/39971280418" target="_blank" rel="noopener">execução na main<span class="sr-only"> (abre em nova aba)</span></a> aprovou <strong>58 execuções: 29 cenários em duas telas Chromium</strong>, sem retentativas. São os 19 cenários anteriores e 10 de acessibilidade em cada tela.</p>
+    <p>A <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/e54bbd707a92e54072cdd336815a09ac995e59f4/tests/acessibilidade.spec.cjs" target="_blank" rel="noopener">suíte de acessibilidade<span class="sr-only"> (abre em nova aba)</span></a> analisa regras automáticas A/AA com axe-core nos painéis e desafios/feedbacks examinados e verifica teclado, foco, atalhos, erro associado ao campo, mensagem persistente, tela de 320 px e movimento reduzido. Os enunciados e critérios dos seis desafios foram preservados.</p>
+    <p class="note">Ausência de violações automáticas nos estados testados não equivale a certificação WCAG. Os relatórios preservam itens inconclusivos para avaliação humana. Não houve validação com NVDA/JAWS/VoiceOver, aparelhos físicos ou usuários com deficiência, nem medição de aprendizagem em turma.</p>
   </div>
   <figure class="diag">
     <svg viewBox="0 0 860 300" role="img" aria-labelledby="d5t d5d">
