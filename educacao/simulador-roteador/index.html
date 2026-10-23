@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Simulador de configuração de roteador para aprendizagem de redes · Jeferson Pereira</title>
-<meta name="description" content="Estudo de caso didático: simulador web de configuração de roteador doméstico para o 9º ano, com objetivo de aprendizagem, desafios, gabarito para o professor, limitações e próximos recursos.">
+<meta name="description" content="Simulador educacional de roteador com seis desafios, verificação automática e feedback: alcance, canais, faixas Wi-Fi, segurança, QoS e leitura de log fictício.">
 <link rel="canonical" href="https://pereirashouse.github.io/educacao/simulador-roteador/">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#23774A">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Simulador interativo de configuração de roteador para aprendizagem de redes">
-<meta property="og:description" content="Objeto de aprendizagem em HTML, CSS e JavaScript para estudantes configurarem Wi-Fi 2,4 e 5 GHz, canais e QoS sem risco de derrubar a rede da escola.">
+<meta property="og:description" content="Seis desafios com feedback no navegador: alcance, canais, faixas Wi-Fi, segurança, QoS e log fictício, sem alterar equipamentos reais.">
 <meta property="og:url" content="https://pereirashouse.github.io/educacao/simulador-roteador/">
 <meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
 <link rel="stylesheet" href="../../assets/fonts.css">
@@ -31,7 +31,7 @@
 <header class="case-head edu">
   <p class="crumb"><a href="../../#edu">Computação e Educação</a> / Estudo de caso</p>
   <h1>Simulador interativo de configuração de roteador para aprendizagem de redes</h1>
-  <p class="lede">Uma réplica simplificada do painel de um roteador doméstico, para que estudantes experimentem configurações de Wi-Fi sem risco de derrubar a rede de casa ou da escola.</p>
+  <p class="lede">Uma réplica simplificada do painel de um roteador doméstico, com seis desafios e feedback explicativo, para experimentar configurações de Wi-Fi sem alterar a rede de casa ou da escola.</p>
   <ul class="badges" aria-label="Etiquetas">
     <li class="badge tipo">Didático</li>
     <li class="badge tipo">Acadêmico</li>
@@ -39,15 +39,15 @@
     <li class="badge">Redes</li><li class="badge">BNCC · Mundo Digital</li>
   </ul>
   <dl class="facts">
-    <div><dt>Público</dt><dd>Desenvolvido para turmas do 9º ano do Ensino Fundamental</dd></div>
+    <div><dt>Público</dt><dd>Origem no 9º ano; uso proposto também para anos finais, Ensino Médio, cursos técnicos e oficinas introdutórias</dd></div>
     <div><dt>BNCC</dt><dd>Eixo Mundo Digital da BNCC Computação</dd></div>
     <div><dt>Contexto</dt><dd>Licenciatura em Computação · oficina da Ilha Interdisciplinar de Racionalidade sobre Wi-Fi</dd></div>
-    <div><dt>Período</dt><dd>1º semestre de 2026</dd></div>
+    <div><dt>Período</dt><dd>1º semestre de 2026 · versão consultada em outubro de 2026</dd></div>
     <div><dt>Autoria</dt><dd>Simulador: Jeferson · investigação interdisciplinar: Jeferson e grupo</dd></div>
   </dl>
-  <p class="summary">Ao final da atividade, o aluno deve conseguir localizar as configurações sem fio de um roteador, escolher um canal sem sobreposição em 2,4 GHz, comparar as faixas de 2,4 e 5 GHz e explicar para que serve o controle de banda (QoS).</p>
-  <div class="links edu"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Experimentar o simulador ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/simulador-configura-o-roteador" target="_blank" rel="noopener">Código-fonte no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://drive.google.com/file/d/1y5PUGET-o_UAfKixnomOxO5nb5pLfpK8/view?usp=sharing" target="_blank" rel="noopener">Guia de Sobrevivência do Wi-Fi Doméstico (PDF) ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
-  <p class="updated">Última atualização: 22 de outubro de 2026</p>
+  <p class="summary">Ao final do percurso, o estudante deve conseguir ajustar alcance e canal, comparar 2,4 e 5 GHz, reconhecer configurações inseguras, configurar QoS para o plano fictício e justificar uma decisão a partir de um log de eventos.</p>
+  <div class="links edu"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Experimentar o simulador ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/simulador-configura-o-roteador" target="_blank" rel="noopener">Código-fonte no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/simulador-configura-o-roteador#para-o-professor" target="_blank" rel="noopener">Orientações para o professor ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://drive.google.com/file/d/1y5PUGET-o_UAfKixnomOxO5nb5pLfpK8/view?usp=sharing" target="_blank" rel="noopener">Guia de Sobrevivência do Wi-Fi Doméstico (PDF) ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
+  <p class="updated">Última atualização: 23 de outubro de 2026</p>
 </header>
 
 <div class="tabs" role="tablist" aria-label="Modo de leitura">
@@ -62,11 +62,11 @@
   <h2 class="ph">Resumo executivo</h2>
   <div class="blk">
     <h3>Contexto</h3>
-    <p>O simulador nasceu na Ilha Interdisciplinar de Racionalidade “A invisibilidade do Wi-Fi: por que a internet de 400 Mega trava?”, produzida na Licenciatura em Computação. A turma investiga a física das ondas, a disputa pelo canal e a fila de pacotes e, na oficina de 40 minutos, passa da teoria para a configuração.</p>
+    <p>O simulador nasceu na Ilha Interdisciplinar de Racionalidade “A invisibilidade do Wi-Fi: por que a internet de 400 Mega trava?”, produzida na Licenciatura em Computação. A investigação relaciona ondas, disputa pelo canal e fila de pacotes à configuração. A versão atual organiza essa prática em seis desafios; o README propõe uma aula de 50 minutos.</p>
   </div>
   <div class="blk">
     <h3>Problema pedagógico</h3>
-    <p>Mexer no roteador real da escola ou de casa pode derrubar a rede de todos, e muitas escolas públicas não têm equipamento de laboratório. Os alunos precisavam de um lugar seguro para errar.</p>
+    <p>Mexer no roteador real da escola ou de casa pode derrubar a rede de todos, e muitas escolas públicas não têm equipamento de laboratório. O simulador oferece um lugar seguro para testar escolhas e receber retorno sem modificar equipamentos.</p>
   </div>
   <div class="blk">
     <h3>Meu papel</h3>
@@ -80,26 +80,28 @@
   <div class="blk">
     <h3>Conceitos trabalhados</h3>
     <ul>
-      <li>Nome da rede (SSID) e rádios de 2,4 GHz e 5 GHz.</li>
-      <li>Canais 1, 6 e 11 sem sobreposição em 2,4 GHz.</li>
-      <li>Largura de canal (20, 40 e 80 MHz) e o equilíbrio entre velocidade e interferência.</li>
-      <li>Controle de banda (QoS), upload e download, e conversão entre Mbps e Kbps.</li>
+      <li>SSID, rádios de 2,4 e 5 GHz, largura de canal e potência.</li>
+      <li>Escolha de canal a partir de uma varredura fictícia de redes vizinhas.</li>
+      <li>Segurança: rede aberta, WEP, TKIP, WPA2-AES, WPA3, senha e WPS.</li>
+      <li>QoS, upload e download, conversão de Mbps para Kbps e prioridade de videochamadas.</li>
+      <li>Leitura cronológica de um log fictício e escolha de uma primeira ação.</li>
     </ul>
   </div>
   <div class="blk">
-    <h3>Resultado</h3>
+    <h3>Resultado implementado</h3>
     <ul>
-      <li>Simulador publicado e acessível pelo navegador, sem instalação nem cadastro.</li>
-      <li>Usado na oficina da Ilha de Racionalidade sobre Wi-Fi.</li>
-      <li>Código aberto no GitHub.</li>
+      <li>Simulador publicado, em arquivo único, sem instalação nem cadastro.</li>
+      <li>Seis desafios com dicas, verificação automática e feedback específico.</li>
+      <li>Separação entre campos editados e configuração salva; aviso de alterações não salvas.</li>
+      <li>Marcação de desafios concluídos no navegador e opção <strong>Recomeçar tudo</strong>.</li>
     </ul>
-    <p class="note">Não há medição formal de aprendizagem publicada. A avaliação da oficina foi formativa, feita em sala.</p>
+    <p class="note">O relato autoral informa uso na oficina da Ilha de Racionalidade. Não há medição formal de aprendizagem publicada nem evidência de aplicação dos seis desafios atuais que permita afirmar eficácia pedagógica comprovada.</p>
   </div>
   <div class="blk">
     <h3>O que este caso demonstra</h3>
     <ul class="comp">
       <li>Transposição didática de redes</li><li>Desenho de objeto de aprendizagem</li><li>HTML, CSS e JavaScript</li>
-      <li>Ensino por investigação</li><li>Atenção a escolas com pouca infraestrutura</li>
+      <li>Feedback formativo</li><li>Atenção a escolas com pouca infraestrutura</li>
     </ul>
   </div>
 </section>
@@ -109,39 +111,42 @@
   <div class="blk">
     <h3>Como funciona</h3>
     <ul>
-      <li>Arquivo único em HTML, CSS e JavaScript puro, com cerca de 10 KB e sem dependências externas.</li>
-      <li>Menu lateral com painéis de Wireless 2,4 GHz, Wireless 5 GHz, QoS, Status e Ferramentas do Sistema.</li>
-      <li>Campos de SSID, canal e largura de canal por faixa; QoS com tipo de linha e banda de upload e download.</li>
-      <li>Ao salvar, o simulador confirma a configuração; nada sai do navegador.</li>
-      <li>Hospedado no GitHub Pages.</li>
+      <li>HTML, CSS e JavaScript puro em um único <code>index.html</code>, sem dependências externas; o arquivo baixado pode ser aberto offline.</li>
+      <li>Menu com Início, Status, Wireless 2,4 GHz, Wireless 5 GHz, QoS e Ferramentas do Sistema.</li>
+      <li>Status apresenta o plano fictício de 100 Mbps de download e 20 Mbps de upload e uma tabela fixa de redes vizinhas. Ferramentas contém um log fictício; backup, firmware e reinicialização não são executados.</li>
+      <li><strong>Salvar</strong> valida os campos do painel e atualiza a configuração em memória: SSID até 32 caracteres, senha de 8 a 63 caracteres e banda de QoS em números inteiros.</li>
+      <li><strong>Verificar</strong> confere o desafio. Nos exercícios de configuração, usa os valores salvos e avisa se a tela contém alterações ainda não salvas; nos questionários, lê as respostas selecionadas.</li>
+      <li><code>localStorage</code> guarda somente os índices dos desafios concluídos. Configurações, respostas e justificativas não são restauradas ao recarregar a página.</li>
+      <li>Botões no menu, foco visível, campos com rótulos, região <code>aria-live</code> e regras CSS para telas menores estão implementados; isso não equivale a auditoria completa de acessibilidade.</li>
     </ul>
   </div>
   <div class="blk">
     <h3>Decisões de design</h3>
-    <h4>Parecer um roteador de verdade</h4>
-    <p>O layout reproduz a organização típica de um roteador doméstico (cabeçalho, menu lateral e formulários) para que o aluno reconheça a tela quando abrir o roteador de casa.</p>
-    <h4>Poucos campos</h4>
-    <p>Só aparecem as opções ligadas aos conceitos da aula. Status e Ferramentas existem para dar contexto, mas não têm conteúdo funcional.</p>
-    <h4>Leve e sem cadastro</h4>
-    <p>Um único arquivo pequeno abre em computadores antigos e em conexões lentas, comuns na rede pública.</p>
+    <h4>Parecer um roteador, sem controlar um roteador</h4>
+    <p>O cabeçalho, o menu e os formulários aproximam a organização de um painel doméstico. O aviso de simulação e a confirmação ao salvar esclarecem que nenhum equipamento real é alterado.</p>
+    <h4>Retorno sobre a escolha</h4>
+    <p>Cada desafio combina enunciado, dica opcional e mensagens próprias para erros. Ao acertar, o aluno recebe uma explicação e pode avançar; não se trata apenas de mostrar “certo” ou “errado”.</p>
+    <h4>Operação local e sem cadastro</h4>
+    <p>A atividade funciona no próprio navegador. Se o armazenamento local não estiver disponível, a página segue funcionando, mas o progresso não é preservado entre visitas.</p>
   </div>
   <div class="blk">
     <h3>Limitações atuais</h3>
     <ul>
-      <li>O simulador não verifica as respostas: o retorno ao aluno hoje vem da discussão mediada pelo professor.</li>
-      <li>Não simula o efeito das escolhas (interferência, alcance ou velocidade).</li>
-      <li>Não cobre endereçamento IP, DHCP nem rotas.</li>
-      <li>O menu não é acessível por teclado e o layout não se adapta bem ao celular.</li>
-      <li>O README do repositório ainda não traz instruções para professores.</li>
+      <li>Não calcula fisicamente interferência, alcance, velocidade ou comportamento de pacotes. São critérios didáticos, não um modelo de desempenho de rede.</li>
+      <li>A varredura e o log são fixos: todos recebem o mesmo cenário. Canal 11 e potência alta são respostas desse laboratório, não recomendações universais de produção.</li>
+      <li>No desafio 3, a explicação livre é conferida somente pelo mínimo de 40 caracteres; seu conteúdo precisa de comparação com a referência e discussão com o professor.</li>
+      <li>O professor não recebe respostas ou relatórios; a marcação de conclusão não comprova aprendizagem nem preserva a resposta que a originou.</li>
+      <li>Respostas e critérios estão públicos no JavaScript e no README. Não há separação protegida entre versão do aluno e gabarito do professor.</li>
+      <li>Não há DHCP configurável, firewall, VLAN, rotas ou atualização de firmware. Testes automatizados de interface e auditoria de acessibilidade ainda são etapas pendentes.</li>
     </ul>
   </div>
   <div class="blk">
-    <h3>Próximos recursos planejados</h3>
+    <h3>Próximos recursos propostos</h3>
     <ul>
-      <li>Modo desafio com verificação automática e feedback explicativo para cada resposta.</li>
-      <li>Medidor visual de interferência por canal.</li>
-      <li>Menu acessível por teclado e layout responsivo.</li>
-      <li>Guia do professor no repositório, com objetivos, desafios e gabarito.</li>
+      <li>Cenários variados de varredura e log, sem apresentar o cenário fixo como medição real.</li>
+      <li>Exportação das respostas para avaliação formativa pelo professor.</li>
+      <li>Painel DHCP e desafio de rede de convidados isolada.</li>
+      <li>Smoke tests de interface, revisão de acessibilidade e organização dos materiais de aluno e professor.</li>
     </ul>
   </div>
 </section>
@@ -149,13 +154,14 @@
 <section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
   <h2 class="ph">Evidências</h2>
   <div class="blk">
-    <p>O simulador é público e pode ser testado agora: <a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">abrir o simulador<span class="sr-only"> (abre em nova aba)</span></a>. O código completo está em <a href="https://github.com/pereirashouse/simulador-configura-o-roteador" target="_blank" rel="noopener">github.com/pereirashouse/simulador-configura-o-roteador<span class="sr-only"> (abre em nova aba)</span></a>.</p>
+    <p>O simulador está publicado: <a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">abrir a atividade<span class="sr-only"> (abre em nova aba)</span></a>. Esta descrição foi conferida em 23/10/2026 contra o <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/index.html" target="_blank" rel="noopener">código no commit <code>7b50973</code><span class="sr-only"> (abre em nova aba)</span></a> e seu <a href="https://github.com/pereirashouse/simulador-configura-o-roteador/blob/7b50973e42cda7ac8553725a995799ed893d673c/README.md" target="_blank" rel="noopener">README versionado<span class="sr-only"> (abre em nova aba)</span></a>.</p>
+    <p class="note">A conferência desta página é documental, baseada na implementação. Não substitui um teste ponta a ponta de interface, auditoria de acessibilidade ou avaliação de aprendizagem em turma.</p>
   </div>
   <figure class="diag">
     <svg viewBox="0 0 860 300" role="img" aria-labelledby="d5t d5d">
-      <title id="d5t">Esquema da interface do simulador</title>
-      <desc id="d5d">Cabeçalho com o nome do roteador; menu lateral com Status, Wireless 2,4 GHz, Wireless 5 GHz, QoS e Ferramentas do Sistema; à direita, o formulário da faixa de 2,4 GHz com habilitar rádio, nome da rede, canal e largura do canal, e o botão Salvar.</desc>
-      <rect class="dg-box" x="20" y="20" width="820" height="40" rx="4"/><text class="dg-t" x="40" y="45">Roteador · painel de configuração</text><text class="dg-s" x="760" y="45">admin | Sair</text>
+      <title id="d5t">Esquema parcial do painel Wireless 2,4 GHz</title>
+      <desc id="d5d">Representação simplificada do menu e de campos da faixa de 2,4 GHz: habilitar rádio, nome da rede, canal, largura e Salvar. O esquema não representa todos os campos nem o quadro de desafios.</desc>
+      <rect class="dg-box" x="20" y="20" width="820" height="40" rx="4"/><text class="dg-t" x="40" y="45">Roteador · painel de configuração</text><text class="dg-s" x="715" y="45">Modo simulação</text>
       <rect class="dg-box" x="20" y="60" width="200" height="220"/>
       <text class="dg-s" x="36" y="92">Status</text>
       <rect x="20" y="104" width="200" height="34" style="fill:var(--edu-soft)"/><text class="dg-t" x="36" y="126">Wireless 2,4 GHz</text>
@@ -169,20 +175,19 @@
       <text class="dg-s" x="250" y="236">Largura do canal</text><rect class="dg-box" x="420" y="222" width="120" height="24" rx="3"/><text class="dg-s" x="430" y="238">20 · 40 MHz</text>
       <rect x="720" y="236" width="90" height="30" rx="4" style="fill:var(--edu)"/><text x="765" y="256" text-anchor="middle" style="fill:var(--bg);font:600 12px var(--body)">Salvar</text>
     </svg>
-    <figcaption>Esquema da tela principal, desenhado a partir do código publicado.</figcaption>
+    <figcaption>Esquema parcial, não uma captura de tela: segurança, potência, Status, log e quadro de desafios não estão detalhados nesta ilustração.</figcaption>
   </figure>
   <div class="blk wide">
     <h3>Trecho do código publicado</h3>
-<pre><span class="c">// Alterna os painéis do menu lateral (trecho de index.html)</span>
-function showPanel(panelId) {
-    document.querySelectorAll('.panel').forEach(panel =&gt; {
-        panel.classList.remove('active');
+<pre><span class="c">// Verifica o desafio e detecta alterações não salvas (excerto)</span>
+function verify() {
+    var ch = challenges[current];
+    var result = ch.check();
+    var fb = document.getElementById('feedback');
+    var pending = unsavedPanels(ch.panels).map(function(id) {
+        return PANEL_NAMES[id];
     });
-    document.querySelectorAll('.sidebar ul li').forEach(li =&gt; {
-        li.classList.remove('active');
-    });
-    document.getElementById(panelId).classList.add('active');
-    ...
+    <span class="c">// ... feedback e atualização do progresso</span>
 }</pre>
   </div>
 </section>
@@ -191,43 +196,49 @@ function showPanel(panelId) {
   <h2 class="ph">Versão didática</h2>
   <div class="blk">
     <h3>Objetivo de aprendizagem</h3>
-    <p>Ao final da atividade, o aluno deve conseguir localizar as configurações sem fio de um roteador, escolher um canal sem sobreposição em 2,4 GHz, comparar as faixas de 2,4 e 5 GHz e explicar para que serve o controle de banda (QoS).</p>
+    <p>Configurar e justificar escolhas de alcance, canal, faixa, segurança e QoS; interpretar o log fictício antes de escolher uma ação. A verificação automática apoia a atividade, mas a justificativa e a transferência para outros cenários precisam de mediação.</p>
   </div>
   <div class="blk">
     <h3>Instruções para o aluno</h3>
     <ol>
-      <li>Abra o simulador no navegador do computador.</li>
-      <li>Use o menu da esquerda para trocar de tela.</li>
-      <li>Altere os campos pedidos em cada desafio e clique em <strong>Salvar</strong>.</li>
-      <li>Anote no caderno o que escolheu e por quê.</li>
+      <li>Abra o simulador e leia o desafio no quadro <strong>Desafios</strong>.</li>
+      <li>Use o menu para consultar Status ou Ferramentas e encontrar os campos pedidos.</li>
+      <li>Nos desafios de configuração, altere os campos e clique em <strong>Salvar</strong> em cada painel modificado. Nos questionários, responda no próprio quadro.</li>
+      <li>Clique em <strong>Verificar</strong>, leia o feedback e corrija o que faltar. Use a dica apenas se precisar.</li>
+      <li>Anote a escolha e sua justificativa; compartilhe com o professor, pois o simulador não envia respostas.</li>
     </ol>
   </div>
   <div class="blk">
-    <h3>Desafios</h3>
-    <ol class="steps">
-      <li><strong>Batize a rede</strong>Troque o nome das redes de 2,4 GHz e de 5 GHz por nomes que a turma reconheça. Por que é útil saber qual é qual?</li>
-      <li><strong>Fuja do vizinho</strong>A rede do vizinho usa o canal 6 em 2,4 GHz. Qual canal você escolhe para não sobrepor?</li>
-      <li><strong>Prédio lotado</strong>Em um prédio com muitas redes, é melhor usar 20 ou 40 MHz em 2,4 GHz? Configure e justifique.</li>
-      <li><strong>Faça a conta</strong>O plano de internet tem 400 Mbps de download. Ative o QoS e preencha a banda de download em Kbps.</li>
-      <li><strong>Quem vai para o 5 GHz?</strong>O notebook na sala, perto do roteador, ou a TV no quarto do fundo? Explique usando o que a turma mediu na investigação.</li>
+    <h3>Os seis desafios implementados</h3>
+    <ol class="steps" id="desafios-implementados">
+      <li><strong>Mais alcance na rede 2,4 GHz</strong>Ajuste rádio, largura de canal e potência para o cenário de uma sala distante.</li>
+      <li><strong>Escolha o canal com menos interferência</strong>Consulte a varredura fictícia em Status, escolha o canal e justifique pela ocupação e pelo sinal dos vizinhos.</li>
+      <li><strong>2,4 GHz ou 5 GHz?</strong>Classifique cinco frases e explique a diferença entre as faixas com suas palavras.</li>
+      <li><strong>Encontre a configuração insegura</strong>Revise segurança, senha e WPS, sem deixar a outra faixa insegura.</li>
+      <li><strong>Priorize as aulas on-line</strong>Consulte o plano fictício de 100/20 Mbps, converta para Kbps e configure QoS para videochamadas.</li>
+      <li><strong>Interprete o log de eventos</strong>Leia a sequência de autenticações, identifique o padrão e escolha a primeira atitude no cenário proposto.</li>
     </ol>
   </div>
   <div class="blk">
     <h3>Feedback ao aluno</h3>
-    <p>Como o simulador ainda não corrige as respostas, o retorno acontece na socialização: cada dupla apresenta uma escolha e a turma confronta com o que mediu no analisador de espectro. O gabarito abaixo apoia o professor.</p>
-    <details class="more"><summary>Gabarito para o professor</summary>
+    <p>O botão <strong>Verificar</strong> já retorna mensagens específicas: por exemplo, explica a ocupação do canal 1, por que uma banda de QoS acima do plano atrapalha a lógica do exercício e qual linha do log mostra a WAN estável. Ao acertar, apresenta uma explicação do conceito. Alterações ainda não salvas geram aviso, porque não mudam a configuração verificada.</p>
+    <p>Na explicação livre do desafio 3, só o tamanho mínimo de 40 caracteres é verificado; não há avaliação semântica. Peça ao aluno para comparar com a resposta de referência e defender sua escolha. A discussão mediada complementa o feedback, não é mais sua única fonte.</p>
+    <details class="more"><summary>Critérios de referência para o professor — públicos</summary>
       <ol>
-        <li>Nomes diferentes permitem escolher conscientemente a faixa em cada aparelho.</li>
-        <li>Canal 1 ou 11: em 2,4 GHz, só 1, 6 e 11 não se sobrepõem.</li>
-        <li>20 MHz: com muitas redes, 40 MHz ocupa quase toda a faixa de 2,4 GHz e aumenta a interferência.</li>
-        <li>400 Mbps = 400.000 Kbps (1 Mbps = 1.000 Kbps).</li>
-        <li>O notebook perto do roteador: 5 GHz é mais rápido, mas atravessa pior paredes; a TV distante tende a se sair melhor em 2,4 GHz.</li>
+        <li>No cenário de alcance, rádio 2,4 GHz ligado, largura de 20 MHz e potência Alta. Discuta por que potência alta não é solução universal em redes com vários APs.</li>
+        <li>Canal 11 e largura de 20 MHz para a tabela fictícia apresentada. Não é uma indicação fixa de canal para qualquer ambiente.</li>
+        <li>Na ordem das cinco frases, 2,4 GHz; 5 GHz; 2,4 GHz; 5 GHz; 2,4 GHz. A explicação deve ter pelo menos 40 caracteres, mas seu sentido é avaliado pelo professor.</li>
+        <li>Nas duas faixas, WPA2-AES ou WPA3, senha com pelo menos 12 caracteres, sem padrão numérico ou repetição de um único caractere e fora da lista didática de senhas comuns; WPS desligado em 2,4 GHz. Não use senhas reais na atividade.</li>
+        <li>QoS ligado, download de 80.000 a 100.000 Kbps, upload de 16.000 a 20.000 Kbps e prioridade para videochamadas, de acordo com o plano fictício de 100/20 Mbps.</li>
+        <li>No cenário do log, reconhecer oito falhas do mesmo MAC seguidas de associação; escolher identificar o aparelho, trocar a senha e reforçar a segurança. São dados fictícios para discussão, não evidência de ataque real.</li>
       </ol>
     </details>
+    <p class="note">Esses critérios também estão disponíveis no README e no código. Ocultar um bloco com <code>details</code> não protege um gabarito; a atividade não deve ser usada como prova individual sem adaptação.</p>
   </div>
   <div class="blk">
     <h3>Para outros professores</h3>
-    <p>O simulador pode ser usado sozinho, em uma aula de 40 a 50 minutos, ou como fechamento da investigação sobre Wi-Fi. Funciona em computadores simples e não exige cadastro dos alunos.</p>
+    <p>O <a href="https://github.com/pereirashouse/simulador-configura-o-roteador#para-o-professor" target="_blank" rel="noopener">README traz uma sequência sugerida de 50 minutos<span class="sr-only"> (abre em nova aba)</span></a>, conhecimentos prévios e critérios dos desafios. Para uma nova turma em computador compartilhado, use <strong>Recomeçar tudo</strong>. Recarregar a página restaura os campos iniciais, mas pode manter os desafios marcados como concluídos no armazenamento local.</p>
+    <p>Recolha justificativas separadamente e registre resultados reais apenas após uma aplicação autorizada e anonimizada. Conclusão automática de desafios é evidência de interação com o artefato, não medida suficiente de aprendizagem.</p>
   </div>
 </section>
 </main>
