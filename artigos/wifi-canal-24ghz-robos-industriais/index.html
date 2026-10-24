@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quando o Wi-Fi “cai” e o sinal está ótimo · Jeferson Pereira</title>
+<meta name="description" content="Artigo: investigação passiva de alarmes falsos de “fora da rede” em robôs industriais, causados por canal 2,4 GHz saturado por celulares distantes, e como transpor o caso para aulas de Computação e Redes.">
+<link rel="canonical" href="https://pereirashouse.github.io/artigos/wifi-canal-24ghz-robos-industriais/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Quando o Wi-Fi “cai” e o sinal está ótimo: um caso de alarme falso em robôs industriais">
+<meta property="og:description" content="Uma investigação passiva em canal 2,4 GHz saturado por celulares distantes, e o que esse caso ensina sobre diagnóstico, evidência e transposição para a sala de aula.">
+<meta property="og:url" content="https://pereirashouse.github.io/artigos/wifi-canal-24ghz-robos-industriais/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<meta property="article:author" content="Jeferson Luiz Pereira">
+<meta property="article:published_time" content="2026-10-24">
+<link rel="stylesheet" href="../../assets/fonts.css">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../">Início</a></li>
+  <li><a href="../../#destaques">Destaques</a></li>
+  <li><a href="../../#infra">Infraestrutura</a></li>
+  <li><a href="../../#edu">Educação</a></li>
+  <li><a href="../../#arquivo">Todos os projetos</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head infra">
+  <p class="crumb"><a href="../../#infra">Infraestrutura de TI</a> / Artigo</p>
+  <h1>Quando o Wi-Fi “cai” e o sinal está ótimo: um caso de alarme falso em robôs industriais</h1>
+  <p class="lede">Uma investigação passiva em canal 2,4 GHz saturado por celulares distantes, e o que esse caso ensina sobre diagnóstico, evidência e transposição para a sala de aula.</p>
+  <ul class="badges" aria-label="Etiquetas">
+    <li class="badge tipo">Artigo</li>
+    <li class="badge">Infraestrutura</li><li class="badge">Educação</li><li class="badge">Wi-Fi 2,4 GHz</li><li class="badge">BNCC Computação</li>
+  </ul>
+  <dl class="facts">
+    <div><dt>Autor</dt><dd>Jeferson Luiz Pereira</dd></div>
+    <div><dt>Publicado</dt><dd>24 de outubro de 2026</dd></div>
+    <div><dt>Para quem</dt><dd>Profissionais de infraestrutura e professores de Computação e Redes</dd></div>
+    <div><dt>Leitura</dt><dd>Cerca de 7 minutos</dd></div>
+  </dl>
+  <p class="summary">Quatro robôs industriais geravam alarmes recorrentes de “fora da rede”. O sinal de Wi-Fi estava entre −53 e −58 dBm, ótimo. Não havia reinicialização de antena. Nenhuma configuração tinha sido alterada. E, ainda assim, o monitoramento (Zabbix, com painéis no Grafana) abria cards de falha por dias seguidos. O problema não estava onde o sintoma apontava.</p>
+</header>
+
+<main id="conteudo" class="article">
+  <div class="blk">
+    <h2>O cenário e a regra do alarme</h2>
+    <p>Os robôs (ESP32) operam na área de silos de uma indústria e são monitorados pelo Zabbix, com painéis no Grafana. O Zabbix testa a porta de aplicação de cada um a cada 30 segundos. Dois testes consecutivos sem resposta, ou seja, um minuto, abrem um card de “fora da rede”. O card só fecha após quatro respostas positivas com menos de quatro mudanças em 30 minutos. A regra foi pensada para evitar oscilação, mas tinha um efeito colateral: esticava o alarme muito além da falha real.</p>
+  </div>
+
+  <div class="blk">
+    <h2>O que foi descartado (e por que isso importa)</h2>
+    <p>Antes de investigar a causa, o método foi descartar hipóteses com evidência:</p>
+    <ul>
+      <li><strong>Queda de Wi-Fi: descartada.</strong> A controladora registrava todos os robôs conectados sem interrupção, com sinal estável entre −53 e −58 dBm.</li>
+      <li><strong>Falha de antena: descartada.</strong> Não havia reinicializações no período, e 100 % dos pings do monitor foram respondidos.</li>
+      <li><strong>Mudança de configuração: descartada.</strong> Os logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li>
+      <li><strong>Defeito em um robô: descartada.</strong> Os quatro ficaram lentos exatamente ao mesmo tempo, o que elimina problema isolado de hardware.</li>
+    </ul>
+    <p>Cada hipótese descartada reduzia o espaço de busca. O que sobrou foi o que ninguém tinha olhado: o canal de rádio.</p>
+  </div>
+
+  <div class="blk">
+    <h2>A causa raiz: canal 2,4 GHz congestionado</h2>
+    <p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %.</p>
+    <p>Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs, mesmo com sinal ótimo, precisavam aguardar para transmitir. O tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, exatamente no intervalo das falhas consecutivas que abriram o alarme.</p>
+  </div>
+
+  <figure class="diag">
+    <svg viewBox="0 0 860 250" role="img" aria-labelledby="dg-t dg-d">
+      <title id="dg-t">Tempo de ar no canal 2,4 GHz, antes e durante o incidente</title>
+      <desc id="dg-d">Na faixa de cima, com o canal a 42 %, os pacotes curtos dos robôs encontram intervalos livres. Na faixa de baixo, com o canal entre 61 e 75 %, pacotes longos de celulares distantes ocupam quase todo o tempo e o pacote do robô espera na fila.</desc>
+      <text class="dg-t" x="20" y="30">Canal em operação normal · ~42 % ocupado</text>
+      <text class="dg-s" x="20" y="48">resposta ao teste de porta: ~3 ms</text>
+      <line class="dg" x1="20" y1="90" x2="840" y2="90"/>
+      <rect class="dg-ok" x="40" y="66" width="34" height="24" rx="2"/>
+      <rect class="dg-no" x="120" y="66" width="120" height="24" rx="2"/>
+      <rect class="dg-ok" x="290" y="66" width="34" height="24" rx="2"/>
+      <rect class="dg-ok" x="420" y="66" width="34" height="24" rx="2"/>
+      <rect class="dg-no" x="500" y="66" width="120" height="24" rx="2"/>
+      <rect class="dg-ok" x="690" y="66" width="34" height="24" rx="2"/>
+
+      <text class="dg-t" x="20" y="140">Canal no incidente (09:25–09:31) · 61–75 % ocupado</text>
+      <text class="dg-s" x="20" y="158">resposta ao teste de porta: 70–150 ms</text>
+      <line class="dg" x1="20" y1="200" x2="840" y2="200"/>
+      <rect class="dg-no" x="40" y="176" width="150" height="24" rx="2"/>
+      <rect class="dg-no" x="200" y="176" width="150" height="24" rx="2"/>
+      <rect class="dg-ok" x="360" y="176" width="34" height="24" rx="2"/>
+      <rect class="dg-no" x="404" y="176" width="150" height="24" rx="2"/>
+      <rect class="dg-no" x="564" y="176" width="150" height="24" rx="2"/>
+      <rect class="dg-ok" x="724" y="176" width="34" height="24" rx="2"/>
+      <path class="dg-dash" d="M94 222H354"/>
+      <path class="dg" d="M346 216l8 6l-8 6"/>
+      <text class="dg-s" x="96" y="242">o robô tem o pacote pronto, mas espera o canal liberar</text>
+
+      <rect class="dg-ok" x="600" y="18" width="24" height="14" rx="2"/>
+      <text class="dg-okt" x="632" y="30">robô (sinal −53 a −58 dBm)</text>
+      <rect class="dg-no" x="600" y="40" width="24" height="14" rx="2"/>
+      <text class="dg-not" x="632" y="52">celular distante (−80 a −107 dBm)</text>
+    </svg>
+    <figcaption>Esquema ilustrativo, sem escala: pacotes de aparelhos distantes são mais lentos e ficam mais tempo no ar. Os valores de ocupação e de tempo de resposta são os medidos no caso.</figcaption>
+  </figure>
+
+  <div class="blk">
+    <h2>Como foi apurado</h2>
+    <p>Toda a análise foi passiva: leitura da controladora Wi-Fi (somente leitura) para o estado dos robôs, log de conexões da antena e log de administração; monitoramento com dados de ping (a cada 3 min), teste TCP de porta (a cada 30 s) e ocupação do canal 2,4 GHz (a cada 1 min). Nenhuma configuração foi alterada durante a investigação, o que é importante tanto para a segurança do ambiente quanto para a validade da evidência.</p>
+  </div>
+
+  <div class="blk">
+    <h2>A solução e a validação</h2>
+    <p>Foi ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados; a reconexão a um AP mais próximo depende do cliente e da cobertura disponível e não é garantida. Os robôs industriais, com sinal entre −53 e −58 dBm, não foram afetados.</p>
+    <p>Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p>
+    <p><strong>Caso completo no portfólio:</strong> <a href="../../#p-alarme">Alarme falso de robô industrial: congestionamento de canal Wi-Fi 2,4 GHz</a><br>
+    <strong>Caso irmão:</strong> <a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">monitor de quedas Wi-Fi em Python ↗<span class="sr-only"> (abre em nova aba)</span></a></p>
+  </div>
+
+  <section class="blk lane" aria-labelledby="h-infra-licoes">
+    <p class="eyebrow">Para profissionais de infraestrutura</p>
+    <h2 id="h-infra-licoes">O que esse caso ensina</h2>
+    <ul>
+      <li><strong>“Sinal bom” não significa “conexão boa”.</strong> Em 2,4 GHz, ocupação de canal e tempo de ar importam mais que RSSI.</li>
+      <li><strong>Diagnóstico passivo é subestimado.</strong> Dá para provar causa raiz sem alterar uma configuração.</li>
+      <li><strong>Métrica sem linha de base é chute.</strong> O monitor de quedas Wi-Fi foi o que permitiu medir o “antes e depois” com dados, em vez de percepção.</li>
+    </ul>
+  </section>
+
+  <section class="blk lane edu" aria-labelledby="h-edu-licoes">
+    <p class="eyebrow">Para professores de Computação e Redes</p>
+    <h2 id="h-edu-licoes">O que esse caso ensina</h2>
+    <p>Este é o ponto que me interessa particularmente como licenciando em Computação: o mesmo caso que resolve um problema de produção é um excelente problema de sala de aula.</p>
+    <p>O paradoxo central, “sinal ótimo, conexão ruim”, é contraintuitivo o suficiente para provocar investigação. Ele se conecta diretamente a dois eixos da BNCC Computação:</p>
+    <ul>
+      <li><strong>Mundo Digital:</strong> redes, protocolos, transmissão de dados, compartilhamento de meio físico.</li>
+      <li><strong>Pensamento Computacional:</strong> formular hipóteses, testar, descartar com evidência, concluir.</li>
+    </ul>
+    <h3>Uma transposição possível para o 9º ano ou Ensino Médio técnico</h3>
+    <ol class="steps">
+      <li><strong>Apresente o paradoxo sem a solução.</strong> “O sinal está ótimo, mas o robô não responde. O que pode ser?”</li>
+      <li><strong>Peça hipóteses e conduza o descarte.</strong> Use evidências fictícias: logs, prints de controladora, medições.</li>
+      <li><strong>Introduza fila e tempo de ar com uma atividade desplugada.</strong> Cartões representando pacotes disputam um único “canal” na lousa.</li>
+      <li><strong>Feche com a linha do tempo.</strong> Ocupação do canal × latência × abertura do alarme.</li>
+    </ol>
+    <p>Esse desenho dialoga com dois materiais que já publiquei:</p>
+    <ul>
+      <li><a href="../../a-rede-parou/">A Rede Parou</a>: laboratório de investigação de incidente com logs fictícios, em que os estudantes testam hipóteses com evidências.</li>
+      <li><a href="../../projetos/wifi-8021x/#didatica">Laboratório: senha, usuário ou máquina?</a>: versão didática do caso de autenticação 802.1X, no mesmo espírito de transpor um caso técnico real para a sala.</li>
+    </ul>
+    <p>A ideia não é ensinar ESP32 ou controladora UniFi, mas ensinar o método: observar, formular hipótese, buscar evidência, descartar, concluir. É o mesmo raciocínio que uso em produção, só que com dados sanitizados e no ritmo da turma.</p>
+  </section>
+
+  <div class="blk">
+    <h2>Fechamento</h2>
+    <p>O sinal estava ótimo. O problema nunca foi o sinal. Foi o canal, e a falta de dados para enxergá-lo.</p>
+    <p>Se você é professor e quer transformar casos reais como este em aula, os materiais e a oficina de BNCC Computação estão no portfólio: <a href="../../#edu">Computação e Educação</a>. Se você atua em infraestrutura e convive com alarmes recorrentes de “fora da rede” ou quedas de Wi-Fi sem causa aparente, o método está descrito no caso completo: <a href="../../#p-alarme">alarme falso de robô industrial</a>.</p>
+  </div>
+
+  <p class="byline">Jeferson Luiz Pereira é Analista Sênior de Infraestrutura de TI e professor de tecnologia, licenciando em Computação pela UTFPR. <a href="https://pereirashouse.github.io/">Portfólio</a> · <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn ↗<span class="sr-only"> (abre em nova aba)</span></a></p>
+</main>
+
+<nav class="pager" aria-label="Leia também">
+  <a href="../../projetos/quedas-coletores-wifi/"><span>Caso relacionado</span><strong>Troubleshooting de quedas dos coletores Wi-Fi</strong></a>
+  <a href="../../a-rede-parou/" style="text-align:right"><span>Laboratório relacionado</span><strong>A Rede Parou</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../assets/site.js"></script>
+</body>
+</html>
