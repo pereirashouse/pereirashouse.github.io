@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Serviços · Jeferson Pereira</title>
+<meta name="description" content="Serviços de Jeferson Luiz Pereira: conteúdo pedagógico de Computação alinhado à BNCC, suporte técnico para pequenos negócios e desenvolvimento e automação em Python.">
+<link rel="canonical" href="https://pereirashouse.github.io/servicos/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Serviços: educação, suporte técnico e automação">
+<meta property="og:description" content="Serviços de Jeferson Luiz Pereira: conteúdo pedagógico de Computação alinhado à BNCC, suporte técnico para pequenos negócios e desenvolvimento e automação em Python.">
+<meta property="og:url" content="https://pereirashouse.github.io/servicos/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+/* Layout: mesma coluna do portfólio. Cada frente de serviço é uma seção com cor própria: verde = educação, azul = suporte/infra, violeta = desenvolvimento. */
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --fg:#15211F; --muted:#56655F; --line:#D3DCD8;
+  --infra:#1D5BB8; --infra-soft:#E4ECF8; --edu:#23774A; --edu-soft:#E2F1E8; --dev:#6A47A8; --dev-soft:#EEE8F7;
+  --warn:#9A5B00; --warn-soft:#FBF0DC; --on-accent:#FFFFFF;
+  --display:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --body:"Public Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101716; --surface:#172120; --fg:#E6EEEB; --muted:#9AABA5; --line:#2A3735;
+  --infra:#7FAEF5; --infra-soft:#18263B; --edu:#6FCB97; --edu-soft:#14291E; --dev:#B9A0F0; --dev-soft:#241C36;
+  --warn:#F0B35A; --warn-soft:#2E2412; --on-accent:#101716; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101716; --surface:#172120; --fg:#E6EEEB; --muted:#9AABA5; --line:#2A3735;
+  --infra:#7FAEF5; --infra-soft:#18263B; --edu:#6FCB97; --edu-soft:#14291E; --dev:#B9A0F0; --dev-soft:#241C36;
+  --warn:#F0B35A; --warn-soft:#2E2412; --on-accent:#101716; color-scheme:dark}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+.wrap{max-width:1040px;margin:0 auto;padding-block:40px 72px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+a{color:inherit;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--infra);outline-offset:3px;border-radius:2px}
+.mono{font-family:var(--mono);font-size:.8rem;letter-spacing:.02em}
+.ph{font-family:var(--mono);font-size:.85em;background:var(--warn-soft);color:var(--warn);padding:1px 6px;border-radius:3px;white-space:nowrap}
+
+
+
+
+header.hero{display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-size:clamp(2rem,5.4vw,3.3rem);font-weight:700;letter-spacing:-.02em;max-width:22ch}
+.lede{max-width:62ch;font-size:1.12rem;color:var(--muted)}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;text-decoration:none;padding:10px 16px;border-radius:6px;border:1px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn.edu{background:var(--edu);color:var(--on-accent)} .btn.infra{background:var(--infra);color:var(--on-accent)} .btn.dev{background:var(--dev);color:var(--on-accent)}
+.btn:hover{filter:brightness(1.08)}
+.cred{display:flex;flex-wrap:wrap;gap:6px 0;font-family:var(--mono);font-size:.78rem;color:var(--muted);padding-top:16px;border-top:1px solid var(--line);list-style:none;margin:4px 0 0;padding-left:0}
+.cred li{display:flex;align-items:center}
+.cred li+li::before{content:"·";margin:0 10px;color:var(--line)}
+
+section{display:flex;flex-direction:column;gap:24px;scroll-margin-top:16px}
+.sec-head{display:flex;flex-direction:column;gap:8px;padding-bottom:14px;border-bottom:2px solid var(--line)}
+.sec-head .k{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.sec-head h2{font-size:1.9rem}
+#educacao .sec-head{border-color:var(--edu)} #educacao .k{color:var(--edu)}
+#suporte .sec-head{border-color:var(--infra)} #suporte .k{color:var(--infra)}
+#desenvolvimento .sec-head{border-color:var(--dev)} #desenvolvimento .k{color:var(--dev)}
+
+.intro{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 40px;align-items:start}
+.intro>p{font-size:1.05rem;max-width:62ch}
+.receive{display:flex;flex-direction:column;gap:8px}
+.receive h3,.label{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.receive ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:.95rem}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 16px;border-bottom:1px solid var(--line)}
+td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+td.prazo{color:var(--muted);white-space:nowrap}
+td.valor,th.valor{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.valor{font-family:var(--display);font-weight:600;font-size:1.02rem}
+#educacao td.valor{color:var(--edu)} #suporte td.valor{color:var(--infra)} #desenvolvimento td.valor{color:var(--dev)}
+
+.case{display:flex;flex-direction:column;gap:8px;padding:18px 20px;border-radius:8px;border:1px solid var(--line);background:var(--surface)}
+.case .tag{align-self:flex-start;font-family:var(--mono);font-size:.75rem;font-weight:500;padding:4px 10px 4px 14px;border-radius:3px;position:relative}
+.case .tag::before{content:"";position:absolute;left:5px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:currentColor}
+#educacao .tag{background:var(--edu-soft);color:var(--edu)} #suporte .tag{background:var(--infra-soft);color:var(--infra)} #desenvolvimento .tag{background:var(--dev-soft);color:var(--dev)}
+.case p{max-width:72ch}
+.case a{font-weight:600;font-size:.93rem;align-self:flex-start}
+#educacao .case a{color:var(--edu)} #suporte .case a{color:var(--infra)} #desenvolvimento .case a{color:var(--dev)}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.steps li{display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:2px solid var(--fg)}
+.steps .n{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.steps strong{font-family:var(--display);font-size:1.12rem;line-height:1.25}
+.steps p{font-size:.93rem;color:var(--muted)}
+
+.faq{display:flex;flex-direction:column}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:16px 0;font-family:var(--display);font-weight:600;font-size:1.1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--muted)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 16px;max-width:68ch;color:var(--muted)}
+
+#contato{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:28px 40px;padding:28px;border-radius:8px;border:1px solid var(--line);background:var(--surface)}
+#contato h2{font-size:1.9rem}
+.contact-info{display:flex;flex-direction:column;gap:16px}
+.contact-info dl{margin:0;display:flex;flex-direction:column;gap:10px}
+.contact-info dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.contact-info dd{margin:0}
+form{display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fld label{font-size:.82rem;font-weight:600}
+input,select,textarea{font:inherit;font-size:.95rem;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:9px 11px;width:100%}
+textarea{min-height:96px;resize:vertical}
+form .btn{background:var(--fg);color:var(--bg);align-self:flex-start}
+.note{font-size:.85rem;color:var(--warn);background:var(--warn-soft);padding:8px 12px;border-radius:6px}
+
+footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px}
+
+@media (max-width:820px){
+  .intro,#contato{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  #contato{padding:20px}
+  .row,.steps{grid-template-columns:1fr}
+  /* Tabelas viram fichas empilhadas no celular */
+  .tbl{border:0;background:none;overflow:visible}
+  table,tbody,tr,td{display:block;width:100%}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  tr{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);margin-bottom:10px}
+  td{padding:0;border:0}
+  td:nth-child(1){grid-column:1}
+  td:nth-child(2){grid-column:1/-1;grid-row:2;color:var(--muted);font-size:.9rem}
+  td.prazo{grid-column:1/-1;grid-row:3;font-family:var(--mono);font-size:.75rem}
+  td.valor{grid-column:2;grid-row:1}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+.topnav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.topnav ul{max-width:1040px;margin:0 auto;list-style:none;display:flex;flex-wrap:wrap;gap:4px 22px;
+  padding:10px max(16px,env(safe-area-inset-left,0px));font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.topnav a{display:inline-flex;align-items:center;min-height:32px;padding:3px 0;text-decoration:none;color:var(--muted)}
+.topnav a:hover,.topnav a[aria-current]{color:var(--fg)}
+.skip{position:absolute;left:16px;top:-48px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:4px;z-index:20;text-decoration:none}
+.skip:focus{top:8px}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../">Portfólio</a></li>
+  <li><a href="../servicos/" aria-current="page">Serviços</a></li>
+  <li><a href="../professores/">Professores</a></li>
+  <li><a href="../negocios/">Negócios</a></li>
+</ul></nav>
+<main class="wrap" id="conteudo">
+
+  <header class="hero">
+    <p class="eyebrow">Serviços · Educação, suporte e automação</p>
+    <h1>Conhecimento técnico que resolve problemas reais, na escola, no escritório e no código.</h1>
+    <p class="lede">Sou Jeferson Luiz Pereira, analista sênior de infraestrutura de TI e professor de tecnologia. Ajudo professores a destravar temas técnicos, pequenos negócios a organizar sua tecnologia e profissionais a automatizar tarefas repetitivas.</p>
+    <div class="ctas">
+      <a class="btn edu" href="#contato" data-assunto="educacao">Falar sobre aula ou material didático</a>
+      <a class="btn infra" href="#contato" data-assunto="suporte">Preciso de suporte técnico</a>
+      <a class="btn dev" href="#contato" data-assunto="desenvolvimento">Quero um site ou automação</a>
+    </div>
+    <ul class="cred">
+      <li>18 anos em tecnologia</li>
+      <li>Licenciando em Computação (UTFPR)</li>
+      <li>177 testes automatizados em projeto open source</li>
+      <li>Materiais alinhados à BNCC publicados</li>
+    </ul>
+  </header>
+
+  <section id="educacao">
+    <div class="sec-head">
+      <span class="k">Educação e conteúdo pedagógico</span>
+      <h2>Para professores e escolas</h2>
+    </div>
+    <div class="intro">
+      <p>Você domina a sala de aula. Eu ajudo com o conteúdo técnico. Transformo temas de computação, redes e segurança digital em planos de aula prontos para aplicar, alinhados à BNCC, com versão desplugada para escolas sem laboratório.</p>
+      <div class="receive">
+        <h3>O que você recebe</h3>
+        <ul>
+          <li>Plano de aula completo (objetivos, metodologia, recursos, avaliação)</li>
+          <li>Slides e atividade impressa com gabarito</li>
+          <li>Rubrica de avaliação formativa</li>
+          <li>Adaptação para a realidade da sua turma</li>
+          <li>Versão desplugada quando necessário</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Serviço</th><th>Entrega</th><th>Prazo</th><th class="valor">Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Plano de aula avulso</td><td>1 plano completo + slides + atividade + rubrica</td><td class="prazo">5 dias úteis</td><td class="valor">R$ 250</td></tr>
+          <tr><td>Sequência didática (4 aulas)</td><td>4 planos articulados + materiais</td><td class="prazo">10 dias úteis</td><td class="valor">R$ 800</td></tr>
+          <tr><td>Consultoria avulsa (1h30)</td><td>Sessão ao vivo + resumo por escrito</td><td class="prazo">Agendada</td><td class="valor">R$ 180</td></tr>
+          <tr><td>Mentoria mensal</td><td>2 encontros + suporte por WhatsApp</td><td class="prazo">30 dias</td><td class="valor">R$ 600</td></tr>
+          <tr><td>Oficina para escola (2h)</td><td>Formação presencial ou online para até 20 professores</td><td class="prazo">Agendada</td><td class="valor">R$ 900</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="case">
+      <span class="tag">Case de destaque · EF09CO04 · EF09CO10</span>
+      <p><strong>Operação Anzol</strong>, jogo de perícia contra golpes digitais para o 9º ano. Funciona offline, no celular.</p>
+      <a href="../operacao-anzol/">Ver no portfólio →</a>
+    </div>
+  </section>
+
+  <section id="suporte">
+    <div class="sec-head">
+      <span class="k">Suporte técnico e manutenção</span>
+      <h2>Para pequenos negócios e profissionais</h2>
+    </div>
+    <div class="intro">
+      <p>Computador lento, Wi-Fi que cai, backup que ninguém sabe se funciona. Resolvo com diagnóstico claro, orientação por escrito e sem empurrar equipamento novo que você não precisa.</p>
+      <div class="receive">
+        <h3>O que você recebe</h3>
+        <ul>
+          <li>Diagnóstico remoto ou presencial</li>
+          <li>Correção com explicação do que foi feito</li>
+          <li>Relatório simples com recomendações</li>
+          <li>Orientação de próximos passos, sem venda casada</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Serviço</th><th>Entrega</th><th>Prazo</th><th class="valor">Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Suporte remoto avulso (1h)</td><td>Sessão + resumo por escrito</td><td class="prazo">24h</td><td class="valor">R$ 120</td></tr>
+          <tr><td>Pacote 5 horas remotas</td><td>5 sessões + relatório</td><td class="prazo">30 dias</td><td class="valor">R$ 500</td></tr>
+          <tr><td>Diagnóstico + limpeza presencial</td><td>Visita + relatório</td><td class="prazo">Agendada</td><td class="valor">R$ 150</td></tr>
+          <tr><td>Formatação com backup</td><td>Sistema + programas + backup</td><td class="prazo">48h</td><td class="valor">R$ 180</td></tr>
+          <tr><td>Upgrade SSD/RAM (mão de obra)</td><td>Migração + teste</td><td class="prazo">24h</td><td class="valor">R$ 200</td></tr>
+          <tr><td>Consultoria de rede pequena</td><td>Levantamento + relatório + configuração</td><td class="prazo">7 dias</td><td class="valor">R$ 800</td></tr>
+          <tr><td>Contrato mensal pequeno negócio</td><td>Até 8h remotas + suporte por WhatsApp</td><td class="prazo">Mensal</td><td class="valor">R$ 550</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="case">
+      <span class="tag">Estudo de caso · Redes</span>
+      <p>Rede de filial industrial sem documentação, levantada do zero: VLANs, redundância e roteiro de regularização por risco.</p>
+      <a href="../projetos/rede-filial-industrial/">Ver no portfólio →</a>
+    </div>
+  </section>
+
+  <section id="desenvolvimento">
+    <div class="sec-head">
+      <span class="k">Desenvolvimento e automação</span>
+      <h2>Para quem precisa de presença online ou de parar de fazer tarefa repetitiva</h2>
+    </div>
+    <div class="intro">
+      <p>Sites rápidos, responsivos e sem mensalidade de plataforma. Automações em Python com testes automatizados, com o mesmo rigor que uso em ambiente corporativo, aplicado ao seu projeto.</p>
+      <div class="receive">
+        <h3>O que você recebe</h3>
+        <ul>
+          <li>Código limpo, documentado e versionado</li>
+          <li>Testes automatizados (quando aplicável)</li>
+          <li>Instruções de uso por escrito</li>
+          <li>30 dias de suporte para ajustes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Serviço</th><th>Entrega</th><th>Prazo</th><th class="valor">Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Landing page responsiva</td><td>1 página + formulário + publicação</td><td class="prazo">7 dias</td><td class="valor">R$ 1.200</td></tr>
+          <tr><td>Site institucional (até 5 páginas)</td><td>Site completo + publicação</td><td class="prazo">15 dias</td><td class="valor">R$ 2.500</td></tr>
+          <tr><td>Automação simples (1 função)</td><td>Script + documentação</td><td class="prazo">5 dias</td><td class="valor">R$ 500</td></tr>
+          <tr><td>Automação com testes e CI</td><td>Script + testes + pipeline</td><td class="prazo">10 dias</td><td class="valor">R$ 2.000</td></tr>
+          <tr><td>Monitoramento contínuo sob medida</td><td>Agente + relatórios + alertas</td><td class="prazo">15 dias</td><td class="valor">R$ 3.500</td></tr>
+          <tr><td>Manutenção mensal (site ou automação)</td><td>Ajustes e suporte</td><td class="prazo">Mensal</td><td class="valor">R$ 200</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="case">
+      <span class="tag">Case de destaque · Python · Open source</span>
+      <p>Monitor automático de quedas Wi-Fi de coletores WMS: 177 testes, CI em Python 3.10 a 3.13 e validação TLS por padrão.</p>
+      <a href="../#p-monitor">Ver no portfólio →</a>
+    </div>
+  </section>
+
+  <section id="como-funciona">
+    <div class="sec-head"><h2>Como funciona</h2></div>
+    <ol class="steps">
+      <li><span class="n">1</span><strong>Conversa inicial</strong><p>30 minutos, gratuita. Você conta o problema, eu digo se consigo ajudar e como.</p></li>
+      <li><span class="n">2</span><strong>Proposta por escrito</strong><p>Escopo, prazo, valor e o que não está incluído. Sem surpresa.</p></li>
+      <li><span class="n">3</span><strong>Execução com marcos</strong><p>Você acompanha o andamento do começo ao fim.</p></li>
+      <li><span class="n">4</span><strong>Entrega + 30 dias de suporte</strong><p>Ajustes inclusos. Depois, manutenção opcional.</p></li>
+    </ol>
+  </section>
+
+  <section id="faq">
+    <div class="sec-head"><h2>Perguntas frequentes</h2></div>
+    <div class="faq">
+      <details open><summary>Atende remoto?</summary><p>Sim, para suporte técnico, consultoria pedagógica e desenvolvimento. Presencial apenas na região de Palmeira – PR, com deslocamento combinado.</p></details>
+      <details><summary>Como é o pagamento?</summary><p>50% na aprovação da proposta e 50% na entrega. Contratos mensais são cobrados no início do mês. Pix, transferência ou boleto.</p></details>
+      <details><summary>Emite nota fiscal?</summary><p>Sim, como MEI ou pessoa física, conforme o caso. Combinamos na proposta.</p></details>
+      <details><summary>Qual o prazo para começar?</summary><p>Normalmente de 3 a 7 dias após a aprovação da proposta, dependendo da fila.</p></details>
+      <details><summary>Posso pedir ajustes?</summary><p>Sim. Cada pacote inclui um número de revisões, indicado no escopo. Ajustes adicionais são cobrados por hora.</p></details>
+      <details><summary>Você usa IA nos materiais?</summary><p>Uso IA como copiloto no planejamento, nunca como substituta do professor, e sanitizo todos os dados antes. Isso está documentado no meu <a href="../pipeline-pedagogico/">artigo sobre o pipeline BNCC</a>.</p></details>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="contact-info">
+      <h2>Vamos conversar?</h2>
+      <p>Conte o que você precisa. Respondo com os próximos passos e, se fizer sentido, marcamos a conversa inicial gratuita.</p>
+      <dl>
+        <div><dt>WhatsApp</dt><dd><a href="https://wa.me/5542999601085" target="_blank" rel="noopener">(42) 99960-1085</a></dd></div>
+        <div><dt>E-mail</dt><dd><a href="mailto:jeferson.luizpereira@outlook.com">jeferson.luizpereira@outlook.com</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/pereirashouse" target="_blank" rel="noopener">github.com/pereirashouse</a></dd></div>
+      </dl>
+    </div>
+    <form id="form-contato" novalidate>
+      <div class="row">
+        <div class="fld"><label for="f-nome">Nome</label><input id="f-nome" name="nome" autocomplete="name" placeholder="Seu nome"></div>
+        <div class="fld"><label for="f-contato">E-mail ou WhatsApp</label><input id="f-contato" name="contato" placeholder="Como te respondo"></div>
+      </div>
+      <div class="fld"><label for="f-assunto">Assunto</label>
+        <select id="f-assunto" name="assunto">
+          <option value="educacao">Aula ou material didático</option>
+          <option value="suporte">Suporte técnico</option>
+          <option value="desenvolvimento">Site ou automação</option>
+          <option value="outro">Outro assunto</option>
+        </select>
+      </div>
+      <div class="fld"><label for="f-msg">Mensagem</label><textarea id="f-msg" name="mensagem" placeholder="Descreva o problema ou o que você precisa"></textarea></div>
+      <button class="btn" type="submit">Enviar pelo WhatsApp</button>
+      
+    </form>
+  </section>
+
+  <footer>
+    <span>Jeferson Luiz Pereira</span>
+    <a href="../">Voltar ao portfólio</a>
+    <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">github.com/pereirashouse</a>
+    <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn</a>
+  </footer>
+</main>
+
+<script>
+// Sem servidor: o formulário monta a mensagem e abre a conversa no WhatsApp.
+(function(){
+  var WA='https://wa.me/5542999601085';
+  var botoes=document.querySelectorAll('[data-assunto]');
+  botoes.forEach(function(a){a.addEventListener('click',function(){var s=document.getElementById('f-assunto');if(s)s.value=a.dataset.assunto})});
+  document.querySelectorAll('form').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var linhas=[];
+      f.querySelectorAll('input,select,textarea').forEach(function(c){
+        var v=c.tagName==='SELECT'?c.options[c.selectedIndex].text:c.value.trim();
+        var l=f.querySelector('label[for="'+c.id+'"]');
+        if(v)linhas.push((l?l.textContent:c.name)+': '+v);
+      });
+      window.open(WA+'?text='+encodeURIComponent('Olá, Jeferson! Vim pelo site.\n'+linhas.join('\n')),'_blank','noopener');
+    });
+  });
+})();
+</script>
+</body>
+</html>
