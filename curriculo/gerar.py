@@ -72,7 +72,7 @@ PROJ_EDU = """<ul>
 <li><b>A Rede Parou</b> (protótipo publicado): laboratório com logs fictícios para 9º ano/Ensino Médio; método científico, papéis, três pistas graduais e versão impressa; EF07CO06, EF07CO07 e EF08CO06.</li>
 <li><b>Operação Anzol</b> (publicado): jogo de perícia de 60 min para 9º ano; Três Momentos Pedagógicos, papéis alternados, protocolo P.A.R.E. e avaliação formativa com laudo, rubrica e ticket de saída; EF09CO04 e EF09CO10.</li>
 <li><b>Do Planejamento à Prática</b> (artigo publicado): pipeline em quatro etapas — captura, seleção/sanitização com revisão humana, transposição BNCC e publicação versionada de planos de aula e rubricas.</li>
-</ul><p class="extra"><b>Outros materiais:</b> simulador de configuração de roteador e IIR “A invisibilidade do Wi-Fi” (9º ano, Mundo Digital, Física e Matemática); oficina desplugada de Letramento e Pensamento Computacional; versão didática do 802.1X.</p>"""
+</ul><p class="extra"><b>Outros materiais:</b> simulador de roteador, IIR “A invisibilidade do Wi-Fi”, oficina desplugada e 802.1X didático.</p>"""
 
 PONTE = "<p>Mentoria, runbooks e incidentes sanitizados viram materiais didáticos alinhados à BNCC.</p>"
 
@@ -89,9 +89,9 @@ VARIANTES = {
 <h2>Formação</h2>{FORMACAO}"""),
     "educacao": dict(
         titulo="Currículo · Computação e Educação", cor="#23774A",
-        cargo="Licenciando em Computação (UTFPR) · Analista de Infraestrutura de TI Sênior",
+        cargo="Licenciando em Computação (UTFPR) · Professor de tecnologia · Analista de Infraestrutura de TI Sênior",
         corpo=f"""<h2>Resumo</h2>
-<p>Licenciando em Computação e analista sênior de infraestrutura. Desenvolve materiais de Computação alinhados à BNCC para contextos de pouca infraestrutura, com versões offline/desplugadas, planejamento por investigação e avaliação formativa.</p>
+<p>Professor de tecnologia (redes, hardware e manutenção, BNCC Computação, Excel avançado) e analista sênior de infraestrutura. Parte de casos reais antes da teoria, usa IA só como copilota com dados sanitizados e cria materiais alinhados à BNCC, revisados e adaptados ao contexto local, com versões offline e avaliação formativa.</p>
 <h2>Materiais e método</h2>{PROJ_EDU}
 <h2>Formação</h2>{FORMACAO}
 <h2>Experiência profissional</h2>{EXPERIENCIA}
