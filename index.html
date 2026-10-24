@@ -129,14 +129,14 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
     </div>
     <h3 class="sub-h">Onde cada área aparece</h3>
     <dl class="areas">
-      <div><dt>Redes e segurança</dt><dd><a href="projetos/rede-filial-industrial/">Modernização de rede</a> · <a href="projetos/quedas-coletores-wifi/">Quedas de coletores Wi-Fi</a> · <a href="#p-alarme">Wi-Fi industrial</a></dd></div>
+      <div><dt>Redes e segurança</dt><dd><a href="projetos/rede-filial-industrial/">Modernização de rede</a> · <a href="projetos/quedas-coletores-wifi/">Quedas de coletores Wi-Fi</a> · <a href="projetos/alarme-falso-robos-esp32/">Wi-Fi industrial</a></dd></div>
       <div><dt>Wi-Fi corporativo e 802.1X</dt><dd><a href="projetos/wifi-8021x/">Implantação 802.1X</a> · <a href="projetos/incidente-8021x-windows/">Incidente</a></dd></div>
       <div><dt>Active Directory e identidade</dt><dd><a href="projetos/wifi-8021x/">Conta de máquina</a> · <a href="#p-offboarding">Offboarding seguro</a></dd></div>
       <div><dt>Virtualização</dt><dd><a href="projetos/poc-virtualizacao/">PoC VMware, Sangfor HCI e Proxmox VE</a> · <a href="projetos/troubleshooting-pos-migracao/">Migração KVM → VMware</a></dd></div>
       <div><dt>Backup e proteção de dados</dt><dd><a href="projetos/poc-virtualizacao/#tecnico">Redesenho do backup Veeam</a></dd></div>
-      <div><dt>Monitoramento</dt><dd><a href="#p-monitor">Monitor de quedas Wi-Fi</a> · <a href="#p-alarme">Alarme com Zabbix</a></dd></div>
+      <div><dt>Monitoramento</dt><dd><a href="#p-monitor">Monitor de quedas Wi-Fi</a> · <a href="projetos/alarme-falso-robos-esp32/">Alarme com Zabbix</a></dd></div>
       <div><dt>Automação</dt><dd><a href="#p-monitor">Python e API UniFi</a> · <a href="projetos/rede-filial-industrial/#evidencias">Parser de configurações</a> · <a href="#p-offboarding">PowerShell</a></dd></div>
-      <div><dt>Resposta a incidentes</dt><dd><a href="projetos/incidente-8021x-windows/">Falha 802.1X</a> · <a href="projetos/quedas-coletores-wifi/">Quedas de coletores</a> · <a href="#p-alarme">Alarme falso</a> · <a href="#p-wms">Sessões WMS</a> · <a href="projetos/troubleshooting-pos-migracao/">Pós-migração de VM</a></dd></div>
+      <div><dt>Resposta a incidentes</dt><dd><a href="projetos/incidente-8021x-windows/">Falha 802.1X</a> · <a href="projetos/quedas-coletores-wifi/">Quedas de coletores</a> · <a href="projetos/alarme-falso-robos-esp32/">Alarme falso</a> · <a href="#p-wms">Sessões WMS</a> · <a href="projetos/troubleshooting-pos-migracao/">Pós-migração de VM</a></dd></div>
     </dl>
     <h3 class="sub-h">Estudos de caso selecionados</h3>
     <div class="cards">
@@ -181,6 +181,14 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
         <a class="go" href="projetos/poc-virtualizacao/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Avaliação de plataformas de virtualização e HCI</span></a>
       </article>
       <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="18" y="58" width="36" height="30" rx="4"/><circle class="s" cx="29" cy="70" r="3"/><circle class="s" cx="43" cy="70" r="3"/><path d="M36 58V48"/><circle cx="36" cy="44" r="4"/><path d="M24 96h24"/><path d="M62 52a16 16 0 0 1 0 22"/><path d="M92 92V40"/><path d="M80 40h24"/><path d="M84 30a12 12 0 0 1 16 0"/><path class="d" d="M120 46a14 14 0 0 1 0 20M128 40a24 24 0 0 1 0 32"/><rect x="146" y="30" width="16" height="28" rx="3"/><rect x="168" y="44" width="16" height="28" rx="3"/><rect x="150" y="70" width="16" height="28" rx="3"/><path d="M20 108H186"/><rect class="f" x="70" y="100" width="44" height="8" rx="1"/><circle class="bg" cx="182" cy="18" r="10"/><path d="M182 12v7M182 23v1"/></svg></figure>
+        <h3><a href="projetos/alarme-falso-robos-esp32/">Alarme falso de robôs ESP32 no Wi-Fi 2,4 GHz</a></h3>
+        <p class="desc">Robôs com sinal ótimo e alarme de “fora da rede”: quatro hipóteses descartadas e causa raiz no tempo de ar do canal, ocupado por celulares distantes.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">ESP32 · Wi-Fi 2,4 GHz · UniFi · Zabbix · Grafana · RSSI mínimo</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <a class="go" href="projetos/alarme-falso-robos-esp32/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Alarme falso de robôs ESP32 no Wi-Fi 2,4 GHz</span></a>
+      </article>
+      <article class="card infra-c">
         <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="12" y="34" width="52" height="52" rx="4"/><rect class="f" x="20" y="42" width="36" height="12" rx="2"/><path class="m" d="M24 64h28M24 72h20"/><path d="M70 60H96M90 54l6 6l-6 6"/><rect x="102" y="34" width="52" height="52" rx="4"/><rect class="f" x="110" y="42" width="36" height="12" rx="2"/><path class="m" d="M114 64h28M114 72h20"/><circle class="s" cx="170" cy="30" r="5"/><circle class="s" cx="182" cy="60" r="5"/><circle cx="170" cy="90" r="5"/><path d="M154 44L166 33M154 60H177M154 76L166 87"/><path class="d" d="M24 104H142"/><path d="M164 87l12 6M176 87l-12 6"/></svg></figure>
         <h3><a href="projetos/troubleshooting-pos-migracao/">Troubleshooting pós-migração de máquina virtual</a></h3>
         <p class="desc">VM crítica migrada de KVM para VMware com três bloqueios em cadeia: acesso, rede e HTTP 503, resolvidos sem rollback.</p>
@@ -198,7 +206,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
         <a class="go" href="artigos/wifi-canal-24ghz-robos-industriais/">Ler o artigo <span aria-hidden="true">→</span><span class="sr-only">: Quando o Wi-Fi “cai” e o sinal está ótimo</span></a>
       </article>
     </div>
-    <p class="count">Outros quatro trabalhos de infraestrutura (offboarding seguro, monitor de quedas Wi-Fi, alarme de robôs industriais e sessões WMS) estão em <a href="#arquivo">Todos os projetos</a>.</p>
+    <p class="count">Outros três trabalhos de infraestrutura (offboarding seguro, monitor de quedas Wi-Fi e sessões WMS) estão em <a href="#arquivo">Todos os projetos</a>.</p>
   </section>
 
   <section id="edu" aria-labelledby="h-edu">
@@ -430,7 +438,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
         <p class="when">Out 2026</p>
         <div class="body">
           <p class="trilha">Infraestrutura de TI</p>
-          <h3>Alarme falso de robô industrial: congestionamento de canal Wi-Fi 2,4 GHz</h3>
+          <h3><a href="projetos/alarme-falso-robos-esp32/">Alarme falso de robô industrial: congestionamento de canal Wi-Fi 2,4 GHz</a></h3>
           <p>Causa raiz em canal 2,4 GHz saturado por celulares distantes; RSSI mínimo em −80 dBm e os alarmes não se repetiram.</p>
           <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li></ul>
           <details class="more"><summary>Ver contexto, decisões e validação</summary>
@@ -444,7 +452,7 @@ Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
         </div>
           </details>
           
-          <div class="links"><a href="artigos/wifi-canal-24ghz-robos-industriais/">Ler o artigo sobre este caso</a></div>
+          <div class="links"><a href="projetos/alarme-falso-robos-esp32/">Ver o estudo de caso completo</a><a href="artigos/wifi-canal-24ghz-robos-industriais/">Ler o artigo sobre este caso</a></div>
           <div class="chips"><span class="chip">UniFi</span><span class="chip">Zabbix</span><span class="chip">Grafana</span><span class="chip">Wi-Fi 2,4 GHz</span><span class="chip">ESP32</span><span class="chip">Sistemas industriais</span><span class="chip">Análise de causa raiz</span><span class="chip">Congestionamento de canal</span></div>
         </div>
       </li>
@@ -702,7 +710,7 @@ sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_kee
           <h4>Proteção e observabilidade</h4>
           <p class="sk-desc">Backup e recuperação de dados, monitoramento com alertas e análise de logs para separar falha real de alarme falso.</p>
           <div class="chips"><span class="chip">Veeam</span><span class="chip">Dell PowerProtect</span><span class="chip">Zabbix</span><span class="chip">Grafana</span><span class="chip">Análise de logs</span></div>
-          <a class="sk-link" href="#p-alarme">Na prática: alarme falso com Zabbix <span aria-hidden="true">→</span></a>
+          <a class="sk-link" href="projetos/alarme-falso-robos-esp32/">Na prática: alarme falso com Zabbix <span aria-hidden="true">→</span></a>
         </div>
         <div class="sk-group">
           <h4>Automação e diagnóstico</h4>
