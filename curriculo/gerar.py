@@ -91,7 +91,7 @@ VARIANTES = {
         titulo="Currículo · Computação e Educação", cor="#23774A",
         cargo="Licenciando em Computação (UTFPR) · Professor de tecnologia · Analista de Infraestrutura de TI Sênior",
         corpo=f"""<h2>Resumo</h2>
-<p>Professor de tecnologia (redes, hardware e manutenção, BNCC Computação, Excel avançado) e analista sênior de infraestrutura. Parte de casos reais antes da teoria, usa IA só como copilota com dados sanitizados e cria materiais alinhados à BNCC, revisados e adaptados ao contexto local, com versões offline e avaliação formativa.</p>
+<p>Professor de tecnologia em cursos livres desde 2008 (redes, hardware, BNCC Computação, Excel) e analista sênior de infraestrutura. Parte de casos reais antes da teoria, usa IA só como copilota com dados sanitizados e cria materiais alinhados à BNCC, revisados e adaptados ao contexto local, com versões offline e avaliação formativa.</p>
 <h2>Materiais e método</h2>{PROJ_EDU}
 <h2>Formação</h2>{FORMACAO}
 <h2>Experiência profissional</h2>{EXPERIENCIA}

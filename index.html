@@ -46,6 +46,8 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 .tl li::before{content:"";position:absolute;left:-5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--line)}
 .tl li.ativo::before{background:var(--infra)}
 .tl li.ativo{border-left-color:var(--infra)}
+.tl li.ativo.doc::before{background:var(--edu)}
+.tl li.ativo.doc{border-left-color:var(--edu)}
 .tl-per{font-family:var(--mono);font-size:.72rem;color:var(--muted);display:block;margin-bottom:2px;letter-spacing:.03em}
 .tl li strong{font-size:.95rem;display:block;line-height:1.3}
 .tl-place{font-size:.83rem;color:var(--muted);display:block;margin-bottom:4px}
@@ -595,7 +597,7 @@ sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_kee
     </div>
     <div class="ponte" id="docencia">
       <h3>Professor de tecnologia</h3>
-      <p>Além da licenciatura, atuo como professor de tecnologia, levando para a sala de aula o mesmo raciocínio que uso na operação.</p>
+      <p>Dou aulas de tecnologia em cursos livres desde 2008, levando para a sala de aula o mesmo raciocínio que uso na operação. A licenciatura veio para dar método a essa prática.</p>
       <ul>
         <li><strong>Infraestrutura e redes:</strong> fundamentos, monitoramento e diagnóstico com Python.</li>
         <li><strong>Hardware e manutenção:</strong> montagem, diagnóstico, upgrade e boas práticas de bancada.</li>
@@ -618,6 +620,12 @@ sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_kee
             <strong>Analista de Infraestrutura Sênior</strong>
             <span class="tl-place">Indústria · Paraná</span>
             <p>Condução da prova de conceito (PoC) VMware → Sangfor HCI, com critérios de rollback formalizados antes da implantação e executados quando o risco se confirmou. Análise de rede Wi-Fi com Python e API do UniFi. Automação com PowerShell e GPO. Backup Veeam e Dell PowerProtect. PoC Proxmox VE.</p>
+          </li>
+          <li class="ativo doc">
+            <span class="tl-per">2008 – atual</span>
+            <strong>Professor de tecnologia</strong>
+            <span class="tl-place">Cursos livres</span>
+            <p>Aulas de infraestrutura e redes, hardware e manutenção, tecnologia alinhada à BNCC Computação e Excel avançado, sempre partindo de casos reais. <a href="#docencia">Como ensino</a>.</p>
           </li>
           <li>
             <span class="tl-per">Set 2022 – Mai 2026</span>
