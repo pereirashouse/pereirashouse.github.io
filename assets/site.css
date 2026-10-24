@@ -75,7 +75,7 @@ footer.site{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)
 
 /* Destaques: lista compacta */
 .hl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-@media (min-width:820px){.hl{grid-template-columns:repeat(6,minmax(0,1fr))}.hl>li{grid-column:span 2}.hl>li.edu{grid-column:span 3}}
+@media (min-width:820px){.hl{grid-template-columns:repeat(6,minmax(0,1fr))}.hl>li{grid-column:span 2}.hl>li.edu{grid-column:span 3}.hl>li.artigo{grid-column:span 6}}
 .hl a{display:flex;flex-direction:column;gap:6px;height:100%;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none}
 .hl a:hover{border-color:currentColor}
 .hl .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}
