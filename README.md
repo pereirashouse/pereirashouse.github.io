@@ -23,6 +23,10 @@ Portfólio público que reúne experiência profissional em **infraestrutura de 
 
 O monitor tem **177 testes automatizados** (coleta, eventos, relatórios, persistência, concorrência e TLS seguro por padrão), executados no GitHub Actions em Python 3.10, 3.11, 3.12 e 3.13 a cada push na `main`. Resultados: [execuções do workflow](https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain).
 
+## Artigos
+
+- [Quando o Wi-Fi “cai” e o sinal está ótimo](https://pereirashouse.github.io/artigos/wifi-canal-24ghz-robos-industriais/): alarme falso em robôs industriais causado por canal 2,4 GHz saturado, com as lições para infraestrutura e uma transposição para aulas de Computação.
+
 ## Materiais educacionais
 
 [Simulador de configuração de roteador](https://pereirashouse.github.io/educacao/simulador-roteador/): seis desafios com feedback automático sobre alcance, escolha de canal, comparação de faixas, segurança, QoS e leitura de log. Os desafios têm testes de interface com Playwright em tela de computador e de celular ([workflow de interface](https://github.com/pereirashouse/simulador-configura-o-roteador/actions/workflows/testes-interface.yml?query=branch%3Amain)). Código e orientações ao professor no [repositório do simulador](https://github.com/pereirashouse/simulador-configura-o-roteador).

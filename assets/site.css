@@ -184,3 +184,12 @@ figure.diag figcaption{font-size:.85rem;color:var(--muted)}
   .panel{scroll-margin-top:calc(var(--nav-height,56px) + 16px)}
 }
 @media print{.topnav,.tabs,.skip{display:none}.panel[hidden]{display:flex!important}}
+
+/* Artigo: texto corrido com duas leituras (infraestrutura e sala de aula) */
+.article{display:flex;flex-direction:column;gap:40px}
+.lane{border-left:3px solid var(--infra);padding-left:18px}
+.lane.edu{border-left-color:var(--edu)}
+.lane .eyebrow{color:var(--infra)} .lane.edu .eyebrow{color:var(--edu)}
+.card .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--infra)}
+.byline{font-size:.95rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;max-width:76ch}
+.byline a{color:var(--fg);font-weight:600}
