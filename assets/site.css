@@ -190,6 +190,6 @@ figure.diag figcaption{font-size:.85rem;color:var(--muted)}
 .lane{border-left:3px solid var(--infra);padding-left:18px}
 .lane.edu{border-left-color:var(--edu)}
 .lane .eyebrow{color:var(--infra)} .lane.edu .eyebrow{color:var(--edu)}
-.card .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--infra)}
+.card .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--infra)} .edu-c .k{color:var(--edu)}
 .byline{font-size:.95rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;max-width:76ch}
 .byline a{color:var(--fg);font-weight:600}
