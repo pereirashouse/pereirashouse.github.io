@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infraestrutura de TI · Jeferson Luiz Pereira</title>
+<meta name="description" content="Estudos de caso de redes, Wi-Fi corporativo com 802.1X, virtualização, backup e automação, com trajetória e competências de Jeferson Luiz Pereira.">
+<link rel="canonical" href="https://pereirashouse.github.io/infraestrutura/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1D5BB8">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Infraestrutura de TI · Jeferson Luiz Pereira">
+<meta property="og:description" content="Estudos de caso de redes, Wi-Fi corporativo com 802.1X, virtualização, backup e automação, com trajetória e competências de Jeferson Luiz Pereira.">
+<meta property="og:url" content="https://pereirashouse.github.io/infraestrutura/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+/* Página principal: entrada, trilhas e seção Sobre */
+header.hero{display:flex;flex-direction:column;gap:20px}
+header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing:-.02em}
+.fronts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:8px}
+.front{display:flex;flex-direction:column;gap:6px;padding:18px 20px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none}
+.front:hover{border-color:currentColor}
+.front .k{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.front.infra .k{color:var(--infra)} .front.edu .k{color:var(--edu)}
+.front strong{font-family:var(--display);font-size:1.2rem}
+.front span:last-child{color:var(--muted);font-size:.93rem}
+.areas{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px 24px;margin:0}
+.areas>div{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-bottom:1px solid var(--line)}
+.areas dt{font-weight:600;font-size:.95rem}
+.areas dd{margin:0;font-size:.86rem;color:var(--muted)}
+.areas dd a{color:var(--infra)}
+.edu-topics{color:var(--muted);font-size:.95rem;max-width:72ch}
+.sobre-grid{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start}
+.tl{list-style:none;padding:0;margin:0;display:flex;flex-direction:column}
+.tl li{position:relative;padding:0 0 20px 20px;border-left:2px solid var(--line)}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:-5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--line)}
+.tl li.ativo::before{background:var(--infra)}
+.tl li.ativo{border-left-color:var(--infra)}
+.tl li.ativo.doc::before{background:var(--edu)}
+.tl li.ativo.doc{border-left-color:var(--edu)}
+.tl-per{font-family:var(--mono);font-size:.72rem;color:var(--muted);display:block;margin-bottom:2px;letter-spacing:.03em}
+.tl li strong{font-size:.95rem;display:block;line-height:1.3}
+.tl-place{font-size:.83rem;color:var(--muted);display:block;margin-bottom:4px}
+.tl li p{font-size:.87rem;color:var(--muted);margin-top:3px}
+.edu-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:14px}
+.edu-list li{display:flex;flex-direction:column;gap:2px;font-size:.92rem}
+.edu-list span{font-size:.83rem;color:var(--muted)}
+.sk-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.sk-group .sk-desc{margin:0;font-size:.9rem;color:var(--muted);max-width:68ch}
+.sk-group .sk-link{font-size:.86rem;align-self:flex-start}
+.sk-group h4{font-size:.83rem;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font-weight:600;font-size:.93rem;text-decoration:none}
+.btn:hover{border-color:currentColor}
+.btn.primary{background:var(--infra);border-color:var(--infra);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn .fmt{font-family:var(--mono);font-size:.7rem;font-weight:500;color:var(--muted)}
+.btn.primary .fmt{color:inherit;opacity:.8}
+.ponte{display:flex;flex-direction:column;gap:12px;max-width:72ch;padding:18px 20px;border:1px solid var(--line);border-left:3px solid var(--edu);border-radius:8px;background:var(--surface)}
+.ponte h3{font-size:1.2rem}
+.ponte p{color:var(--muted)}
+.ponte ul,.ponte ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:.93rem}
+.ponte h4{font-size:1rem;margin-top:4px}
+.card .row .alc{font-size:.88rem}
+@media (max-width:720px){.sobre-grid{grid-template-columns:1fr}}
+
+.topback{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;font-weight:600;font-size:.93rem}
+.topback a{color:var(--infra)} .topback a.edu{color:var(--edu)}
+.sobre-curto{display:flex;flex-direction:column;gap:12px;max-width:72ch}
+.sobre-curto p{color:var(--muted)}
+.fronts .front .go{font-weight:600;font-size:.9rem;margin-top:4px}
+.front.infra .go{color:var(--infra)} .front.edu .go{color:var(--edu)}
+.btn.serv{border-color:var(--fg)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Seções"><ul>
+  <li><a href="../">← Portfólio</a></li>
+  <li><a href="#infra">Estudos de caso</a></li>
+  <li><a href="#arquivo">Todos os projetos</a></li>
+  <li><a href="#trajetoria">Trajetória</a></li>
+  <li><a href="../educacao/">Educação</a></li>
+  <li><a href="#contato">Contato</a></li>
+</ul></nav>
+
+<div class="wrap">
+  <nav class="topback" aria-label="Navegação entre páginas"><a href="../">← Voltar ao portfólio</a><a class="edu" href="../educacao/">Ver Computação e Educação →</a></nav>
+  <main id="conteudo">
+
+  <section id="infra" aria-labelledby="h-infra">
+    <div class="sec-head infra">
+      <h2 id="h-infra">Infraestrutura de TI</h2>
+      <p>Trabalho profissional em uma indústria com fábricas e centros de distribuição. Endereços, nomes de servidores, domínios e credenciais foram omitidos em todos os casos.</p>
+    </div>
+    <h3 class="sub-h">Onde cada área aparece</h3>
+    <dl class="areas">
+      <div><dt>Redes e segurança</dt><dd><a href="../projetos/rede-filial-industrial/">Modernização de rede</a> · <a href="../projetos/quedas-coletores-wifi/">Quedas de coletores Wi-Fi</a> · <a href="../projetos/alarme-falso-robos-esp32/">Wi-Fi industrial</a></dd></div>
+      <div><dt>Wi-Fi corporativo e 802.1X</dt><dd><a href="../projetos/wifi-8021x/">Implantação 802.1X</a> · <a href="../projetos/incidente-8021x-windows/">Incidente</a></dd></div>
+      <div><dt>Active Directory e identidade</dt><dd><a href="../projetos/wifi-8021x/">Conta de máquina</a> · <a href="#p-offboarding">Offboarding seguro</a></dd></div>
+      <div><dt>Virtualização</dt><dd><a href="../projetos/poc-virtualizacao/">PoC VMware, Sangfor HCI e Proxmox VE</a> · <a href="../projetos/troubleshooting-pos-migracao/">Migração KVM → VMware</a></dd></div>
+      <div><dt>Backup e proteção de dados</dt><dd><a href="../projetos/poc-virtualizacao/#tecnico">Redesenho do backup Veeam</a></dd></div>
+      <div><dt>Monitoramento</dt><dd><a href="#p-monitor">Monitor de quedas Wi-Fi</a> · <a href="../projetos/alarme-falso-robos-esp32/">Alarme com Zabbix</a></dd></div>
+      <div><dt>Automação</dt><dd><a href="#p-monitor">Python e API UniFi</a> · <a href="../projetos/rede-filial-industrial/#evidencias">Parser de configurações</a> · <a href="#p-offboarding">PowerShell</a></dd></div>
+      <div><dt>Resposta a incidentes</dt><dd><a href="../projetos/incidente-8021x-windows/">Falha 802.1X</a> · <a href="../projetos/quedas-coletores-wifi/">Quedas de coletores</a> · <a href="../projetos/alarme-falso-robos-esp32/">Alarme falso</a> · <a href="#p-wms">Sessões WMS</a> · <a href="../projetos/troubleshooting-pos-migracao/">Pós-migração de VM</a></dd></div>
+    </dl>
+    <h3 class="sub-h">Estudos de caso selecionados</h3>
+    <div class="cards">
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><path d="M78 40a31 31 0 0 1 44 0M86 48a19 19 0 0 1 28 0M93 55a8 8 0 0 1 14 0"/><circle class="s" cx="100" cy="60" r="3"/><rect class="f" x="20" y="64" width="50" height="32" rx="3"/><path d="M12 100H78"/><path d="M45 70l9 4v6c0 5-4 9-9 11c-5-2-9-6-9-11v-6z"/><path d="M41 81l3 3l6-6"/><rect x="140" y="62" width="24" height="42" rx="4"/><path d="M148 98h8"/><path d="M62 62L90 64"/><path class="d" d="M140 70L112 64"/><circle class="bg" cx="166" cy="62" r="9"/><path d="M162 58l8 8M170 58l-8 8"/></svg></figure>
+        <h3><a href="../projetos/wifi-8021x/">Wi-Fi corporativo com autenticação 802.1X</a></h3>
+        <p class="desc">Implantação de autenticação por conta de máquina em rede Wi-Fi corporativa, cobrindo 60 access points e bloqueando dispositivos pessoais.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">NPS · Active Directory · UniFi · GPO · PEAP-MSCHAPv2</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Implantação concluída</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <a class="go" href="../projetos/wifi-8021x/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Wi-Fi corporativo com autenticação 802.1X</span></a>
+      </article>
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="18" y="28" width="74" height="48" rx="3"/><path d="M10 82H100"/><path d="M66 46A12 12 0 1 0 67 58"/><path d="M68 38L66 46L58 44"/><rect x="120" y="14" width="64" height="14" rx="2"/><rect x="120" y="36" width="64" height="14" rx="2"/><rect class="f" x="120" y="58" width="64" height="14" rx="2"/><rect x="120" y="80" width="64" height="14" rx="2"/><path class="m" d="M127 21h30M127 43h40M127 65h24M127 87h34"/><path class="d" d="M118 65H98"/><circle class="bg" cx="172" cy="96" r="9"/><path d="M178 102l8 8" stroke-width="3"/></svg></figure>
+        <h3><a href="../projetos/incidente-8021x-windows/">Diagnóstico de falha 802.1X após atualização do Windows</a></h3>
+        <p class="desc">Investigação de um notebook que deixou de autenticar no Wi-Fi: hipóteses, quatro fontes de log, causa raiz e correção definitiva.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">802.1X · NPS · NTLM · Active Directory · análise de logs</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul></div>
+        <a class="go" href="../projetos/incidente-8021x-windows/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Diagnóstico de falha 802.1X após atualização do Windows</span></a>
+      </article>
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="16" y="12" width="70" height="96" rx="4"/><rect class="f" x="24" y="22" width="54" height="14" rx="2"/><rect class="f" x="24" y="44" width="54" height="14" rx="2"/><rect class="f" x="24" y="66" width="54" height="14" rx="2"/><rect x="24" y="88" width="54" height="12" rx="2"/><path class="m" d="M30 29h4M38 29h4M46 29h4M54 29h4M30 51h4M38 51h4M46 51h4M30 73h4M38 73h4M46 73h4M54 73h4"/><path d="M78 29L120 24M78 51L120 60"/><path class="d" d="M78 73L120 96"/><circle class="s" cx="126" cy="24" r="6"/><circle class="s" cx="126" cy="60" r="6"/><circle cx="126" cy="96" r="6"/><rect x="152" y="30" width="34" height="58" rx="3"/><rect class="s" x="162" y="26" width="14" height="8" rx="2"/><path d="M158 46l3 3l5-5M158 60l3 3l5-5M158 74l3 3l5-5"/><path class="m" d="M170 47h10M170 61h10M170 75h10"/></svg></figure>
+        <h3><a href="../projetos/rede-filial-industrial/">Levantamento e modernização de rede de uma filial industrial</a></h3>
+        <p class="desc">Rede sem documentação levantada do zero: VLANs inconsistentes, redundância, drift de configuração e roteiro de regularização por risco.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">HPE Aruba · FortiGate · SD-WAN · VLAN · Python</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <a class="go" href="../projetos/rede-filial-industrial/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Levantamento e modernização de rede de uma filial industrial</span></a>
+      </article>
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="30" y="30" width="40" height="72" rx="5"/><rect x="36" y="38" width="28" height="30" rx="2"/><path class="m" d="M40 76h20M40 84h20M40 92h12"/><path d="M78 30a26 26 0 0 1 0 30M86 22a38 38 0 0 1 0 46"/><path d="M96 45H120" stroke-dasharray="4 4"/><circle class="bg" cx="146" cy="50" r="22"/><path d="M134 50l8 8l14-16"/><path d="M162 66L182 88" stroke-width="6"/><circle class="s" cx="120" cy="45" r="3"/></svg></figure>
+        <h3><a href="../projetos/quedas-coletores-wifi/">Troubleshooting de quedas dos coletores Wi-Fi</a></h3>
+        <p class="desc">Um sintoma, seis frentes de investigação, com correções e hipóteses em estados diferentes.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">UniFi · tcpdump · Linux · Python · análise de RF</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <a class="go" href="../projetos/quedas-coletores-wifi/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Troubleshooting de quedas dos coletores Wi-Fi</span></a>
+      </article>
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="14" y="26" width="58" height="62" rx="4"/><rect class="f" x="22" y="34" width="18" height="18" rx="2"/><rect class="f" x="46" y="34" width="18" height="18" rx="2"/><rect class="f" x="22" y="60" width="18" height="18" rx="2"/><rect class="f" x="46" y="60" width="18" height="18" rx="2"/><rect x="128" y="26" width="58" height="18" rx="3"/><rect x="128" y="48" width="58" height="18" rx="3"/><rect x="128" y="70" width="58" height="18" rx="3"/><circle class="s" cx="176" cy="35" r="2"/><circle class="s" cx="176" cy="57" r="2"/><circle class="s" cx="176" cy="79" r="2"/><path d="M80 42H120M114 36l6 6l-6 6"/><path class="d" d="M122 84C110 108 92 108 80 88"/><path d="M80 98L79 88L88 91"/><path class="bg" d="M150 114L158 100L166 114Z"/><path d="M158 105v4"/></svg></figure>
+        <h3><a href="../projetos/poc-virtualizacao/">Avaliação de plataformas de virtualização e HCI</a></h3>
+        <p class="desc">PoC para substituir o VMware com critérios de avaliação e de rollback definidos antes, e acionados quando o risco se confirmou.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">VMware · Sangfor HCI · Proxmox VE · KVM · Veeam</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <a class="go" href="../projetos/poc-virtualizacao/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Avaliação de plataformas de virtualização e HCI</span></a>
+      </article>
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="18" y="58" width="36" height="30" rx="4"/><circle class="s" cx="29" cy="70" r="3"/><circle class="s" cx="43" cy="70" r="3"/><path d="M36 58V48"/><circle cx="36" cy="44" r="4"/><path d="M24 96h24"/><path d="M62 52a16 16 0 0 1 0 22"/><path d="M92 92V40"/><path d="M80 40h24"/><path d="M84 30a12 12 0 0 1 16 0"/><path class="d" d="M120 46a14 14 0 0 1 0 20M128 40a24 24 0 0 1 0 32"/><rect x="146" y="30" width="16" height="28" rx="3"/><rect x="168" y="44" width="16" height="28" rx="3"/><rect x="150" y="70" width="16" height="28" rx="3"/><path d="M20 108H186"/><rect class="f" x="70" y="100" width="44" height="8" rx="1"/><circle class="bg" cx="182" cy="18" r="10"/><path d="M182 12v7M182 23v1"/></svg></figure>
+        <h3><a href="../projetos/alarme-falso-robos-esp32/">Alarme falso de robôs ESP32 no Wi-Fi 2,4 GHz</a></h3>
+        <p class="desc">Robôs com sinal ótimo e alarme de “fora da rede”: quatro hipóteses descartadas e causa raiz no tempo de ar do canal, ocupado por celulares distantes.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">ESP32 · Wi-Fi 2,4 GHz · UniFi · Zabbix · Grafana · RSSI mínimo</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <a class="go" href="../projetos/alarme-falso-robos-esp32/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Alarme falso de robôs ESP32 no Wi-Fi 2,4 GHz</span></a>
+      </article>
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="12" y="34" width="52" height="52" rx="4"/><rect class="f" x="20" y="42" width="36" height="12" rx="2"/><path class="m" d="M24 64h28M24 72h20"/><path d="M70 60H96M90 54l6 6l-6 6"/><rect x="102" y="34" width="52" height="52" rx="4"/><rect class="f" x="110" y="42" width="36" height="12" rx="2"/><path class="m" d="M114 64h28M114 72h20"/><circle class="s" cx="170" cy="30" r="5"/><circle class="s" cx="182" cy="60" r="5"/><circle cx="170" cy="90" r="5"/><path d="M154 44L166 33M154 60H177M154 76L166 87"/><path class="d" d="M24 104H142"/><path d="M164 87l12 6M176 87l-12 6"/></svg></figure>
+        <h3><a href="../projetos/troubleshooting-pos-migracao/">Troubleshooting pós-migração de máquina virtual</a></h3>
+        <p class="desc">VM crítica migrada de KVM para VMware com três bloqueios em cadeia: acesso, rede e HTTP 503, resolvidos sem rollback.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">VMware · KVM · Linux · GRUB · Docker · Apache</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
+        <a class="go" href="../projetos/troubleshooting-pos-migracao/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Troubleshooting pós-migração de máquina virtual</span></a>
+      </article>
+    </div>
+    <p class="count">Outros três trabalhos de infraestrutura (offboarding seguro, monitor de quedas Wi-Fi e sessões WMS) estão em <a href="#arquivo">Todos os projetos de infraestrutura</a>.</p>
+  </section>
+
+    <section id="arquivo" aria-labelledby="h-arquivo">
+    <div class="sec-head">
+      <h2 id="h-arquivo">Todos os projetos de infraestrutura</h2>
+      <p>Arquivo completo dos trabalhos técnicos, com tipo e status. Projetos menores trazem os detalhes aqui mesmo.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar projetos" hidden>
+      <button type="button" data-f="todos" aria-pressed="true">Todos</button>
+      <button type="button" data-f="redes" aria-pressed="false">Redes</button>
+      <button type="button" data-f="seguranca" aria-pressed="false">Segurança</button>
+      <button type="button" data-f="virtualizacao" aria-pressed="false">Virtualização</button>
+      <button type="button" data-f="automacao" aria-pressed="false">Automação</button>
+      <button type="button" data-f="andamento" aria-pressed="false">Em andamento</button>
+      <button type="button" data-f="concluido" aria-pressed="false">Concluídos</button>
+    </div>
+    <p class="count" id="arch-count" aria-live="polite"></p>
+    <ul class="arch">
+      <li id="p-8021x" class="infra" data-tags="infra edu redes seguranca concluido">
+        <p class="when">Ago – Out 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura · também na trilha de Educação</p>
+          <h3><a href="../projetos/wifi-8021x/">Autenticação de máquinas em Wi-Fi corporativo com NPS e Active Directory</a></h3>
+          <p>802.1X em 60 access points, substituindo senha compartilhada; inclui versão didática sobre autenticação de rede.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Implantação concluída</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
+          <div class="links"><a href="../projetos/wifi-8021x/">Ver estudo de caso →</a></div>
+        </div>
+      </li>
+      <li id="p-incidente" class="infra" data-tags="infra redes seguranca concluido">
+        <p class="when">Out 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3><a href="../projetos/incidente-8021x-windows/">Diagnóstico de falha de autenticação 802.1X após atualização do Windows</a></h3>
+          <p>Troubleshooting com hipóteses, quatro fontes de log, causa raiz, contorno e correção definitiva.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul>
+          <div class="links"><a href="../projetos/incidente-8021x-windows/">Ver estudo de caso →</a></div>
+        </div>
+      </li>
+      <li id="p-rede" class="infra" data-tags="infra redes automacao andamento">
+        <p class="when">Ago 2026 – atual</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3><a href="../projetos/rede-filial-industrial/">Levantamento e modernização de rede de uma filial industrial</a></h3>
+          <p>Levantamento físico, parser de configurações, drift, VLANs, redundância e matriz de achados por risco.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
+          <div class="links"><a href="../projetos/rede-filial-industrial/">Ver estudo de caso →</a></div>
+        </div>
+      </li>
+      <li id="p-coletores" class="infra" data-tags="infra redes automacao andamento">
+        <p class="when">Out 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3><a href="../projetos/quedas-coletores-wifi/">Troubleshooting de quedas dos coletores Wi-Fi em operação logística</a></h3>
+          <p>Seis frentes de investigação para um mesmo sintoma, com hipóteses, cinco fontes de evidência e correções em rodadas com rollback.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
+          <div class="links"><a href="../projetos/quedas-coletores-wifi/">Ver estudo de caso →</a></div>
+        </div>
+      </li>
+      <li id="p-poc" class="infra" data-tags="infra virtualizacao concluido">
+        <p class="when">Jun – Ago 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3><a href="../projetos/poc-virtualizacao/">Avaliação de plataformas de virtualização e infraestrutura hiperconvergente</a></h3>
+          <p>PoC VMware → Sangfor HCI, com Proxmox VE como alternativa, critérios de rollback e redesenho do backup.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
+          <div class="links"><a href="../projetos/poc-virtualizacao/">Ver estudo de caso →</a></div>
+        </div>
+      </li>
+      <li id="p-pos-migracao" class="infra" data-tags="infra virtualizacao concluido">
+        <p class="when">Out 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3><a href="../projetos/troubleshooting-pos-migracao/">Troubleshooting pós-migração de máquina virtual: acesso, rede e aplicação</a></h3>
+          <p>Migração a frio de KVM para VMware com senha de root recusada, interface renomeada e Port Group divergente e proxy reverso em 503; causa raiz por camada e três recomendações preventivas.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
+          <div class="links"><a href="../projetos/troubleshooting-pos-migracao/">Ver estudo de caso →</a></div>
+        </div>
+      </li>
+      <li id="p-offboarding" class="infra" data-tags="infra seguranca automacao">
+        <p class="when">Set – Out 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3>Offboarding seguro: bloqueio de acessos no desligamento de colaborador</h3>
+          <p>Runbook de 7 blocos que revoga todos os acessos durante a conversa de desligamento, com evidência auditável e cuidado extra para contas privilegiadas.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li></ul>
+          <details class="more"><summary>Ver contexto, decisões e validação</summary>
+            <p>Runbook estruturado em sete blocos para garantir que, quando um colaborador é desligado, todos os acessos sejam revogados de forma consistente e auditável — do Active Directory aos hypervisors e storages. O procedimento distingue o perfil comum do colaborador com acesso privilegiado (TI), onde os riscos são significativamente maiores.</p>
+            <div class="fields">
+          <div class="field"><h4>Princípio central</h4><p>O bloqueio acontece <strong>durante</strong> a conversa de desligamento, não depois. Cada minuto de janela entre a comunicação e o bloqueio é risco real. O chamado do RH formaliza o horário; o analista de infraestrutura fica de prontidão nesse horário.</p></div>
+          <div class="field"><h4>Blocos 1 a 5 — qualquer colaborador</h4><ul><li>Exportar grupos do AD como evidência antes de qualquer alteração</li><li>Trocar a senha por valor aleatório e desabilitar a conta; em ambientes com M365/Entra ID, bloquear na nuvem e revogar tokens de sessão imediatamente (a sincronização leva até 30 min)</li><li>Derrubar sessões ativas: RDP, VPN no firewall, Wi-Fi 802.1X (a sessão atual persiste até a próxima reautenticação do NPS)</li><li>Sistemas externos ao AD: ERP, WMS, logins no banco de dados, portais SaaS, ramal VoIP, código de impressão e acesso físico</li><li>No AD: preencher a descrição com data, chamado e executor; remover de todos os grupos; mover para OU de Inativos; agendar exclusão definitiva em 90 dias</li></ul></div>
+          <div class="field"><h4>Bloco 6 — colaborador da TI ou com acesso privilegiado</h4><p>O risco aqui não é apenas a conta, mas <strong>tudo o que a pessoa sabe</strong>. Senhas de contas de serviço, break-glass, firewall, switches, iDRAC, storage, hypervisors, banco de dados, PSKs de Wi-Fi — tudo que ela conhecia precisa ser rotacionado. Adicionalmente:</p><ul><li>Auditoria de contas criadas e mudanças em grupos privilegiados nos últimos 30 a 90 dias (detecção de backdoors)</li><li>Verificar tarefas agendadas, serviços e scripts rodando com a credencial dela — o ideal é migrar para conta de serviço antes do D0</li><li>Revisar logs do firewall, do AD e dos hypervisors: acessos fora do horário, exportações de dados, mudanças de regras</li><li>Rotacionar senhas LAPS das máquinas que ela consultou recentemente</li><li>Remover chaves SSH, tokens de API e acessos a cofres de senha</li></ul></div>
+          <div class="field"><h4>Contas nominais fora do AD</h4><p>iDRAC, storages, hosts ESXi e servidores KVM têm contas locais que o AD não gerencia. Cada uma precisa ser bloqueada equipamento por equipamento, via CLI ou interface web. O runbook mantém um inventário dessas contas com os comandos específicos por plataforma — incluindo o cuidado de não remover contas de contingência que o ambiente de gerenciamento usa por SSH.</p></div>
+        </div>
+            <pre><span class="c"># Bloco AD: evidência de grupos, bloqueio e movimentação para OU Inativos</span>
+$u = Get-ADUser $sam -Properties MemberOf
+$u.MemberOf | Out-File "C:\Offboarding\$sam-grupos-$(Get-Date -f yyyyMMdd).txt"
+
+<span class="c"># Senha aleatória com gerador criptográfico (não usar $pwd: é variável automática)</span>
+$bytes = [byte[]]::new(32)
+[Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+$novaSenha = [Convert]::ToBase64String($bytes)
+Set-ADAccountPassword $sam -Reset -NewPassword (ConvertTo-SecureString $novaSenha -AsPlainText -Force)
+Disable-ADAccount $sam
+Set-ADUser $sam -Description "Desligado $(Get-Date -f dd/MM/yyyy) - $chamado - $env:USERNAME"
+$u.MemberOf | ForEach-Object { Remove-ADGroupMember $_ -Members $sam -Confirm:$false }
+Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
+          </details>
+          
+          <div class="chips"><span class="chip">Active Directory</span><span class="chip">PowerShell</span><span class="chip">FortiGate</span><span class="chip">NPS / 802.1X</span><span class="chip">Segurança</span><span class="chip">Offboarding</span><span class="chip">ESXi / KVM</span><span class="chip">iDRAC</span></div>
+        </div>
+      </li>
+      <li id="p-monitor" class="infra" data-tags="infra redes automacao concluido">
+        <p class="when">Out 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3>Monitor automático de quedas Wi-Fi de coletores WMS</h3>
+          <p>Agente Python open source com testes automatizados, CI multiversão e validação TLS por padrão, que transformou relatos de queda em métrica por coletor, AP e hora.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
+          <details class="more"><summary>Ver contexto, decisões e validação</summary>
+            <p>Coletores de dados (Urovo e Skorpio) em um SSID dedicado ao WMS apresentavam quedas cuja frequência e padrão eram difíceis de medir objetivamente. Sem métrica, era impossível saber se uma mudança na configuração do Wi-Fi havia melhorado ou piorado o cenário. Desenvolvi um agente Python que consulta a API do UniFi, detecta quando cada coletor some e volta e registra duração, AP e RSSI em CSV.</p>
+            <div class="fields">
+          <div class="field"><h4>Problema de diagnóstico</h4><p>As quedas eram relatadas pelos operadores de armazém, mas sem dados objetivos: não se sabia quantas quedas por hora ocorriam, qual coletor caía mais, em qual AP, com que RSSI. Sem uma linha de base, qualquer ajuste no rádio era um chute.</p></div>
+          <div class="field"><h4>Arquitetura do agente</h4><p>O script consulta a API legada do UniFi a cada 60 segundos e compara o estado anterior com o atual. Quando um coletor desaparece, grava um evento de queda com o AP e o RSSI do último registro. Na reconexão, calcula a duração. Toda saída vai para um CSV em <span class="mono">dados/eventos.csv</span>; um segundo comando gera um relatório Markdown diário com top coletores, quedas por hora e alertas configuráveis. Sem dependências externas — stdlib Python 3.10 apenas.</p></div>
+          <div class="field"><h4>Classificação automática</h4><p>Coletores são identificados por prefixo OUI (Urovo <span class="mono">b4:29:3d</span>, Skorpio <span class="mono">04:7b:cb</span> / <span class="mono">3c:e1:a1</span>) ou por um inventário em <span class="mono">config.json</span>. Dispositivos Android com MAC aleatório são sinalizados separadamente — importante para não confundir quedas de coletor com dispositivos pessoais no mesmo SSID.</p></div>
+          <div class="field"><h4>Resultado operacional</h4><p>Com a linha de base em mãos, foi possível correlacionar as quedas com métricas de rádio (TX Retry por AP, Canal Busy) e validar, com dados, o efeito de cada ajuste de configuração — canais, largura de banda e taxas mínimas. O script ficou genérico o suficiente para qualquer ambiente UniFi com coletores no Wi-Fi.</p></div>
+          <div class="field"><h4>Testes automatizados</h4><p>A suíte cobre classificação por OUI, queda e reconexão, SSID com espaço extra, geração e migração do CSV, duração, alertas sem repetição, nome das APs e demonstração sem controladora. Os testes TLS verificam certificado e hostname por padrão, CA interna, rejeição de configurações ambíguas e falha sem fallback inseguro. O workflow está configurado para pushes na <span class="mono">main</span> e pull requests, em Python 3.10 a 3.13.</p></div>
+          <div class="field"><h4>Evidência de execução</h4><p>A suíte tem <strong>177 testes</strong> e roda no GitHub Actions em Python 3.10, 3.11, 3.12 e 3.13 a cada push na <span class="mono">main</span> (versão de 23/10/2026, commit <span class="mono">963d838</span>). O resultado de cada execução está nas <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">execuções do workflow ↗<span class="sr-only"> (abre em nova aba)</span></a>.</p><p>Os testes simulam a API da controladora; o comportamento em produção está medido no estudo de caso das quedas dos coletores.</p></div>
+        </div>
+          </details>
+          <div class="links"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">Código-fonte no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">Execuções de testes na main ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
+          <div class="chips"><span class="chip">Python</span><span class="chip">UniFi API</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS / coletores</span><span class="chip">Open source</span><span class="chip">Testes unitários</span><span class="chip">CSV / Markdown</span></div>
+        </div>
+      </li>
+      <li id="p-alarme" class="infra" data-tags="infra redes concluido">
+        <p class="when">Out 2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3><a href="../projetos/alarme-falso-robos-esp32/">Alarme falso de robô industrial: congestionamento de canal Wi-Fi 2,4 GHz</a></h3>
+          <p>Causa raiz em canal 2,4 GHz saturado por celulares distantes; RSSI mínimo em −80 dBm e os alarmes não se repetiram.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li></ul>
+          <details class="more"><summary>Ver contexto, decisões e validação</summary>
+            <p>Quatro robôs industriais (ESP32) na área de silos geravam alarmes recorrentes de "fora da rede" no sistema de monitoramento. Os eventos vinham se repetindo por dias, com avisos de lentidão de ping e perda de pacotes — mesmo com o sinal Wi-Fi ótimo, entre −53 e −58 dBm, e sem qualquer reinicialização da antena.</p>
+            <div class="fields">
+          <div class="field"><h4>O alarme e sua regra</h4><p>O sistema de monitoramento testava a porta de aplicação de cada robô a cada 30 segundos. Dois testes consecutivos sem resposta (1 minuto) abriam um card de "fora da rede". O card só fechava após quatro respostas positivas com menos de quatro mudanças em 30 minutos — regra pensada para evitar oscilação, mas que esticava o alarme muito além da falha real.</p></div>
+          <div class="field"><h4>O que foi descartado</h4><ul><li><strong>Queda de Wi-Fi:</strong> a controladora registrava todos os robôs conectados sem interrupção, sinal estável entre −53 e −58 dBm.</li><li><strong>Falha de antena:</strong> sem reinicializações no período; 100 % dos pings do monitor respondidos.</li><li><strong>Mudança de configuração:</strong> logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li><li><strong>Defeito em um robô:</strong> os quatro ficaram lentos exatamente ao mesmo tempo, descartando problema isolado de hardware.</li></ul></div>
+          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, no mesmo intervalo das falhas consecutivas que abriram o alarme.</p></div>
+          <div class="field"><h4>Como foi apurado</h4><p>Análise inteiramente passiva: leitura da controladora Wi-Fi (somente leitura) para estado dos robôs, log de conexões da antena e log de administração; monitoramento com dados de ping (a cada 3 min), teste TCP de porta (a cada 30 s) e ocupação do canal 2,4 GHz (a cada 1 min). Nenhuma configuração foi alterada durante a investigação.</p></div>
+          <div class="field"><h4>Solução implantada em produção</h4><p>Ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados; a reconexão a um AP mais próximo depende do cliente e da cobertura disponível e não é garantida. Os robôs industriais, com sinal entre −53 e −58 dBm, não são afetados. Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p></div>
+        </div>
+          </details>
+          
+          <div class="links"><a href="../projetos/alarme-falso-robos-esp32/">Ver o estudo de caso completo</a><a href="../artigos/wifi-canal-24ghz-robos-industriais/">Ler o artigo sobre este caso</a></div>
+          <div class="chips"><span class="chip">UniFi</span><span class="chip">Zabbix</span><span class="chip">Grafana</span><span class="chip">Wi-Fi 2,4 GHz</span><span class="chip">ESP32</span><span class="chip">Sistemas industriais</span><span class="chip">Análise de causa raiz</span><span class="chip">Congestionamento de canal</span></div>
+        </div>
+      </li>
+      <li id="p-wms" class="infra" data-tags="infra redes concluido">
+        <p class="when"></p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3>Sessões estáveis para coletores de dados no WMS</h3>
+          <p>Fim dos bloqueios de coletores pelo servidor: sessões mortas encerradas em menos de 2 minutos com TCP keep-alive.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul>
+          <details class="more"><summary>Ver contexto, decisões e validação</summary>
+            <p>Coletores Android de um centro de distribuição perdiam a sessão com o sistema de gestão de armazém (WMS) e acabavam bloqueados pelo próprio servidor. Diagnostiquei a causa, ajustei o servidor Linux e escrevi a instrução de trabalho para padronizar o procedimento.</p>
+            <div class="fields">
+          <div class="field"><h4>Problema</h4><p>O roaming entre antenas Wi-Fi gerava micro-quedas. O aplicativo do coletor perdia a sessão, mas o servidor mantinha o processo vivo. Na reconexão, as tentativas em rajada eram tratadas pelo xinetd como ameaça e o IP do coletor era bloqueado.</p></div>
+          <div class="field"><h4>Diagnóstico</h4><p>Análise de logs do xinetd e monitoramento da rede, cruzando os bloqueios <span class="mono">connections limit per_source</span> com os momentos de troca de antena.</p></div>
+          <div class="field"><h4>Solução</h4><ul><li>Limites do serviço ajustados ao volume real de coletores.</li><li>Parâmetros de TCP keep-alive para sockets do serviço com <span class="mono">SO_KEEPALIVE</span> habilitado, visando encerrar sessões mortas em menos de 2 minutos.</li><li>Plano B documentado: keep-alive no app e emuladores com sessão persistente.</li></ul></div>
+          <div class="field"><h4>Validação</h4><p>Logs passaram a mostrar encerramentos limpos de sessão e nenhum bloqueio por limite de origem.</p></div>
+        </div>
+            <pre><span class="c"># Exemplo temporário; o serviço precisa habilitar SO_KEEPALIVE no socket</span>
+sysctl -w net.ipv4.tcp_keepalive_time=60
+sysctl -w net.ipv4.tcp_keepalive_intvl=10
+sysctl -w net.ipv4.tcp_keepalive_probes=3
+
+<span class="c"># Persistência: /etc/sysctl.d/99-wms-keepalive.conf</span>
+<span class="c"># Depois de criar o arquivo, aplicar e verificar:</span>
+sysctl --system
+sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_keepalive_probes</pre>
+            <p class="note"><span class="mono">sysctl -w</span> vale até o próximo reinício. Para tornar a configuração permanente, os valores vão em <span class="mono">/etc/sysctl.d/</span> e são aplicados com <span class="mono">sysctl --system</span>.</p>
+          </details>
+          
+          <div class="chips"><span class="chip">Linux</span><span class="chip">xinetd</span><span class="chip">TCP keep-alive</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS</span><span class="chip">Documentação técnica</span></div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="trajetoria" aria-labelledby="h-traj">
+    <div class="sec-head infra">
+      <h2 id="h-traj">Trajetória e competências</h2>
+      <p>Analista Sênior de Infraestrutura de TI com foco em virtualização, redes e automação.</p>
+    </div>
+    <div class="sobre-grid">
+      <div>
+        <h3 style="margin-bottom:20px">Trajetória</h3>
+        <ol class="tl">
+          <li class="ativo">
+            <span class="tl-per">Mai 2026 – atual</span>
+            <strong>Analista de Infraestrutura Sênior</strong>
+            <span class="tl-place">Indústria · Paraná</span>
+            <p>Condução da prova de conceito (PoC) VMware → Sangfor HCI, com critérios de rollback formalizados antes da implantação e executados quando o risco se confirmou. Análise de rede Wi-Fi com Python e API do UniFi. Automação com PowerShell e GPO. Backup Veeam e Dell PowerProtect. PoC Proxmox VE.</p>
+          </li>
+          <li class="ativo doc">
+            <span class="tl-per">2008 – atual</span>
+            <strong>Professor de tecnologia</strong>
+            <span class="tl-place">Cursos livres</span>
+            <p>Aulas de infraestrutura e redes, hardware e manutenção, tecnologia alinhada à BNCC Computação e Excel avançado, sempre partindo de casos reais. <a href="../educacao/#docencia">Como ensino</a>.</p>
+          </li>
+          <li>
+            <span class="tl-per">Set 2022 – Mai 2026</span>
+            <strong>Analista de TI Pleno</strong>
+            <span class="tl-place">Indústria · Paraná</span>
+            <p>Infraestrutura de TI para fábricas e centros de distribuição: switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware + KVM, monitoramento Zabbix/Grafana e backup Dell PowerProtect.</p>
+          </li>
+          <li>
+            <span class="tl-per">Ago 2021 – Set 2022</span>
+            <strong>Analista de TI Júnior</strong>
+            <span class="tl-place">Indústria · Paraná</span>
+            <p>Suporte de infraestrutura, gestão de usuários AD, antivírus, Wi-Fi Ubiquiti, VMware vSphere e KVM Oracle, monitoramento com Zabbix e Grafana.</p>
+          </li>
+          <li>
+            <span class="tl-per">Mar 2014 – Set 2019</span>
+            <strong>Analista Financeiro</strong>
+            <span class="tl-place">Multinacional de embalagens · PR</span>
+            <p>Crédito PF/PJ, câmbio, contas a receber/pagar e relatórios gerenciais — antes da transição definitiva para TI.</p>
+          </li>
+          <li>
+            <span class="tl-per">Jan 2012 – Abr 2014</span>
+            <strong>Assistente de TI</strong>
+            <span class="tl-place">Empresa de fundição · PR</span>
+            <p>Help Desk N1/N2, manutenção de computadores e rede local.</p>
+          </li>
+        </ol>
+      
+      </div>
+      <div>
+        <h3 style="margin:28px 0 16px">Competências técnicas</h3>
+        <div class="sk-group">
+          <h4>Redes e segurança</h4>
+          <p class="sk-desc">Desenho e operação de redes corporativas e Wi-Fi, segmentação por VLAN, autenticação 802.1X/RADIUS integrada ao Active Directory e firewalls.</p>
+          <div class="chips"><span class="chip">Aruba / TP-Link</span><span class="chip">Wi-Fi Ubiquiti</span><span class="chip">FortiGate</span><span class="chip">802.1X / RADIUS</span><span class="chip">VLAN</span><span class="chip">Active Directory</span><span class="chip">Microsoft Entra ID (Azure AD)</span></div>
+          <a class="sk-link" href="../projetos/wifi-8021x/">Na prática: Wi-Fi corporativo com 802.1X <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="sk-group">
+          <h4>Virtualização e servidores</h4>
+          <p class="sk-desc">Avaliação, operação e migração de hipervisores e servidores Windows e Linux, com critérios de teste e plano de rollback.</p>
+          <div class="chips"><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">Proxmox VE</span><span class="chip">KVM Oracle</span><span class="chip">Hyper-V</span><span class="chip">Windows Server</span><span class="chip">Linux</span></div>
+          <a class="sk-link" href="../projetos/poc-virtualizacao/">Na prática: PoC de virtualização <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="sk-group">
+          <h4>Proteção e observabilidade</h4>
+          <p class="sk-desc">Backup e recuperação de dados, monitoramento com alertas e análise de logs para separar falha real de alarme falso.</p>
+          <div class="chips"><span class="chip">Veeam</span><span class="chip">Dell PowerProtect</span><span class="chip">Zabbix</span><span class="chip">Grafana</span><span class="chip">Análise de logs</span></div>
+          <a class="sk-link" href="../projetos/alarme-falso-robos-esp32/">Na prática: alarme falso com Zabbix <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="sk-group">
+          <h4>Automação e diagnóstico</h4>
+          <p class="sk-desc">Scripts para coletar dados, padronizar tarefas e diagnosticar falhas, incluindo integração com APIs de equipamentos.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">GPO</span><span class="chip">API UniFi</span></div>
+          <a class="sk-link" href="#p-monitor">Na prática: monitor de quedas Wi-Fi em Python <span aria-hidden="true">→</span></a>
+        </div>
+      
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer id="contato" class="site">
+    <span>Jeferson Luiz Pereira</span>
+    <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">github.com/pereirashouse<span class="sr-only"> (abre em nova aba)</span></a>
+    <a href="tel:+5542988842215">(42) 98884-2215</a>
+    <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+    <a href="../curriculo/jeferson-pereira-curriculo-ti.pdf" download>Currículo TI (PDF)</a>
+    <a href="../curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Currículo Educação (PDF)</a>
+    <a href="../servicos/">Serviços</a>
+  </footer>
+  <p class="updated">Última atualização: 25 de outubro de 2026</p>
+
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>
