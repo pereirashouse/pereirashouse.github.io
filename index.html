@@ -59,7 +59,8 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 .sk-group .sk-desc{margin:0;font-size:.9rem;color:var(--muted);max-width:68ch}
 .sk-group .sk-link{font-size:.86rem;align-self:flex-start}
 .sk-group h4{font-size:.83rem;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
-.cta{display:flex;flex-wrap:wrap;gap:10px}
+.cta{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px}
 .btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font-weight:600;font-size:.93rem;text-decoration:none}
 .btn:hover{border-color:currentColor}
 .btn.primary{background:var(--infra);border-color:var(--infra);color:var(--bg)}
@@ -102,10 +103,14 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
     <h1>Jeferson Luiz Pereira</h1>
     <p class="lede">Analista Sênior de Infraestrutura de TI com experiência em redes corporativas, virtualização, segurança e automação. Licenciando em Computação pela UTFPR, transformo casos reais de operação em aulas alinhadas à BNCC.</p>
     <div class="cta">
-      <a class="btn primary" href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn ↗<span class="sr-only"> (abre em nova aba)</span></a>
-      <a class="btn serv" href="servicos/">Serviços <span aria-hidden="true">→</span></a>
-      <a class="btn" href="curriculo/jeferson-pereira-curriculo-ti.pdf" download>Currículo · Infraestrutura de TI <span class="fmt">PDF</span></a>
-      <a class="btn" href="curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Currículo · Computação e Educação <span class="fmt">PDF</span></a>
+      <div class="cta-row">
+        <a class="btn primary" href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn ↗<span class="sr-only"> (abre em nova aba)</span></a>
+        <a class="btn serv" href="servicos/">Serviços <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="curriculo/jeferson-pereira-curriculo-ti.pdf" download>Currículo · Infraestrutura de TI <span class="fmt">PDF</span></a>
+        <a class="btn" href="curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Currículo · Computação e Educação <span class="fmt">PDF</span></a>
+      </div>
     </div>
     <div class="fronts">
       <a class="front infra" href="infraestrutura/"><span class="k">Para recrutadores</span><strong>Infraestrutura de TI</strong><span>Estudos de caso, todos os projetos técnicos, trajetória e competências.</span></a>
