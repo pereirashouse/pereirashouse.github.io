@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guia do Professor · Roteador Wi-Fi · Jeferson Pereira</title>
+<meta name="description" content="Guia de 1 página para aplicar o simulador Roteador Wi-Fi em uma aula: preparação, roteiro em três blocos, perguntas de fechamento, rubrica e problemas comuns.">
+<link rel="canonical" href="https://pereirashouse.github.io/educacao/guias/guia-simulador-roteador/">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#23774A">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Guia do Professor · Roteador Wi-Fi">
+<meta property="og:description" content="Guia de 1 página para aplicar o simulador Roteador Wi-Fi em uma aula: preparação, roteiro em três blocos, perguntas de fechamento, rubrica e problemas comuns.">
+<meta property="og:url" content="https://pereirashouse.github.io/educacao/guias/guia-simulador-roteador/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="stylesheet" href="../../../assets/fonts.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<style>
+.ficha-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font-weight:600;font-size:.93rem;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:currentColor}
+.btn.primary{background:var(--edu);border-color:var(--edu);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.08)}
+.status-val{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--edu-soft);color:var(--edu);font-weight:600;font-size:.88rem}
+.bncc-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.bncc-list code{display:inline-block;min-width:7.5em;padding:1px 6px;margin-right:6px;border-radius:3px;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.74rem}
+.objetivo{font-size:1.05rem;padding:12px 16px;border-left:3px solid var(--edu);background:var(--surface);border-radius:4px}
+.bloco-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.bloco-t .min{font-family:var(--mono);font-size:.75rem;color:var(--edu);border:1px solid var(--edu);border-radius:3px;padding:0 6px}
+.blk ul.rubrica{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;list-style:none;padding:0;margin:0}
+.rubrica li{padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-size:.92rem}
+.rubrica strong{display:block;font-family:var(--display);font-size:1rem;margin-bottom:2px}
+.rubrica .nv{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rubrica li:nth-child(3){border-color:var(--edu)}
+.steps li>p:not(.bloco-t) strong{display:inline}
+.probs dt{font-weight:600} .probs dd{margin:0 0 10px;color:var(--muted)}
+@media print{
+  @page{size:A4;margin:12mm}
+  :root{--bg:#fff;--surface:#fff;--fg:#000;--muted:#333;--line:#bbb;--edu:#1d5e3a;--edu-soft:#eef6f1}
+  body{font-size:9pt;line-height:1.35;background:#fff;color:#000}
+  main,.panel,.case-head{gap:8px!important;padding:0!important;margin:0!important}
+  .panel>h2.ph,.crumb{display:none}
+  .blk{gap:4px!important;margin:0!important} .blk h4{font-size:9.5pt;margin-top:2px}
+  .steps li{padding-bottom:4px!important}
+  .blk ul.rubrica{grid-template-columns:repeat(3,1fr)} .rubrica li{padding:6px 8px;font-size:8.5pt}
+  .facts div{padding:0!important}
+  .topnav,.ficha-acts,.pager,footer.site,.no-print{display:none!important}
+  .case-head h1{font-size:15pt} .blk{break-inside:avoid;padding:0;border:0} .blk h3{font-size:12pt}
+  .facts{gap:4px 16px} .wrap{padding:0;max-width:none}
+}
+</style>
+</head>
+<body class="edu-page">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../../">Início</a></li>
+  <li><a href="../../../educacao/">Educação</a></li>
+  <li><a href="../../../educacao/#simuladores">Simuladores</a></li>
+  <li><a href="../../../infraestrutura/">Infraestrutura</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head edu">
+  <p class="crumb"><a href="../../../educacao/simuladores/simulador-roteador/">Ficha do simulador</a> / Guia do Professor</p>
+  <h1>Guia do Professor: Roteador Wi-Fi</h1>
+  <dl class="facts">
+    <div><dt>Público</dt><dd>7º ao 9º ano do Ensino Fundamental ou Ensino Médio</dd></div>
+    <div><dt>Duração</dt><dd>50 minutos (1 aula)</dd></div>
+    <div><dt>Modalidade</dt><dd>Individual, com auditoria em duplas no fim</dd></div>
+  </dl>
+  <div class="ficha-acts">
+    <a class="btn primary" href="../../../simulador-configura-o-roteador/">Abrir o simulador <span aria-hidden="true">→</span><span class="sr-only">: Roteador Wi-Fi</span></a>
+    <a class="btn" href="../../../educacao/simuladores/simulador-roteador/">Ver a ficha</a>
+    <button type="button" class="btn" onclick="window.print()">Imprimir ou salvar em PDF</button>
+  </div>
+</header>
+
+<main id="conteudo">
+<section class="panel" aria-labelledby="h-guia">
+  <h2 class="ph" id="h-guia">Roteiro da aula</h2>
+  <div class="blk">
+    <h3>1. Antes da aula <span class="min" style="font-family:var(--mono);font-size:.75rem;color:var(--muted)">5 min de preparação</span></h3>
+    <ul><li>Projetar a pergunta: <em>“Quem aqui em casa já virou o roteador de ponta-cabeça para ver a senha colada na etiqueta?”</em></li><li>Abrir o simulador no projetor ou enviar o link aos estudantes. Em computador compartilhado, clicar em <strong>Recomeçar tudo</strong>.</li></ul>
+  </div>
+  <div class="blk">
+    <h3>2. Durante a aula</h3>
+    <ol class="steps"><li><p class="bloco-t"><strong>Bloco 1: A falsa sensação de segurança</strong><span class="min">10 min</span></p><p>Explique a diferença entre a senha do Wi-Fi e a senha de administração do roteador, e por que um aparelho com a senha de fábrica (admin/admin) deixa toda a casa exposta. O simulador não tem tela de login: essa parte é conversa com a turma.</p></li><li><p class="bloco-t"><strong>Bloco 2: Mão na massa no simulador</strong><span class="min">25 min</span></p><p>Os alunos cumprem os desafios: criar um SSID sem dados pessoais (nada de sobrenome ou número da casa), proteger as duas faixas com WPA2 ou WPA3 e senha forte, e escolher o canal com menos redes vizinhas.</p></li><li><p class="bloco-t"><strong>Bloco 3: Auditoria do colega</strong><span class="min">15 min</span></p><p>Em duplas, um aluno confere a tela de Status e as configurações do outro e tenta achar alguma vulnerabilidade deixada para trás: rede aberta, TKIP, WPS ligado ou senha fraca.</p></li></ol>
+  </div>
+  <div class="blk">
+    <h3>3. Depois da aula</h3>
+    <h4>Perguntas de fechamento</h4>
+    <ul><li>Por que colocar o número do seu apartamento no nome do Wi-Fi pode ser um risco à segurança física e digital?</li><li>Por que o canal do Wi-Fi afeta a estabilidade dos jogos e vídeos, mesmo com o sinal cheio?</li></ul>
+    <h4>Rubrica rápida</h4>
+    <ul class="rubrica"><li><span class="nv">Nível 1 de 3</span><strong>Insuficiente</strong>Deixou rede aberta, WEP ou TKIP, ou manteve senha fraca.</li><li><span class="nv">Nível 2 de 3</span><strong>Básico</strong>Protegeu o Wi-Fi, mas deixou o WPS ligado ou não sabe explicar a diferença entre a senha do Wi-Fi e a de administração.</li><li><span class="nv">Nível 3 de 3</span><strong>Adequado</strong>Protegeu as duas faixas com WPA2 ou WPA3 e senha forte, escolheu o canal mais livre e explica as duas senhas.</li></ul>
+  </div>
+  <div class="blk">
+    <h3>4. Problemas comuns e como resolver</h3>
+    <dl class="probs"><dt>“Verificar” diz que nada mudou</dt><dd>O desafio confere a configuração salva, como num roteador real. Peça para clicar em <strong>Salvar</strong> antes de <strong>Verificar</strong>.</dd><dt>Confusão entre senha do Wi-Fi e senha do aparelho</dt><dd>Use a analogia: a senha do Wi-Fi é a fechadura do portão; a senha de administração é o cofre dentro da casa.</dd></dl>
+  </div>
+</section>
+</main>
+<nav class="pager" aria-label="Navegação">
+  <a href="../../../educacao/simuladores/simulador-roteador/"><span>Voltar</span><strong>Ficha · Roteador Wi-Fi</strong></a>
+  <a href="../../../educacao/#simuladores" style="text-align:right"><span>Todos</span><strong>Simuladores para a sala de aula</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../../assets/site.js"></script>
+</body>
+</html>
