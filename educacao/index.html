@@ -81,10 +81,17 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 .btn.primary.edu{background:var(--edu);border-color:var(--edu)}
 
 /* Vitrine de simuladores */
-.vitrine{display:flex;flex-direction:column;gap:16px;padding:28px 24px;border:1px solid var(--line);border-top:4px solid var(--edu);border-radius:10px;background:linear-gradient(180deg,var(--edu-soft),var(--surface) 70%)}
-.vitrine .eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--edu);margin:0}
-.vitrine h2{font-size:clamp(1.7rem,4.5vw,2.3rem)}
-.vitrine .lead{max-width:70ch;font-size:1.02rem}
+.vitrine{display:flex;flex-direction:column;gap:18px;padding:36px 24px 32px;border:2px solid var(--edu);border-top-width:8px;border-radius:14px;background:linear-gradient(180deg,var(--edu-soft),var(--surface) 75%);box-shadow:0 10px 32px -18px var(--edu)}
+@media (min-width:820px){.vitrine{padding:48px 40px 40px}}
+.vitrine .eyebrow{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--edu);padding:5px 12px;border-radius:999px;margin:0}
+.vitrine .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--bg)}
+.vitrine h2{font-size:clamp(2.1rem,6vw,3.3rem);line-height:1.05;letter-spacing:-.02em;margin:0}
+.vitrine h2 .acc{color:var(--edu)}
+.vitrine .sub{font-size:clamp(1.15rem,2.6vw,1.45rem);line-height:1.4;font-weight:600;color:var(--fg);max-width:46ch;margin:0}
+.vitrine .lead{max-width:70ch;font-size:1.05rem}
+.vitrine .nums{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px 28px}
+.vitrine .nums li{display:flex;flex-direction:column;font-size:.85rem;color:var(--muted)}
+.vitrine .nums strong{font-size:1.6rem;line-height:1.1;color:var(--edu)}
 .provas{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .provas li{padding:12px 14px;border-left:3px solid var(--edu);background:var(--surface);border-radius:4px;font-size:.9rem;color:var(--muted)}
 .provas strong{color:var(--fg);display:block}
@@ -109,7 +116,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <nav class="topnav" aria-label="Seções"><ul>
   <li><a href="../">← Portfólio</a></li>
-  <li><a href="#simuladores">Simuladores</a></li>
+  <li><a href="#simuladores">Vitrine de inovação</a></li>
   <li><a href="#edu">Materiais</a></li>
   <li><a href="#arquivo">Todos os projetos</a></li>
   <li><a href="#formacao">Formação</a></li>
@@ -119,16 +126,19 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 
 <div class="wrap">
   <nav class="topback" aria-label="Navegação entre páginas"><a href="../">← Voltar ao portfólio</a><a class="" href="../infraestrutura/">Ver Infraestrutura de TI →</a></nav>
-  <div class="cta">
-    <a class="btn primary edu" href="../curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Baixar currículo · Computação e Educação <span class="fmt">PDF</span></a>
-    <a class="btn" href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn ↗<span class="sr-only"> (abre em nova aba)</span></a>
-  </div>
   <main id="conteudo">
 
   <section id="simuladores" class="vitrine" aria-labelledby="h-simuladores">
-    <p class="eyebrow">Vitrine de inovação educacional</p>
-    <h2 id="h-simuladores">Simuladores para a sala de aula</h2>
-    <p class="lead">Não são ideias no papel. São seis ferramentas interativas que já funcionam e já foram utilizadas em sala de aula. Nascem de casos reais de infraestrutura e levam redes, segurança e hardware para a escola pública sem laboratório caro e sem risco de derrubar a rede de verdade.</p>
+    <p class="eyebrow">Em destaque · Simuladores e jogos</p>
+    <h2 id="h-simuladores">Vitrine de inovação <span class="acc">educacional</span></h2>
+    <p class="sub">Infraestrutura de verdade transformada em aula: simuladores e jogos que levam redes, segurança e hardware para a escola pública.</p>
+    <ul class="nums" aria-label="A vitrine em números">
+      <li><strong>6</strong>ferramentas interativas</li>
+      <li><strong>Já usadas</strong>em sala de aula</li>
+      <li><strong>0</strong>instalações ou contas</li>
+      <li><strong>BNCC</strong>Computação</li>
+    </ul>
+    <p class="lead">Não são ideias no papel. São ferramentas que já funcionam e já foram utilizadas em sala de aula, nascidas de casos reais de infraestrutura, para ensinar sem laboratório caro e sem risco de derrubar a rede de verdade.</p>
     <ul class="provas">
       <li><strong>Abre e usa.</strong> Roda no navegador, inclusive no celular, sem instalar nada nem criar conta.</li>
       <li><strong>Feito para a escola real.</strong> Página única, sem dependências externas, pensada para internet instável e computadores antigos.</li>
@@ -186,6 +196,11 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
     </ul>
     <p class="nota">Protótipos funcionais publicados e já utilizados em sala de aula. Público e habilidades de cada um estão detalhados nos materiais abaixo.</p>
   </section>
+
+  <div class="cta">
+    <a class="btn primary edu" href="../curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Baixar currículo · Computação e Educação <span class="fmt">PDF</span></a>
+    <a class="btn" href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn ↗<span class="sr-only"> (abre em nova aba)</span></a>
+  </div>
 
   <section id="edu" aria-labelledby="h-edu">
     <div class="sec-head edu">
