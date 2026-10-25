@@ -114,7 +114,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
       <div><dt>Virtualização</dt><dd><a href="../projetos/poc-virtualizacao/">Avaliação de plataformas de virtualização</a> · <a href="../projetos/troubleshooting-pos-migracao/">Migração KVM → VMware</a></dd></div>
       <div><dt>Backup e proteção de dados</dt><dd><a href="../projetos/poc-virtualizacao/#tecnico">Redesenho do backup Veeam</a></dd></div>
       <div><dt>Monitoramento</dt><dd><a href="#p-monitor">Monitor de quedas Wi-Fi</a> · <a href="../projetos/alarme-falso-robos-esp32/">Alarme com Zabbix</a></dd></div>
-      <div><dt>Automação</dt><dd><a href="#p-monitor">Python e API UniFi</a> · <a href="../projetos/rede-filial-industrial/#evidencias">Parser de configurações</a> · <a href="#p-offboarding">PowerShell</a></dd></div>
+      <div><dt>Automação</dt><dd><a href="#p-monitor">Python e API UniFi</a> · <a href="../projetos/rede-filial-industrial/#evidencias">Parser de configurações</a> · <a href="#p-offboarding">PowerShell</a> · <a href="#p-integracao-apis">Integração Tally, Sheets e Telegram</a></dd></div>
       <div><dt>Resposta a incidentes</dt><dd><a href="../projetos/incidente-8021x-windows/">Falha 802.1X</a> · <a href="../projetos/quedas-coletores-wifi/">Quedas de coletores</a> · <a href="../projetos/alarme-falso-robos-esp32/">Alarme falso</a> · <a href="#p-wms">Sessões WMS</a> · <a href="../projetos/troubleshooting-pos-migracao/">Pós-migração de VM</a></dd></div>
     </dl>
     <h3 class="sub-h">Estudos de caso selecionados</h3>
@@ -174,6 +174,14 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
         <div class="row"><span>Tecnologias</span><p class="tech">VMware · KVM · Linux · GRUB · Docker · Apache</p></div>
         <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
         <a class="go" href="../projetos/troubleshooting-pos-migracao/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Troubleshooting pós-migração de máquina virtual</span></a>
+      </article>
+      <article class="card infra-c">
+        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="12" y="24" width="44" height="66" rx="4"/><rect class="f" x="20" y="34" width="28" height="8" rx="2"/><rect x="20" y="50" width="28" height="8" rx="2"/><rect x="20" y="66" width="18" height="8" rx="2"/><path d="M60 57H76M70 51l6 6l-6 6"/><rect x="80" y="30" width="52" height="54" rx="3"/><path d="M80 44H132M80 58H132M80 72H132M98 30V84M115 30V84"/><rect class="f" x="80" y="72" width="52" height="12" rx="1"/><path d="M136 57H150M144 51l6 6l-6 6"/><path class="f" d="M154 58L188 42L178 78L168 66Z"/><path d="M168 66L188 42"/><circle class="s" cx="34" cy="100" r="3"/><circle class="s" cx="106" cy="100" r="3"/><circle class="s" cx="172" cy="100" r="3"/><path class="d" d="M37 100H103M109 100H169"/><circle class="bg" cx="182" cy="20" r="9"/><path d="M178 20l3 3l5-6"/></svg></figure>
+        <h3><a href="#p-integracao-apis">Integração de APIs: formulários → planilha → notificação</a></h3>
+        <p class="desc">Automação que recebe as respostas dos formulários de briefing, registra cada uma em planilha e me avisa na hora pelo Telegram. O próprio portfólio é a vitrine: o fluxo está ativo nos briefings da página de serviços.</p>
+        <div class="row"><span>Tecnologias</span><p class="tech">Tally · Google Sheets · Telegram · APIs · Automação</p></div>
+        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li></ul></div>
+        <a class="go" href="../servicos/#contato">Ver em funcionamento <span aria-hidden="true">→</span><span class="sr-only">: briefings da página de serviços</span></a>
       </article>
     </div>
     <p class="count">Outros três trabalhos de infraestrutura (offboarding seguro, monitor de quedas Wi-Fi e sessões WMS) estão em <a href="#arquivo">Todos os projetos de infraestrutura</a>.</p>
@@ -308,6 +316,26 @@ Move-ADObject $u.DistinguishedName -TargetPath "OU=Inativos,DC=exemplo,DC=local"
           </details>
           <div class="links"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">Código-fonte no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">Execuções de testes na main ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
           <div class="chips"><span class="chip">Python</span><span class="chip">UniFi API</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS / coletores</span><span class="chip">Open source</span><span class="chip">Testes unitários</span><span class="chip">CSV / Markdown</span></div>
+        </div>
+      </li>
+      <li id="p-integracao-apis" class="infra" data-tags="infra automacao concluido">
+        <p class="when">2026</p>
+        <div class="body">
+          <p class="trilha">Infraestrutura de TI</p>
+          <h3>Integração de APIs: formulários → planilha → notificação</h3>
+          <p>Cada briefing enviado pelo site vira uma linha de planilha e uma notificação no Telegram, sem servidor próprio e sem digitação manual.</p>
+          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li></ul>
+          <details class="more"><summary>Ver contexto, decisões e validação</summary>
+            <p>Os briefings da página de serviços (pedagógico, diagnóstico de suporte e projeto de desenvolvimento) são formulários Tally. Montei a integração que leva cada resposta para uma planilha Google Sheets e dispara um aviso no Telegram, para que nenhum pedido fique esperando alguém abrir a caixa de entrada.</p>
+            <div class="fields">
+          <div class="field"><h4>Problema</h4><p>Pedidos chegando por formulário ficam parados até alguém lembrar de olhar. Para cumprir o prazo de resposta prometido na página (proposta em até 1 ou 2 dias úteis), o aviso precisa chegar no momento do envio e o histórico precisa ficar em um lugar só.</p></div>
+          <div class="field"><h4>Fluxo</h4><ul><li><strong>Entrada:</strong> o visitante preenche o briefing no Tally.</li><li><strong>Registro:</strong> cada resposta vira uma nova linha na planilha, com os campos do formulário.</li><li><strong>Notificação:</strong> uma mensagem chega no Telegram com o resumo do pedido.</li></ul></div>
+          <div class="field"><h4>Decisões</h4><p>Serviços gerenciados no lugar de um servidor próprio: nada para manter no ar e menos superfície de ataque para um site estático. Tokens, webhooks e identificadores da planilha ficam só nas configurações das plataformas, fora do código do site.</p></div>
+          <div class="field"><h4>Validação</h4><p>Em produção nos briefings do portfólio. Cada envio aparece na planilha e gera a notificação, o que dá um registro auditável de todos os pedidos recebidos.</p></div>
+        </div>
+          </details>
+          <div class="links"><a href="../servicos/#contato">Ver os briefings em funcionamento →</a></div>
+          <div class="chips"><span class="chip">Tally</span><span class="chip">Google Sheets</span><span class="chip">Telegram</span><span class="chip">APIs</span><span class="chip">Webhooks</span><span class="chip">Automação</span></div>
         </div>
       </li>
       <li id="p-alarme" class="infra" data-tags="infra redes concluido">
