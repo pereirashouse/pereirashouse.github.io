@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ficha do simulador · A Rede Parou · Jeferson Pereira</title>
+<meta name="description" content="Ficha de 1 página do laboratório A Rede Parou: público, duração, habilidades da BNCC Computação, o que o aluno faz, evidência de aprendizagem e acessibilidade.">
+<link rel="canonical" href="https://pereirashouse.github.io/educacao/simuladores/a-rede-parou/">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#23774A">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Ficha do simulador · A Rede Parou">
+<meta property="og:description" content="Ficha de 1 página do laboratório A Rede Parou: público, duração, habilidades da BNCC Computação, o que o aluno faz, evidência de aprendizagem e acessibilidade.">
+<meta property="og:url" content="https://pereirashouse.github.io/educacao/simuladores/a-rede-parou/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="stylesheet" href="../../../assets/fonts.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<style>
+.ficha-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font-weight:600;font-size:.93rem;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:currentColor}
+.btn.primary{background:var(--edu);border-color:var(--edu);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.08)}
+.status-val{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--edu-soft);color:var(--edu);font-weight:600;font-size:.88rem}
+.bncc-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.bncc-list code{display:inline-block;min-width:7.5em;padding:1px 6px;margin-right:6px;border-radius:3px;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.74rem}
+.objetivo{font-size:1.05rem;padding:12px 16px;border-left:3px solid var(--edu);background:var(--surface);border-radius:4px}
+.bloco-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.bloco-t .min{font-family:var(--mono);font-size:.75rem;color:var(--edu);border:1px solid var(--edu);border-radius:3px;padding:0 6px}
+.blk ul.rubrica{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;list-style:none;padding:0;margin:0}
+.rubrica li{padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-size:.92rem}
+.rubrica strong{display:block;font-family:var(--display);font-size:1rem;margin-bottom:2px}
+.rubrica .nv{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rubrica li:nth-child(3){border-color:var(--edu)}
+.steps li>p:not(.bloco-t) strong{display:inline}
+.probs dt{font-weight:600} .probs dd{margin:0 0 10px;color:var(--muted)}
+@media print{
+  @page{size:A4;margin:12mm}
+  :root{--bg:#fff;--surface:#fff;--fg:#000;--muted:#333;--line:#bbb;--edu:#1d5e3a;--edu-soft:#eef6f1}
+  body{font-size:9pt;line-height:1.35;background:#fff;color:#000}
+  main,.panel,.case-head{gap:8px!important;padding:0!important;margin:0!important}
+  .panel>h2.ph,.crumb{display:none}
+  .blk{gap:4px!important;margin:0!important} .blk h4{font-size:9.5pt;margin-top:2px}
+  .steps li{padding-bottom:4px!important}
+  .blk ul.rubrica{grid-template-columns:repeat(3,1fr)} .rubrica li{padding:6px 8px;font-size:8.5pt}
+  .facts div{padding:0!important}
+  .topnav,.ficha-acts,.pager,footer.site,.no-print{display:none!important}
+  .case-head h1{font-size:15pt} .blk{break-inside:avoid;padding:0;border:0} .blk h3{font-size:12pt}
+  .facts{gap:4px 16px} .wrap{padding:0;max-width:none}
+}
+</style>
+</head>
+<body class="edu-page">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../../">Início</a></li>
+  <li><a href="../../../educacao/">Educação</a></li>
+  <li><a href="../../../educacao/#simuladores">Simuladores</a></li>
+  <li><a href="../../../infraestrutura/">Infraestrutura</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head edu">
+  <p class="crumb"><a href="../../../educacao/#simuladores">Simuladores para a sala de aula</a> / Ficha do laboratório</p>
+  <h1>A Rede Parou: investigação e resolução de problemas de conectividade</h1>
+  <dl class="facts">
+    <div><dt>Público</dt><dd>9º ano do Ensino Fundamental, Ensino Médio e cursos técnicos</dd></div>
+    <div><dt>Duração</dt><dd>50 a 80 minutos (1 a 2 aulas)</dd></div>
+    <div><dt>Modalidade</dt><dd>Duplas ou pequenos grupos, no estilo sala de operações de suporte</dd></div>
+    <div><dt>Status de validação</dt><dd><span class="status-val"><span aria-hidden="true">✓</span>Aplicado em turmas</span></dd></div>
+  </dl>
+  <div class="ficha-acts">
+    <a class="btn primary" href="../../../a-rede-parou/">Investigar o caso <span aria-hidden="true">→</span><span class="sr-only">: A Rede Parou</span></a>
+    <a class="btn" href="../../../educacao/guias/guia-a-rede-parou/">Guia do Professor <span aria-hidden="true">→</span><span class="sr-only">: A Rede Parou</span></a>
+    <button type="button" class="btn" onclick="window.print()">Imprimir ou salvar em PDF</button>
+  </div>
+</header>
+
+<main id="conteudo">
+<section class="panel" aria-labelledby="h-ficha">
+  <h2 class="ph" id="h-ficha">Ficha do laboratório</h2>
+  <div class="blk">
+    <h3>Habilidades da BNCC Computação</h3>
+    <ul class="bncc-list"><li><code>EF07CO06</code>Compreender o papel de protocolos para a transmissão de dados</li><li><code>EF07CO07</code>Identificar problemas de segurança cibernética e experimentar formas de proteção</li><li><code>EF08CO06</code>Entender como é a estrutura e funcionamento da internet</li></ul>
+  </div>
+  <div class="blk">
+    <h3>Objetivo de aprendizagem</h3>
+    <p class="objetivo">Identificar a causa raiz da queda da rede de uma escola pela leitura de registros (logs), cruzamento de evidências e eliminação metódica de hipóteses.</p>
+  </div>
+  <div class="blk">
+    <h3>Pré-requisitos</h3>
+    <p>Compreensão elementar de cabos, roteadores e serviços de rede (DNS, DHCP e link de internet).</p>
+  </div>
+  <div class="blk">
+    <h3>O que o aluno faz</h3>
+    <ol><li>Recebe o chamado fictício: os computadores dizem “conectado, sem internet” e o sistema de notas não abre, mas a direção diz que lá está tudo normal.</li><li>Lê os registros coletados (servidor DHCP, firewall, switch, servidor de arquivos, chamados e configuração de rede de dois computadores) e marca as linhas importantes como evidência.</li><li>Avalia cada hipótese e descarta as erradas com base no que os registros mostram.</li><li>Preenche o laudo: o que mudou, quando, onde e por que só alguns computadores foram afetados. O simulador confere o laudo.</li></ol>
+  </div>
+  <div class="blk">
+    <h3>Evidência de aprendizagem</h3>
+    <p>O laudo da investigação conferido pelo simulador e baixado em .txt, com a causa raiz, a linha do tempo das evidências e a justificativa da equipe.</p>
+  </div>
+  <div class="blk">
+    <h3>Acessibilidade</h3>
+    <ul><li>Registros em texto puro, legíveis por leitores de tela, com busca em todos os registros e filtro por fonte.</li><li>Pistas progressivas para quem travar e laudo que pode ser baixado para entregar ao professor.</li><li>Página única que funciona no navegador do computador ou do celular, sem instalação.</li></ul>
+  </div>
+  <p class="note">Simulação educacional com dados fictícios. Plano de aula completo, material do aluno e do professor: <a href="https://github.com/pereirashouse/computacao-bncc/tree/main/projetos/03-investigacao-incidente-logs" target="_blank" rel="noopener">repositório do projeto<span class="sr-only"> (abre em nova aba)</span> ↗</a>.</p>
+</section>
+</main>
+<nav class="pager" aria-label="Navegação">
+  <a href="../../../educacao/#simuladores"><span>Voltar</span><strong>Simuladores para a sala de aula</strong></a>
+  <a href="../../../educacao/guias/guia-a-rede-parou/" style="text-align:right"><span>Próximo</span><strong>Guia do Professor · A Rede Parou</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../../assets/site.js"></script>
+</body>
+</html>
