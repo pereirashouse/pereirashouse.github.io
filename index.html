@@ -73,16 +73,25 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 .ponte h4{font-size:1rem;margin-top:4px}
 .card .row .alc{font-size:.88rem}
 @media (max-width:720px){.sobre-grid{grid-template-columns:1fr}}
+
+.topback{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;font-weight:600;font-size:.93rem}
+.topback a{color:var(--infra)} .topback a.edu{color:var(--edu)}
+.sobre-curto{display:flex;flex-direction:column;gap:12px;max-width:72ch}
+.sobre-curto p{color:var(--muted)}
+.fronts .front .go{font-weight:600;font-size:.9rem;margin-top:4px}
+.front.infra .go{color:var(--infra)} .front.edu .go{color:var(--edu)}
+.btn.serv{border-color:var(--fg)}
+
 </style>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <nav class="topnav" aria-label="Seções"><ul>
   <li><a href="#destaques">Destaques</a></li>
-  <li><a href="#infra">Infraestrutura</a></li>
-  <li><a href="#edu">Educação</a></li>
-  <li><a href="#arquivo">Todos os projetos</a></li>
+  <li><a href="infraestrutura/">Infraestrutura</a></li>
+  <li><a href="educacao/">Educação</a></li>
   <li><a href="#sobre">Sobre</a></li>
+  <li><a href="servicos/">Serviços</a></li>
   <li><a href="#contato">Contato</a></li>
 </ul></nav>
 
@@ -90,18 +99,17 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
   <header class="hero">
     <p class="eyebrow">Analista de Infraestrutura de TI Sênior · Professor de tecnologia · Licenciando em Computação (UTFPR, em andamento)</p>
     <h1>Jeferson Luiz Pereira</h1>
-    <p class="lede">Analista Sênior de Infraestrutura de TI com experiência sólida em redes corporativas, virtualização, segurança e automação. Licenciando em Computação pela UTFPR, com foco em transposição didática alinhada à BNCC — transformando operação real em aprendizagem aplicada. Atuo também como professor de tecnologia, partindo sempre de casos reais.</p>
-    <div class="fronts">
-      <a class="front infra" href="#infra"><span class="k">Para recrutadores</span><strong>Infraestrutura de TI</strong><span>Estudos de caso com problema, papel, decisões, validação e resultado, sem dados internos.</span></a>
-      <a class="front edu" href="#edu"><span class="k">Para escolas e universidades</span><strong>Computação e Educação</strong><span>Simulador, oficinas, jogos e laboratórios para a rede pública, alinhados à BNCC.</span></a>
-    </div>
+    <p class="lede">Analista Sênior de Infraestrutura de TI com experiência em redes corporativas, virtualização, segurança e automação. Licenciando em Computação pela UTFPR, transformo casos reais de operação em aulas alinhadas à BNCC.</p>
     <div class="cta">
       <a class="btn primary" href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn ↗<span class="sr-only"> (abre em nova aba)</span></a>
       <a class="btn" href="curriculo/jeferson-pereira-curriculo-ti.pdf" download>Currículo · Infraestrutura de TI <span class="fmt">PDF</span></a>
       <a class="btn" href="curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Currículo · Computação e Educação <span class="fmt">PDF</span></a>
-      <a class="btn" href="tel:+5542988842215">(42) 98884-2215</a>
+      <a class="btn serv" href="servicos/">Serviços <span aria-hidden="true">→</span></a>
     </div>
-    <div class="links"><a href="#destaques">Ver projetos em destaque</a><a href="rede-da-escola/">Abrir o protótipo Rede da Escola</a><a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="#contato">Contato</a></div>
+    <div class="fronts">
+      <a class="front infra" href="infraestrutura/"><span class="k">Para recrutadores</span><strong>Infraestrutura de TI</strong><span>Estudos de caso, todos os projetos técnicos, trajetória e competências.</span></a>
+      <a class="front edu" href="educacao/"><span class="k">Para escolas e universidades</span><strong>Computação e Educação</strong><span>Simuladores, oficinas, jogos e laboratórios para a rede pública, alinhados à BNCC.</span></a>
+    </div>
   </header>
 
   <main id="conteudo">
@@ -109,7 +117,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
   <section id="destaques" aria-labelledby="h-destaques">
     <div class="sec-head">
       <h2 id="h-destaques">Projetos em destaque</h2>
-      <p>Um artigo de docência e cinco projetos para começar: dois estudos de caso de infraestrutura, um monitor em Python com estudo de caso próprio e dois projetos de Computação e Educação. Os demais estão nas trilhas abaixo.</p>
+      <p>Um artigo de docência e cinco projetos para começar: dois estudos de caso de infraestrutura, um monitor em Python com estudo de caso próprio e dois projetos de Computação e Educação. Os demais estão nas páginas de <a href="infraestrutura/">Infraestrutura</a> e <a href="educacao/">Educação</a>.</p>
     </div>
     <ul class="hl">
       <li class="edu artigo"><a href="artigos/wifi-canal-24ghz-robos-industriais/"><span class="k">Artigo · Docência</span><strong>Quando o Wi-Fi “cai” e o sinal está ótimo</strong><span>Alarme falso em robôs industriais causado por canal 2,4 GHz saturado: investigação passiva, causa raiz e como levar o caso para a sala de aula</span></a></li>
@@ -122,606 +130,13 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
     <p class="links"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">Ver código do monitor Python ↗<span class="sr-only"> (abre em nova aba)</span></a></p>
   </section>
 
-  <section id="infra" aria-labelledby="h-infra">
-    <div class="sec-head infra">
-      <h2 id="h-infra">Infraestrutura de TI</h2>
-      <p>Trabalho profissional em uma indústria com três fábricas e dez centros de distribuição. Endereços, nomes de servidores, domínios e credenciais foram omitidos em todos os casos.</p>
-    </div>
-    <h3 class="sub-h">Onde cada área aparece</h3>
-    <dl class="areas">
-      <div><dt>Redes e segurança</dt><dd><a href="projetos/rede-filial-industrial/">Modernização de rede</a> · <a href="projetos/quedas-coletores-wifi/">Quedas de coletores Wi-Fi</a> · <a href="projetos/alarme-falso-robos-esp32/">Wi-Fi industrial</a></dd></div>
-      <div><dt>Wi-Fi corporativo e 802.1X</dt><dd><a href="projetos/wifi-8021x/">Implantação 802.1X</a> · <a href="projetos/incidente-8021x-windows/">Incidente</a></dd></div>
-      <div><dt>Active Directory e identidade</dt><dd><a href="projetos/wifi-8021x/">Conta de máquina</a> · <a href="#p-offboarding">Offboarding seguro</a></dd></div>
-      <div><dt>Virtualização</dt><dd><a href="projetos/poc-virtualizacao/">PoC VMware, Sangfor HCI e Proxmox VE</a> · <a href="projetos/troubleshooting-pos-migracao/">Migração KVM → VMware</a></dd></div>
-      <div><dt>Backup e proteção de dados</dt><dd><a href="projetos/poc-virtualizacao/#tecnico">Redesenho do backup Veeam</a></dd></div>
-      <div><dt>Monitoramento</dt><dd><a href="#p-monitor">Monitor de quedas Wi-Fi</a> · <a href="projetos/alarme-falso-robos-esp32/">Alarme com Zabbix</a></dd></div>
-      <div><dt>Automação</dt><dd><a href="#p-monitor">Python e API UniFi</a> · <a href="projetos/rede-filial-industrial/#evidencias">Parser de configurações</a> · <a href="#p-offboarding">PowerShell</a></dd></div>
-      <div><dt>Resposta a incidentes</dt><dd><a href="projetos/incidente-8021x-windows/">Falha 802.1X</a> · <a href="projetos/quedas-coletores-wifi/">Quedas de coletores</a> · <a href="projetos/alarme-falso-robos-esp32/">Alarme falso</a> · <a href="#p-wms">Sessões WMS</a> · <a href="projetos/troubleshooting-pos-migracao/">Pós-migração de VM</a></dd></div>
-    </dl>
-    <h3 class="sub-h">Estudos de caso selecionados</h3>
-    <div class="cards">
-      <article class="card infra-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><path d="M78 40a31 31 0 0 1 44 0M86 48a19 19 0 0 1 28 0M93 55a8 8 0 0 1 14 0"/><circle class="s" cx="100" cy="60" r="3"/><rect class="f" x="20" y="64" width="50" height="32" rx="3"/><path d="M12 100H78"/><path d="M45 70l9 4v6c0 5-4 9-9 11c-5-2-9-6-9-11v-6z"/><path d="M41 81l3 3l6-6"/><rect x="140" y="62" width="24" height="42" rx="4"/><path d="M148 98h8"/><path d="M62 62L90 64"/><path class="d" d="M140 70L112 64"/><circle class="bg" cx="166" cy="62" r="9"/><path d="M162 58l8 8M170 58l-8 8"/></svg></figure>
-        <h3><a href="projetos/wifi-8021x/">Wi-Fi corporativo com autenticação 802.1X</a></h3>
-        <p class="desc">Implantação de autenticação por conta de máquina em rede Wi-Fi corporativa, cobrindo 60 access points e bloqueando dispositivos pessoais.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">NPS · Active Directory · UniFi · GPO · PEAP-MSCHAPv2</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Implantação concluída</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
-        <a class="go" href="projetos/wifi-8021x/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Wi-Fi corporativo com autenticação 802.1X</span></a>
-      </article>
-      <article class="card infra-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="18" y="28" width="74" height="48" rx="3"/><path d="M10 82H100"/><path d="M66 46A12 12 0 1 0 67 58"/><path d="M68 38L66 46L58 44"/><rect x="120" y="14" width="64" height="14" rx="2"/><rect x="120" y="36" width="64" height="14" rx="2"/><rect class="f" x="120" y="58" width="64" height="14" rx="2"/><rect x="120" y="80" width="64" height="14" rx="2"/><path class="m" d="M127 21h30M127 43h40M127 65h24M127 87h34"/><path class="d" d="M118 65H98"/><circle class="bg" cx="172" cy="96" r="9"/><path d="M178 102l8 8" stroke-width="3"/></svg></figure>
-        <h3><a href="projetos/incidente-8021x-windows/">Diagnóstico de falha 802.1X após atualização do Windows</a></h3>
-        <p class="desc">Investigação de um notebook que deixou de autenticar no Wi-Fi: hipóteses, quatro fontes de log, causa raiz e correção definitiva.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">802.1X · NPS · NTLM · Active Directory · análise de logs</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul></div>
-        <a class="go" href="projetos/incidente-8021x-windows/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Diagnóstico de falha 802.1X após atualização do Windows</span></a>
-      </article>
-      <article class="card infra-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="16" y="12" width="70" height="96" rx="4"/><rect class="f" x="24" y="22" width="54" height="14" rx="2"/><rect class="f" x="24" y="44" width="54" height="14" rx="2"/><rect class="f" x="24" y="66" width="54" height="14" rx="2"/><rect x="24" y="88" width="54" height="12" rx="2"/><path class="m" d="M30 29h4M38 29h4M46 29h4M54 29h4M30 51h4M38 51h4M46 51h4M30 73h4M38 73h4M46 73h4M54 73h4"/><path d="M78 29L120 24M78 51L120 60"/><path class="d" d="M78 73L120 96"/><circle class="s" cx="126" cy="24" r="6"/><circle class="s" cx="126" cy="60" r="6"/><circle cx="126" cy="96" r="6"/><rect x="152" y="30" width="34" height="58" rx="3"/><rect class="s" x="162" y="26" width="14" height="8" rx="2"/><path d="M158 46l3 3l5-5M158 60l3 3l5-5M158 74l3 3l5-5"/><path class="m" d="M170 47h10M170 61h10M170 75h10"/></svg></figure>
-        <h3><a href="projetos/rede-filial-industrial/">Levantamento e modernização de rede de uma filial industrial</a></h3>
-        <p class="desc">Rede sem documentação levantada do zero: VLANs inconsistentes, redundância, drift de configuração e roteiro de regularização por risco.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">HPE Aruba · FortiGate · SD-WAN · VLAN · Python</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
-        <a class="go" href="projetos/rede-filial-industrial/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Levantamento e modernização de rede de uma filial industrial</span></a>
-      </article>
-      <article class="card infra-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="30" y="30" width="40" height="72" rx="5"/><rect x="36" y="38" width="28" height="30" rx="2"/><path class="m" d="M40 76h20M40 84h20M40 92h12"/><path d="M78 30a26 26 0 0 1 0 30M86 22a38 38 0 0 1 0 46"/><path d="M96 45H120" stroke-dasharray="4 4"/><circle class="bg" cx="146" cy="50" r="22"/><path d="M134 50l8 8l14-16"/><path d="M162 66L182 88" stroke-width="6"/><circle class="s" cx="120" cy="45" r="3"/></svg></figure>
-        <h3><a href="projetos/quedas-coletores-wifi/">Troubleshooting de quedas dos coletores Wi-Fi</a></h3>
-        <p class="desc">Um sintoma, seis frentes de investigação, com correções e hipóteses em estados diferentes.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">UniFi · tcpdump · Linux · Python · análise de RF</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
-        <a class="go" href="projetos/quedas-coletores-wifi/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Troubleshooting de quedas dos coletores Wi-Fi</span></a>
-      </article>
-      <article class="card infra-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="14" y="26" width="58" height="62" rx="4"/><rect class="f" x="22" y="34" width="18" height="18" rx="2"/><rect class="f" x="46" y="34" width="18" height="18" rx="2"/><rect class="f" x="22" y="60" width="18" height="18" rx="2"/><rect class="f" x="46" y="60" width="18" height="18" rx="2"/><rect x="128" y="26" width="58" height="18" rx="3"/><rect x="128" y="48" width="58" height="18" rx="3"/><rect x="128" y="70" width="58" height="18" rx="3"/><circle class="s" cx="176" cy="35" r="2"/><circle class="s" cx="176" cy="57" r="2"/><circle class="s" cx="176" cy="79" r="2"/><path d="M80 42H120M114 36l6 6l-6 6"/><path class="d" d="M122 84C110 108 92 108 80 88"/><path d="M80 98L79 88L88 91"/><path class="bg" d="M150 114L158 100L166 114Z"/><path d="M158 105v4"/></svg></figure>
-        <h3><a href="projetos/poc-virtualizacao/">Avaliação de plataformas de virtualização e HCI</a></h3>
-        <p class="desc">PoC para substituir o VMware com critérios de avaliação e de rollback definidos antes, e acionados quando o risco se confirmou.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">VMware · Sangfor HCI · Proxmox VE · KVM · Veeam</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
-        <a class="go" href="projetos/poc-virtualizacao/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Avaliação de plataformas de virtualização e HCI</span></a>
-      </article>
-      <article class="card infra-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="18" y="58" width="36" height="30" rx="4"/><circle class="s" cx="29" cy="70" r="3"/><circle class="s" cx="43" cy="70" r="3"/><path d="M36 58V48"/><circle cx="36" cy="44" r="4"/><path d="M24 96h24"/><path d="M62 52a16 16 0 0 1 0 22"/><path d="M92 92V40"/><path d="M80 40h24"/><path d="M84 30a12 12 0 0 1 16 0"/><path class="d" d="M120 46a14 14 0 0 1 0 20M128 40a24 24 0 0 1 0 32"/><rect x="146" y="30" width="16" height="28" rx="3"/><rect x="168" y="44" width="16" height="28" rx="3"/><rect x="150" y="70" width="16" height="28" rx="3"/><path d="M20 108H186"/><rect class="f" x="70" y="100" width="44" height="8" rx="1"/><circle class="bg" cx="182" cy="18" r="10"/><path d="M182 12v7M182 23v1"/></svg></figure>
-        <h3><a href="projetos/alarme-falso-robos-esp32/">Alarme falso de robôs ESP32 no Wi-Fi 2,4 GHz</a></h3>
-        <p class="desc">Robôs com sinal ótimo e alarme de “fora da rede”: quatro hipóteses descartadas e causa raiz no tempo de ar do canal, ocupado por celulares distantes.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">ESP32 · Wi-Fi 2,4 GHz · UniFi · Zabbix · Grafana · RSSI mínimo</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
-        <a class="go" href="projetos/alarme-falso-robos-esp32/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Alarme falso de robôs ESP32 no Wi-Fi 2,4 GHz</span></a>
-      </article>
-      <article class="card infra-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="12" y="34" width="52" height="52" rx="4"/><rect class="f" x="20" y="42" width="36" height="12" rx="2"/><path class="m" d="M24 64h28M24 72h20"/><path d="M70 60H96M90 54l6 6l-6 6"/><rect x="102" y="34" width="52" height="52" rx="4"/><rect class="f" x="110" y="42" width="36" height="12" rx="2"/><path class="m" d="M114 64h28M114 72h20"/><circle class="s" cx="170" cy="30" r="5"/><circle class="s" cx="182" cy="60" r="5"/><circle cx="170" cy="90" r="5"/><path d="M154 44L166 33M154 60H177M154 76L166 87"/><path class="d" d="M24 104H142"/><path d="M164 87l12 6M176 87l-12 6"/></svg></figure>
-        <h3><a href="projetos/troubleshooting-pos-migracao/">Troubleshooting pós-migração de máquina virtual</a></h3>
-        <p class="desc">VM crítica migrada de KVM para VMware com três bloqueios em cadeia: acesso, rede e HTTP 503, resolvidos sem rollback.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">VMware · KVM · Linux · GRUB · Docker · Apache</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul></div>
-        <a class="go" href="projetos/troubleshooting-pos-migracao/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Troubleshooting pós-migração de máquina virtual</span></a>
-      </article>
-    </div>
-    <p class="count">Outros três trabalhos de infraestrutura (offboarding seguro, monitor de quedas Wi-Fi e sessões WMS) estão em <a href="#arquivo">Todos os projetos</a>.</p>
-  </section>
-
-  <section id="edu" aria-labelledby="h-edu">
-    <div class="sec-head edu">
-      <h2 id="h-edu">Computação e Educação</h2>
-      <p>Materiais produzidos na Licenciatura em Computação (UTFPR, em andamento), pensados para escolas públicas, inclusive as que têm pouca infraestrutura. Autoria e colaboração estão indicadas em cada material.</p>
-    </div>
-    <p class="edu-topics">Temas: redes e Wi-Fi, segurança digital, autenticação, pensamento computacional desplugado e transposição de casos reais de infraestrutura para a sala de aula.</p>
-    <p class="edu-topics">Como ensino: o problema vem antes da ferramenta, a IA entra só como copilota no planejamento e com dados sanitizados, e a BNCC é adaptada à realidade de cada turma. <a href="#docencia">Mais sobre a minha prática em sala</a>.</p>
-    <div class="cards">
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="14" y="12" width="172" height="96" rx="4"/><path d="M14 26H186"/><circle class="s" cx="22" cy="19" r="2"/><circle class="s" cx="30" cy="19" r="2"/><circle class="s" cx="38" cy="19" r="2"/><rect class="f" x="14" y="26" width="46" height="82" stroke="none"/><path d="M60 26V108"/><path class="m" d="M22 40h28M22 66h28M22 78h28M22 90h28"/><rect class="s" x="20" y="48" width="34" height="10" rx="2"/><path class="m" d="M72 44h26M72 62h26M72 80h26"/><rect x="106" y="38" width="62" height="12" rx="2"/><rect x="106" y="56" width="34" height="12" rx="2"/><path d="M132 61l3 3l3-3"/><rect x="106" y="74" width="34" height="12" rx="2"/><path d="M132 79l3 3l3-3"/><rect class="s" x="140" y="92" width="36" height="10" rx="2"/><path d="M152 70a10 10 0 0 1 14 0M147 64a17 17 0 0 1 24 0"/><circle class="s" cx="159" cy="75" r="2"/></svg></figure>
-        <h3><a href="educacao/simulador-roteador/">Simulador de configuração de roteador</a></h3>
-        <p class="desc">Objeto de aprendizagem web para o 9º ano configurar Wi-Fi 2,4 e 5 GHz, canais e QoS sem risco de derrubar a rede real.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">HTML · CSS · JavaScript · GitHub Pages</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Desenvolvido para turmas do 9º ano do Ensino Fundamental · eixo Mundo Digital da BNCC Computação</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge tipo"><span class="sr-only">Tipo: </span>Acadêmico</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul></div>
-        <a class="go" href="educacao/simulador-roteador/">Ver estudo de caso <span aria-hidden="true">→</span><span class="sr-only">: Simulador de configuração de roteador</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><path d="M47 50a12 12 0 0 1 18 0M40 42a22 22 0 0 1 32 0M33 34a32 32 0 0 1 46 0"/><rect class="f" x="22" y="70" width="68" height="24" rx="4"/><path d="M34 70L28 48M78 70L84 48"/><circle class="s" cx="34" cy="82" r="2.5"/><circle class="s" cx="44" cy="82" r="2.5"/><circle class="s" cx="54" cy="82" r="2.5"/><path d="M112 92A38 38 0 0 1 188 92"/><path class="m" d="M118 72l6 4M132 58l4 6M150 53v7M168 58l-4 6M182 72l-6 4"/><path d="M150 92L128 74" stroke-width="3"/><circle class="s" cx="150" cy="92" r="5"/></svg></figure>
-        <h3><a href="#p-iir">A “invisibilidade” do Wi-Fi</a></h3>
-        <p class="desc">Ilha Interdisciplinar de Racionalidade em que a turma mede o próprio Wi-Fi e investiga por que a internet trava.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">Analisador de espectro · simulador de roteador · infográfico</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Desenvolvido para turmas do 9º ano · investigação interdisciplinar com Física e Matemática</p></div>
-        <div class="row"><span>Aplicação</span><p class="alc">Aplicada apenas com estudantes do curso de licenciatura</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Acadêmico</li><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul></div>
-        <a class="go" href="#p-iir">Ver detalhes <span aria-hidden="true">→</span><span class="sr-only">: A “invisibilidade” do Wi-Fi</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="26" y="80" width="50" height="30" rx="2"/><path d="M26 82L51 98L76 82"/><path d="M64 6V74A14 14 0 0 1 36 74V68"/><path d="M36 68L31 75"/><circle class="bg" cx="136" cy="52" r="28"/><path d="M156 72L180 96" stroke-width="6"/><path class="m" d="M120 42h32M120 52h24M120 62h28"/><path d="M150 50l-4 6"/></svg></figure>
-        <h3><a href="operacao-anzol/">Operação Anzol</a></h3>
-        <p class="desc">Jogo web de 60 minutos em que estudantes do 9º ano atuam como peritos contra golpes digitais. Funciona no celular e offline.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">HTML · CSS · JavaScript · funciona offline</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Desenvolvido para turmas do 9º ano · alinhado às habilidades EF09CO04 e EF09CO10</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul></div>
-        <a class="go" href="operacao-anzol/">Jogar a Operação Anzol <span aria-hidden="true">→</span><span class="sr-only">: Operação Anzol</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="80" y="10" width="40" height="18" rx="3"/><path d="M100 28V42M34 42H166M34 42V56M78 42V56M122 42V56M166 42V56"/><rect class="f" x="16" y="56" width="36" height="26" rx="3"/><rect x="60" y="56" width="36" height="26" rx="3"/><rect class="f" x="104" y="56" width="36" height="26" rx="3"/><rect x="148" y="56" width="36" height="26" rx="3"/><path class="m" d="M24 69h20M68 69h20M112 69h20M156 69h20"/><path class="m d" d="M56 52V100M100 52V100M144 52V100"/><circle class="s" cx="26" cy="96" r="3"/><circle class="s" cx="42" cy="96" r="3"/><circle class="s" cx="78" cy="96" r="3"/><circle class="s" cx="114" cy="96" r="3"/><circle class="s" cx="130" cy="96" r="3"/><circle class="s" cx="166" cy="96" r="3"/></svg></figure>
-        <h3><a href="rede-da-escola/">Rede da Escola</a></h3>
-        <p class="desc">Simulador em que a turma monta a rede de uma escola fictícia: VLANs, endereços IP, gateway, equipamentos e firewall, em cinco missões com defeitos reais.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">HTML · CSS · JavaScript · funciona offline</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Desenvolvido para turmas do 8º e 9º ano · alinhado às habilidades EF07CO06, EF07CO07, EF08CO06 e EF08CO10</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul></div>
-        <a class="go" href="rede-da-escola/">Abrir o simulador <span aria-hidden="true">→</span><span class="sr-only">: Rede da Escola</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="14" y="14" width="96" height="92" rx="4"/><path class="m" d="M24 30h70M24 42h56M24 70h64M24 82h50M24 94h60"/><rect class="f" x="20" y="50" width="84" height="12" rx="2"/><path d="M24 56h66"/><circle class="bg" cx="146" cy="48" r="24"/><path d="M146 36V48L154 54"/><path d="M163 65L184 86" stroke-width="6"/><path d="M122 104H190"/><circle class="s" cx="130" cy="104" r="3"/><circle class="s" cx="156" cy="104" r="3"/><circle class="s" cx="182" cy="104" r="3"/></svg></figure>
-        <h3><a href="a-rede-parou/">A Rede Parou</a></h3>
-        <p class="desc">Laboratório de investigação: a partir de registros fictícios, estudantes descobrem por que a rede de uma escola parou, testando hipóteses com evidências.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">HTML · CSS · JavaScript · logs fictícios</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Desenvolvido para o 9º ano e o Ensino Médio · alinhado às habilidades EF07CO06, EF07CO07 e EF08CO06</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul></div>
-        <a class="go" href="a-rede-parou/">Investigar o caso <span aria-hidden="true">→</span><span class="sr-only">: A Rede Parou</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect x="20" y="10" width="44" height="16" rx="8"/><path d="M42 26V38"/><path class="f" d="M42 38L60 52L42 66L24 52Z"/><path d="M42 66V78M60 52H74"/><rect x="22" y="78" width="40" height="18" rx="2"/><g transform="rotate(-12 116 60)"><rect class="bg" x="98" y="34" width="36" height="52" rx="4"/><circle cx="116" cy="60" r="7"/></g><g><rect class="bg" x="124" y="30" width="36" height="52" rx="4"/><path d="M142 48L150 64H134Z"/></g><g transform="rotate(12 168 60)"><rect class="bg" x="150" y="34" width="36" height="52" rx="4"/><rect class="f" x="161" y="53" width="14" height="14" rx="1"/></g></svg></figure>
-        <h3><a href="#p-oficina">Oficina de Letramento e Pensamento Computacional</a></h3>
-        <p class="desc">Oficina desplugada para professores de escolas rurais; cada grupo sai com um mini-plano de aula da própria disciplina.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">Computação desplugada · materiais de baixo custo</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Formação para professores de escolas rurais · três eixos da BNCC Computação</p></div>
-        <div class="row"><span>Aplicação</span><p class="alc">Aplicada com professores da rede pública de ensino do município de Palmeira</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li></ul></div>
-        <a class="go" href="#p-oficina">Ver detalhes <span aria-hidden="true">→</span><span class="sr-only">: Oficina de Letramento e Pensamento Computacional</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><path d="M14 34h26l10 10v38H14Z"/><path d="M40 34v10h10"/><path class="m" d="M20 54h24M20 62h24M20 70h16"/><path d="M56 58H72M67 53l5 5l-5 5"/><circle class="f" cx="99" cy="58" r="13"/><path d="M112.0 58.0L118.0 58.0M108.2 67.2L112.4 71.4M99.0 71.0L99.0 77.0M89.8 67.2L85.6 71.4M86.0 58.0L80.0 58.0M89.8 48.8L85.6 44.6M99.0 45.0L99.0 39.0M108.2 48.8L112.4 44.6" stroke-width="4"/><circle cx="99" cy="58" r="4"/><path d="M126 58H142M137 53l5 5l-5 5"/><path class="f" d="M148 40Q162 34 168 42V88Q162 80 148 84Z"/><path class="f" d="M188 40Q174 34 168 42V88Q174 80 188 84Z"/></svg></figure>
-        <h3><a href="pipeline-pedagogico/">IA e o pipeline de casos de infraestrutura para material BNCC</a></h3>
-        <p class="desc">Artigo técnico-pedagógico sobre usar IA como copiloto e transformar incidentes reais em estudos de caso para a sala de aula.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">IA generativa · Obsidian · GitHub</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul></div>
-        <a class="go" href="pipeline-pedagogico/">Abrir a visualização <span aria-hidden="true">→</span><span class="sr-only">: IA e o pipeline de casos de infraestrutura para material BNCC</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><path d="M78 40a31 31 0 0 1 44 0M86 48a19 19 0 0 1 28 0M93 55a8 8 0 0 1 14 0"/><circle class="s" cx="100" cy="60" r="3"/><rect class="f" x="20" y="64" width="50" height="32" rx="3"/><path d="M12 100H78"/><path d="M45 70l9 4v6c0 5-4 9-9 11c-5-2-9-6-9-11v-6z"/><path d="M41 81l3 3l6-6"/><rect x="140" y="62" width="24" height="42" rx="4"/><path d="M148 98h8"/><path d="M62 62L90 64"/><path class="d" d="M140 70L112 64"/><circle class="bg" cx="166" cy="62" r="9"/><path d="M162 58l8 8M170 58l-8 8"/></svg></figure>
-        <h3><a href="projetos/wifi-8021x/#didatica">Laboratório: senha, usuário ou máquina?</a></h3>
-        <p class="desc">O caso do 802.1X em versão didática: uma atividade desplugada para explicar três formas de autenticar em uma rede.</p>
-        <div class="row"><span>Tecnologias</span><p class="tech">Atividade desplugada · autenticação de rede</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Pensado para Ensino Médio técnico, cursos de redes e licenciatura · eixo Mundo Digital</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li></ul></div>
-        <a class="go" href="projetos/wifi-8021x/#didatica">Ver versão didática <span aria-hidden="true">→</span><span class="sr-only">: Laboratório: senha, usuário ou máquina?</span></a>
-      </article>
-      <article class="card edu-c">
-        <figure class="ill" aria-hidden="true"><svg viewBox="0 0 200 120"><rect class="f" x="22" y="56" width="40" height="34" rx="4"/><circle class="s" cx="34" cy="70" r="3"/><circle class="s" cx="50" cy="70" r="3"/><path d="M34 80h16"/><path d="M42 56V44"/><circle cx="42" cy="40" r="4"/><path d="M28 98h28"/><path d="M84 36a22 22 0 0 1 0 28M92 30a32 32 0 0 1 0 40"/><path d="M110 90H186"/><rect class="f" x="114" y="70" width="12" height="20" rx="1"/><rect x="130" y="54" width="12" height="36" rx="1"/><rect x="146" y="40" width="12" height="50" rx="1"/><rect x="162" y="46" width="12" height="44" rx="1"/><path class="d" d="M110 62H186"/><circle class="bg" cx="170" cy="28" r="10"/><path d="M170 22v7M170 33v1"/></svg></figure>
-        <p class="k">Artigo · Docência</p>
-        <h3><a href="artigos/wifi-canal-24ghz-robos-industriais/">Quando o Wi-Fi “cai” e o sinal está ótimo</a></h3>
-        <p class="desc">Alarme falso em robôs industriais causado por canal 2,4 GHz saturado: investigação passiva, causa raiz, validação e como levar o caso para a sala de aula.</p>
-        <div class="row"><span>Temas</span><p class="tech">Wi-Fi 2,4 GHz · tempo de ar · RSSI mínimo · Zabbix · Grafana · BNCC Computação</p></div>
-        <div class="row"><span>Público e BNCC</span><p class="alc">Professores de Computação e Redes, 9º ano e Ensino Médio técnico · eixos Mundo Digital e Pensamento Computacional</p></div>
-        <div class="row"><span>Tipo</span><ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Artigo</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul></div>
-        <a class="go" href="artigos/wifi-canal-24ghz-robos-industriais/">Ler o artigo <span aria-hidden="true">→</span><span class="sr-only">: Quando o Wi-Fi “cai” e o sinal está ótimo</span></a>
-      </article>
-    </div>
-  </section>
-
-  <section id="arquivo" aria-labelledby="h-arquivo">
+    <section id="sobre" aria-labelledby="h-sobre">
     <div class="sec-head">
-      <h2 id="h-arquivo">Todos os projetos</h2>
-      <p>Arquivo completo, com tipo e status de cada trabalho. Projetos menores trazem os detalhes aqui mesmo.</p>
+      <h2 id="h-sobre">Sobre mim</h2>
     </div>
-    <div class="filters" role="group" aria-label="Filtrar projetos" hidden>
-      <button type="button" data-f="todos" aria-pressed="true">Todos</button>
-      <button type="button" data-f="infra" aria-pressed="false">Infraestrutura</button>
-      <button type="button" data-f="edu" aria-pressed="false">Educação</button>
-      <button type="button" data-f="redes" aria-pressed="false">Redes</button>
-      <button type="button" data-f="seguranca" aria-pressed="false">Segurança</button>
-      <button type="button" data-f="virtualizacao" aria-pressed="false">Virtualização</button>
-      <button type="button" data-f="automacao" aria-pressed="false">Automação</button>
-      <button type="button" data-f="andamento" aria-pressed="false">Em andamento</button>
-      <button type="button" data-f="concluido" aria-pressed="false">Concluídos</button>
-    </div>
-    <p class="count" id="arch-count" aria-live="polite"></p>
-    <ul class="arch">
-      <li id="p-8021x" class="infra" data-tags="infra edu redes seguranca concluido">
-        <p class="when">Ago – Out 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura · também na trilha de Educação</p>
-          <h3><a href="projetos/wifi-8021x/">Autenticação de máquinas em Wi-Fi corporativo com NPS e Active Directory</a></h3>
-          <p>802.1X em 60 access points, substituindo senha compartilhada; inclui versão didática sobre autenticação de rede.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Implantação concluída</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
-          <div class="links"><a href="projetos/wifi-8021x/">Ver estudo de caso →</a></div>
-        </div>
-      </li>
-      <li id="p-incidente" class="infra" data-tags="infra redes seguranca concluido">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3><a href="projetos/incidente-8021x-windows/">Diagnóstico de falha de autenticação 802.1X após atualização do Windows</a></h3>
-          <p>Troubleshooting com hipóteses, quatro fontes de log, causa raiz, contorno e correção definitiva.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul>
-          <div class="links"><a href="projetos/incidente-8021x-windows/">Ver estudo de caso →</a></div>
-        </div>
-      </li>
-      <li id="p-rede" class="infra" data-tags="infra redes automacao andamento">
-        <p class="when">Ago 2026 – atual</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3><a href="projetos/rede-filial-industrial/">Levantamento e modernização de rede de uma filial industrial</a></h3>
-          <p>Levantamento físico, parser de configurações, drift, VLANs, redundância e matriz de achados por risco.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
-          <div class="links"><a href="projetos/rede-filial-industrial/">Ver estudo de caso →</a></div>
-        </div>
-      </li>
-      <li id="p-coletores" class="infra" data-tags="infra redes automacao andamento">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3><a href="projetos/quedas-coletores-wifi/">Troubleshooting de quedas dos coletores Wi-Fi em operação logística</a></h3>
-          <p>Seis frentes de investigação para um mesmo sintoma, com hipóteses, cinco fontes de evidência e correções em rodadas com rollback.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">◐</span><span class="sr-only">Status: </span>Em andamento</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
-          <div class="links"><a href="projetos/quedas-coletores-wifi/">Ver estudo de caso →</a></div>
-        </div>
-      </li>
-      <li id="p-poc" class="infra" data-tags="infra virtualizacao concluido">
-        <p class="when">Jun – Ago 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3><a href="projetos/poc-virtualizacao/">Avaliação de plataformas de virtualização e infraestrutura hiperconvergente</a></h3>
-          <p>PoC VMware → Sangfor HCI, com Proxmox VE como alternativa, critérios de rollback e redesenho do backup.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
-          <div class="links"><a href="projetos/poc-virtualizacao/">Ver estudo de caso →</a></div>
-        </div>
-      </li>
-      <li id="p-pos-migracao" class="infra" data-tags="infra virtualizacao concluido">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3><a href="projetos/troubleshooting-pos-migracao/">Troubleshooting pós-migração de máquina virtual: acesso, rede e aplicação</a></h3>
-          <p>Migração a frio de KVM para VMware com senha de root recusada, interface renomeada e Port Group divergente e proxy reverso em 503; causa raiz por camada e três recomendações preventivas.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li><li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li></ul>
-          <div class="links"><a href="projetos/troubleshooting-pos-migracao/">Ver estudo de caso →</a></div>
-        </div>
-      </li>
-      <li id="p-simulador" class="edu" data-tags="edu redes concluido">
-        <p class="when">1º sem. 2026</p>
-        <div class="body">
-          <p class="trilha">Computação e Educação</p>
-          <h3><a href="educacao/simulador-roteador/">Simulador interativo de configuração de roteador para aprendizagem de redes</a></h3>
-          <p>Objeto de aprendizagem web com seis desafios e feedback automático: alcance, canais, faixas Wi-Fi, segurança, QoS e log fictício. Orientações para professores e limites da avaliação estão documentados.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge tipo"><span class="sr-only">Tipo: </span>Acadêmico</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
-          <div class="links edu"><a href="educacao/simulador-roteador/">Ver estudo de caso →</a></div>
-        </div>
-      </li>
-      <li id="p-offboarding" class="infra" data-tags="infra seguranca automacao">
-        <p class="when">Set – Out 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3>Offboarding seguro: bloqueio de acessos no desligamento de colaborador</h3>
-          <p>Runbook de 7 blocos que revoga todos os acessos durante a conversa de desligamento, com evidência auditável e cuidado extra para contas privilegiadas.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Runbook estruturado em sete blocos para garantir que, quando um colaborador é desligado, todos os acessos sejam revogados de forma consistente e auditável — do Active Directory aos hypervisors e storages. O procedimento distingue o perfil comum do colaborador com acesso privilegiado (TI), onde os riscos são significativamente maiores.</p>
-            <div class="fields">
-          <div class="field"><h4>Princípio central</h4><p>O bloqueio acontece <strong>durante</strong> a conversa de desligamento, não depois. Cada minuto de janela entre a comunicação e o bloqueio é risco real. O chamado do RH formaliza o horário; o analista de infraestrutura fica de prontidão nesse horário.</p></div>
-          <div class="field"><h4>Blocos 1 a 5 — qualquer colaborador</h4><ul><li>Exportar grupos do AD como evidência antes de qualquer alteração</li><li>Trocar a senha por valor aleatório e desabilitar a conta; em ambientes com M365/Entra ID, bloquear na nuvem e revogar tokens de sessão imediatamente (a sincronização leva até 30 min)</li><li>Derrubar sessões ativas: RDP, VPN no firewall, Wi-Fi 802.1X (a sessão atual persiste até a próxima reautenticação do NPS)</li><li>Sistemas externos ao AD: ERP, WMS, logins no banco de dados, portais SaaS, ramal VoIP, código de impressão e acesso físico</li><li>No AD: preencher a descrição com data, chamado e executor; remover de todos os grupos; mover para OU de Inativos; agendar exclusão definitiva em 90 dias</li></ul></div>
-          <div class="field"><h4>Bloco 6 — colaborador da TI ou com acesso privilegiado</h4><p>O risco aqui não é apenas a conta, mas <strong>tudo o que a pessoa sabe</strong>. Senhas de contas de serviço, break-glass, firewall, switches, iDRAC, storage, hypervisors, banco de dados, PSKs de Wi-Fi — tudo que ela conhecia precisa ser rotacionado. Adicionalmente:</p><ul><li>Auditoria de contas criadas e mudanças em grupos privilegiados nos últimos 30 a 90 dias (detecção de backdoors)</li><li>Verificar tarefas agendadas, serviços e scripts rodando com a credencial dela — o ideal é migrar para conta de serviço antes do D0</li><li>Revisar logs do firewall, do AD e dos hypervisors: acessos fora do horário, exportações de dados, mudanças de regras</li><li>Rotacionar senhas LAPS das máquinas que ela consultou recentemente</li><li>Remover chaves SSH, tokens de API e acessos a cofres de senha</li></ul></div>
-          <div class="field"><h4>Contas nominais fora do AD</h4><p>iDRAC, storages, hosts ESXi e servidores KVM têm contas locais que o AD não gerencia. Cada uma precisa ser bloqueada equipamento por equipamento, via CLI ou interface web. O runbook mantém um inventário dessas contas com os comandos específicos por plataforma — incluindo o cuidado de não remover contas de contingência que o ambiente de gerenciamento usa por SSH.</p></div>
-        </div>
-            <pre><span class="c"># Bloco AD: evidência de grupos, bloqueio e movimentação para OU Inativos</span>
-$u = Get-ADUser $sam -Properties MemberOf
-$u.MemberOf | Out-File "C:\Offboarding\$sam-grupos-$(Get-Date -f yyyyMMdd).txt"
-
-<span class="c"># Senha aleatória com gerador criptográfico (não usar $pwd: é variável automática)</span>
-$bytes = [byte[]]::new(32)
-[Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
-$novaSenha = [Convert]::ToBase64String($bytes)
-Set-ADAccountPassword $sam -Reset -NewPassword (ConvertTo-SecureString $novaSenha -AsPlainText -Force)
-Disable-ADAccount $sam
-Set-ADUser $sam -Description "Desligado $(Get-Date -f dd/MM/yyyy) - $chamado - $env:USERNAME"
-$u.MemberOf | ForEach-Object { Remove-ADGroupMember $_ -Members $sam -Confirm:$false }
-Move-ADObject $u.DistinguishedName -TargetPath $ouInativos</pre>
-          </details>
-          
-          <div class="chips"><span class="chip">Active Directory</span><span class="chip">PowerShell</span><span class="chip">FortiGate</span><span class="chip">NPS / 802.1X</span><span class="chip">Segurança</span><span class="chip">Offboarding</span><span class="chip">ESXi / KVM</span><span class="chip">iDRAC</span></div>
-        </div>
-      </li>
-      <li id="p-monitor" class="infra" data-tags="infra redes automacao concluido">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3>Monitor automático de quedas Wi-Fi de coletores WMS</h3>
-          <p>Agente Python open source com testes automatizados, CI multiversão e validação TLS por padrão, que transformou relatos de queda em métrica por coletor, AP e hora.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Coletores de dados (Urovo e Skorpio) em um SSID dedicado ao WMS apresentavam quedas cuja frequência e padrão eram difíceis de medir objetivamente. Sem métrica, era impossível saber se uma mudança na configuração do Wi-Fi havia melhorado ou piorado o cenário. Desenvolvi um agente Python que consulta a API do UniFi, detecta quando cada coletor some e volta e registra duração, AP e RSSI em CSV.</p>
-            <div class="fields">
-          <div class="field"><h4>Problema de diagnóstico</h4><p>As quedas eram relatadas pelos operadores de armazém, mas sem dados objetivos: não se sabia quantas quedas por hora ocorriam, qual coletor caía mais, em qual AP, com que RSSI. Sem uma linha de base, qualquer ajuste no rádio era um chute.</p></div>
-          <div class="field"><h4>Arquitetura do agente</h4><p>O script consulta a API legada do UniFi a cada 60 segundos e compara o estado anterior com o atual. Quando um coletor desaparece, grava um evento de queda com o AP e o RSSI do último registro. Na reconexão, calcula a duração. Toda saída vai para um CSV em <span class="mono">dados/eventos.csv</span>; um segundo comando gera um relatório Markdown diário com top coletores, quedas por hora e alertas configuráveis. Sem dependências externas — stdlib Python 3.10 apenas.</p></div>
-          <div class="field"><h4>Classificação automática</h4><p>Coletores são identificados por prefixo OUI (Urovo <span class="mono">b4:29:3d</span>, Skorpio <span class="mono">04:7b:cb</span> / <span class="mono">3c:e1:a1</span>) ou por um inventário em <span class="mono">config.json</span>. Dispositivos Android com MAC aleatório são sinalizados separadamente — importante para não confundir quedas de coletor com dispositivos pessoais no mesmo SSID.</p></div>
-          <div class="field"><h4>Resultado operacional</h4><p>Com a linha de base em mãos, foi possível correlacionar as quedas com métricas de rádio (TX Retry por AP, Canal Busy) e validar, com dados, o efeito de cada ajuste de configuração — canais, largura de banda e taxas mínimas. O script ficou genérico o suficiente para qualquer ambiente UniFi com coletores no Wi-Fi.</p></div>
-          <div class="field"><h4>Testes automatizados</h4><p>A suíte cobre classificação por OUI, queda e reconexão, SSID com espaço extra, geração e migração do CSV, duração, alertas sem repetição, nome das APs e demonstração sem controladora. Os testes TLS verificam certificado e hostname por padrão, CA interna, rejeição de configurações ambíguas e falha sem fallback inseguro. O workflow está configurado para pushes na <span class="mono">main</span> e pull requests, em Python 3.10 a 3.13.</p></div>
-          <div class="field"><h4>Evidência de execução</h4><p>A suíte tem <strong>177 testes</strong> e roda no GitHub Actions em Python 3.10, 3.11, 3.12 e 3.13 a cada push na <span class="mono">main</span> (versão de 23/10/2026, commit <span class="mono">963d838</span>). O resultado de cada execução está nas <a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">execuções do workflow ↗<span class="sr-only"> (abre em nova aba)</span></a>.</p><p>Os testes simulam a API da controladora; o comportamento em produção está medido no estudo de caso das quedas dos coletores.</p></div>
-        </div>
-          </details>
-          <div class="links"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">Código-fonte no GitHub ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://github.com/pereirashouse/monitoramentowificompython/actions/workflows/testes.yml?query=branch%3Amain" target="_blank" rel="noopener">Execuções de testes na main ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
-          <div class="chips"><span class="chip">Python</span><span class="chip">UniFi API</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS / coletores</span><span class="chip">Open source</span><span class="chip">Testes unitários</span><span class="chip">CSV / Markdown</span></div>
-        </div>
-      </li>
-      <li id="p-alarme" class="infra" data-tags="infra redes concluido">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3><a href="projetos/alarme-falso-robos-esp32/">Alarme falso de robô industrial: congestionamento de canal Wi-Fi 2,4 GHz</a></h3>
-          <p>Causa raiz em canal 2,4 GHz saturado por celulares distantes; RSSI mínimo em −80 dBm e os alarmes não se repetiram.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">●</span><span class="sr-only">Status: </span>Em produção</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Quatro robôs industriais (ESP32) na área de silos geravam alarmes recorrentes de "fora da rede" no sistema de monitoramento. Os eventos vinham se repetindo por dias, com avisos de lentidão de ping e perda de pacotes — mesmo com o sinal Wi-Fi ótimo, entre −53 e −58 dBm, e sem qualquer reinicialização da antena.</p>
-            <div class="fields">
-          <div class="field"><h4>O alarme e sua regra</h4><p>O sistema de monitoramento testava a porta de aplicação de cada robô a cada 30 segundos. Dois testes consecutivos sem resposta (1 minuto) abriam um card de "fora da rede". O card só fechava após quatro respostas positivas com menos de quatro mudanças em 30 minutos — regra pensada para evitar oscilação, mas que esticava o alarme muito além da falha real.</p></div>
-          <div class="field"><h4>O que foi descartado</h4><ul><li><strong>Queda de Wi-Fi:</strong> a controladora registrava todos os robôs conectados sem interrupção, sinal estável entre −53 e −58 dBm.</li><li><strong>Falha de antena:</strong> sem reinicializações no período; 100 % dos pings do monitor respondidos.</li><li><strong>Mudança de configuração:</strong> logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li><li><strong>Defeito em um robô:</strong> os quatro ficaram lentos exatamente ao mesmo tempo, descartando problema isolado de hardware.</li></ul></div>
-          <div class="field"><h4>Causa raiz: canal 2,4 GHz congestionado</h4><p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %. Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs — mesmo com sinal ótimo — precisavam aguardar para transmitir, e o tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, no mesmo intervalo das falhas consecutivas que abriram o alarme.</p></div>
-          <div class="field"><h4>Como foi apurado</h4><p>Análise inteiramente passiva: leitura da controladora Wi-Fi (somente leitura) para estado dos robôs, log de conexões da antena e log de administração; monitoramento com dados de ping (a cada 3 min), teste TCP de porta (a cada 30 s) e ocupação do canal 2,4 GHz (a cada 1 min). Nenhuma configuração foi alterada durante a investigação.</p></div>
-          <div class="field"><h4>Solução implantada em produção</h4><p>Ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados; a reconexão a um AP mais próximo depende do cliente e da cobertura disponível e não é garantida. Os robôs industriais, com sinal entre −53 e −58 dBm, não são afetados. Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p></div>
-        </div>
-          </details>
-          
-          <div class="links"><a href="projetos/alarme-falso-robos-esp32/">Ver o estudo de caso completo</a><a href="artigos/wifi-canal-24ghz-robos-industriais/">Ler o artigo sobre este caso</a></div>
-          <div class="chips"><span class="chip">UniFi</span><span class="chip">Zabbix</span><span class="chip">Grafana</span><span class="chip">Wi-Fi 2,4 GHz</span><span class="chip">ESP32</span><span class="chip">Sistemas industriais</span><span class="chip">Análise de causa raiz</span><span class="chip">Congestionamento de canal</span></div>
-        </div>
-      </li>
-      <li id="p-artigo-wifi" class="edu" data-tags="edu infra redes concluido">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Docência · também na trilha de Infraestrutura</p>
-          <h3><a href="artigos/wifi-canal-24ghz-robos-industriais/">Artigo: quando o Wi-Fi “cai” e o sinal está ótimo</a></h3>
-          <p>Como transformar o caso do alarme falso dos robôs industriais em aula de Computação alinhada à BNCC, com as lições técnicas do caso.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Artigo</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
-        </div>
-      </li>
-      <li id="p-wms" class="infra" data-tags="infra redes concluido">
-        <p class="when"></p>
-        <div class="body">
-          <p class="trilha">Infraestrutura de TI</p>
-          <h3>Sessões estáveis para coletores de dados no WMS</h3>
-          <p>Fim dos bloqueios de coletores pelo servidor: sessões mortas encerradas em menos de 2 minutos com TCP keep-alive.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Profissional</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Coletores Android de um centro de distribuição perdiam a sessão com o sistema de gestão de armazém (WMS) e acabavam bloqueados pelo próprio servidor. Diagnostiquei a causa, ajustei o servidor Linux e escrevi a instrução de trabalho para padronizar o procedimento.</p>
-            <div class="fields">
-          <div class="field"><h4>Problema</h4><p>O roaming entre antenas Wi-Fi gerava micro-quedas. O aplicativo do coletor perdia a sessão, mas o servidor mantinha o processo vivo. Na reconexão, as tentativas em rajada eram tratadas pelo xinetd como ameaça e o IP do coletor era bloqueado.</p></div>
-          <div class="field"><h4>Diagnóstico</h4><p>Análise de logs do xinetd e monitoramento da rede, cruzando os bloqueios <span class="mono">connections limit per_source</span> com os momentos de troca de antena.</p></div>
-          <div class="field"><h4>Solução</h4><ul><li>Limites do serviço ajustados ao volume real de coletores.</li><li>Parâmetros de TCP keep-alive para sockets do serviço com <span class="mono">SO_KEEPALIVE</span> habilitado, visando encerrar sessões mortas em menos de 2 minutos.</li><li>Plano B documentado: keep-alive no app e emuladores com sessão persistente.</li></ul></div>
-          <div class="field"><h4>Validação</h4><p>Logs passaram a mostrar encerramentos limpos de sessão e nenhum bloqueio por limite de origem.</p></div>
-        </div>
-            <pre><span class="c"># Exemplo temporário; o serviço precisa habilitar SO_KEEPALIVE no socket</span>
-sysctl -w net.ipv4.tcp_keepalive_time=60
-sysctl -w net.ipv4.tcp_keepalive_intvl=10
-sysctl -w net.ipv4.tcp_keepalive_probes=3
-
-<span class="c"># Persistência: /etc/sysctl.d/99-wms-keepalive.conf</span>
-<span class="c"># Depois de criar o arquivo, aplicar e verificar:</span>
-sysctl --system
-sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_keepalive_probes</pre>
-            <p class="note"><span class="mono">sysctl -w</span> vale até o próximo reinício. Para tornar a configuração permanente, os valores vão em <span class="mono">/etc/sysctl.d/</span> e são aplicados com <span class="mono">sysctl --system</span>.</p>
-          </details>
-          
-          <div class="chips"><span class="chip">Linux</span><span class="chip">xinetd</span><span class="chip">TCP keep-alive</span><span class="chip">Wi-Fi corporativo</span><span class="chip">WMS</span><span class="chip">Documentação técnica</span></div>
-        </div>
-      </li>
-      <li id="p-iir" class="edu" data-tags="edu redes concluido">
-        <p class="when">1º sem. 2026</p>
-        <div class="body">
-          <p class="trilha">Computação e Educação</p>
-          <h3>A “invisibilidade” do Wi-Fi: por que a internet de 400 Mega trava?</h3>
-          <p>Investigação interdisciplinar em que a turma do 9º ano mede o próprio Wi-Fi e aprende a configurar um roteador num simulador web. Aplicada apenas com estudantes do curso de licenciatura.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Acadêmico</li><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">✓</span><span class="sr-only">Status: </span>Concluído</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Parte de um problema que todo aluno conhece: o jogo dá lag quando alguém liga o streaming na sala. A turma investiga a física das ondas, a disputa pelo canal e a fila de pacotes no roteador, e termina sabendo diagnosticar e configurar a própria rede.</p>
-            <div class="fields">
-          <div class="field"><h4>Etapas</h4><ul><li>Concepções iniciais e perguntas investigativas</li><li>Mapeamento em cinco dimensões: científica, tecnológica, social, ambiental e ética</li><li>Auditoria Wi-Fi com analisador de espectro (dBm, ping, streaming ligado e desligado)</li><li>Infográfico “A jornada e os gargalos do sinal”</li></ul></div>
-          <div class="field"><h4>Conceitos</h4><ul><li>Atenuação em 2,4 GHz e 5 GHz (Física)</li><li>Pacotes, TCP e UDP, latência e largura de banda (Computação)</li><li>Bits e bytes, divisão de banda e QoS (Matemática)</li><li>Canais 1, 6 e 11 sem sobreposição</li></ul></div>
-        </div>
-          </details>
-          <div class="links"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/" target="_blank" rel="noopener">Simulador de roteador (HTML, CSS e JS) ↗<span class="sr-only"> (abre em nova aba)</span></a><a href="https://drive.google.com/file/d/1y5PUGET-o_UAfKixnomOxO5nb5pLfpK8/view?usp=sharing" target="_blank" rel="noopener">Guia de Sobrevivência do Wi-Fi Doméstico (PDF) ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
-          <div class="chips"><span class="chip">BNCC Computação · Mundo Digital</span><span class="chip">Ensino por investigação</span><span class="chip">Interdisciplinar</span></div>
-        </div>
-      </li>
-      <li id="p-anzol" class="edu" data-tags="edu seguranca concluido">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Computação e Educação</p>
-          <h3>Operação Anzol: laboratório de perícia contra golpes digitais</h3>
-          <p>Jogo web de 60 minutos para o 9º ano que funciona no celular e offline, com 12 mensagens para periciar e laudo final.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Uma página web em que estudantes do 9º ano atuam como peritos de segurança. Em duplas, eles marcam pistas em mensagens fictícias, descobrem o dono real de endereços da internet e, no papel do golpista, montam mensagens para entender os gatilhos de manipulação. Funciona no celular, sem instalação, sem cadastro e até sem internet.</p>
-            <div class="fields">
-          <div class="field"><h4>Missões</h4><ul><li>Perícia de 12 mensagens: SMS, e-mail e aplicativo, com marcação de pistas antes do veredito</li><li>Anatomia do link: 8 endereços com prefixos enganosos, hífens e troca de letras</li><li>Laboratório de gatilhos: urgência, medo, autoridade, recompensa e curiosidade, com radar em tempo real</li><li>Laudo final com desempenho por tipo de pista</li></ul></div>
-          <div class="field"><h4>Metodologia e avaliação</h4><ul><li>Três Momentos Pedagógicos em 60 minutos</li><li>Papéis alternados de operador e relator</li><li>Protocolo P.A.R.E.: Pare, Analise remetente e link, Reveja o pedido, Entre pelo canal oficial</li><li>Avaliação formativa com laudo, rubrica e ticket de saída</li></ul></div>
-        </div>
-          </details>
-          <div class="links"><a href="operacao-anzol/">Jogar a Operação Anzol →</a></div>
-          <div class="chips"><span class="chip">BNCC EF09CO04 · EF09CO10</span><span class="chip">Segurança digital</span><span class="chip">Engenharia social</span><span class="chip">Gamificação</span><span class="chip">Acessibilidade</span><span class="chip">HTML, CSS, JS</span></div>
-        </div>
-      </li>
-      <li id="p-rede-escola" class="edu" data-tags="edu redes seguranca">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Computação e Educação</p>
-          <h3>Rede da Escola: simulador de redes para o Ensino Fundamental</h3>
-          <p>Simulador web para o 8º e o 9º ano montarem e corrigirem a rede de uma escola fictícia, com teste de conectividade e relatório final.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>A turma atua como equipe de infraestrutura de uma escola com laboratório, secretaria, biblioteca, sala dos professores, visitantes, servidores, impressoras e câmeras. O simulador aponta conflito de IP, ausência de gateway, segmentação inadequada e equipamento subdimensionado, e o teste de ping mostra em que ponto o pacote parou. Funciona no celular e sem internet.</p>
-            <div class="fields">
-          <div class="field"><h4>Missões</h4><ul><li>Conflito de IP na biblioteca</li><li>Impressora fora da rede e sem gateway</li><li>Visitantes na VLAN da secretaria</li><li>Switches e access points para a reforma, com custo</li><li>Laboratório sem DHCP</li><li>Projeto do zero</li></ul></div>
-          <div class="field"><h4>Metodologia e avaliação</h4><ul><li>Hipótese antes de mexer, verificação e teste de ping</li><li>Dicas graduais, com uso registrado</li><li>Relatório do que foi corrigido e do que ficou pendente</li><li>Rubrica de endereçamento, diagnóstico, segurança e comunicação</li></ul></div>
-        </div>
-          </details>
-          <div class="links"><a href="rede-da-escola/">Abrir o simulador →</a><a href="https://github.com/pereirashouse/computacao-bncc/tree/main/projetos" target="_blank" rel="noopener">Plano de aula e materiais ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
-          <div class="chips"><span class="chip">BNCC EF07CO06 · EF07CO07 · EF08CO06 · EF08CO10</span><span class="chip">Redes</span><span class="chip">VLAN</span><span class="chip">Endereçamento IP</span><span class="chip">Firewall</span><span class="chip">HTML, CSS, JS</span></div>
-        </div>
-      </li>
-      <li id="p-rede-parou" class="edu" data-tags="edu redes seguranca">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Computação e Educação</p>
-          <h3>A Rede Parou: investigação de incidente com logs</h3>
-          <p>Laboratório web em que grupos do 9º ano e do Ensino Médio investigam, com registros fictícios, por que a rede de uma escola parou.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Protótipo publicado</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Os estudantes recebem chamados, registro de mudanças e logs do servidor DHCP, do firewall, do switch, do sistema de notas e do servidor de arquivos. A causa é um servidor DHCP indevido, e o caso traz cinco pistas falsas plausíveis. O grupo marca evidências, a linha do tempo se monta sozinha e cada hipótese precisa ser confirmada ou descartada antes do laudo.</p>
-            <div class="fields">
-          <div class="field"><h4>Etapas</h4><ul><li>Hipóteses iniciais antes de ler os registros</li><li>Busca em 9 fontes e marcação de evidências</li><li>Quadro de 6 hipóteses com justificativa</li><li>Laudo com 7 perguntas e relato para a direção</li></ul></div>
-          <div class="field"><h4>Metodologia e avaliação</h4><ul><li>Método científico aplicado ao diagnóstico de rede</li><li>Papéis de leitor, escrivão e advogado do diabo</li><li>Três pistas graduais, com uso registrado</li><li>Versão impressa para escolas sem laboratório</li></ul></div>
-        </div>
-          </details>
-          <div class="links"><a href="a-rede-parou/">Investigar o caso →</a><a href="https://github.com/pereirashouse/computacao-bncc/tree/main/projetos" target="_blank" rel="noopener">Plano de aula e materiais ↗<span class="sr-only"> (abre em nova aba)</span></a></div>
-          <div class="chips"><span class="chip">BNCC EF07CO06 · EF07CO07 · EF08CO06</span><span class="chip">Redes</span><span class="chip">DHCP</span><span class="chip">Logs</span><span class="chip">Pensamento computacional</span><span class="chip">HTML, CSS, JS</span></div>
-        </div>
-      </li>
-      <li id="p-pipeline" class="edu" data-tags="edu automacao concluido">
-        <p class="when">Out 2026</p>
-        <div class="body">
-          <p class="trilha">Computação e Educação</p>
-          <h3>Do Planejamento à Prática: IA e o pipeline que transforma casos de infraestrutura em material BNCC</h3>
-          <p>Como usar IA como copiloto para produzir material BNCC, e o pipeline que transforma incidentes reais em estudos de caso.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li><li class="badge status"><span class="sym" aria-hidden="true">↗</span><span class="sr-only">Status: </span>Publicado</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Artigo técnico-pedagógico sobre o uso da Inteligência Artificial como copilota na criação de material didático para a BNCC de Computação. Aborda desde o bloqueio criativo do docente até a construção de um portfólio técnico a partir de casos reais de infraestrutura.</p>
-            <div class="fields">
-          <div class="field"><h4>Onde a IA realmente ajuda</h4><ul><li><strong>Fim do bloqueio criativo:</strong> estruturação instantânea de rascunhos para sequências didáticas e oficinas temáticas.</li><li><strong>Contextualização:</strong> tradução de conceitos abstratos em analogias ligadas a jogos, rotina escolar e vivências comunitárias.</li><li><strong>Diferenciação pedagógica:</strong> adaptação rápida do mesmo conteúdo para abordagens plugadas ou desplugadas.</li><li><strong>Avaliação formativa:</strong> geração de rubricas com critérios claros de proficiência e roteiros de autoavaliação.</li></ul></div>
-          <div class="field"><h4>Os 3 eixos da BNCC com IA</h4><ul><li><strong>Pensamento Computacional:</strong> gincanas desplugadas, labirintos lógicos e desafios de ordenação passo a passo.</li><li><strong>Mundo Digital:</strong> roteiros para Scratch/Python comentados, simulações de placas e sensores escolares.</li><li><strong>Cultura Digital:</strong> estudos de caso sobre pegada digital, algoritmos de redes e combate à desinformação.</li></ul></div>
-                    <div class="field"><h4>Pipeline pedagógico em 4 etapas</h4><ol><li><strong>Obsidian Vault:</strong> captura de logs, incidentes e notas técnicas em Markdown.</li><li><strong>Seleção de contexto &amp; Sanitização:</strong> notas relevantes passam por regras de substituição (IPs, hostnames, credenciais) e revisão humana antes de chegar à IA. Busca semântica com RAG é uma proposta de evolução, ainda sem código publicado.</li><li><strong>Transposição BNCC:</strong> IA reconstrói o incidente como estudo de caso educativo (PC, Mundo Digital, Cultura Digital).</li><li><strong>GitHub Portfólio:</strong> publicação com versionamento de código, planos de aula e rubricas avaliativas.</li></ol></div>
-          <div class="field"><h4>Engenharia de prompt para aula</h4><p>Fórmula: Papel + Público + Habilidade BNCC + Formato do entregável. Exemplo: <em>"Atue como especialista em didática da computação. Crie um plano de aula de 50 minutos para o 7º ano sobre Decomposição de Problemas (PC — BNCC). Inclua: caso prático de infraestrutura escolar desplugada, atividade em grupos, roteiro para debate e rubrica de autoavaliação."</em></p></div>
-        </div>
-          </details>
-          <div class="links"><a href="pipeline-pedagogico/">Abrir a visualização do pipeline →</a></div>
-          <div class="chips"><span class="chip">IA generativa</span><span class="chip">BNCC Computação</span><span class="chip">Material didático</span><span class="chip">Portfólio docente</span><span class="chip">Sanitização de dados</span><span class="chip">GitHub</span><span class="chip">Obsidian</span><span class="chip">Transposição didática</span></div>
-        </div>
-      </li>
-      <li id="p-oficina" class="edu" data-tags="edu">
-        <p class="when"></p>
-        <div class="body">
-          <p class="trilha">Computação e Educação</p>
-          <h3>Letramento e Pensamento Computacional: da BNCC à prática inclusiva</h3>
-          <p>Oficina desplugada para professores de escolas rurais: cada grupo sai com um mini-plano de aula da própria disciplina. Aplicada com professores da rede pública de ensino do município de Palmeira.</p>
-          <ul class="badges" aria-label="Etiquetas"><li class="badge tipo"><span class="sr-only">Tipo: </span>Didático</li></ul>
-          <details class="more"><summary>Ver contexto, decisões e validação</summary>
-            <p>Oficina para professores de escolas com pouca estrutura, sobretudo da zona rural. A proposta mostra que dá para ensinar Computação sem computador, partindo da cultura local dos alunos.</p>
-            <div class="fields">
-          <div class="field"><h4>Roteiro</h4><ul><li>Aquecimento “Meu Sanduíche”: o facilitador vira robô e segue instruções ao pé da letra</li><li>Os três eixos da BNCC e os quatro pilares do PC</li><li>Mão na massa: “Meu Robô Artista”, “Classificando o Nosso Mundo” e “O Algoritmo da Minha Tradição”</li><li>Cada grupo sai com um mini-plano de aula da própria disciplina</li></ul></div>
-          <div class="field"><h4>Diferencial</h4><p>Materiais de baixo custo (copos, papel quadriculado, cartões) e atividades com elementos da cultura regional: artesanato, comidas típicas, brincadeiras, festas.</p></div>
-        </div>
-          </details>
-          
-          <div class="chips"><span class="chip">Computação desplugada</span><span class="chip">Formação docente</span><span class="chip">Escolas rurais</span><span class="chip">Inclusão</span></div>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section id="sobre">
-    <div class="sec-head">
-      <h2>Sobre mim</h2>
-      <p>Analista Sênior de Infraestrutura de TI com foco em virtualização, redes e automação, e professor de tecnologia. A Licenciatura em Computação é a continuação desse trabalho, não uma mudança de rumo.</p>
-    </div>
-    <div class="ponte">
-      <h3>Da mentoria técnica à sala de aula</h3>
-      <p>Em infraestrutura, parte do trabalho sênior é fazer outras pessoas entenderem e operarem o ambiente com segurança. A docência nasceu dessa rotina e hoje dá método a ela: planejamento, avaliação e alinhamento à BNCC.</p>
-      <ul>
-        <li><strong>No trabalho técnico:</strong> orientação de colegas da equipe, instruções de trabalho e runbooks que outra pessoa consegue executar sozinha, e explicação de incidentes e riscos para quem não é da área.</li>
-        <li><strong>Na licenciatura:</strong> os mesmos casos reais, sem dados internos, viram material didático, como a <a href="projetos/wifi-8021x/#didatica">versão didática do 802.1X</a> e o laboratório <a href="a-rede-parou/">A Rede Parou</a>.</li>
-        <li><strong>De volta à operação:</strong> ensinar obriga a explicar o porquê de cada decisão, e isso melhora a documentação, o repasse de conhecimento e a comunicação com gestores.</li>
-      </ul>
-      <p>Infraestrutura de TI segue sendo a minha atuação principal; a docência amplia o alcance do que aprendo nela.</p>
-    </div>
-    <div class="ponte" id="docencia">
-      <h3>Professor de tecnologia</h3>
-      <p>Dou aulas de tecnologia em cursos livres desde 2008, levando para a sala de aula o mesmo raciocínio que uso na operação. A licenciatura veio para dar método a essa prática.</p>
-      <ul>
-        <li><strong>Infraestrutura e redes:</strong> fundamentos, monitoramento e diagnóstico com Python.</li>
-        <li><strong>Hardware e manutenção:</strong> montagem, diagnóstico, upgrade e boas práticas de bancada.</li>
-        <li><strong>Tecnologia e BNCC Computação:</strong> transposição de casos técnicos em material didático.</li>
-        <li><strong>Excel avançado:</strong> fórmulas, tabelas dinâmicas, Power Query, dashboards e macros.</li>
-      </ul>
-      <h4>Como ensino</h4>
-      <ol>
-        <li><strong>Caso real antes de teoria.</strong> Parto de problemas reais, não de definições. A turma primeiro encara uma situação concreta, como uma rede que parou ou uma planilha que precisa responder uma pergunta em 30 segundos, e a ferramenta vem depois do problema.</li>
-        <li><strong>Sanitização e ética no uso de IA.</strong> Uso IA como copilota no planejamento, nunca como substituta do professor, e sanitizo tudo antes de qualquer IA tocar no dado. Em sala, isso vira conteúdo: o aluno aprende a ferramenta e aprende que dado real não vai para ferramenta pública sem cuidado.</li>
-        <li><strong>BNCC com revisão em cada etapa.</strong> O material segue a BNCC Computação, revisado a cada etapa e sempre com adaptação local: o que funciona em uma escola técnica de periferia não é o mesmo que funciona em um curso noturno de EJA.</li>
-      </ol>
-    </div>
-    <div class="sobre-grid">
-      <div>
-        <h3 style="margin-bottom:20px">Trajetória</h3>
-        <ol class="tl">
-          <li class="ativo">
-            <span class="tl-per">Mai 2026 – atual</span>
-            <strong>Analista de Infraestrutura Sênior</strong>
-            <span class="tl-place">Indústria · Paraná</span>
-            <p>Condução da prova de conceito (PoC) VMware → Sangfor HCI, com critérios de rollback formalizados antes da implantação e executados quando o risco se confirmou. Análise de rede Wi-Fi com Python e API do UniFi. Automação com PowerShell e GPO. Backup Veeam e Dell PowerProtect. PoC Proxmox VE.</p>
-          </li>
-          <li class="ativo doc">
-            <span class="tl-per">2008 – atual</span>
-            <strong>Professor de tecnologia</strong>
-            <span class="tl-place">Cursos livres</span>
-            <p>Aulas de infraestrutura e redes, hardware e manutenção, tecnologia alinhada à BNCC Computação e Excel avançado, sempre partindo de casos reais. <a href="#docencia">Como ensino</a>.</p>
-          </li>
-          <li>
-            <span class="tl-per">Set 2022 – Mai 2026</span>
-            <strong>Analista de TI Pleno</strong>
-            <span class="tl-place">Indústria · Paraná</span>
-            <p>Infraestrutura de TI para 3 fábricas e 10 centros de distribuição: switches Aruba e TP-Link, Wi-Fi Ubiquiti, firewall, VMware + KVM, monitoramento Zabbix/Grafana e backup Dell PowerProtect.</p>
-          </li>
-          <li>
-            <span class="tl-per">Ago 2021 – Set 2022</span>
-            <strong>Analista de TI Júnior</strong>
-            <span class="tl-place">Indústria · Paraná</span>
-            <p>Suporte de infraestrutura, gestão de usuários AD, antivírus, Wi-Fi Ubiquiti, VMware vSphere e KVM Oracle, monitoramento com Zabbix e Grafana.</p>
-          </li>
-          <li>
-            <span class="tl-per">Mar 2014 – Set 2019</span>
-            <strong>Analista Financeiro</strong>
-            <span class="tl-place">Multinacional de embalagens · PR</span>
-            <p>Crédito PF/PJ, câmbio, contas a receber/pagar e relatórios gerenciais — antes da transição definitiva para TI.</p>
-          </li>
-          <li>
-            <span class="tl-per">Jan 2012 – Abr 2014</span>
-            <strong>Assistente de TI</strong>
-            <span class="tl-place">Empresa de fundição · PR</span>
-            <p>Help Desk N1/N2, manutenção de computadores e rede local.</p>
-          </li>
-        </ol>
-      </div>
-      <div>
-        <h3 style="margin-bottom:16px">Formação</h3>
-        <ul class="edu-list">
-          <li>
-            <strong>Licenciatura em Computação</strong> <span style="font-weight:400">(cursando)</span>
-            <span>UTFPR · desde fev. 2024</span>
-          </li>
-          <li>
-            <strong>Técnico em Administração</strong>
-          </li>
-        </ul>
-
-        <h3 style="margin:28px 0 16px">Competências técnicas</h3>
-        <div class="sk-group">
-          <h4>Redes e segurança</h4>
-          <p class="sk-desc">Desenho e operação de redes corporativas e Wi-Fi, segmentação por VLAN, autenticação 802.1X/RADIUS integrada ao Active Directory e firewalls.</p>
-          <div class="chips"><span class="chip">Aruba / TP-Link</span><span class="chip">Wi-Fi Ubiquiti</span><span class="chip">FortiGate</span><span class="chip">802.1X / RADIUS</span><span class="chip">VLAN</span><span class="chip">Active Directory</span><span class="chip">Microsoft Entra ID (Azure AD)</span></div>
-          <a class="sk-link" href="projetos/wifi-8021x/">Na prática: Wi-Fi corporativo com 802.1X <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="sk-group">
-          <h4>Virtualização e servidores</h4>
-          <p class="sk-desc">Avaliação, operação e migração de hipervisores e servidores Windows e Linux, com critérios de teste e plano de rollback.</p>
-          <div class="chips"><span class="chip">VMware vSphere</span><span class="chip">Sangfor HCI</span><span class="chip">Proxmox VE</span><span class="chip">KVM Oracle</span><span class="chip">Hyper-V</span><span class="chip">Windows Server</span><span class="chip">Linux</span></div>
-          <a class="sk-link" href="projetos/poc-virtualizacao/">Na prática: PoC de virtualização <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="sk-group">
-          <h4>Proteção e observabilidade</h4>
-          <p class="sk-desc">Backup e recuperação de dados, monitoramento com alertas e análise de logs para separar falha real de alarme falso.</p>
-          <div class="chips"><span class="chip">Veeam</span><span class="chip">Dell PowerProtect</span><span class="chip">Zabbix</span><span class="chip">Grafana</span><span class="chip">Análise de logs</span></div>
-          <a class="sk-link" href="projetos/alarme-falso-robos-esp32/">Na prática: alarme falso com Zabbix <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="sk-group">
-          <h4>Automação e diagnóstico</h4>
-          <p class="sk-desc">Scripts para coletar dados, padronizar tarefas e diagnosticar falhas, incluindo integração com APIs de equipamentos.</p>
-          <div class="chips"><span class="chip">Python</span><span class="chip">PowerShell</span><span class="chip">GPO</span><span class="chip">API UniFi</span></div>
-          <a class="sk-link" href="#p-monitor">Na prática: monitor de quedas Wi-Fi em Python <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
+    <div class="sobre-curto">
+      <p>Trabalho com infraestrutura de TI desde 2012 e sou analista sênior em uma indústria do Paraná, cuidando de redes, Wi-Fi corporativo, virtualização, backup e automação. Dou aulas de tecnologia desde 2008, e a Licenciatura em Computação na UTFPR dá método a essa prática: casos reais, sem dados internos, viram material didático para a rede pública.</p>
+      <p class="links"><a href="infraestrutura/#trajetoria">Trajetória e competências</a><a class="edu" href="educacao/#docencia" style="color:var(--edu)">Como ensino</a></p>
     </div>
   </section>
 
@@ -736,7 +151,8 @@ sysctl net.ipv4.tcp_keepalive_time net.ipv4.tcp_keepalive_intvl net.ipv4.tcp_kee
     <a href="curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Currículo Educação (PDF)</a>
     <a href="servicos/">Serviços</a>
   </footer>
-  <p class="updated">Última atualização: 24 de outubro de 2026</p>
+  <p class="updated">Última atualização: 25 de outubro de 2026</p>
+
 </div>
 <script src="assets/site.js"></script>
 </body>
