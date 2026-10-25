@@ -83,6 +83,12 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 .front.infra .go{color:var(--infra)} .front.edu .go{color:var(--edu)}
 .btn.serv{border-color:var(--fg)}
 
+.vitrine-cta{display:flex;flex-direction:column;gap:4px;margin-top:16px;padding:16px 20px;border:1px solid var(--edu);border-left:4px solid var(--edu);border-radius:8px;background:var(--edu-soft);text-decoration:none;color:var(--fg)}
+.vitrine-cta:hover{filter:brightness(1.03)}
+.vitrine-cta .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--edu)}
+.vitrine-cta strong{font-family:var(--display);font-size:1.15rem}
+.vitrine-cta>span:last-child{color:var(--muted);font-size:.92rem}
+.vitrine-cta .go{color:var(--edu);font-weight:600;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -130,9 +136,10 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
       <li class="infra"><a href="projetos/wifi-8021x/"><span class="k">Infraestrutura</span><strong>Wi-Fi corporativo com 802.1X</strong><span>Autenticação de máquinas, NPS, Active Directory e UniFi</span></a></li>
       <li class="infra"><a href="projetos/incidente-8021x-windows/"><span class="k">Infraestrutura</span><strong>Diagnóstico de incidente 802.1X</strong><span>Análise de logs após atualização do Windows</span></a></li>
       <li class="infra"><a href="projetos/quedas-coletores-wifi/"><span class="k">Infraestrutura · Python</span><strong>Monitoramento de quedas de coletores Android em rede Wi-Fi</strong><span>Agente Python para medir quedas via API UniFi, com testes automatizados e relatórios.</span></a></li>
-      <li class="edu"><a href="rede-da-escola/"><span class="k">Educação</span><strong>Rede da Escola</strong><span>Simulador de rede escolar com VLAN, IP e firewall para aulas de Computação</span></a></li>
-      <li class="edu"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/"><span class="k">Educação</span><strong>Simulador de configuração de roteador</strong><span>Simulador interativo de roteador doméstico para aulas de redes: configuração Wi-Fi, segurança e troubleshooting</span></a></li>
+      <li class="edu"><a href="rede-da-escola/"><span class="k">Educação · Simulador interativo</span><strong>Rede da Escola</strong><span>Simulador de rede escolar com VLAN, IP e firewall para aulas de Computação</span></a></li>
+      <li class="edu"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/"><span class="k">Educação · Simulador interativo</span><strong>Simulador de configuração de roteador</strong><span>Simulador interativo de roteador doméstico para aulas de redes: configuração Wi-Fi, segurança e troubleshooting</span></a></li>
     </ul>
+    <a class="vitrine-cta" href="educacao/#simuladores"><span class="k">Vitrine de inovação educacional</span><strong>Seis simuladores e jogos já utilizados em sala de aula</strong><span>Protótipos funcionais que abrem no navegador e no celular, ligados a habilidades da BNCC Computação. <span class="go">Ver os simuladores →</span></span></a>
     <p class="links"><a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">Ver código do monitor Python ↗<span class="sr-only"> (abre em nova aba)</span></a></p>
   </section>
 
