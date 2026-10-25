@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Por Dentro da Caixa: Anatomia do Computador | Jeferson Pereira</title>
+  <meta name="description" content="Simulador didático da anatomia do computador no modelo de Von Neumann: placa-mãe interativa, ciclo da tecla à tela, RAM versus HD/SSD e gerador de infográfico para impressão.">
+  <link rel="canonical" href="https://pereirashouse.github.io/anatomia-do-computador/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  
+  <!-- Tailwind CSS CDN -->
+  
+  <!-- Google Fonts: Inter e JetBrains Mono -->
+  <link rel="stylesheet" href="../assets/fonts.css">
+  
+  
+
+  <style>/* Tailwind compilado (sem CDN) */
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Atkinson Hyperlegible,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:JetBrains Mono,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.visible{visibility:visible}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.right-0{right:0}.top-0{top:0}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-0\.5{margin-bottom:.125rem}.mb-1{margin-bottom:.25rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-auto{margin-top:auto}.block{display:block}.flex{display:flex}.table{display:table}.grid{display:grid}.hidden{display:none}.aspect-\[4\/3\]{aspect-ratio:4/3}.h-10{height:2.5rem}.h-12{height:3rem}.h-2{height:.5rem}.h-24{height:6rem}.h-3{height:.75rem}.h-6{height:1.5rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-2{width:.5rem}.w-32{width:8rem}.w-6{width:1.5rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-7xl{max-width:80rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05}.scale-105,.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes ping{75%,to{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0,0,.2,1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;-moz-user-select:none;user-select:none}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-x-3{-moz-column-gap:.75rem;column-gap:.75rem}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.divide-y>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px*(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px*var(--tw-divide-y-reverse))}.divide-tech-800>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgb(24 36 62/var(--tw-divide-opacity,1))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-bl-xl{border-bottom-left-radius:.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-4{border-width:4px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-l{border-left-width:1px}.border-t{border-top-width:1px}.border-amber-500\/40{border-color:rgba(245,158,11,.4)}.border-blue-500\/30{border-color:rgba(59,130,246,.3)}.border-blue-500\/40{border-color:rgba(59,130,246,.4)}.border-blue-500\/60{border-color:rgba(59,130,246,.6)}.border-blue-700\/60{border-color:rgba(29,78,216,.6)}.border-cyan-400{--tw-border-opacity:1;border-color:rgb(34 211 238/var(--tw-border-opacity,1))}.border-cyan-500\/30{border-color:rgba(6,182,212,.3)}.border-cyan-500\/40{border-color:rgba(6,182,212,.4)}.border-cyan-500\/50{border-color:rgba(6,182,212,.5)}.border-emerald-500\/30{border-color:rgba(16,185,129,.3)}.border-emerald-500\/40{border-color:rgba(16,185,129,.4)}.border-emerald-500\/60{border-color:rgba(16,185,129,.6)}.border-emerald-600\/70{border-color:rgba(5,150,105,.7)}.border-emerald-700\/60{border-color:rgba(4,120,87,.6)}.border-indigo-500\/40{border-color:rgba(99,102,241,.4)}.border-orange-500{--tw-border-opacity:1;border-color:rgb(249 115 22/var(--tw-border-opacity,1))}.border-orange-500\/40{border-color:rgba(249,115,22,.4)}.border-purple-500\/40{border-color:rgba(168,85,247,.4)}.border-rose-500{--tw-border-opacity:1;border-color:rgb(244 63 94/var(--tw-border-opacity,1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240/var(--tw-border-opacity,1))}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225/var(--tw-border-opacity,1))}.border-slate-400{--tw-border-opacity:1;border-color:rgb(148 163 184/var(--tw-border-opacity,1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85/var(--tw-border-opacity,1))}.border-slate-700\/60{border-color:rgba(51,65,85,.6)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59/var(--tw-border-opacity,1))}.border-tech-700{--tw-border-opacity:1;border-color:rgb(35 52 88/var(--tw-border-opacity,1))}.border-tech-700\/60{border-color:rgba(35,52,88,.6)}.border-tech-700\/70{border-color:rgba(35,52,88,.7)}.border-tech-700\/80{border-color:rgba(35,52,88,.8)}.border-tech-800{--tw-border-opacity:1;border-color:rgb(24 36 62/var(--tw-border-opacity,1))}.border-yellow-500\/40{border-color:rgba(234,179,8,.4)}.bg-amber-500\/20{background-color:rgba(245,158,11,.2)}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.bg-black\/40{background-color:rgba(0,0,0,.4)}.bg-blue-500\/10{background-color:rgba(59,130,246,.1)}.bg-blue-500\/20{background-color:rgba(59,130,246,.2)}.bg-blue-950\/50{background-color:rgba(23,37,84,.5)}.bg-cyan-400{--tw-bg-opacity:1;background-color:rgb(34 211 238/var(--tw-bg-opacity,1))}.bg-cyan-500{--tw-bg-opacity:1;background-color:rgb(6 182 212/var(--tw-bg-opacity,1))}.bg-cyan-500\/10{background-color:rgba(6,182,212,.1)}.bg-cyan-500\/20{background-color:rgba(6,182,212,.2)}.bg-cyan-950\/60{background-color:rgba(8,51,68,.6)}.bg-emerald-500\/10{background-color:rgba(16,185,129,.1)}.bg-emerald-500\/20{background-color:rgba(16,185,129,.2)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105/var(--tw-bg-opacity,1))}.bg-emerald-950\/30{background-color:rgba(2,44,34,.3)}.bg-emerald-950\/50{background-color:rgba(2,44,34,.5)}.bg-indigo-500\/20{background-color:rgba(99,102,241,.2)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229/var(--tw-bg-opacity,1))}.bg-orange-50{--tw-bg-opacity:1;background-color:rgb(255 247 237/var(--tw-bg-opacity,1))}.bg-orange-500\/20{background-color:rgba(249,115,22,.2)}.bg-purple-500\/20{background-color:rgba(168,85,247,.2)}.bg-rose-500\/20{background-color:rgba(244,63,94,.2)}.bg-rose-600{--tw-bg-opacity:1;background-color:rgb(225 29 72/var(--tw-bg-opacity,1))}.bg-rose-800{--tw-bg-opacity:1;background-color:rgb(159 18 57/var(--tw-bg-opacity,1))}.bg-rose-950\/80{background-color:rgba(76,5,25,.8)}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249/var(--tw-bg-opacity,1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252/var(--tw-bg-opacity,1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42/var(--tw-bg-opacity,1))}.bg-tech-800{--tw-bg-opacity:1;background-color:rgb(24 36 62/var(--tw-bg-opacity,1))}.bg-tech-850{--tw-bg-opacity:1;background-color:rgb(17 27 48/var(--tw-bg-opacity,1))}.bg-tech-900{--tw-bg-opacity:1;background-color:rgb(12 19 34/var(--tw-bg-opacity,1))}.bg-tech-900\/90{background-color:rgba(12,19,34,.9)}.bg-tech-950{--tw-bg-opacity:1;background-color:rgb(6 9 19/var(--tw-bg-opacity,1))}.bg-tech-950\/60{background-color:rgba(6,9,19,.6)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-yellow-500\/20{background-color:rgba(234,179,8,.2)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right,var(--tw-gradient-stops))}.from-cyan-500{--tw-gradient-from:#06b6d4 var(--tw-gradient-from-position);--tw-gradient-to:rgba(6,182,212,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-cyan-600{--tw-gradient-from:#0891b2 var(--tw-gradient-from-position);--tw-gradient-to:rgba(8,145,178,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-rose-600{--tw-gradient-from:#e11d48 var(--tw-gradient-from-position);--tw-gradient-to:rgba(225,29,72,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-slate-900{--tw-gradient-from:#0f172a var(--tw-gradient-from-position);--tw-gradient-to:rgba(15,23,42,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-tech-850{--tw-gradient-from:#111b30 var(--tw-gradient-from-position);--tw-gradient-to:rgba(17,27,48,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-blue-600{--tw-gradient-to:rgba(37,99,235,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#2563eb var(--tw-gradient-via-position),var(--tw-gradient-to)}.via-orange-500{--tw-gradient-to:rgba(249,115,22,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#f97316 var(--tw-gradient-via-position),var(--tw-gradient-to)}.via-slate-950{--tw-gradient-to:rgba(2,6,23,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#020617 var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-emerald-500{--tw-gradient-to:#10b981 var(--tw-gradient-to-position)}.to-emerald-950\/40{--tw-gradient-to:rgba(2,44,34,.4) var(--tw-gradient-to-position)}.to-indigo-600{--tw-gradient-to:#4f46e5 var(--tw-gradient-to-position)}.to-red-600{--tw-gradient-to:#dc2626 var(--tw-gradient-to-position)}.to-tech-800{--tw-gradient-to:#18243e var(--tw-gradient-to-position)}.p-1{padding:.25rem}.p-2{padding:.5rem}.p-2\.5{padding:.625rem}.p-3{padding:.75rem}.p-3\.5{padding:.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-1{padding-bottom:.25rem}.pb-2{padding-bottom:.5rem}.pb-3{padding-bottom:.75rem}.pt-3{padding-top:.75rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:JetBrains Mono,monospace}.font-sans{font-family:Atkinson Hyperlegible,sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-.025em}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77/var(--tw-text-opacity,1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36/var(--tw-text-opacity,1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9/var(--tw-text-opacity,1))}.text-blue-200{--tw-text-opacity:1;color:rgb(191 219 254/var(--tw-text-opacity,1))}.text-blue-300{--tw-text-opacity:1;color:rgb(147 197 253/var(--tw-text-opacity,1))}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250/var(--tw-text-opacity,1))}.text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249/var(--tw-text-opacity,1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(167 243 208/var(--tw-text-opacity,1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183/var(--tw-text-opacity,1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153/var(--tw-text-opacity,1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(165 180 252/var(--tw-text-opacity,1))}.text-orange-300{--tw-text-opacity:1;color:rgb(253 186 116/var(--tw-text-opacity,1))}.text-orange-700{--tw-text-opacity:1;color:rgb(194 65 12/var(--tw-text-opacity,1))}.text-purple-300{--tw-text-opacity:1;color:rgb(216 180 254/var(--tw-text-opacity,1))}.text-rose-200{--tw-text-opacity:1;color:rgb(254 205 211/var(--tw-text-opacity,1))}.text-rose-300{--tw-text-opacity:1;color:rgb(253 164 175/var(--tw-text-opacity,1))}.text-sky-400{--tw-text-opacity:1;color:rgb(56 189 248/var(--tw-text-opacity,1))}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249/var(--tw-text-opacity,1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240/var(--tw-text-opacity,1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225/var(--tw-text-opacity,1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184/var(--tw-text-opacity,1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139/var(--tw-text-opacity,1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105/var(--tw-text-opacity,1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85/var(--tw-text-opacity,1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity,1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-yellow-300{--tw-text-opacity:1;color:rgb(253 224 71/var(--tw-text-opacity,1))}.underline{text-decoration-line:underline}.underline-offset-2{text-underline-offset:2px}.opacity-100{opacity:1}.opacity-20{opacity:.2}.opacity-40{opacity:.4}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-inner{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgba(0,0,0,.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color)}.shadow-lg,.shadow-md{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-cyan-500\/20{--tw-shadow-color:rgba(6,182,212,.2);--tw-shadow:var(--tw-shadow-colored)}.shadow-emerald-600\/30{--tw-shadow-color:rgba(5,150,105,.3);--tw-shadow:var(--tw-shadow-colored)}.shadow-rose-600\/30{--tw-shadow-color:rgba(225,29,72,.3);--tw-shadow:var(--tw-shadow-colored)}.blur{--tw-blur:blur(8px)}.blur,.grayscale{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.grayscale{--tw-grayscale:grayscale(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.duration-500{transition-duration:.5s}.selection\:bg-cyan-500 ::-moz-selection{--tw-bg-opacity:1;background-color:rgb(6 182 212/var(--tw-bg-opacity,1))}.selection\:bg-cyan-500 ::selection{--tw-bg-opacity:1;background-color:rgb(6 182 212/var(--tw-bg-opacity,1))}.selection\:text-black ::-moz-selection{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.selection\:text-black ::selection{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.selection\:bg-cyan-500::-moz-selection{--tw-bg-opacity:1;background-color:rgb(6 182 212/var(--tw-bg-opacity,1))}.selection\:bg-cyan-500::selection{--tw-bg-opacity:1;background-color:rgb(6 182 212/var(--tw-bg-opacity,1))}.selection\:text-black::-moz-selection{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.selection\:text-black::selection{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.hover\:bg-cyan-400:hover{--tw-bg-opacity:1;background-color:rgb(34 211 238/var(--tw-bg-opacity,1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))}.hover\:bg-indigo-500:hover{--tw-bg-opacity:1;background-color:rgb(99 102 241/var(--tw-bg-opacity,1))}.hover\:bg-rose-500:hover{--tw-bg-opacity:1;background-color:rgb(244 63 94/var(--tw-bg-opacity,1))}.hover\:bg-rose-700:hover{--tw-bg-opacity:1;background-color:rgb(190 18 60/var(--tw-bg-opacity,1))}.hover\:bg-tech-700:hover{--tw-bg-opacity:1;background-color:rgb(35 52 88/var(--tw-bg-opacity,1))}.hover\:bg-tech-800:hover{--tw-bg-opacity:1;background-color:rgb(24 36 62/var(--tw-bg-opacity,1))}.hover\:from-rose-500:hover{--tw-gradient-from:#f43f5e var(--tw-gradient-from-position);--tw-gradient-to:rgba(244,63,94,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.hover\:to-red-500:hover{--tw-gradient-to:#ef4444 var(--tw-gradient-to-position)}.hover\:text-cyan-300:hover{--tw-text-opacity:1;color:rgb(103 232 249/var(--tw-text-opacity,1))}.hover\:text-sky-300:hover{--tw-text-opacity:1;color:rgb(125 211 252/var(--tw-text-opacity,1))}.hover\:text-slate-200:hover{--tw-text-opacity:1;color:rgb(226 232 240/var(--tw-text-opacity,1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.hover\:underline:hover{text-decoration-line:underline}.focus\:border-cyan-500:focus{--tw-border-opacity:1;border-color:rgb(6 182 212/var(--tw-border-opacity,1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.focus\:ring-cyan-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(34 211 238/var(--tw-ring-opacity,1))}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width:640px){.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:p-5{padding:1.25rem}.sm\:p-6{padding:1.5rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width:768px){.md\:w-auto{width:auto}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:pb-0{padding-bottom:0}}@media (min-width:1024px){.lg\:col-span-5{grid-column:span 5/span 5}.lg\:col-span-7{grid-column:span 7/span 7}.lg\:inline{display:inline}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}@media (min-width:1280px){.xl\:col-span-4{grid-column:span 4/span 4}.xl\:col-span-8{grid-column:span 8/span 8}}
+</style>
+  <style>
+    /* Estilos de impressão para o Entregável do Aluno */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #printableReport, #printableReport * {
+        visibility: visible !important;
+      }
+      #printableReport {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        padding: 20px !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        display: block !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Brilho pulsante e circuitos */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .hotspot-pulse {
+      animation: pulse-ring 2.2s infinite ease-in-out;
+      transform-origin: center;
+    }
+
+    /* Trajetória de pacotes de dados animados */
+    @keyframes dashMove {
+      to {
+        stroke-dashoffset: -40;
+      }
+    }
+    .bus-flow {
+      stroke-dasharray: 8, 6;
+      animation: dashMove 1s linear infinite;
+    }
+
+    /* Efeito de fade na queda de energia */
+    .fade-out-memory {
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0.05 !important;
+      transform: scale(0.96);
+      filter: blur(4px) grayscale(100%);
+    }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0c1322;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #233458;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #38bdf8;
+    }
+  </style>
+</head>
+<body class="bg-tech-950 text-slate-100 font-sans min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
+  <div class="border-b border-slate-700/60 bg-black/40 px-4 py-1.5 text-xs flex flex-wrap gap-x-3"><a href="../" class="text-sky-400 hover:text-sky-300 underline-offset-2 hover:underline">← Voltar ao portfólio</a><a href="../educacao/" class="text-slate-400 hover:text-slate-200 underline-offset-2 hover:underline">Computação e Educação</a></div>
+
+  <!-- CABEÇALHO PEDAGÓGICO & NAVEGAÇÃO -->
+  <header class="bg-tech-900/90 border-b border-tech-700/80 sticky top-0 z-50 backdrop-blur-md shadow-xl no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <!-- Identificação Pedagógica -->
+      <div class="flex items-center gap-3 w-full md:w-auto">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-black text-xl flex-shrink-0">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center flex-wrap gap-2">
+            <h1 class="text-base sm:text-lg font-bold text-white tracking-tight">Por Dentro da Caixa: Anatomia do Computador</h1>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold">
+              EF06CO01 / EF07CO01
+            </span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+              Eixo: Mundo Digital
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Modelo de Von Neumann Simplificado • Ensino Fundamental II (6º/7º ano)</p>
+        </div>
+      </div>
+
+      <!-- Navegação dos 4 Módulos & Controles -->
+      <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+        <button id="btnSound" onclick="toggleAudio()" class="px-2.5 py-1.5 rounded-lg border border-tech-700 bg-tech-850 hover:bg-tech-800 text-xs text-slate-300 flex items-center gap-1.5 transition" title="Alternar Efeitos Sonoros Educacionais">
+          <span id="soundIcon">🔊</span>
+          <span class="hidden lg:inline text-[11px]" id="soundLabel">Som: On</span>
+        </button>
+
+        <nav class="flex bg-tech-850 p-1 rounded-xl border border-tech-700">
+          <button onclick="switchTab('explorer')" id="tab-explorer" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 bg-cyan-500 text-slate-950 shadow-md">
+            <span>🔬</span>
+            <span>1. Explorador</span>
+          </button>
+          <button onclick="switchTab('flow')" id="tab-flow" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <span>⚡</span>
+            <span>2. Da Tecla à Tela</span>
+          </button>
+          <button onclick="switchTab('memory')" id="tab-memory" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <span>⚔️</span>
+            <span>3. RAM vs. Disco</span>
+          </button>
+          <button onclick="switchTab('deliverable')" id="tab-deliverable" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            <span>📋</span>
+            <span>4. Entregável</span>
+          </button>
+        </nav>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL (MÓDULOS) -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 no-print">
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 1: EXPLORADOR INTERATIVO DE HARDWARE (PLACA-MÃE ATX VETORIAL) -->
+    <!-- ================================================================= -->
+    <section id="module-explorer" class="module-pane space-y-4">
+      <!-- Banner Instrutivo -->
+      <div class="bg-tech-900 border border-tech-700/80 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">🔍</span>
+          <div>
+            <h2 class="text-sm sm:text-base font-bold text-white">Laboratório de Desmontagem Virtual: Placa-Mãe ATX</h2>
+            <p class="text-xs text-slate-400">Passe o mouse ou toque nos componentes brilhantes da placa-mãe abaixo para inspecionar seu papel no Modelo de Von Neumann.</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-1.5 text-[11px] font-mono">
+          <span class="px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/40">Processamento</span>
+          <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40">Memória Primária</span>
+          <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Armazenamento</span>
+          <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40">Saída de Vídeo</span>
+          <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">Entrada / I-O</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        
+        <!-- Vista da Placa-Mãe (SVG Gigante e Detalhado) -->
+        <div class="lg:col-span-7 xl:col-span-8 bg-tech-900 border border-tech-700 rounded-2xl p-3 sm:p-5 shadow-2xl relative overflow-hidden">
+          <div class="flex items-center justify-between mb-3 border-b border-tech-700/60 pb-2">
+            <span class="text-xs font-mono font-bold text-cyan-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+              VISÃO SUPERIOR DO CIRCUITO IMPRESSO (PCB)
+            </span>
+            <span class="text-[11px] text-slate-400 font-mono">Soquete LGA / DDR4 / PCIe 4.0</span>
+          </div>
+
+          <!-- SVG da Placa-Mãe -->
+          <div class="w-full aspect-[4/3] bg-gradient-to-br from-slate-900 via-slate-950 to-emerald-950/40 rounded-xl border border-tech-700 relative p-1 shadow-inner select-none">
+            <svg viewBox="0 0 800 600" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Trilhas da Placa -->
+                <pattern id="pcbGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#164e63" stroke-width="0.7" opacity="0.35"/>
+                  <circle cx="20" cy="20" r="1" fill="#0891b2" opacity="0.4"/>
+                </pattern>
+                
+                <!-- Gradiente CPU -->
+                <linearGradient id="cpuGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#475569"/>
+                  <stop offset="50%" stop-color="#334155"/>
+                  <stop offset="100%" stop-color="#1e293b"/>
+                </linearGradient>
+
+                <!-- Gradiente Dissipador de Calor Alumínio -->
+                <linearGradient id="heatsinkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#94a3b8"/>
+                  <stop offset="50%" stop-color="#64748b"/>
+                  <stop offset="100%" stop-color="#334155"/>
+                </linearGradient>
+
+                <linearGradient id="goldPin" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#fbbf24"/>
+                  <stop offset="100%" stop-color="#d97706"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Fundo PCB Verde-Escuro Tecnológico -->
+              <rect width="800" height="600" rx="16" fill="#061719"/>
+              <rect width="800" height="600" rx="16" fill="url(#pcbGrid)"/>
+
+              <!-- Trilhas de Barramento em Cobre/Dourado no PCB -->
+              <g stroke="#d97706" stroke-width="1.5" opacity="0.4" fill="none">
+                <!-- Barramento CPU -> RAM -->
+                <path d="M 390 190 L 450 190 L 450 150 L 490 150" />
+                <path d="M 390 210 L 460 210 L 460 170 L 490 170" />
+                <path d="M 390 230 L 470 230 L 470 190 L 490 190" />
+                <!-- Barramento CPU -> PCIe -->
+                <path d="M 300 290 L 300 360 L 220 360 L 220 380" />
+                <path d="M 320 290 L 320 340 L 250 340 L 250 380" />
+                <!-- Barramento Chipset -> SATA / NVMe -->
+                <path d="M 520 420 L 520 480 L 620 480" />
+                <path d="M 540 420 L 540 510 L 620 510" />
+              </g>
+
+              <!-- PAINEL TRASEIRO I/O (Portas de Entrada/Saída: USB, Rede, Som, HDMI) -->
+              <g id="part-io" class="cursor-pointer group" onclick="inspectPart('io')">
+                <rect x="20" y="50" width="70" height="250" rx="4" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+                <!-- Portas USB -->
+                <rect x="30" y="70" width="30" height="18" rx="2" fill="#0284c7" stroke="#38bdf8"/>
+                <rect x="30" y="95" width="30" height="18" rx="2" fill="#0284c7" stroke="#38bdf8"/>
+                <!-- Porta de Rede RJ45 -->
+                <rect x="30" y="130" width="35" height="24" rx="2" fill="#334155" stroke="#94a3b8"/>
+                <!-- Saída HDMI -->
+                <rect x="30" y="170" width="28" height="16" rx="2" fill="#1e1e24" stroke="#e2e8f0"/>
+                <!-- Conectores de Áudio Jack -->
+                <circle cx="45" cy="220" r="7" fill="#10b981"/>
+                <circle cx="45" cy="245" r="7" fill="#3b82f6"/>
+                <circle cx="45" cy="270" r="7" fill="#ef4444"/>
+                <text x="55" y="190" fill="#94a3b8" font-size="11" font-family="monospace" transform="rotate(-90 55,190)">PAINEL TRASEIRO I/O</text>
+                <!-- Hotspot Animado -->
+                <circle cx="55" cy="110" r="14" fill="#38bdf8" class="hotspot-pulse" opacity="0.4"/>
+                <circle cx="55" cy="110" r="6" fill="#38bdf8"/>
+              </g>
+
+              <!-- SOQUETE DA CPU & PROCESSADOR CENTRAL (Com Dissipador) -->
+              <g id="part-cpu" class="cursor-pointer group" onclick="inspectPart('cpu')">
+                <!-- Base do Soquete -->
+                <rect x="230" y="110" width="160" height="170" rx="8" fill="#0f172a" stroke="#f97316" stroke-width="2.5"/>
+                <!-- Envoltório Metálico (IHS da CPU) -->
+                <rect x="250" y="130" width="120" height="130" rx="6" fill="url(#cpuGrad)" stroke="#cbd5e1" stroke-width="2"/>
+                <!-- Aletas de Refrigeração do Cooler -->
+                <g fill="url(#heatsinkGrad)" opacity="0.9">
+                  <rect x="260" y="145" width="100" height="7" rx="1"/>
+                  <rect x="260" y="160" width="100" height="7" rx="1"/>
+                  <rect x="260" y="175" width="100" height="7" rx="1"/>
+                  <rect x="260" y="190" width="100" height="7" rx="1"/>
+                  <rect x="260" y="205" width="100" height="7" rx="1"/>
+                  <rect x="260" y="220" width="100" height="7" rx="1"/>
+                  <rect x="260" y="235" width="100" height="7" rx="1"/>
+                </g>
+                <text x="310" y="140" fill="#f97316" font-size="12" font-family="monospace" font-weight="bold" text-anchor="middle">CPU (PROCESSADOR)</text>
+                <!-- Hotspot Central -->
+                <circle cx="310" cy="195" r="18" fill="#f97316" class="hotspot-pulse" opacity="0.4"/>
+                <circle cx="310" cy="195" r="8" fill="#ea580c"/>
+              </g>
+
+              <!-- SLOTS DE MEMÓRIA RAM DDR4/DDR5 -->
+              <g id="part-ram" class="cursor-pointer group" onclick="inspectPart('ram')">
+                <!-- 4 Slots de Memória -->
+                <rect x="480" y="90" width="18" height="210" rx="3" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+                <rect x="510" y="90" width="18" height="210" rx="3" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+                <rect x="540" y="90" width="18" height="210" rx="3" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+                <rect x="570" y="90" width="18" height="210" rx="3" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+                <!-- Pentes Instalados nos Slots 2 e 4 -->
+                <rect x="512" y="95" width="14" height="200" rx="2" fill="#1d4ed8" stroke="#60a5fa"/>
+                <rect x="572" y="95" width="14" height="200" rx="2" fill="#1d4ed8" stroke="#60a5fa"/>
+                <!-- Chips pretos na memória -->
+                <rect x="515" y="115" width="8" height="14" fill="#000"/>
+                <rect x="515" y="145" width="8" height="14" fill="#000"/>
+                <rect x="515" y="175" width="8" height="14" fill="#000"/>
+                <rect x="515" y="205" width="8" height="14" fill="#000"/>
+                <rect x="575" y="115" width="8" height="14" fill="#000"/>
+                <rect x="575" y="145" width="8" height="14" fill="#000"/>
+                <rect x="575" y="175" width="8" height="14" fill="#000"/>
+                <rect x="575" y="205" width="8" height="14" fill="#000"/>
+                <!-- Travas dos slots -->
+                <rect x="475" y="85" width="120" height="6" fill="#cbd5e1" rx="2"/>
+                <rect x="475" y="299" width="120" height="6" fill="#cbd5e1" rx="2"/>
+                <text x="535" y="78" fill="#60a5fa" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">SLOTS RAM (DDR)</text>
+                <!-- Hotspot Central -->
+                <circle cx="535" cy="195" r="16" fill="#3b82f6" class="hotspot-pulse" opacity="0.4"/>
+                <circle cx="535" cy="195" r="7" fill="#2563eb"/>
+              </g>
+
+              <!-- SLOTS PCIe x16 PARA PLACA DE VÍDEO (GPU) -->
+              <g id="part-gpu" class="cursor-pointer group" onclick="inspectPart('gpu')">
+                <!-- Slot PCIe Principal 1 -->
+                <rect x="150" y="380" width="280" height="20" rx="4" fill="#0f172a" stroke="#a855f7" stroke-width="2"/>
+                <!-- Detalhe dos pinos de contato dourados -->
+                <line x1="160" y1="390" x2="410" y2="390" stroke="url(#goldPin)" stroke-width="3" stroke-dasharray="4,2"/>
+                <!-- Trava do Slot da GPU -->
+                <rect x="420" y="375" width="18" height="30" rx="2" fill="#7e22ce"/>
+                <!-- Slot PCIe Secundário 2 -->
+                <rect x="150" y="440" width="240" height="16" rx="3" fill="#1e1b4b" stroke="#6b21a8"/>
+                <text x="280" y="422" fill="#c084fc" font-size="11" font-family="monospace" font-weight="bold" text-anchor="middle">SLOT PCIe x16 (PLACA DE VÍDEO)</text>
+                <!-- Hotspot -->
+                <circle cx="280" cy="390" r="15" fill="#a855f7" class="hotspot-pulse" opacity="0.4"/>
+                <circle cx="280" cy="390" r="7" fill="#9333ea"/>
+              </g>
+
+              <!-- ARMAZENAMENTO SECUNDÁRIO (Slot M.2 NVMe SSD + Portas SATA) -->
+              <g id="part-storage" class="cursor-pointer group" onclick="inspectPart('storage')">
+                <!-- Slot M.2 SSD com Dissipador -->
+                <rect x="460" y="330" width="130" height="32" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="2"/>
+                <!-- Chip Flash NAND do SSD -->
+                <rect x="495" y="336" width="30" height="20" rx="2" fill="#022c22"/>
+                <rect x="535" y="336" width="30" height="20" rx="2" fill="#022c22"/>
+                <circle cx="470" cy="346" r="3" fill="#cbd5e1"/> <!-- Parafuso de fixação -->
+                <text x="525" y="380" fill="#34d399" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">M.2 NVMe SSD</text>
+
+                <!-- Portas SATA (Para conectar cabos de HD/SSD) -->
+                <g transform="translate(640, 420)">
+                  <rect x="0" y="0" width="35" height="24" rx="2" fill="#991b1b" stroke="#ef4444"/>
+                  <rect x="0" y="32" width="35" height="24" rx="2" fill="#991b1b" stroke="#ef4444"/>
+                  <rect x="0" y="64" width="35" height="24" rx="2" fill="#991b1b" stroke="#ef4444"/>
+                  <text x="18" y="105" fill="#f87171" font-size="9" font-family="monospace" text-anchor="middle">PORTAS SATA (HD/SSD)</text>
+                </g>
+                <!-- Hotspot -->
+                <circle cx="525" cy="346" r="14" fill="#10b981" class="hotspot-pulse" opacity="0.4"/>
+                <circle cx="525" cy="346" r="6" fill="#059669"/>
+              </g>
+
+              <!-- CHIPSET DA PLACA-MÃE (Ponte de Controle de Barramento) -->
+              <g id="part-chipset" class="cursor-pointer group" onclick="inspectPart('chipset')">
+                <rect x="460" y="420" width="90" height="90" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
+                <!-- Logo estilizado no dissipador do chipset -->
+                <rect x="480" y="440" width="50" height="50" rx="4" fill="#0f172a" stroke="#0891b2"/>
+                <path d="M 495 455 L 515 455 L 505 475 Z" fill="#22d3ee"/>
+                <text x="505" y="525" fill="#67e8f9" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">CHIPSET</text>
+                <circle cx="505" cy="465" r="12" fill="#06b6d4" class="hotspot-pulse" opacity="0.3"/>
+                <circle cx="505" cy="465" r="5" fill="#0891b2"/>
+              </g>
+
+              <!-- CONECTOR DA FONTE DE ALIMENTAÇÃO (ATX 24 Pinos) -->
+              <g id="part-power" class="cursor-pointer group" onclick="inspectPart('power')">
+                <rect x="650" y="110" width="28" height="170" rx="3" fill="#1e293b" stroke="#eab308" stroke-width="1.5"/>
+                <!-- 24 pinos individuais -->
+                <g fill="#fef08a" stroke="#ca8a04" stroke-width="0.5">
+                  <rect x="654" y="115" width="8" height="8"/> <rect x="666" y="115" width="8" height="8"/>
+                  <rect x="654" y="127" width="8" height="8"/> <rect x="666" y="127" width="8" height="8"/>
+                  <rect x="654" y="139" width="8" height="8"/> <rect x="666" y="139" width="8" height="8"/>
+                  <rect x="654" y="151" width="8" height="8"/> <rect x="666" y="151" width="8" height="8"/>
+                  <rect x="654" y="163" width="8" height="8"/> <rect x="666" y="163" width="8" height="8"/>
+                  <rect x="654" y="175" width="8" height="8"/> <rect x="666" y="175" width="8" height="8"/>
+                  <rect x="654" y="187" width="8" height="8"/> <rect x="666" y="187" width="8" height="8"/>
+                  <rect x="654" y="199" width="8" height="8"/> <rect x="666" y="199" width="8" height="8"/>
+                  <rect x="654" y="211" width="8" height="8"/> <rect x="666" y="211" width="8" height="8"/>
+                  <rect x="654" y="223" width="8" height="8"/> <rect x="666" y="223" width="8" height="8"/>
+                  <rect x="654" y="235" width="8" height="8"/> <rect x="666" y="235" width="8" height="8"/>
+                  <rect x="654" y="247" width="8" height="8"/> <rect x="666" y="247" width="8" height="8"/>
+                </g>
+                <text x="664" y="98" fill="#facc15" font-size="10" font-family="monospace" font-weight="bold" text-anchor="middle">FORÇA ATX</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="mt-3 flex items-center justify-between text-xs text-slate-400">
+            <span>Dica: Clique diretamente sobre os nomes dos componentes para inspecionar.</span>
+            <span class="text-cyan-400 font-mono">Componente Selecionado: <strong id="selectedComponentName">Processador (CPU)</strong></span>
+          </div>
+        </div>
+
+        <!-- Painel Lateral de Inspeção Técnica e Didática -->
+        <div class="lg:col-span-5 xl:col-span-4 bg-tech-900 border border-tech-700 rounded-2xl p-5 shadow-2xl flex flex-col space-y-4">
+          
+          <div class="flex items-center justify-between border-b border-tech-700 pb-3">
+            <div class="flex items-center gap-2">
+              <span id="inspectIcon" class="text-2xl p-2 rounded-xl bg-tech-800 border border-tech-700">🧠</span>
+              <div>
+                <h3 id="inspectTitle" class="text-base font-bold text-white tracking-wide">Processador (CPU)</h3>
+                <span id="inspectRoleBadge" class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/40">
+                  Unidade Central de Processamento
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Função no Modelo de Von Neumann -->
+          <div>
+            <span class="text-[11px] font-mono uppercase text-slate-400 font-bold tracking-wider">Papel no Modelo de Von Neumann</span>
+            <p id="inspectVonNeumann" class="text-xs text-slate-200 mt-1 leading-relaxed bg-tech-950 p-2.5 rounded-lg border border-tech-800">
+              É a <strong>Unidade de Processamento</strong>. Contém a Unidade de Controle (UC), a Unidade Lógica e Aritmética (ULA) e os Registradores rápidos. Busca as instruções na memória, decodifica e calcula o resultado.
+            </p>
+          </div>
+
+          <!-- Como funciona na prática -->
+          <div>
+            <span class="text-[11px] font-mono uppercase text-slate-400 font-bold tracking-wider">O Que Faz no Dia a Dia</span>
+            <p id="inspectDaily" class="text-xs text-slate-300 mt-1 leading-relaxed">
+              Executa bilhões de cálculos matemáticos e lógicos por segundo em ciclos de clock (GHz). Toda ação, cálculo de física em jogos ou edição de texto passa por ela.
+            </p>
+          </div>
+
+          <!-- Analogia Didática de Sala de Aula -->
+          <div class="bg-gradient-to-br from-tech-850 to-tech-800 p-3.5 rounded-xl border border-tech-700/80">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-amber-400 text-sm">💡</span>
+              <span class="text-xs font-bold text-amber-300">Analogia do Restaurante / Cozinha:</span>
+            </div>
+            <p id="inspectAnalogy" class="text-xs text-slate-200 italic leading-relaxed">
+              "A CPU é o <strong>Chef de Cozinha</strong>: ele é ultra rápido e executa as receitas passo a passo, mas só consegue trabalhar com os ingredientes que estão imediatamente à mão sobre sua bancada."
+            </p>
+          </div>
+
+          <!-- Mini Especificação Técnica -->
+          <div class="border-t border-tech-700/70 pt-3">
+            <span class="text-[11px] font-mono uppercase text-slate-400 font-bold tracking-wider">Ficha Técnica Rápida</span>
+            <ul id="inspectTechList" class="mt-2 space-y-1.5 text-xs text-slate-300">
+              <li class="flex justify-between font-mono bg-tech-950/60 px-2 py-1 rounded"><span>Velocidade Típica:</span> <span class="text-cyan-300">3.5 GHz a 5.4 GHz</span></li>
+              <li class="flex justify-between font-mono bg-tech-950/60 px-2 py-1 rounded"><span>Volatilidade:</span> <span class="text-amber-300">Sem retenção de dados</span></li>
+              <li class="flex justify-between font-mono bg-tech-950/60 px-2 py-1 rounded"><span>Comunicação:</span> <span class="text-orange-300">Barramento Frontal / PCIe</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 2: SIMULAÇÃO DE FLUXO DE DADOS: DA TECLA À TELA           -->
+    <!-- ================================================================= -->
+    <section id="module-flow" class="module-pane hidden space-y-5">
+      
+      <!-- Cabeçalho do Módulo de Fluxo -->
+      <div class="bg-tech-900 border border-tech-700 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-bold text-white">Ciclo de Instrução: "O que acontece quando você digita uma tecla?"</h2>
+            <span class="text-xs font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded border border-amber-500/40">Interrupção & I/O</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Acompanhe a trajetória física e lógica de um caractere: do toque mecânico no teclado até o acendimento dos subpixels RGB no monitor.</p>
+        </div>
+
+        <!-- Entrada de Caractere Personalizada do Aluno -->
+        <div class="flex items-center gap-2 bg-tech-950 p-2 rounded-xl border border-tech-700 w-full md:w-auto">
+          <label for="inputKeyChar" class="text-xs text-slate-300 font-mono">Digite uma tecla:</label>
+          <input type="text" id="inputKeyChar" maxlength="1" value="A" class="w-10 h-10 text-center font-mono font-black text-lg bg-tech-850 text-cyan-400 rounded-lg border border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-400 uppercase" oninput="updateKeySimulation(this.value)">
+          <button onclick="triggerSimulateKey()" class="px-3 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-lg transition shadow-md flex items-center gap-1">
+            <span>Disparar Fluxo</span>
+            <span>🚀</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Diagrama de Barramento e Componentes do Fluxo -->
+      <div class="bg-tech-900 border border-tech-700 rounded-2xl p-4 sm:p-6 shadow-2xl relative">
+        
+        <!-- Componentes em Linha (Grid de 6 Estações) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6 relative">
+          
+          <!-- Estação 1: Entrada (Teclado) -->
+          <div id="flow-node-1" class="flow-node p-3 rounded-xl bg-tech-850 border-2 border-tech-700 text-center transition-all duration-300 flex flex-col items-center">
+            <span class="text-2xl mb-1">⌨️</span>
+            <span class="text-[11px] font-mono text-slate-400">1. ENTRADA</span>
+            <span class="text-xs font-bold text-white mt-0.5">Teclado USB</span>
+            <span class="text-[10px] font-mono text-cyan-300 mt-1 px-1.5 py-0.5 bg-tech-950 rounded">Scan Code</span>
+          </div>
+
+          <!-- Estação 2: Barramento / Controlador -->
+          <div id="flow-node-2" class="flow-node p-3 rounded-xl bg-tech-850 border-2 border-tech-700 text-center transition-all duration-300 flex flex-col items-center">
+            <span class="text-2xl mb-1">🔌</span>
+            <span class="text-[11px] font-mono text-slate-400">2. BARRAMENTO</span>
+            <span class="text-xs font-bold text-white mt-0.5">I/O & Interrupção</span>
+            <span class="text-[10px] font-mono text-amber-300 mt-1 px-1.5 py-0.5 bg-tech-950 rounded">Sinal IRQ</span>
+          </div>
+
+          <!-- Estação 3: CPU (UC / ULA) -->
+          <div id="flow-node-3" class="flow-node p-3 rounded-xl bg-tech-850 border-2 border-tech-700 text-center transition-all duration-300 flex flex-col items-center">
+            <span class="text-2xl mb-1">🧠</span>
+            <span class="text-[11px] font-mono text-slate-400">3. PROCESSAMENTO</span>
+            <span class="text-xs font-bold text-white mt-0.5">CPU Central</span>
+            <span class="text-[10px] font-mono text-orange-300 mt-1 px-1.5 py-0.5 bg-tech-950 rounded">Decodificação</span>
+          </div>
+
+          <!-- Estação 4: Memória Primária (RAM) -->
+          <div id="flow-node-4" class="flow-node p-3 rounded-xl bg-tech-850 border-2 border-tech-700 text-center transition-all duration-300 flex flex-col items-center">
+            <span class="text-2xl mb-1">⚡</span>
+            <span class="text-[11px] font-mono text-slate-400">4. MEMÓRIA PRIMÁRIA</span>
+            <span class="text-xs font-bold text-white mt-0.5">Memória RAM</span>
+            <span class="text-[10px] font-mono text-blue-300 mt-1 px-1.5 py-0.5 bg-tech-950 rounded">Buffer de Texto</span>
+          </div>
+
+          <!-- Estação 5: GPU / Placa de Vídeo -->
+          <div id="flow-node-5" class="flow-node p-3 rounded-xl bg-tech-850 border-2 border-tech-700 text-center transition-all duration-300 flex flex-col items-center">
+            <span class="text-2xl mb-1">🎨</span>
+            <span class="text-[11px] font-mono text-slate-400">5. RENDERIZAÇÃO</span>
+            <span class="text-xs font-bold text-white mt-0.5">GPU de Vídeo</span>
+            <span class="text-[10px] font-mono text-purple-300 mt-1 px-1.5 py-0.5 bg-tech-950 rounded">Rasterização</span>
+          </div>
+
+          <!-- Estação 6: Saída (Monitor) -->
+          <div id="flow-node-6" class="flow-node p-3 rounded-xl bg-tech-850 border-2 border-tech-700 text-center transition-all duration-300 flex flex-col items-center">
+            <span class="text-2xl mb-1">🖥️</span>
+            <span class="text-[11px] font-mono text-slate-400">6. SAÍDA</span>
+            <span class="text-xs font-bold text-white mt-0.5">Monitor / Tela</span>
+            <span class="text-[10px] font-mono text-emerald-300 mt-1 px-1.5 py-0.5 bg-tech-950 rounded">Subpixels RGB</span>
+          </div>
+
+        </div>
+
+        <!-- Barra de Progresso do Fluxo e Trilha Animada -->
+        <div class="w-full bg-tech-950 rounded-full h-3 border border-tech-700 overflow-hidden mb-6">
+          <div id="flowProgressBar" class="bg-gradient-to-r from-cyan-500 via-orange-500 to-emerald-500 h-full rounded-full transition-all duration-500" style="width: 16.6%;"></div>
+        </div>
+
+        <!-- Caixa de Detalhes da Etapa Ativa -->
+        <div class="bg-tech-950 border border-tech-800 rounded-xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div id="flowStepBadge" class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-black text-xl flex-shrink-0">
+              1
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="flowStepSubtitle" class="text-[11px] font-mono text-cyan-400 uppercase font-bold tracking-wider">ETAPA 1 DE 6 • ENTRADA DE DADOS</span>
+              </div>
+              <h3 id="flowStepTitle" class="text-base font-bold text-white mt-0.5">Acionamento da Tecla Mecânica</h3>
+              <p id="flowStepDescription" class="text-xs text-slate-300 mt-1 leading-relaxed max-w-2xl">
+                O usuário pressiona a tecla física. O microcontrolador do teclado detecta o fechamento do circuito na matriz elétrica e converte a tecla no código binário equivalente (Scan Code).
+              </p>
+              <!-- Detalhe do Pacote Binário -->
+              <div class="mt-2 flex items-center gap-2 font-mono text-xs">
+                <span class="text-slate-500">Pacote de Dados na Trilha:</span>
+                <span id="flowBinaryData" class="px-2 py-0.5 rounded bg-tech-850 text-cyan-300 border border-tech-700">ScanCode: 0x1E | Binário: 01000001 (ASCII 65 = 'A')</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monitor Virtual em Miniatura Mostrando a Saída -->
+          <div class="w-32 h-24 bg-slate-900 border-4 border-slate-700 rounded-lg p-2 flex flex-col items-center justify-center flex-shrink-0 shadow-lg">
+            <span class="text-[9px] font-mono text-slate-500 mb-1">TELA VIRTUAL</span>
+            <div id="virtualScreenOutput" class="w-full flex-1 bg-black rounded flex items-center justify-center border border-slate-800">
+              <span id="virtualScreenChar" class="text-2xl font-mono font-black text-emerald-400 opacity-20">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles Interativos da Simulação de Fluxo -->
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-tech-800">
+          <div class="flex items-center gap-2">
+            <button onclick="prevFlowStep()" class="px-3.5 py-2 rounded-lg bg-tech-800 hover:bg-tech-700 text-xs font-semibold text-slate-200 transition flex items-center gap-1.5 border border-tech-700">
+              <span>◀</span>
+              <span>Passo Anterior</span>
+            </button>
+            <button onclick="nextFlowStep()" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-xs font-bold text-slate-950 transition flex items-center gap-1.5 shadow-md shadow-cyan-500/20">
+              <span>Próximo Passo</span>
+              <span>▶</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button id="btnAutoPlayFlow" onclick="toggleAutoPlayFlow()" class="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white transition flex items-center gap-1.5 shadow-md">
+              <span id="autoPlayIcon">▶</span>
+              <span id="autoPlayText">Reprodução Automática</span>
+            </button>
+            <button onclick="resetFlowSimulation()" class="px-3 py-2 rounded-lg bg-tech-800 hover:bg-tech-700 text-xs text-slate-400 hover:text-white transition">
+              Reiniciar Ciclo
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 3: BATALHA DA MEMÓRIA: RAM vs. ARMAZENAMENTO (HD/SSD)     -->
+    <!-- ================================================================= -->
+    <section id="module-memory" class="module-pane hidden space-y-5">
+      
+      <!-- Cabeçalho do Experimento -->
+      <div class="bg-tech-900 border border-tech-700 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-bold text-white">Batalha das Memórias: Memória Primária (RAM) vs. Secundária (HD/SSD)</h2>
+            <span class="text-xs font-mono bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded border border-blue-500/40">Volatilidade & Velocidade</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Descubra na prática por que precisamos de dois tipos de memória e o que acontece quando o computador fica sem energia elétrica.</p>
+        </div>
+
+        <!-- Botão Crítico: Queda de Energia -->
+        <button onclick="triggerPowerOutage()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-rose-600/30 transition transform active:scale-95 flex-shrink-0">
+          <span class="text-base">⚡</span>
+          <span>Simular Queda de Energia (Desligar PC)</span>
+        </button>
+      </div>
+
+      <!-- Alerta Didático da Queda de Energia -->
+      <div id="powerOutageAlert" class="hidden bg-rose-950/80 border border-rose-500 text-rose-200 p-4 rounded-xl flex items-start justify-between gap-3 transition-all duration-300">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">⚠️</span>
+          <div>
+            <h4 class="font-bold text-sm text-white">Queda de Energia Acionada! A RAM perdeu todos os dados imediatamente.</h4>
+            <p class="text-xs text-rose-300 mt-0.5">
+              Por ser uma <strong>Memória Volátil</strong>, a RAM necessita de corrente elétrica constante para reter os capacitores carregados. Já o SSD/HD é <strong>Não-Volátil (Persistente)</strong> e manteve os arquivos salvos em segurança através de cargas elétricas presas (Flash NAND) ou magnetismo!
+            </p>
+          </div>
+        </div>
+        <button onclick="restorePowerState()" class="px-3 py-1.5 bg-rose-800 hover:bg-rose-700 text-white text-xs rounded-lg transition font-semibold flex-shrink-0">
+          Religar Energia 🔌
+        </button>
+      </div>
+
+      <!-- Comparativo Lado a Lado -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        <!-- CARD 1: MEMÓRIA RAM (PRIMÁRIA) -->
+        <div class="bg-tech-900 border-2 border-blue-500/60 rounded-2xl p-5 shadow-xl flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 px-3 py-1 bg-blue-500/20 text-blue-300 border-b border-l border-blue-500/40 rounded-bl-xl text-[10px] font-mono font-bold">
+            VOLÁTIL (TEMPORÁRIA)
+          </div>
+
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl p-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400">⚡</span>
+              <div>
+                <h3 class="text-base font-bold text-white">Memória RAM</h3>
+                <p class="text-xs text-slate-400 font-mono">Random Access Memory (DDR4 / DDR5)</p>
+              </div>
+            </div>
+
+            <!-- Analogia -->
+            <div class="bg-tech-950 p-3 rounded-xl border border-tech-800 mb-4 text-xs text-slate-300">
+              <strong class="text-blue-300">Analogia:</strong> É a sua <strong>Mesa de Trabalho</strong>. Quando você está estudando, coloca os cadernos abertos sobre ela. É rápida para olhar, mas ao final do dia (quando o PC desliga), ela é completamente limpa!
+            </div>
+
+            <!-- Dados na Memória RAM (Simulação de Blocos) -->
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 font-mono">Dados Carregados no Momento:</span>
+                <span id="ramStatusBadge" class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">Energizada (Online)</span>
+              </div>
+
+              <div id="ramMemoryPool" class="grid grid-cols-2 gap-2 text-xs font-mono">
+                <div class="p-2.5 bg-blue-950/50 border border-blue-700/60 rounded-lg text-blue-200 flex items-center justify-between">
+                  <span>📄 Trabalho_Escola.docx (Não salvo!)</span>
+                  <span class="text-[10px] text-blue-400 font-bold">buffer</span>
+                </div>
+                <div class="p-2.5 bg-blue-950/50 border border-blue-700/60 rounded-lg text-blue-200 flex items-center justify-between">
+                  <span>🎮 Texturas do Jogo (Fase 1)</span>
+                  <span class="text-[10px] text-blue-400 font-bold">VRAM/RAM</span>
+                </div>
+                <div class="p-2.5 bg-blue-950/50 border border-blue-700/60 rounded-lg text-blue-200 flex items-center justify-between">
+                  <span>🌐 5 Abas do Navegador</span>
+                  <span class="text-[10px] text-blue-400 font-bold">process</span>
+                </div>
+                <div class="p-2.5 bg-blue-950/50 border border-blue-700/60 rounded-lg text-blue-200 flex items-center justify-between">
+                  <span>🐧 Processos do SO (Kernel)</span>
+                  <span class="text-[10px] text-blue-400 font-bold">sys</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Métricas Técnicas -->
+          <div class="border-t border-tech-700/80 pt-3 space-y-1.5 text-xs font-mono text-slate-300">
+            <div class="flex justify-between py-1 border-b border-tech-800">
+              <span class="text-slate-400">Velocidade de Leitura:</span>
+              <span class="text-cyan-400 font-bold">~50.000 MB/s (Ultra Rápida)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-tech-800">
+              <span class="text-slate-400">Capacidade Típica:</span>
+              <span class="text-white">8 GB a 32 GB</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-400">Custo por Gigabyte:</span>
+              <span class="text-amber-400">Mais Alto ($$$)</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CARD 2: ARMAZENAMENTO SECUNDÁRIO (HD / SSD) -->
+        <div class="bg-tech-900 border-2 border-emerald-500/60 rounded-2xl p-5 shadow-xl flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 px-3 py-1 bg-emerald-500/20 text-emerald-300 border-b border-l border-emerald-500/40 rounded-bl-xl text-[10px] font-mono font-bold">
+            NÃO-VOLÁTIL (PERSISTENTE)
+          </div>
+
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">💾</span>
+              <div>
+                <h3 class="text-base font-bold text-white">Disco de Armazenamento (SSD / HD)</h3>
+                <p class="text-xs text-slate-400 font-mono">Solid State Drive / Hard Disk Drive</p>
+              </div>
+            </div>
+
+            <!-- Analogia -->
+            <div class="bg-tech-950 p-3 rounded-xl border border-tech-800 mb-4 text-xs text-slate-300">
+              <strong class="text-emerald-300">Analogia:</strong> É o seu <strong>Armário / Gaveta / Estante</strong>. É mais demorado para ir até lá buscar algo, mas quando você guarda um caderno fechado, ele permanece lá por anos, mesmo com o quarto às escuras!
+            </div>
+
+            <!-- Dados no Disco (Simulação de Blocos) -->
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between items-center text-xs">
+                <span class="text-slate-400 font-mono">Arquivos Salvos com Segurança no Disco:</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">Gravação Estável</span>
+              </div>
+
+              <div id="diskMemoryPool" class="grid grid-cols-2 gap-2 text-xs font-mono">
+                <div class="p-2.5 bg-emerald-950/50 border border-emerald-700/60 rounded-lg text-emerald-200 flex items-center justify-between">
+                  <span>📁 Fotos_Ferias_2024.zip</span>
+                  <span class="text-[10px] text-emerald-400 font-bold">Salvo</span>
+                </div>
+                <div class="p-2.5 bg-emerald-950/50 border border-emerald-700/60 rounded-lg text-emerald-200 flex items-center justify-between">
+                  <span>💿 Instalador do Sistema (SO)</span>
+                  <span class="text-[10px] text-emerald-400 font-bold">Salvo</span>
+                </div>
+                <div class="p-2.5 bg-emerald-950/50 border border-emerald-700/60 rounded-lg text-emerald-200 flex items-center justify-between">
+                  <span>🎵 Músicas e Vídeos</span>
+                  <span class="text-[10px] text-emerald-400 font-bold">Salvo</span>
+                </div>
+                <div class="p-2.5 bg-emerald-950/50 border border-emerald-700/60 rounded-lg text-emerald-200 flex items-center justify-between">
+                  <span>📄 Trabalho_Escola_v1.docx</span>
+                  <span class="text-[10px] text-emerald-400 font-bold">Salvo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Métricas Técnicas -->
+          <div class="border-t border-tech-700/80 pt-3 space-y-1.5 text-xs font-mono text-slate-300">
+            <div class="flex justify-between py-1 border-b border-tech-800">
+              <span class="text-slate-400">Velocidade de Leitura:</span>
+              <span class="text-emerald-400 font-bold">~500 MB/s (SATA) a ~5.000 MB/s (NVMe)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-tech-800">
+              <span class="text-slate-400">Capacidade Típica:</span>
+              <span class="text-white">512 GB a 2.000 GB (2 TB)</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-slate-400">Custo por Gigabyte:</span>
+              <span class="text-emerald-400">Mais Baixo ($)</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Tabela Síntese para Fixação Escolar -->
+      <div class="bg-tech-900 border border-tech-700 rounded-2xl p-4 overflow-x-auto shadow-lg">
+        <h4 class="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <span>📊</span> Tabela Comparativa Resumida (Para Anotação no Caderno / Relatório)
+        </h4>
+        <table class="w-full text-left text-xs text-slate-300">
+          <thead class="bg-tech-950 text-slate-400 uppercase font-mono text-[11px] border-b border-tech-800">
+            <tr>
+              <th class="p-2.5">Característica</th>
+              <th class="p-2.5 text-blue-400">Memória RAM (Primária)</th>
+              <th class="p-2.5 text-emerald-400">SSD / HD (Armazenamento Secundário)</th>
+              <th class="p-2.5">Por Que Essa Diferença Importa?</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-tech-800 font-mono text-[11px]">
+            <tr>
+              <td class="p-2.5 font-bold text-white">Retenção de Energia</td>
+              <td class="p-2.5 text-rose-300 font-semibold">Volátil (apaga ao desligar)</td>
+              <td class="p-2.5 text-emerald-300 font-semibold">Não-Volátil (grava permanentemente)</td>
+              <td class="p-2.5 text-slate-400">Sempre precisamos clicar em "Salvar" para mandar da RAM ao disco!</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 font-bold text-white">Velocidade de Acesso</td>
+              <td class="p-2.5 text-cyan-300 font-semibold">Ultra Rápida (nanossegundos)</td>
+              <td class="p-2.5 text-amber-300 font-semibold">Mais Lenta (micro/milissegundos)</td>
+              <td class="p-2.5 text-slate-400">A CPU não consegue esperar a velocidade lenta do HD/SSD.</td>
+            </tr>
+            <tr>
+              <td class="p-2.5 font-bold text-white">Capacidade Média</td>
+              <td class="p-2.5">8 a 16 Gigabytes</td>
+              <td class="p-2.5">512 a 2.000 Gigabytes (2 Terabytes)</td>
+              <td class="p-2.5 text-slate-400">O disco guarda a vida inteira de arquivos; a RAM só o que você abriu agora.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- MÓDULO 4: GERADOR DO ENTREGÁVEL DO ALUNO (INFOGRÁFICO / MAPA)     -->
+    <!-- ================================================================= -->
+    <section id="module-deliverable" class="module-pane hidden space-y-5">
+      
+      <!-- Cabeçalho do Entregável -->
+      <div class="bg-tech-900 border border-tech-700 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-base font-bold text-white">Gerador do Entregável Pedagógico da BNCC</h2>
+            <span class="text-xs font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40">Avaliação Formativa</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Preencha suas conclusões com suas próprias palavras para gerar um Infográfico / Mapa Conceitual formatado para impressão ou exportação em PDF.</p>
+        </div>
+
+        <button onclick="window.print()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center gap-2 flex-shrink-0">
+          <span>🖨️</span>
+          <span>Imprimir / Salvar em PDF</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        
+        <!-- Formulário de Preenchimento do Aluno -->
+        <div class="lg:col-span-5 bg-tech-900 border border-tech-700 rounded-2xl p-5 shadow-xl space-y-4">
+          <h3 class="text-sm font-bold text-white border-b border-tech-700 pb-2 flex items-center gap-2">
+            <span>✍️</span> Seus Dados & Reflexões
+          </h3>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono text-slate-400 mb-1">Nome do(a) Estudante:</label>
+              <input type="text" id="reportStudentName" value="Ana Carolina Silva" class="w-full bg-tech-950 border border-tech-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-cyan-500" oninput="updateReportPreview()">
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono text-slate-400 mb-1">Turma / Escola:</label>
+              <input type="text" id="reportClass" value="6º Ano B • Colégio Estadual" class="w-full bg-tech-950 border border-tech-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-cyan-500" oninput="updateReportPreview()">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-mono text-slate-400 mb-1">1. Qual é o papel da CPU (Processador)?:</label>
+            <textarea id="reportCpuText" rows="2" class="w-full bg-tech-950 border border-tech-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-cyan-500 leading-relaxed" oninput="updateReportPreview()">A CPU é a unidade de processamento que atua como o 'cérebro' ou 'chef de cozinha', calculando operações lógicas e matemáticas e executando as instruções dos programas.</textarea>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-mono text-slate-400 mb-1">2. O que diferencia a Memória RAM do Disco (HD/SSD)?:</label>
+            <textarea id="reportMemoryText" rows="3" class="w-full bg-tech-950 border border-tech-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-cyan-500 leading-relaxed" oninput="updateReportPreview()">A memória RAM é primária, temporária (volátil) e ultra rápida para os dados que estão em uso agora; enquanto o HD/SSD é armazenamento secundário, não-volátil e permanente, guardando os dados mesmo sem energia elétrica.</textarea>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-mono text-slate-400 mb-1">3. Conclusão do experimento 'Da Tecla à Tela':</label>
+            <textarea id="reportFlowText" rows="2" class="w-full bg-tech-950 border border-tech-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-cyan-500 leading-relaxed" oninput="updateReportPreview()">Percebi que digitar uma letra gera um sinal elétrico codificado (scan code), que interrompe a CPU, armazena no buffer da RAM, é desenhado pela GPU e acende os subpixels na tela em milionésimos de segundo.</textarea>
+          </div>
+
+          <button onclick="fillExampleReport()" class="text-xs text-cyan-400 hover:text-cyan-300 font-mono underline">
+            Carregar Exemplo Modelo Completo
+          </button>
+        </div>
+
+        <!-- Pré-Visualização em Estilo Poster Científico Escolar -->
+        <div class="lg:col-span-7 bg-white text-slate-900 rounded-2xl p-6 shadow-2xl border-4 border-slate-300 relative select-none">
+          <div class="flex items-center justify-between border-b-2 border-slate-800 pb-3 mb-4">
+            <div>
+              <span class="text-[10px] font-mono uppercase bg-slate-900 text-white px-2 py-0.5 rounded font-bold">RELATÓRIO PRÁTICO • BNCC COMPUTAÇÃO</span>
+              <h2 class="text-lg font-black text-slate-900 tracking-tight mt-1">Mapa Conceitual: Por Dentro da Caixa do Computador</h2>
+            </div>
+            <div class="text-right text-xs font-mono text-slate-600">
+              <div id="previewStudentName" class="font-bold text-slate-900">Ana Carolina Silva</div>
+              <div id="previewClass">6º Ano B • Colégio Estadual</div>
+            </div>
+          </div>
+
+          <!-- Diagrama Arquitetura de Von Neumann no Poster -->
+          <div class="grid grid-cols-3 gap-2 text-center text-xs font-mono mb-4">
+            <div class="p-2 border border-slate-400 rounded bg-slate-100">
+              <span class="font-bold text-amber-700 block text-[11px]">ENTRADA (I/O)</span>
+              <span class="text-[10px] text-slate-600">Teclado, Mouse, Microfone</span>
+            </div>
+            <div class="p-2 border-2 border-orange-500 rounded bg-orange-50">
+              <span class="font-bold text-orange-700 block text-[11px]">PROCESSAMENTO (CPU)</span>
+              <span class="text-[10px] text-slate-600">Unidade de Controle + ULA</span>
+            </div>
+            <div class="p-2 border border-slate-400 rounded bg-slate-100">
+              <span class="font-bold text-emerald-700 block text-[11px]">SAÍDA (I/O)</span>
+              <span class="text-[10px] text-slate-600">Monitor, Som, Impressora</span>
+            </div>
+          </div>
+
+          <!-- Blocos de Texto Preenchidos -->
+          <div class="space-y-3 text-xs leading-relaxed">
+            <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-900 block font-mono text-[11px] mb-0.5">🧠 1. Papel da CPU (Unidade Central de Processamento):</span>
+              <p id="previewCpuText" class="text-slate-700 italic">A CPU é a unidade de processamento que atua como o 'cérebro' ou 'chef de cozinha'...</p>
+            </div>
+
+            <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-900 block font-mono text-[11px] mb-0.5">⚔️ 2. Batalha das Memórias: RAM (Volátil) vs. Disco (Permanente):</span>
+              <p id="previewMemoryText" class="text-slate-700 italic">A memória RAM é primária, temporária (volátil) e ultra rápida...</p>
+            </div>
+
+            <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+              <span class="font-bold text-slate-900 block font-mono text-[11px] mb-0.5">⚡ 3. O Ciclo 'Da Tecla à Tela':</span>
+              <p id="previewFlowText" class="text-slate-700 italic">Percebi que digitar uma letra gera um sinal elétrico codificado...</p>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-300 flex items-center justify-between text-[10px] font-mono text-slate-500">
+            <span>Certificado de Conclusão Prática do Laboratório</span>
+            <span>Rubrica: Compreensão de Hardware & Fluxo de Dados</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ELEMENTO DEDICADO PARA IMPRESSÃO LIMPA (WINDOW.PRINT) -->
+  <div id="printableReport" class="hidden font-sans">
+    <div style="border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
+      <h1 style="font-size: 20px; font-weight: bold; margin: 0;">Relatório Pedagógico: Por Dentro da Caixa (Anatomia do Computador)</h1>
+      <p style="font-size: 12px; color: #555; margin: 2px 0 0 0;">Alinhamento BNCC Computação • Eixo Mundo Digital • Ensino Fundamental II</p>
+      <div style="margin-top: 10px; font-size: 12px; display: flex; justify-content: space-between;">
+        <span><strong>Estudante:</strong> <span id="printName">Nome</span></span>
+        <span><strong>Turma/Escola:</strong> <span id="printClass">Turma</span></span>
+        <span><strong>Data:</strong> <span id="printDate">25/10/2026</span></span>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 18px;">
+      <h3 style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">1. Unidade Central de Processamento (CPU):</h3>
+      <p id="printCpu" style="font-size: 12px; line-height: 1.5; color: #222; border: 1px solid #ddd; padding: 10px; border-radius: 4px;"></p>
+    </div>
+
+    <div style="margin-bottom: 18px;">
+      <h3 style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">2. Comparação de Memórias: RAM (Volátil) vs. Disco HD/SSD (Permanente):</h3>
+      <p id="printMemory" style="font-size: 12px; line-height: 1.5; color: #222; border: 1px solid #ddd; padding: 10px; border-radius: 4px;"></p>
+    </div>
+
+    <div style="margin-bottom: 18px;">
+      <h3 style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">3. Experimento "Da Tecla à Tela" (Ciclo de Entrada, Processamento e Saída):</h3>
+      <p id="printFlow" style="font-size: 12px; line-height: 1.5; color: #222; border: 1px solid #ddd; padding: 10px; border-radius: 4px;"></p>
+    </div>
+
+    <div style="margin-top: 30px; border-top: 1px solid #000; padding-top: 15px; font-size: 11px; display: flex; justify-content: space-between;">
+      <span>Assinatura do(a) Professor(a): ____________________________________</span>
+      <span>Avaliação: [ &nbsp; ] Excelente &nbsp; [ &nbsp; ] Bom &nbsp; [ &nbsp; ] Em desenvolvimento</span>
+    </div>
+  </div>
+
+  <!-- RODAPÉ PEDAGÓGICO -->
+  <footer class="bg-tech-950 border-t border-tech-800 py-4 px-6 text-center text-xs text-slate-500 no-print mt-auto">
+    <p>Projeto Didático Interativo: <strong>"Por Dentro da Caixa: Anatomia do Computador"</strong> • Licenciatura em Computação & Infraestrutura de TI</p>
+    <p class="text-[11px] mt-1 text-slate-600">Desenvolvido com Tecnologias Web Puras (HTML5, SVG, Tailwind CSS e Web Audio API) • Totalmente acessível offline</p>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- JAVASCRIPT: LÓGICA PEDAGÓGICA, WEB AUDIO API E INTERAÇÕES       -->
+  <!-- ================================================================= -->
+  <script>
+    /* ===============================================================
+       SINTETIZADOR DE ÁUDIO DIDÁTICO (WEB AUDIO API - ZERO ARQUIVOS EXTERNOS)
+       =============================================================== */
+    let audioCtx = null;
+    let isAudioOn = true;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq = 440, type = 'sine', duration = 0.1, gainVal = 0.05) {
+      if (!isAudioOn) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(gainVal, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio feedback blocked or not supported');
+      }
+    }
+
+    function toggleAudio() {
+      isAudioOn = !isAudioOn;
+      const icon = document.getElementById('soundIcon');
+      const label = document.getElementById('soundLabel');
+      if (isAudioOn) {
+        icon.textContent = '🔊';
+        label.textContent = 'Som: On';
+        playTone(600, 'sine', 0.1, 0.05);
+      } else {
+        icon.textContent = '🔇';
+        label.textContent = 'Som: Off';
+      }
+    }
+
+    /* ===============================================================
+       SISTEMA DE ABAS / MÓDULOS
+       =============================================================== */
+    function switchTab(tabKey) {
+      playTone(480, 'sine', 0.08, 0.03);
+      
+      // Esconder todos os módulos
+      document.querySelectorAll('.module-pane').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`module-${tabKey}`).classList.remove('hidden');
+
+      // Atualizar estilos dos botões de aba
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-cyan-500', 'text-slate-950', 'shadow-md');
+        btn.classList.add('text-slate-300');
+      });
+
+      const activeBtn = document.getElementById(`tab-${tabKey}`);
+      activeBtn.classList.add('bg-cyan-500', 'text-slate-950', 'shadow-md');
+      activeBtn.classList.remove('text-slate-300');
+
+      if (tabKey === 'deliverable') {
+        updateReportPreview();
+      }
+    }
+
+    /* ===============================================================
+       MÓDULO 1: BANCO DE DADOS DIDÁTICO DOS COMPONENTES DA PLACA-MÃE
+       =============================================================== */
+    const HARDWARE_PARTS = {
+      cpu: {
+        name: 'Processador (CPU)',
+        roleBadge: 'Unidade Central de Processamento',
+        badgeColor: 'bg-orange-500/20 text-orange-300 border-orange-500/40',
+        vonNeumann: 'É a <strong>Unidade de Processamento</strong>. Contém a Unidade de Controle (UC), a Unidade Lógica e Aritmética (ULA) e os Registradores ultra-rápidos. Busca as instruções na RAM, decodifica e calcula o resultado.',
+        daily: 'Executa bilhões de cálculos matemáticos e lógicos por segundo em ciclos de clock (GHz). Toda ação, cálculo de física em jogos ou edição de texto passa por ela.',
+        analogy: '"A CPU é o <strong>Chef de Cozinha</strong>: ele é ultra rápido e executa as receitas passo a passo, mas só consegue trabalhar com os ingredientes que estão imediatamente à mão sobre sua bancada."',
+        techList: [
+          { label: 'Velocidade Típica:', val: '3.5 GHz a 5.4 GHz' },
+          { label: 'Volatilidade:', val: 'Sem retenção de dados' },
+          { label: 'Comunicação:', val: 'Barramento Frontal / PCIe' }
+        ],
+        icon: '🧠'
+      },
+      ram: {
+        name: 'Memória RAM (Slots DDR)',
+        roleBadge: 'Memória Primária / Principal',
+        badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        vonNeumann: 'É a <strong>Memória Primária</strong>. Armazena temporariamente os programas em execução e os dados que a CPU precisa ler ou gravar imediatamente com baixíssima latência.',
+        daily: 'Permite abrir dezenas de abas no navegador ao mesmo tempo. Quanto mais RAM o computador tem, mais programas podem ficar abertos sem travar o sistema.',
+        analogy: '"A RAM é a <strong>Mesa de Trabalho</strong> ou a tábua de corte do cozinheiro: onde você espalha os livros e cadernos abertos. Quando você sai da sala e apaga a luz (desliga o PC), ela é completamente esvaziada."',
+        techList: [
+          { label: 'Velocidade Típica:', val: '~50.000 MB/s (Ultra Rápida)' },
+          { label: 'Volatilidade:', val: 'Volátil (Apaga sem energia)' },
+          { label: 'Capacidade Típica:', val: '8 GB a 32 GB' }
+        ],
+        icon: '⚡'
+      },
+      storage: {
+        name: 'SSD M.2 NVMe & Portas SATA (HD/SSD)',
+        roleBadge: 'Armazenamento Secundário (Persistente)',
+        badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+        vonNeumann: 'Representa a <strong>Memória Secundária / Armazenamento Persistente</strong>. Ao contrário da RAM, guarda permanentemente o Sistema Operacional, programas e arquivos mesmo quando o computador é desligado.',
+        daily: 'Guarda suas fotos, jogos e documentos para sempre. Ao ligar o PC, os arquivos saem do SSD/HD e são copiados para a memória RAM para serem executados.',
+        analogy: '"O SSD/HD é o <strong>Armário / Despensa de Alimentos</strong>: você guarda caixas e mantimentos por meses ou anos. É mais demorado para ir até lá buscar, mas nada some quando a cozinha é fechada."',
+        techList: [
+          { label: 'Velocidade Típica:', val: '500 a 7.000 MB/s' },
+          { label: 'Volatilidade:', val: 'Não-Volátil (Permanente)' },
+          { label: 'Capacidade Típica:', val: '512 GB a 2.000 GB (2 TB)' }
+        ],
+        icon: '💾'
+      },
+      gpu: {
+        name: 'Slot PCIe x16 (Placa de Vídeo / GPU)',
+        roleBadge: 'Coprocessador Gráfico & Saída de Vídeo',
+        badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
+        vonNeumann: 'Atua como acelerador especializado de processamento matricial e gera o sinal para os <strong>Dispositivos de Saída (Monitores)</strong>.',
+        daily: 'Calcula a iluminação 3D, sombras e geometria de jogos, além de acelerar modelos de Inteligência Artificial e edição de vídeos em alta resolução.',
+        analogy: '"A GPU é um <strong>Exército de Artistas</strong>: enquanto o Chef (CPU) faz um prato complexo por vez, a GPU tem milhares de pequenos núcleos para colorir e pintar milhões de pontos na tela ao mesmo tempo."',
+        techList: [
+          { label: 'Interface:', val: 'PCI Express 4.0/5.0 x16' },
+          { label: 'Núcleos Paralelos:', val: '1.500 a 16.000 núcleos' },
+          { label: 'Memória Própria:', val: 'VRAM GDDR6' }
+        ],
+        icon: '🎨'
+      },
+      io: {
+        name: 'Painel Traseiro I/O (Portas de Entrada e Saída)',
+        roleBadge: 'Interfaces de Entrada / Saída (I/O)',
+        badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+        vonNeumann: 'É a ponte para os <strong>Dispositivos de Entrada (Entrada de Dados)</strong> como teclado, mouse e microfone, e <strong>Dispositivos de Saída</strong> como monitores e caixas de som.',
+        daily: 'Conecta o mundo exterior ao computador via sinais elétricos USB, ondas luminosas HDMI e pacotes de rede Ethernet (RJ-45).',
+        analogy: '"São os <strong>Garçons e a Porta de Entrada do Restaurante</strong>: por onde chegam os pedidos dos clientes (entrada) e saem os pratos prontos (saída)."',
+        techList: [
+          { label: 'Padrões:', val: 'USB 3.2, HDMI 2.1, RJ-45' },
+          { label: 'Função:', val: 'Tradução de sinais externos' },
+          { label: 'Controlador:', val: 'Integrado ao Chipset / SoC' }
+        ],
+        icon: '🔌'
+      },
+      chipset: {
+        name: 'Chipset da Placa-Mãe',
+        roleBadge: 'Controlador de Tráfego de Barramento',
+        badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
+        vonNeumann: 'Gerencia as rotas de <strong>Barramento de Comunicação</strong> entre os periféricos mais lentos (portas SATA, portas USB, áudio) e a CPU rápida.',
+        daily: 'Garante que os dados do teclado, do mouse e da internet cheguem ordenadamente à CPU sem sobrecarregar as linhas diretas.',
+        analogy: '"O Chipset é o <strong>Guarda de Trânsito / Maître</strong>: organiza os cruzamentos para evitar congestionamento entre dados rápidos e dados lentos."',
+        techList: [
+          { label: 'Localização:', val: 'Perto das portas SATA' },
+          { label: 'Dissipação:', val: 'Geralmente possui dissipador de metal' },
+          { label: 'Comunicação:', val: 'Ligado à CPU por link DMI' }
+        ],
+        icon: '🧭'
+      },
+      power: {
+        name: 'Conector de Força ATX 24 Pinos',
+        roleBadge: 'Alimentação de Energia Contínua',
+        badgeColor: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        vonNeumann: 'Fornece a energia elétrica contínua (+12V, +5V, +3.3V) necessária para manter os transistores e capacitores semicondutores funcionando.',
+        daily: 'Recebe os cabos da Fonte de Alimentação que converte os 110V/220V alternados da tomada em corrente contínua estável.',
+        analogy: '"É o <strong>Coração e o Sangue do Sistema</strong>: sem eletricidade contínua, os circuitos semicondutores perdem instantaneamente seus estados lógicos."',
+        techList: [
+          { label: 'Tensão:', val: '+12V, +5V, +3.3V DC' },
+          { label: 'Pinos:', val: '24 vias padrão ATX' },
+          { label: 'Segurança:', val: 'Possui trava plástica de encaixe' }
+        ],
+        icon: '⚡'
+      }
+    };
+
+    function inspectPart(partKey) {
+      const p = HARDWARE_PARTS[partKey];
+      if (!p) return;
+
+      playTone(520, 'sine', 0.08, 0.04);
+
+      document.getElementById('selectedComponentName').textContent = p.name;
+      document.getElementById('inspectTitle').textContent = p.name;
+      document.getElementById('inspectIcon').textContent = p.icon;
+      
+      const badge = document.getElementById('inspectRoleBadge');
+      badge.textContent = p.roleBadge;
+      badge.className = `text-[11px] font-mono px-2 py-0.5 rounded-full border ${p.badgeColor}`;
+
+      document.getElementById('inspectVonNeumann').innerHTML = p.vonNeumann;
+      document.getElementById('inspectDaily').textContent = p.daily;
+      document.getElementById('inspectAnalogy').innerHTML = p.analogy;
+
+      const techContainer = document.getElementById('inspectTechList');
+      techContainer.innerHTML = '';
+      p.techList.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'flex justify-between font-mono bg-tech-950/60 px-2 py-1 rounded';
+        li.innerHTML = `<span>${item.label}</span> <span class="text-cyan-300">${item.val}</span>`;
+        techContainer.appendChild(li);
+      });
+    }
+
+    /* ===============================================================
+       MÓDULO 2: SIMULADOR DE FLUXO "DA TECLA À TELA"
+       =============================================================== */
+    let currentFlowStep = 1;
+    let autoPlayTimer = null;
+    let typedChar = 'A';
+
+    const FLOW_STEPS = [
+      {
+        step: 1,
+        nodeId: 'flow-node-1',
+        title: 'Acionamento Mecânico e Geração de Sinal (Entrada)',
+        subtitle: 'ETAPA 1 DE 6 • DISPOSITIVO DE ENTRADA',
+        desc: 'Ao pressionar a tecla física, um circuito elétrico fecha sob a membrana ou switch mecânico. O chip controlador do teclado lê a posição da matriz e gera um código de rastreio (Scan Code).',
+        getBinary: (ch) => `ScanCode: 0x${ch.charCodeAt(0).toString(16).toUpperCase()} | Binário: ${ch.charCodeAt(0).toString(2).padStart(8, '0')} (ASCII ${ch.charCodeAt(0)} = '${ch}')`,
+        screenDisplay: '-',
+        screenOpacity: 'opacity-20',
+        toneFreq: 330
+      },
+      {
+        step: 2,
+        nodeId: 'flow-node-2',
+        title: 'Viagem pelo Barramento USB & Sinal de Interrupção',
+        subtitle: 'ETAPA 2 DE 6 • BARRAMENTO E CONTROLADOR I/O',
+        desc: 'O pacote viaja pelos fios de dados do cabo USB até a placa-mãe. O controlador de I/O emite um sinal elétrico especial chamado IRQ (Requisição de Interrupção), avisando à CPU que um evento externo acaba de acontecer.',
+        getBinary: (ch) => `Sinal de Interrupção Elétrica (IRQ 1) -> CPU alertada! Dado na fila do barramento.`,
+        screenDisplay: '-',
+        screenOpacity: 'opacity-20',
+        toneFreq: 440
+      },
+      {
+        step: 3,
+        nodeId: 'flow-node-3',
+        title: 'CPU Interrompe a Tarefa e Decodifica a Instrução',
+        subtitle: 'ETAPA 3 DE 6 • PROCESSAMENTO CENTRAL',
+        desc: 'A CPU pausa por alguns nanossegundos a tarefa atual para atender a interrupção. A Unidade de Controle decodifica o pacote e executa o driver do sistema operacional, traduzindo o Scan Code na letra correspondente.',
+        getBinary: (ch) => `Ciclo de Busca (Fetch) -> Decodificação (Decode) -> Letra '${ch}' identificada pelo SO.`,
+        screenDisplay: '-',
+        screenOpacity: 'opacity-20',
+        toneFreq: 550
+      },
+      {
+        step: 4,
+        nodeId: 'flow-node-4',
+        title: 'Armazenamento Temporário no Buffer da Memória RAM',
+        subtitle: 'ETAPA 4 DE 6 • MEMÓRIA PRIMÁRIA',
+        desc: 'O caractere é gravado imediatamente em um endereço de memória RAM alocado para o programa que está aberto (ex: Bloco de Notas ou Word). Ele ainda NÃO está salvo no HD/SSD!',
+        getBinary: (ch) => `RAM Addr 0x7FFF42 -> Byte gravado: '${ch}' no buffer do aplicativo.`,
+        screenDisplay: '-',
+        screenOpacity: 'opacity-20',
+        toneFreq: 660
+      },
+      {
+        step: 5,
+        nodeId: 'flow-node-5',
+        title: 'Renderização Gráfica pela Placa de Vídeo (GPU)',
+        subtitle: 'ETAPA 5 DE 6 • PROCESSAMENTO GRÁFICO',
+        desc: 'O processador instrui a GPU a desenhar a forma visual (glifo) da letra. A GPU rasteriza os contornos vetoriais da fonte e determina as coordenadas exatas dos pixels na tela.',
+        getBinary: (ch) => `FrameBuffer atualizado -> Matriz de pixels para a letra '${ch}' renderizada.`,
+        screenDisplay: '-',
+        screenOpacity: 'opacity-40',
+        toneFreq: 770
+      },
+      {
+        step: 6,
+        nodeId: 'flow-node-6',
+        title: 'Exibição Visual no Monitor (Saída de Dados)',
+        subtitle: 'ETAPA 6 DE 6 • DISPOSITIVO DE SAÍDA',
+        desc: 'O monitor recebe o sinal de vídeo digital (HDMI/DisplayPort) e acende os subpixels Vermelho, Verde e Azul (RGB) correspondentes. O ciclo se completa e você enxerga a letra na tela em menos de 10 milissegundos!',
+        getBinary: (ch) => `Sucesso! Ciclo de instrução concluído para a letra '${ch}'.`,
+        screenDisplay: (ch) => ch,
+        screenOpacity: 'opacity-100',
+        toneFreq: 880
+      }
+    ];
+
+    function updateKeySimulation(val) {
+      if (!val) val = 'A';
+      typedChar = val.toUpperCase().charAt(0);
+      document.getElementById('inputKeyChar').value = typedChar;
+      renderFlowStep(currentFlowStep);
+    }
+
+    function triggerSimulateKey() {
+      currentFlowStep = 1;
+      renderFlowStep(1);
+      playTone(400, 'triangle', 0.1, 0.05);
+    }
+
+    function renderFlowStep(stepNum) {
+      currentFlowStep = stepNum;
+      const data = FLOW_STEPS[stepNum - 1];
+
+      playTone(data.toneFreq, 'sine', 0.12, 0.04);
+
+      // Atualizar nós visuais
+      for (let i = 1; i <= 6; i++) {
+        const node = document.getElementById(`flow-node-${i}`);
+        if (i === stepNum) {
+          node.classList.remove('border-tech-700', 'bg-tech-850');
+          node.classList.add('border-cyan-400', 'bg-cyan-950/60', 'scale-105', 'shadow-lg', 'shadow-cyan-500/20');
+        } else if (i < stepNum) {
+          node.classList.remove('border-tech-700', 'bg-cyan-950/60', 'scale-105', 'shadow-lg');
+          node.classList.add('border-emerald-600/70', 'bg-emerald-950/30');
+        } else {
+          node.classList.remove('border-cyan-400', 'bg-cyan-950/60', 'scale-105', 'shadow-lg', 'border-emerald-600/70', 'bg-emerald-950/30');
+          node.classList.add('border-tech-700', 'bg-tech-850');
+        }
+      }
+
+      // Atualizar textos e barra
+      document.getElementById('flowStepBadge').textContent = data.step;
+      document.getElementById('flowStepSubtitle').textContent = data.subtitle;
+      document.getElementById('flowStepTitle').textContent = data.title;
+      document.getElementById('flowStepDescription').textContent = data.desc;
+      document.getElementById('flowBinaryData').textContent = data.getBinary(typedChar);
+
+      const pct = (stepNum / 6) * 100;
+      document.getElementById('flowProgressBar').style.width = `${pct}%`;
+
+      // Atualizar tela virtual
+      const screenCharEl = document.getElementById('virtualScreenChar');
+      if (typeof data.screenDisplay === 'function') {
+        screenCharEl.textContent = data.screenDisplay(typedChar);
+      } else {
+        screenCharEl.textContent = data.screenDisplay;
+      }
+      screenCharEl.className = `text-2xl font-mono font-black text-emerald-400 ${data.screenOpacity} transition-all duration-300`;
+    }
+
+    function nextFlowStep() {
+      if (currentFlowStep < 6) {
+        renderFlowStep(currentFlowStep + 1);
+      } else {
+        renderFlowStep(1);
+      }
+    }
+
+    function prevFlowStep() {
+      if (currentFlowStep > 1) {
+        renderFlowStep(currentFlowStep - 1);
+      }
+    }
+
+    function resetFlowSimulation() {
+      if (autoPlayTimer) toggleAutoPlayFlow();
+      renderFlowStep(1);
+    }
+
+    function toggleAutoPlayFlow() {
+      const btn = document.getElementById('btnAutoPlayFlow');
+      const icon = document.getElementById('autoPlayIcon');
+      const text = document.getElementById('autoPlayText');
+
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+        icon.textContent = '▶';
+        text.textContent = 'Reprodução Automática';
+        btn.classList.remove('bg-rose-600', 'hover:bg-rose-500');
+        btn.classList.add('bg-indigo-600', 'hover:bg-indigo-500');
+      } else {
+        icon.textContent = '⏸';
+        text.textContent = 'Pausar Reprodução';
+        btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-500');
+        btn.classList.add('bg-rose-600', 'hover:bg-rose-500');
+        
+        autoPlayTimer = setInterval(() => {
+          if (currentFlowStep >= 6) {
+            renderFlowStep(1);
+          } else {
+            renderFlowStep(currentFlowStep + 1);
+          }
+        }, 1600);
+      }
+    }
+
+    /* ===============================================================
+       MÓDULO 3: BATALHA DA MEMÓRIA & SIMULAÇÃO DE QUEDA DE ENERGIA
+       =============================================================== */
+    let isPowerOn = true;
+
+    function triggerPowerOutage() {
+      isPowerOn = false;
+      playTone(180, 'sawtooth', 0.4, 0.08);
+
+      // Mostrar alerta
+      document.getElementById('powerOutageAlert').classList.remove('hidden');
+
+      // Aplicar efeito fade na memória RAM
+      const ramPool = document.getElementById('ramMemoryPool');
+      ramPool.classList.add('fade-out-memory');
+
+      const ramBadge = document.getElementById('ramStatusBadge');
+      ramBadge.className = 'text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono font-bold animate-pulse';
+      ramBadge.textContent = 'Sem Energia (Dados Perdidos!)';
+    }
+
+    function restorePowerState() {
+      isPowerOn = true;
+      playTone(600, 'sine', 0.2, 0.05);
+
+      document.getElementById('powerOutageAlert').classList.add('hidden');
+
+      const ramPool = document.getElementById('ramMemoryPool');
+      ramPool.classList.remove('fade-out-memory');
+
+      const ramBadge = document.getElementById('ramStatusBadge');
+      ramBadge.className = 'text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono';
+      ramBadge.textContent = 'Energizada (Online)';
+    }
+
+    /* ===============================================================
+       MÓDULO 4: GERADOR DE ENTREGÁVEL & ATUALIZAÇÃO DO RELATÓRIO
+       =============================================================== */
+    function updateReportPreview() {
+      const name = document.getElementById('reportStudentName').value || 'Nome do Estudante';
+      const turma = document.getElementById('reportClass').value || 'Turma / Escola';
+      const cpu = document.getElementById('reportCpuText').value;
+      const mem = document.getElementById('reportMemoryText').value;
+      const flow = document.getElementById('reportFlowText').value;
+
+      // Pré-visualização na tela
+      document.getElementById('previewStudentName').textContent = name;
+      document.getElementById('previewClass').textContent = turma;
+      document.getElementById('previewCpuText').textContent = cpu;
+      document.getElementById('previewMemoryText').textContent = mem;
+      document.getElementById('previewFlowText').textContent = flow;
+
+      // Elemento dedicado de impressão
+      document.getElementById('printName').textContent = name;
+      document.getElementById('printClass').textContent = turma;
+      document.getElementById('printCpu').textContent = cpu;
+      document.getElementById('printMemory').textContent = mem;
+      document.getElementById('printFlow').textContent = flow;
+
+      const hoje = new Date();
+      document.getElementById('printDate').textContent = hoje.toLocaleDateString('pt-BR');
+    }
+
+    function fillExampleReport() {
+      playTone(550, 'sine', 0.1, 0.04);
+      document.getElementById('reportStudentName').value = 'Lucas Gabriel Pereira';
+      document.getElementById('reportClass').value = '7º Ano A • Escola de Tempo Integral';
+      document.getElementById('reportCpuText').value = 'A CPU é a unidade de processamento responsável por decodificar e executar todas as instruções em ciclos rápidos de clock. Sem ela, nenhuma decisão lógica pode ser tomada no computador.';
+      document.getElementById('reportMemoryText').value = 'A memória RAM é volátil (primária): precisa de corrente elétrica constante e guarda apenas os programas abertos no momento com alta velocidade. O HD/SSD é persistente (secundário): grava de forma magnética ou em chips flash NAND e não perde nada mesmo se a tomada for desligada.';
+      document.getElementById('reportFlowText').value = 'O experimento demonstrou que o ato simples de teclar a letra A aciona um sinal elétrico codificado (scan code), que interrompe a CPU, armazena no buffer da RAM, é desenhado pela GPU e acende os subpixels na tela em milionésimos de segundo.';
+      updateReportPreview();
+    }
+
+    // Inicialização ao carregar a página
+    window.addEventListener('DOMContentLoaded', () => {
+      inspectPart('cpu');
+      renderFlowStep(1);
+      updateReportPreview();
+    });
+  </script>
+</body>
+</html>
