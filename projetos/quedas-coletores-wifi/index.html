@@ -31,21 +31,21 @@
 <header class="case-head infra">
   <p class="crumb"><a href="../../infraestrutura/">Infraestrutura de TI</a> / Estudo de caso</p>
   <h1>Troubleshooting de quedas dos coletores Wi-Fi em operação logística</h1>
-  <p class="lede">Os coletores de dados da expedição perdiam a conexão com o sistema de armazém várias vezes por hora. Parecia um problema de antena; a investigação foi organizada em seis frentes, com estados diferentes entre correções aplicadas, indícios e hipóteses em verificação.</p>
+  <p class="lede">Os coletores de dados Android da operação logística perdiam a conexão com o sistema de armazém várias vezes por hora. Parecia um problema de antena; a investigação foi organizada em seis frentes, com estados diferentes entre correções aplicadas, indícios e hipóteses em verificação.</p>
   <ul class="badges" aria-label="Etiquetas">
     <li class="badge tipo">Profissional</li>
-    <li class="badge status"><span class="sym" aria-hidden="true">◐</span>Em andamento</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">◐</span>Método e aprendizados</li>
     <li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li>
     <li class="badge">Troubleshooting</li><li class="badge">Wi-Fi</li><li class="badge">Análise de pacotes</li>
   </ul>
   <dl class="facts">
-    <div><dt>Ambiente</dt><dd>Filial industrial no interior do Paraná, com expedição e recebimento atendidos por Wi-Fi</dd></div>
-    <div><dt>Período</dt><dd>Outubro de 2026</dd></div>
-    <div><dt>Papel</dt><dd>Analista de infraestrutura (N3), responsável pelo diagnóstico e pelas correções</dd></div>
+    <div><dt>Ambiente</dt><dd>Unidade industrial com operação logística atendida por Wi-Fi</dd></div>
+    <div><dt>Período</dt><dd>2026</dd></div>
+    <div><dt>Papel</dt><dd>Analista de infraestrutura, responsável pelo diagnóstico e pelas correções</dd></div>
     <div><dt>Tipo</dt><dd>Investigação de incidente recorrente com várias causas</dd></div>
   </dl>
   <p class="summary">Cruzei cinco fontes de evidência (controladora Wi-Fi, um monitor de quedas que eu mesmo escrevi, logs do servidor de sessões, captura de pacotes e leitura de rádio por antena) e organizei o sintoma único em seis frentes de investigação. Três correções de rádio e configuração foram aplicadas no mesmo dia, em três rodadas com rollback documentado; as frentes de aparelho, temporizador de sessão e cobertura têm estados diferentes: indício que requer logs do app/Android, hipótese provável em verificação e achado de cobertura com ação planejada.</p>
-  <p class="updated">Última atualização: 23 de outubro de 2026</p>
+  <p class="updated">Última atualização: 2026</p>
 </header>
 
 <div class="tabs" role="tablist" aria-label="Modo de leitura">
@@ -60,11 +60,11 @@
   <h2 class="ph">Resumo executivo</h2>
   <div class="blk">
     <h3>Contexto</h3>
-    <p>A expedição e o recebimento da filial trabalham com coletores de dados Android, de dois modelos diferentes, ligados ao sistema de gestão de armazém (WMS) por sessões de terminal. Os coletores usam uma rede Wi-Fi própria, em uma VLAN dedicada ao WMS, servida por cerca de 60 access points gerenciados por uma controladora central. Parte das antenas atende áreas abertas e galpões, onde o operador anda o tempo todo entre os pontos de coleta.</p>
+    <p>A expedição e o recebimento trabalham com coletores de dados Android, de mais de um modelo, ligados ao sistema de gestão de armazém (WMS) por sessões de terminal. Os coletores usam uma rede Wi-Fi própria, em uma VLAN dedicada, servida por dezenas de access points gerenciados por uma controladora central. Parte das antenas atende áreas abertas e galpões, onde o operador anda o tempo todo entre os pontos de coleta.</p>
   </div>
   <div class="blk">
     <h3>Problema</h3>
-    <p>Os operadores relatavam que o coletor “caía” no meio da separação e era preciso logar de novo. O relatório que montei com os dados da controladora mostrou o tamanho do problema: <strong>2.743 quedas em 30 dias</strong> e <strong>779 nos últimos 7</strong>, em 40 coletores. Cada queda interrompe a expedição e gera retrabalho.</p>
+    <p>Os operadores relatavam que o coletor “caía” no meio da separação e era preciso logar de novo. O relatório que montei com os dados da controladora mostrou o tamanho do problema: <strong>milhares de quedas em 30 dias</strong>, concentradas em dezenas de coletores. Cada queda interrompe a operação e gera retrabalho.</p>
   </div>
   <div class="blk">
     <h3>Meu papel</h3>
@@ -80,10 +80,10 @@
     <h3>Resultado</h3>
     <ul>
       <li>Seis frentes de investigação registradas, com estados diferentes e evidências correspondentes.</li>
-      <li>Na primeira hora de operação cheia após as correções, as desconexões caíram de 8,7 para 4,5 por hora. A medição de vários dias segue em andamento.</li>
-      <li>Dois dias depois, a mediana do sinal no momento da queda subiu para −54 dBm; nesse recorte, as quedas restantes já não eram de sinal fraco.</li>
-      <li>A captura mostra um modelo de coletor abrindo nova conexão sem encerrar a anterior. A próxima etapa é confirmar a causa com os logs do aplicativo e do Android.</li>
-      <li>Um defeito encontrado no próprio monitor (campo de sinal gravado como relação sinal-ruído, não dBm), corrigido antes de usar o dado.</li>
+      <li>Na primeira janela de operação plena após as correções, as desconexões por hora caíram para cerca de metade (amostra curta; a medição de vários dias seguia em andamento).</li>
+      <li>Nesse recorte, a mediana do sinal no momento da queda passou a ser de sinal bom, ou seja, as quedas restantes já não eram de sinal fraco.</li>
+      <li>A captura de pacotes mostra um modelo de coletor abrindo nova conexão sem encerrar a anterior. A confirmação depende dos logs do aplicativo e do sistema do aparelho.</li>
+      <li>Um defeito encontrado no próprio monitor (campo de sinal gravado como relação sinal-ruído, não dBm) foi corrigido antes de usar o dado.</li>
     </ul>
   </div>
   <div class="blk">
@@ -108,7 +108,7 @@
     <ul>
       <li>Coletor perde a sessão com o WMS e o operador precisa logar de novo.</li>
       <li>Quedas espalhadas por várias áreas, com concentração na expedição (metade do total) e no recebimento.</li>
-      <li>Uma antena da expedição sozinha somava 693 quedas em 30 dias, com sinal bom (mediana de −70 dBm).</li>
+      <li>Uma única antena concentrava parcela desproporcional das quedas, mesmo com sinal bom.</li>
     </ul>
     <h4>Hipóteses levantadas e estado por frente</h4>
     <ol>
@@ -125,7 +125,7 @@
   <div class="blk">
     <h4>Fontes de evidência</h4>
     <ul>
-      <li><strong>Controladora Wi-Fi:</strong> histórico de sessões de 35 dias, log de cada cliente (trocas de antena, sinal, banda) e leitura de rádio por antena (potência real, uso do canal, retransmissões).</li>
+      <li><strong>Controladora Wi-Fi:</strong> histórico de sessões de várias semanas, log de cada cliente (trocas de antena, sinal, banda) e leitura de rádio por antena (potência real, uso do canal, retransmissões).</li>
       <li><strong>Monitor de quedas próprio:</strong> script Python que consulta a controladora a cada 60 s e grava queda, reconexão, antena e duração em CSV.</li>
       <li><strong>Servidor de sessões (Linux):</strong> log de início e fim de cada sessão de terminal e contadores TCP do kernel.</li>
       <li><strong>Captura de pacotes</strong> no servidor, filtrada pelos coletores de um dos modelos.</li>
@@ -139,13 +139,13 @@
       <tbody>
         <tr><td>Rekey derrubando a sessão a cada ~48 min</td><td>Renovação de chave de grupo desligada no SSID dos coletores.</td><td>Descartada</td></tr>
         <tr><td>Servidor encerrando sessões ativas</td><td>Uma sessão por coletor, sem sessões fantasma; nas capturas, o servidor só fecha a sessão antiga depois que o coletor abre a nova.</td><td>Descartada</td></tr>
-        <tr><td>Quedas de ~48 min derrubando o terminal</td><td>Só 4,5% das sessões do dia duraram 40–50 min, sem pico: o keepalive do servidor (tolerância de 480 s) segurava a sessão.</td><td>Descartada para o servidor; segue no Wi-Fi</td></tr>
-        <tr><td>Roaming instável entre duas antenas vizinhas</td><td>1.888 trocas em 5 dias, 603 de ida e volta em menos de 2 min, com sinal bom antes da troca; potência de uma antena no máximo ao lado de outra no mínimo; 802.11r ligado.</td><td><strong>Confirmada</strong></td></tr>
+        <tr><td>Quedas de ~48 min derrubando o terminal</td><td>Poucas sessões duraram 40–50 min, sem pico: o keepalive do servidor (tolerância de alguns minutos) segurava a sessão.</td><td>Descartada para o servidor; segue no Wi-Fi</td></tr>
+        <tr><td>Roaming instável entre duas antenas vizinhas</td><td>Centenas de trocas de ida e volta em menos de 2 min, em poucos dias, com sinal bom antes da troca; potência de uma antena no máximo ao lado de outra no mínimo; 802.11r ligado.</td><td><strong>Confirmada</strong></td></tr>
         <tr><td>Alternância entre 2,4 e 5 GHz</td><td>Log do cliente: coletor saía de −42 dBm em 2,4 GHz para −67/−77 dBm em 5 GHz e voltava; uma antena externa em potência máxima atraía coletores da expedição.</td><td><strong>Confirmada</strong></td></tr>
-        <tr><td>RSSI mínimo expulsando o coletor</td><td>Limite em −67/−70 dBm nas antenas onde os coletores trabalhavam entre −70 e −83 dBm.</td><td><strong>Confirmada</strong></td></tr>
-        <tr><td>Aplicativo do coletor iniciando nova conexão</td><td>Um modelo com 63% de sessões curtas contra 24% do outro; captura mostra nova conexão após intervalo sem dados pendentes, sem retransmissões no intervalo observado.</td><td>Indício; logs do app/Android necessários</td></tr>
-        <tr><td>Temporizador de ~48–55 min em aparelhos específicos</td><td>Quatro aparelhos do mesmo lote concentram o padrão, inclusive em antenas com sinal ótimo; um deles caía a cada ~55 min “como um relógio”.</td><td>Provável (lease DHCP em verificação)</td></tr>
-        <tr><td>Falta de cobertura no recebimento</td><td>Em um corredor, 92% das quedas com sinal fraco; antenas a 22 dBm ouvidas de longe pelo coletor (~15–18 dBm), que não é ouvido de volta.</td><td><strong>Evidência de cobertura insuficiente</strong></td></tr>
+        <tr><td>RSSI mínimo expulsando o coletor</td><td>Limite acima do sinal de trabalho dos coletores.</td><td><strong>Confirmada</strong></td></tr>
+        <tr><td>Aplicativo do coletor iniciando nova conexão</td><td>Proporção bem maior de sessões curtas em um modelo do que no outro; captura mostra nova conexão após intervalo sem dados pendentes, sem retransmissões no intervalo observado.</td><td>Indício; logs do app/Android necessários</td></tr>
+        <tr><td>Temporizador de ~48–55 min em aparelhos específicos</td><td>Um subconjunto de aparelhos do mesmo lote concentra o padrão, inclusive em antenas com sinal ótimo; um deles caía a cada ~55 min “como um relógio”.</td><td>Provável (lease DHCP em verificação)</td></tr>
+        <tr><td>Falta de cobertura no recebimento</td><td>Em um corredor, quase todas as quedas com sinal fraco; antenas em potência alta ouvidas de longe pelo coletor, de potência menor, que não é ouvido de volta.</td><td><strong>Evidência de cobertura insuficiente</strong></td></tr>
       </tbody>
     </table></div>
   </div>
@@ -154,21 +154,21 @@
     <div class="fields">
       <div class="field"><h4>Potência assimétrica</h4><p>Antena em potência máxima é ouvida pelo coletor de longe, mas não ouve o coletor de volta. O coletor se associa a ela, perde o enlace de subida e troca de novo. A regra adotada: potência da antena próxima à do cliente, e nunca máxima em ambiente interno.</p></div>
       <div class="field"><h4>802.11r desligado no SSID dos coletores</h4><p>Fast roaming costuma falhar em Android antigo. Como a frota não tinha suporte confirmado, desliguei e deixei a religação condicionada ao levantamento de modelo e versão do Android de cada aparelho.</p></div>
-      <div class="field"><h4>SSID dos coletores só em 2,4 GHz</h4><p>Era assim até um mês antes, quando passou a usar as duas bandas sem registro de mudança. Voltar a uma banda acabou com o vai-e-volta; o custo é dividir o canal de 2,4 GHz com os outros SSIDs, o que passou a ser acompanhado por antena.</p></div>
+      <div class="field"><h4>SSID dos coletores só em 2,4 GHz</h4><p>Era a configuração anterior, até passar a usar as duas bandas sem registro de mudança. Voltar a uma banda acabou com o vai-e-volta; o custo é dividir o canal de 2,4 GHz com os outros SSIDs, o que passou a ser acompanhado por antena.</p></div>
       <div class="field"><h4>RSSI mínimo desligado, e não −80 dBm</h4><p>Sem 5 GHz como alternativa, cada expulsão pode virar reassociação. A captura mostra nova conexão iniciada pelo coletor, mas os logs do app/Android são necessários para atribuir a decisão ao aplicativo. O plano original previa −80 dBm; decidi desligar até medir o efeito com a operação cheia.</p></div>
-      <div class="field"><h4>Potência média, e não mínima, na antena mais carregada</h4><p>Com uma única banda, potência mínima poderia abrir buraco de cobertura. A média (14 dBm) iguala a antena vizinha e fica próxima da potência do coletor.</p></div>
-      <div class="field"><h4>Canais de 5 GHz a 20 MHz, fora do bloco congestionado</h4><p>Cinco antenas vizinhas estavam no mesmo canal de 40 MHz. Três foram movidas para canais distintos de 20 MHz; um canal ainda repetido ficou na lista de pendências.</p></div>
+      <div class="field"><h4>Potência média, e não mínima, na antena mais carregada</h4><p>Com uma única banda, potência mínima poderia abrir buraco de cobertura. A potência intermediária iguala a antena vizinha e fica próxima da potência do coletor.</p></div>
+      <div class="field"><h4>Canais de 5 GHz a 20 MHz, fora do bloco congestionado</h4><p>Várias antenas vizinhas estavam no mesmo canal de 40 MHz. Parte delas foi movida para canais distintos de 20 MHz.</p></div>
     </div>
   </div>
   <div class="blk">
     <h3>Correções por fases</h3>
     <ol class="steps">
       <li><strong>Linha de base</strong>Relatório de 30 dias da controladora e monitor de quedas rodando antes de qualquer alteração.</li>
-      <li><strong>Rodada 1: rádio da expedição</strong>802.11r desligado; potência equalizada em três antenas; três antenas fora do canal compartilhado; reinício da antena com 93% de memória após 26 dias ligada.</li>
+      <li><strong>Rodada 1: rádio da expedição</strong>802.11r desligado; potência equalizada nas antenas vizinhas; antenas retiradas do canal compartilhado; reinício de um equipamento com consumo de recursos elevado após longo período ligado.</li>
       <li><strong>Rodada 2: banda única</strong>SSID dos coletores só em 2,4 GHz, 802.11v desligado e potência reduzida na antena externa que atraía coletores.</li>
-      <li><strong>Rodada 3: RSSI mínimo</strong>Limite retirado em nove antenas, uma por vez, conferindo a tela antes de aplicar.</li>
+      <li><strong>Rodada 3: RSSI mínimo</strong>Limite retirado nas antenas afetadas, uma por vez, conferindo a tela antes de aplicar.</li>
       <li><strong>Isolamento do aparelho</strong>Captura de pacotes dos coletores de um modelo para registrar que o coletor iniciou nova conexão; logs do app/Android ainda são necessários.</li>
-      <li><strong>Cobertura</strong>Antena provisória levada à expedição e duas antenas definitivas planejadas para os pontos de parada sem sinal.</li>
+      <li><strong>Cobertura</strong>Reforço de cobertura planejado nos pontos de parada.</li>
       <li><strong>Medição contínua</strong>Monitor de quedas, uso de canal e retransmissões por antena acompanhados ao longo dos dias seguintes.</li>
     </ol>
   </div>
@@ -186,7 +186,7 @@
 
 <section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
   <h2 class="ph">Evidências</h2>
-  <p class="callout">Nomes de antenas, endereços IP e MAC, VLANs, hostnames e modelos dos coletores foram substituídos por descrições genéricas ou marcadores (modelo A, modelo B, P1, P2). Contagens, horários e valores de sinal são os observados; o formato das linhas foi simplificado.</p>
+  <p class="callout">Nomes de antenas, endereços IP e MAC, VLANs, hostnames e modelos dos coletores foram substituídos por descrições genéricas ou marcadores (modelo A, modelo B, P1, P2). Contagens, datas e horários foram omitidos ou aproximados; o formato das linhas foi simplificado.</p>
   <div class="blk wide">
     <h3>Código público e validação automatizada do monitor</h3>
     <p>O <a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">repositório do monitor ↗<span class="sr-only"> (abre em nova aba)</span></a> publica a implementação, a demonstração sem controladora e os testes. A suíte tem <strong>177 testes</strong>, incluindo TLS seguro por padrão, e roda no GitHub Actions em Python 3.10, 3.11, 3.12 e 3.13 (versão de 23/10/2026, commit <span class="mono">963d838</span>).</p>
@@ -224,19 +224,17 @@
     <div class="tbl"><table>
       <thead><tr><th scope="col">Achado</th><th scope="col">Evidência</th><th scope="col">Prioridade</th><th scope="col">Ação</th><th scope="col">Status</th></tr></thead>
       <tbody>
-        <tr><td>Roaming de ida e volta entre duas antenas</td><td>603 trocas de ida e volta em 5 dias, com sinal bom</td><td>Alta</td><td>Equalizar potência, desligar 802.11r, mudar canais</td><td>Corrigido</td></tr>
+        <tr><td>Roaming de ida e volta entre duas antenas</td><td>Centenas de trocas de ida e volta em poucos dias, com sinal bom</td><td>Alta</td><td>Equalizar potência, desligar 802.11r, mudar canais</td><td>Corrigido</td></tr>
         <tr><td>Coletor alternando entre bandas</td><td>Trocas de −42 dBm (2,4 GHz) para −77 dBm (5 GHz)</td><td>Alta</td><td>SSID dos coletores em banda única</td><td>Corrigido</td></tr>
-        <tr><td>RSSI mínimo acima do sinal de trabalho</td><td>Limite de −67 dBm com coletores entre −70 e −83 dBm</td><td>Alta</td><td>Retirar o limite nas nove antenas</td><td>Corrigido</td></tr>
-        <tr><td>Antena com 93% de memória</td><td>26 dias ligada; desassociava clientes</td><td>Média</td><td>Reinício e acompanhamento</td><td>Corrigido</td></tr>
-        <tr><td>Aplicativo do modelo A inicia nova conexão</td><td>63% de sessões curtas; captura mostra nova conexão sem retransmissões no intervalo observado</td><td>Alta</td><td>Comparar configuração do app e do Android com o modelo B</td><td>Indício; logs necessários</td></tr>
-        <tr><td>Ciclo de ~48–55 min em aparelhos do modelo B</td><td>Quatro aparelhos concentram o padrão, inclusive com sinal ótimo</td><td>Média</td><td>Conferir lease DHCP da VLAN do WMS</td><td>Em verificação</td></tr>
-        <tr><td>Corredor do recebimento sem cobertura</td><td>92% das quedas com sinal fraco</td><td>Alta</td><td>Site survey e antenas nos pontos de parada</td><td>Planejado</td></tr>
-        <tr><td>Antenas configuradas em potência alta transmitindo no mínimo</td><td>Leitura de rádio: configuração não aplicada até reiniciar</td><td>Média</td><td>Reinício em janela e conferência</td><td>Pendente</td></tr>
-        <tr><td>Relógio do servidor de sessões 4 min atrasado</td><td>Sem cliente NTP; distorcia a correlação com a controladora</td><td>Baixa</td><td>Ajustar NTP; corrigir horários na análise</td><td>Contornado</td></tr>
-        <tr><td>Mudança de rádio sem registro entre setembro e outubro</td><td>Prints antigos divergiam da configuração encontrada</td><td>Média</td><td>Registrar toda mudança de rádio no grupo dos coletores</td><td>Adotado</td></tr>
+        <tr><td>RSSI mínimo acima do sinal de trabalho</td><td>Limite acima do sinal de trabalho dos coletores</td><td>Alta</td><td>Retirar o limite nas antenas afetadas, uma por vez</td><td>Corrigido</td></tr>
+        <tr><td>Equipamento com consumo de recursos elevado após longo período ligado</td><td>Desassociava clientes</td><td>Média</td><td>Reiniciado e acompanhado</td><td>Corrigido</td></tr>
+        <tr><td>Aplicativo do modelo A inicia nova conexão</td><td>Proporção maior de sessões curtas; captura mostra nova conexão sem retransmissões no intervalo observado</td><td>Alta</td><td>Comparar configuração do app e do Android com o modelo B</td><td>Indício; logs necessários</td></tr>
+        <tr><td>Ciclo de ~48–55 min em aparelhos do modelo B</td><td>Um subconjunto de aparelhos concentra o padrão, inclusive com sinal ótimo</td><td>Média</td><td>Conferir lease DHCP da rede dos coletores</td><td>Em verificação</td></tr>
+        <tr><td>Corredor do recebimento sem cobertura</td><td>Quase todas as quedas com sinal fraco</td><td>Alta</td><td>Reforço de cobertura planejado nos pontos de parada</td><td>Planejado</td></tr>
+        <tr><td>Divergência de horário entre as fontes de log</td><td>Distorcia a correlação com a controladora</td><td>Baixa</td><td>Alinhar os horários na análise</td><td>Corrigido na análise</td></tr>
+        <tr><td>Mudanças de rádio sem registro</td><td>Prints antigos divergiam da configuração encontrada</td><td>Média</td><td>Passou a ser registrada toda mudança de rádio</td><td>Adotado</td></tr>
       </tbody>
     </table></div>
-    <p class="note">Achados de segurança e de switches levantados no mesmo período foram tratados por canal interno ou estão no <a href="../rede-filial-industrial/">caso de modernização da rede</a>, sem detalhes sensíveis.</p>
   </div>
   <div class="blk wide">
     <h3>Captura do coletor modelo A (reconstrução sintética)</h3>
@@ -256,12 +254,11 @@
   <div class="blk">
     <h3>Antes e depois (amostras)</h3>
     <div class="tbl"><table>
-      <thead><tr><th scope="col">Métrica</th><th scope="col">Antes</th><th scope="col">Depois</th></tr></thead>
+      <thead><tr><th scope="col">Métrica</th><th scope="col">Variação</th></tr></thead>
       <tbody>
-        <tr><td>Desconexões por hora (operação cheia)</td><td>8,7</td><td>4,5</td></tr>
-        <tr><td>Desconexões com sinal ≤ −70 dBm</td><td>6 em 76 min</td><td>2 em 53 min</td></tr>
-        <tr><td>Trocas de antena em 5 GHz</td><td>66 de 95</td><td>0 de 105</td></tr>
-        <tr><td>Mediana do sinal na queda</td><td>−70 a −79 dBm</td><td>−54 dBm</td></tr>
+        <tr><td>Desconexões por hora (operação plena)</td><td>Cerca de −48%</td></tr>
+        <tr><td>Trocas de antena em 5 GHz</td><td>Eliminadas</td></tr>
+        <tr><td>Mediana do sinal na queda</td><td>De sinal fraco/médio para sinal bom</td></tr>
       </tbody>
     </table></div>
     <p class="note">As trocas de ida e volta aumentaram depois da banda única, sem gerar queda: indicam células sobrepostas com força parecida, que entram na decisão de equalizar a potência do recebimento.</p>
@@ -287,7 +284,7 @@
 </main>
 
 <nav class="pager" aria-label="Outros estudos de caso">
-  <a href="../rede-filial-industrial/"><span>Caso anterior</span><strong>Levantamento e modernização de rede de uma filial industrial</strong></a>
+  <a href="../rede-filial-industrial/"><span>Caso anterior</span><strong>Levantamento e modernização de rede de uma unidade industrial</strong></a>
   <a href="../poc-virtualizacao/" style="text-align:right"><span>Próximo caso</span><strong>Avaliação de plataformas de virtualização</strong></a>
 </nav>
 <footer class="site">

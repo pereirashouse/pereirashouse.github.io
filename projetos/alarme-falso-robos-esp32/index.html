@@ -11,7 +11,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Alarme falso de robôs ESP32: o Wi-Fi não caiu, o canal encheu">
-<meta property="og:description" content="Quatro robôs com sinal de −53 a −58 dBm e alarme de “fora da rede”. A causa estava no tempo de ar do canal 2,4 GHz, ocupado por celulares conectados de longe.">
+<meta property="og:description" content="Robôs com sinal de −53 a −58 dBm e alarme de “fora da rede”. A causa estava no tempo de ar do canal 2,4 GHz, ocupado por celulares conectados de longe.">
 <meta property="og:url" content="https://pereirashouse.github.io/projetos/alarme-falso-robos-esp32/">
 <meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
 <link rel="stylesheet" href="../../assets/fonts.css">
@@ -31,21 +31,21 @@
 <header class="case-head infra">
   <p class="crumb"><a href="../../infraestrutura/">Infraestrutura de TI</a> / Estudo de caso</p>
   <h1>Alarme falso de robôs ESP32: o Wi-Fi não caiu, o canal encheu</h1>
-  <p class="lede">Um robô industrial da área de silos disparou o alarme de “fora da rede”. A controladora mostrava o robô conectado o tempo todo, com sinal ótimo. A investigação mostrou que o problema não estava no robô nem na antena, e sim no tempo de ar do canal de 2,4 GHz, tomado por celulares conectados de longe.</p>
+  <p class="lede">Um robô industrial de uma área operacional disparou o alarme de “fora da rede”. A controladora mostrava o robô conectado o tempo todo, com sinal ótimo. A investigação mostrou que o problema não estava no robô nem na antena, e sim no tempo de ar do canal de 2,4 GHz, tomado por celulares conectados de longe.</p>
   <ul class="badges" aria-label="Etiquetas">
     <li class="badge tipo">Profissional</li>
-    <li class="badge status"><span class="sym" aria-hidden="true">●</span>Em produção</li>
+    <li class="badge status"><span class="sym" aria-hidden="true">✓</span>Concluído</li>
     <li class="badge conf"><span class="sym" aria-hidden="true">◇</span>Confidencialidade parcial</li>
     <li class="badge">Troubleshooting</li><li class="badge">Wi-Fi</li><li class="badge">Monitoramento</li>
   </ul>
   <dl class="facts">
-    <div><dt>Ambiente</dt><dd>Quatro robôs ESP32 em rede Wi-Fi 2,4 GHz gerenciada por controladora UniFi, monitorados pelo Zabbix com painéis no Grafana</dd></div>
-    <div><dt>Período</dt><dd>Outubro de 2026</dd></div>
+    <div><dt>Ambiente</dt><dd>Robôs ESP32 em rede Wi-Fi 2,4 GHz gerenciada por controladora UniFi, monitorados pelo Zabbix com painéis no Grafana</dd></div>
+    <div><dt>Período</dt><dd>2026</dd></div>
     <div><dt>Papel</dt><dd>Analista de infraestrutura, responsável pela análise de causa e pela recomendação</dd></div>
     <div><dt>Método</dt><dd>Investigação só leitura: nenhuma configuração alterada durante a análise</dd></div>
   </dl>
-  <p class="summary">Cruzei três fontes no mesmo minuto: o estado de conexão na controladora, a ocupação do canal da antena e os testes do Zabbix nos quatro robôs. O robô nunca saiu do Wi-Fi. Por cerca de dois minutos ele deixou de responder porque o canal chegou a 61–75% de ocupação, e o alarme ficou aberto quase meia hora por causa da regra contra oscilação. A correção foi limitar quem pode se associar à antena dos silos com RSSI mínimo.</p>
-  <p class="updated">Última atualização: 24 de outubro de 2026</p>
+  <p class="summary">Cruzei três fontes no mesmo minuto: o estado de conexão na controladora, a ocupação do canal da antena e os testes do Zabbix nos robôs. O robô nunca saiu do Wi-Fi. Por cerca de dois minutos ele deixou de responder porque o canal chegou a 61–75% de ocupação, e o alarme ficou aberto quase meia hora por causa da regra contra oscilação. A correção foi limitar quem pode se associar à antena da área operacional com RSSI mínimo.</p>
+  <p class="updated">Última atualização: 2026</p>
 </header>
 
 <div class="tabs" role="tablist" aria-label="Modo de leitura">
@@ -60,7 +60,7 @@
   <h2 class="ph">Resumo executivo</h2>
   <div class="blk">
     <h3>Problema</h3>
-    <p>O Zabbix abriu um card de severidade alta: <strong>robô do silo fora da rede</strong>. O card ficou aberto por 28 minutos. Nos dois dias anteriores os quatro robôs já somavam 21 avisos de lentidão ou perda de ping, alguns em dois robôs no mesmo minuto. Para a operação, a leitura natural era “o Wi-Fi dos robôs está caindo”.</p>
+    <p>O Zabbix abriu um card de severidade alta: <strong>robô fora da rede</strong>. O card ficou aberto por 28 minutos. Nos dois dias anteriores os robôs já somavam 21 avisos de lentidão ou perda de ping, alguns em dois robôs no mesmo minuto. Para a operação, a leitura natural era “o Wi-Fi dos robôs está caindo”.</p>
   </div>
   <div class="blk">
     <h3>Hipóteses descartadas</h3>
@@ -73,12 +73,12 @@
   </div>
   <div class="blk">
     <h3>Causa raiz</h3>
-    <p>O canal de 2,4 GHz da antena dos silos, que costuma ficar entre 30 e 50% ocupado, chegou a <strong>61–75%</strong> por seis minutos. Celulares conectados à rede Wi-Fi de uso geral se associavam a essa antena de longe, com sinal de −80 a −107 dBm. Longe, um aparelho transmite em taxa baixa e ocupa o canal por mais tempo a cada pacote. Os robôs, perto e com sinal ótimo, ficavam esperando a vez: a resposta subiu de cerca de 3 ms para 70–150 ms e os testes falharam.</p>
+    <p>O canal de 2,4 GHz da antena da área operacional, que costuma ficar entre 30 e 50% ocupado, chegou a <strong>61–75%</strong> por cerca de seis minutos. Celulares conectados à rede Wi-Fi de uso geral se associavam a essa antena de longe, com sinal de −80 a −107 dBm. Longe, um aparelho transmite em taxa baixa e ocupa o canal por mais tempo a cada pacote. Os robôs, perto e com sinal ótimo, ficavam esperando a vez: a resposta subiu de cerca de 3 ms para 70–150 ms e os testes falharam.</p>
   </div>
   <div class="blk">
     <h3>Solução e validação</h3>
     <ul>
-      <li>RSSI mínimo de cerca de −80 dBm no rádio de 2,4 GHz da antena dos silos, que estava desligado. Os robôs, entre −53 e −58 dBm, ficam bem acima do limite.</li>
+      <li>RSSI mínimo de cerca de −80 dBm no rádio de 2,4 GHz da antena da área operacional, que estava desligado. Os robôs, entre −53 e −58 dBm, ficam bem acima do limite.</li>
       <li>Depois do ajuste, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</li>
       <li>Recomendação complementar no Zabbix: abrir o alarme com 4 testes seguidos sem resposta (2 min) em vez de 2 (1 min).</li>
     </ul>
@@ -104,24 +104,24 @@
   <div class="blk">
     <h4>1. O alarme e a regra que o abre</h4>
     <p>O Zabbix testa a porta de aplicação de cada robô a cada 30 segundos (<code>net.tcp.service</code>). O gatilho abre com <strong>2 testes seguidos sem resposta</strong> (1 minuto) e fecha com 4 respostas seguidas e menos de 4 mudanças de estado em 30 minutos.</p>
-    <p>No episódio, os testes falharam às 09:26:05, 09:27:05 e 09:27:35, e o robô voltou a responder às 09:28:02. O card abriu às 09:27:35 e só fechou às 09:56:02. A falha real durou cerca de 2 minutos; os outros 26 foram a histerese esperando a primeira mudança sair da janela de 30 minutos.</p>
+    <p>No episódio, os testes falharam em t+1:05, t+2:05 e t+2:35, e o robô voltou a responder em t+3:02. O card abriu em t+2:35 e só fechou em t+31:02. A falha real durou cerca de 2 minutos; os outros 26 foram a histerese esperando a primeira mudança sair da janela de 30 minutos.</p>
   </div>
   <div class="blk">
     <h4>2. Hipóteses descartadas</h4>
     <ul>
-      <li><strong>Robô desconectado:</strong> sessão contínua na controladora havia dois dias, mesma antena, sinal de −53 dBm. O mesmo para os outros três.</li>
+      <li><strong>Robô desconectado:</strong> sessão contínua na controladora havia dois dias, mesma antena, sinal de −53 dBm. O mesmo para os outros robôs.</li>
       <li><strong>Antena:</strong> uptime de mais de dois dias e nenhum ping perdido no Zabbix.</li>
       <li><strong>Configuração:</strong> logs de administração dos dois dias sem nenhuma alteração.</li>
-      <li><strong>Hardware do robô:</strong> os quatro pioraram juntos no mesmo minuto, o que aponta para algo compartilhado.</li>
+      <li><strong>Hardware do robô:</strong> todos pioraram juntos no mesmo minuto, o que aponta para algo compartilhado.</li>
     </ul>
   </div>
   <div class="blk">
     <h4>3. Causa raiz: tempo de ar</h4>
     <p>O Wi-Fi é um meio compartilhado: na mesma antena e no mesmo canal, só um aparelho transmite por vez. O que importa não é só o sinal de cada um, mas quanto tempo de canal cada um gasta.</p>
     <ul>
-      <li>Ocupação do canal da antena dos silos: mediana de 42% desde o início do monitoramento; 60% só é passado em 10% do tempo.</li>
-      <li>Entre 09:25 e 09:31: <strong>61–75%</strong>.</li>
-      <li>Entre 09:10 e 09:45, 21 eventos de clientes com −80 dBm ou pior na antena, todos celulares da rede de uso geral, com MAC aleatório, vindos de antenas de outras áreas.</li>
+      <li>Ocupação do canal da antena da área operacional: mediana de 42% desde o início do monitoramento; 60% só é passado em 10% do tempo.</li>
+      <li>Em uma janela de cerca de 6 minutos: <strong>61–75%</strong>.</li>
+      <li>Entre t−15 min e t+20 min, 21 eventos de clientes com −80 dBm ou pior na antena, todos celulares da rede de uso geral, com MAC aleatório, vindos de antenas de outras áreas.</li>
       <li>Resposta ao ping dos robôs no mesmo intervalo: de cerca de 3 ms para 70–150 ms, com perda de pacotes.</li>
     </ul>
   </div>
@@ -140,8 +140,8 @@
     <div class="tbl"><table>
       <thead><tr><th scope="col">Ação</th><th scope="col">Onde</th><th scope="col">Efeito esperado</th><th scope="col">Status</th></tr></thead>
       <tbody>
-        <tr><td>RSSI mínimo de cerca de −80 dBm no rádio de 2,4 GHz da antena dos silos</td><td>Controladora UniFi</td><td>A antena solta os clientes distantes, que tendem a ir para uma antena mais próxima; os robôs (−53 a −58 dBm) não são afetados</td><td>Implantado</td></tr>
-        <tr><td>Alternativa: tirar a rede de uso geral dessa antena</td><td>Controladora UniFi</td><td>Canal praticamente exclusivo dos robôs</td><td>Não adotada; só se ninguém precisar de celular perto dos silos</td></tr>
+        <tr><td>RSSI mínimo de cerca de −80 dBm no rádio de 2,4 GHz da antena da área operacional</td><td>Controladora UniFi</td><td>A antena solta os clientes distantes, que tendem a ir para uma antena mais próxima; os robôs (−53 a −58 dBm) não são afetados</td><td>Implantado</td></tr>
+        <tr><td>Alternativa: tirar a rede de uso geral dessa antena</td><td>Controladora UniFi</td><td>Canal praticamente exclusivo dos robôs</td><td>Não adotada; só se ninguém precisar de celular naquela área</td></tr>
         <tr><td>Abrir o alarme com 4 testes seguidos sem resposta (2 min)</td><td>Zabbix</td><td>Instabilidade curta deixa de virar card; queda real continua avisando em 2 min</td><td>Recomendado</td></tr>
       </tbody>
     </table></div>
@@ -149,8 +149,8 @@
   <div class="blk">
     <h3>Validação</h3>
     <ul>
-      <li>Depois do RSSI mínimo, a ocupação do canal da antena dos silos voltou à faixa normal.</li>
-      <li>Os alarmes de “fora da rede” desse tipo não se repetiram nos quatro robôs.</li>
+      <li>Depois do RSSI mínimo, a ocupação do canal da antena da área operacional voltou à faixa normal.</li>
+      <li>Os alarmes de “fora da rede” desse tipo não se repetiram nos robôs.</li>
     </ul>
   </div>
   <div class="blk">
@@ -165,33 +165,33 @@
 
 <section class="panel" id="evidencias" role="tabpanel" aria-labelledby="t-evidencias">
   <h2 class="ph">Evidências</h2>
-  <p class="callout">Endereços IP e MAC, nomes de rede, de antenas e de equipamentos e números de evento foram omitidos. Os robôs aparecem como A, B, C e D. Os gráficos são reconstruções simplificadas a partir do relatório de análise: os horários e as faixas de valor são os medidos, e a curva minuto a minuto foi redesenhada.</p>
+  <p class="callout">Endereços IP e MAC, nomes de rede, de antenas e de equipamentos e números de evento foram omitidos. Os robôs aparecem como A, B, C e demais. Os horários aparecem relativos ao início do episódio (t0). Os gráficos são reconstruções simplificadas a partir do relatório de análise: os intervalos de tempo e as faixas de valor são os medidos, e a curva minuto a minuto foi redesenhada.</p>
   <figure class="diag">
     <svg viewBox="0 0 860 240" role="img" aria-labelledby="f1t f1d">
-      <title id="f1t">Ocupação do canal de 2,4 GHz da antena dos silos, minuto a minuto</title>
-      <desc id="f1d">Entre 09:00 e 09:50 a ocupação do canal fica entre 38 e 49 por cento, perto da mediana de 42 por cento. Entre 09:25 e 09:31 sobe para 61 a 75 por cento, acima da linha de 60 por cento, e volta ao normal logo depois. O alarme abriu às 09:27:35, dentro desse intervalo.</desc>
+      <title id="f1t">Ocupação do canal de 2,4 GHz da antena da área operacional, minuto a minuto</title>
+      <desc id="f1d">Entre t−25 min e t+25 min a ocupação do canal fica entre 38 e 49 por cento, perto da mediana de 42 por cento. Durante cerca de 6 minutos sobe para 61 a 75 por cento, acima da linha de 60 por cento, e volta ao normal logo depois. O alarme abriu em t+2:35, dentro desse intervalo.</desc>
       <rect x="450" y="40" width="94" height="160" fill="var(--warn-soft)"/>
-      <text class="dg-not" x="497" y="34" text-anchor="middle">episódio 09:25–09:31</text>
+      <text class="dg-not" x="497" y="34" text-anchor="middle">episódio (≈ 6 min)</text>
       <path class="dg-dash" d="M60 133H840"/><text class="dg-s" x="840" y="147" text-anchor="end">mediana 42%</text>
       <path class="dg-no" d="M60 104H840"/><text class="dg-not" x="840" y="98" text-anchor="end">alto: 60%</text>
       <path class="dg" d="M60 40V200H840"/>
       <text class="dg-s" x="52" y="44" text-anchor="end">100%</text><text class="dg-s" x="52" y="124" text-anchor="end">50%</text><text class="dg-s" x="52" y="204" text-anchor="end">0%</text>
       <polyline class="dg" points="60,130 76,134 91,126 107,131 122,138 138,133 154,125 169,130 185,136 200,139 216,131 232,128 247,134 263,123 278,130 294,136 310,133 325,126 341,131 356,138 372,134 388,128 403,125 419,130 434,122 450,102 466,91 481,80 497,85 512,94 528,99 544,123 559,130 575,133 590,136 606,131 622,126 637,134 653,138 668,130 684,133 700,128 715,136 731,131 746,125 762,133 778,139 793,134 809,130 824,133 840,131" stroke-width="2"/>
-      <text class="dg-s" x="60" y="222" text-anchor="middle">09:00</text><text class="dg-s" x="216" y="222" text-anchor="middle">09:10</text><text class="dg-s" x="372" y="222" text-anchor="middle">09:20</text><text class="dg-s" x="528" y="222" text-anchor="middle">09:30</text><text class="dg-s" x="684" y="222" text-anchor="middle">09:40</text><text class="dg-s" x="840" y="222" text-anchor="middle">09:50</text>
+      <text class="dg-s" x="60" y="222" text-anchor="middle">t−25 min</text><text class="dg-s" x="216" y="222" text-anchor="middle">t−15 min</text><text class="dg-s" x="372" y="222" text-anchor="middle">t−5 min</text><text class="dg-s" x="528" y="222" text-anchor="middle">t+5 min</text><text class="dg-s" x="684" y="222" text-anchor="middle">t+15 min</text><text class="dg-s" x="840" y="222" text-anchor="middle">t+25 min</text>
     </svg>
-    <figcaption>Figura 1. Ocupação do canal de 2,4 GHz da antena dos silos. A faixa marca o episódio: o canal passa do limite de 60% e, no mesmo intervalo, os quatro robôs ficam lentos juntos.</figcaption>
+    <figcaption>Figura 1. Ocupação do canal de 2,4 GHz da antena da área operacional. A faixa marca o episódio: o canal passa do limite de 60% e, no mesmo intervalo, todos os robôs ficam lentos juntos.</figcaption>
   </figure>
   <figure class="diag">
     <svg viewBox="0 0 860 170" role="img" aria-labelledby="f2t f2d">
       <title id="f2t">Testes da porta de aplicação do robô A, a cada 30 segundos</title>
-      <desc id="f2d">Uma fila de quadrados de 09:20 a 09:35, um por teste. Quase todos responderam. Falharam os testes de 09:26:05, 09:27:05 e 09:27:35; os dois últimos, seguidos, abriram o alarme às 09:27:35. O robô voltou a responder às 09:28:02. Abaixo, uma barra mostra que o card ficou aberto até 09:56:02, segurado pela regra contra alarme oscilante, embora a falha real tenha durado cerca de dois minutos.</desc>
+      <desc id="f2d">Uma fila de quadrados de t−5 min a t+10 min, um por teste. Quase todos responderam. Falharam os testes de t+1:05, t+2:05 e t+2:35; os dois últimos, seguidos, abriram o alarme em t+2:35. O robô voltou a responder em t+3:02. Abaixo, uma barra mostra que o card ficou aberto até t+31:02, segurado pela regra contra alarme oscilante, embora a falha real tenha durado cerca de dois minutos.</desc>
       <rect x="30" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="56" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="82" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="108" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="134" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="160" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="186" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="212" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="238" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="264" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="290" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="316" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="342" y="50" width="20" height="20" rx="3" fill="var(--warn)"/><rect x="368" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="394" y="50" width="20" height="20" rx="3" fill="var(--warn)"/><rect x="420" y="50" width="20" height="20" rx="3" fill="var(--warn)"/><rect x="446" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="472" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="498" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="524" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="550" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="576" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="602" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="628" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="654" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="680" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="706" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="732" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="758" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="784" y="50" width="20" height="20" rx="3" fill="var(--edu)"/><rect x="810" y="50" width="20" height="20" rx="3" fill="var(--edu)"/>
-      <text class="dg-s" x="30" y="40">09:20</text><text class="dg-s" x="550" y="40" text-anchor="middle">09:30</text><text class="dg-s" x="830" y="40" text-anchor="end">09:35</text>
+      <text class="dg-s" x="30" y="40">t−5 min</text><text class="dg-s" x="550" y="40" text-anchor="middle">t+5 min</text><text class="dg-s" x="830" y="40" text-anchor="end">t+10 min</text>
       <path class="dg-no" d="M342 84H466"/>
       <text class="dg-not" x="404" y="102" text-anchor="middle">falha real ≈ 2 min</text>
-      <text class="dg-s" x="404" y="118" text-anchor="middle">09:26:05 → 09:28:02</text>
+      <text class="dg-s" x="404" y="118" text-anchor="middle">t+1:05 → t+3:02</text>
       <path class="dg-dash" d="M420 140H830"/>
-      <text class="dg-s" x="830" y="160" text-anchor="end">card aberto 09:27:35 → 09:56:02 (continua fora da figura)</text>
+      <text class="dg-s" x="830" y="160" text-anchor="end">card aberto t+2:35 → t+31:02 (continua fora da figura)</text>
       <rect x="30" y="140" width="10" height="10" fill="var(--edu)"/><text class="dg-s" x="46" y="149">respondeu</text>
       <rect x="120" y="140" width="10" height="10" fill="var(--warn)"/><text class="dg-s" x="136" y="149">não respondeu</text>
     </svg>
@@ -200,16 +200,16 @@
   <figure class="diag">
     <svg viewBox="0 0 860 250" role="img" aria-labelledby="f3t f3d">
       <title id="f3t">Por que o canal enche</title>
-      <desc id="f3d">À esquerda, os quatro robôs perto da antena dos silos, com sinal de −53 a −58 dBm. À direita, celulares de outras áreas associados à mesma antena com −84 a −88 dBm. Todos dividem o mesmo canal de 2,4 GHz, onde só um transmite por vez. Embaixo, o caminho do alarme: robô, antena, rede, Zabbix testando a porta a cada 30 segundos e o card no chat da equipe.</desc>
+      <desc id="f3d">À esquerda, os robôs perto da antena da área operacional, com sinal de −53 a −58 dBm. À direita, celulares de outras áreas associados à mesma antena com −84 a −88 dBm. Todos dividem o mesmo canal de 2,4 GHz, onde só um transmite por vez. Embaixo, o caminho do alarme: robô, antena, rede, Zabbix testando a porta a cada 30 segundos e o card no chat da equipe.</desc>
       <rect class="dg-box" x="20" y="20" width="180" height="128" rx="6"/>
       <text class="dg-t" x="110" y="42" text-anchor="middle">Robôs ESP32</text>
       <text class="dg-okt" x="110" y="66" text-anchor="middle">A · −53 dBm</text>
       <text class="dg-okt" x="110" y="86" text-anchor="middle">B · −55 dBm</text>
       <text class="dg-okt" x="110" y="106" text-anchor="middle">C · −56 dBm</text>
-      <text class="dg-okt" x="110" y="126" text-anchor="middle">D · −58 dBm</text>
+      <text class="dg-okt" x="110" y="126" text-anchor="middle">demais · até −58 dBm</text>
       <path class="dg-ok" d="M200 84H340"/>
       <rect class="dg-box" x="340" y="54" width="180" height="60" rx="6"/>
-      <text class="dg-t" x="430" y="80" text-anchor="middle">Antena dos silos</text>
+      <text class="dg-t" x="430" y="80" text-anchor="middle">Antena da área</text>
       <text class="dg-s" x="430" y="100" text-anchor="middle">2,4 GHz · um fala por vez</text>
       <path class="dg-no" d="M520 84H660"/>
       <rect class="dg-dash" x="660" y="20" width="180" height="128" rx="6"/>
@@ -229,26 +229,26 @@
     <figcaption>Figura 3. Os robôs estão perto e com sinal ótimo, mas dividem o canal com celulares que se associam à mesma antena de longe. O tempo de canal que um aparelho distante gasta é o que os robôs ficam esperando.</figcaption>
   </figure>
   <div class="blk wide">
-    <h3>Clientes com sinal fraco na antena dos silos (amostra)</h3>
+    <h3>Clientes com sinal fraco na antena da área operacional (amostra)</h3>
     <div class="tbl"><table>
-      <thead><tr><th scope="col">Hora</th><th scope="col">Evento</th><th scope="col">Rede</th><th scope="col">Sinal</th><th scope="col">Aparelho</th></tr></thead>
+      <thead><tr><th scope="col">Tempo</th><th scope="col">Evento</th><th scope="col">Rede</th><th scope="col">Sinal</th><th scope="col">Aparelho</th></tr></thead>
       <tbody>
-        <tr><td>09:15:36</td><td>chegou de outra antena</td><td>uso geral</td><td>−88 dBm</td><td>celular 1</td></tr>
-        <tr><td>09:20:20</td><td>desconectou</td><td>uso geral</td><td>−103 dBm</td><td>celular 2</td></tr>
-        <tr><td>09:22:16</td><td>conectou</td><td>uso geral</td><td>−82 dBm</td><td>celular 3</td></tr>
-        <tr><td>09:24:28</td><td>conectou</td><td>uso geral</td><td>−83 dBm</td><td>celular 3</td></tr>
-        <tr><td>09:28:17</td><td>conectou</td><td>uso geral</td><td>−85 dBm</td><td>celular 4</td></tr>
-        <tr><td>09:28:36</td><td>desconectou</td><td>uso geral</td><td>−102 dBm</td><td>celular 3</td></tr>
-        <tr><td>09:30:44</td><td>chegou de outra antena</td><td>uso geral</td><td>−86 dBm</td><td>celular 4</td></tr>
-        <tr><td>09:35:23</td><td>desconectou</td><td>uso geral</td><td>−107 dBm</td><td>celular 5</td></tr>
+        <tr><td>t−9:24</td><td>chegou de outra antena</td><td>uso geral</td><td>−88 dBm</td><td>celular 1</td></tr>
+        <tr><td>t−4:40</td><td>desconectou</td><td>uso geral</td><td>−103 dBm</td><td>celular 2</td></tr>
+        <tr><td>t−2:44</td><td>conectou</td><td>uso geral</td><td>−82 dBm</td><td>celular 3</td></tr>
+        <tr><td>t−0:32</td><td>conectou</td><td>uso geral</td><td>−83 dBm</td><td>celular 3</td></tr>
+        <tr><td>t+3:17</td><td>conectou</td><td>uso geral</td><td>−85 dBm</td><td>celular 4</td></tr>
+        <tr><td>t+3:36</td><td>desconectou</td><td>uso geral</td><td>−102 dBm</td><td>celular 3</td></tr>
+        <tr><td>t+5:44</td><td>chegou de outra antena</td><td>uso geral</td><td>−86 dBm</td><td>celular 4</td></tr>
+        <tr><td>t+10:23</td><td>desconectou</td><td>uso geral</td><td>−107 dBm</td><td>celular 5</td></tr>
       </tbody>
     </table></div>
-    <p class="note">21 eventos com −80 dBm ou pior entre 09:10 e 09:45. Os aparelhos usam MAC aleatório; na análise, o final do MAC serviu só para distinguir um do outro. Os robôs não aparecem na lista: estavam entre −53 e −58 dBm.</p>
+    <p class="note">21 eventos com −80 dBm ou pior entre t−15 min e t+20 min. Os aparelhos usam MAC aleatório; na análise, o final do MAC serviu só para distinguir um do outro. Os robôs não aparecem na lista: estavam entre −53 e −58 dBm.</p>
   </div>
   <div class="blk">
     <h3>Fontes consultadas (só leitura)</h3>
     <ul>
-      <li><strong>Controladora UniFi</strong>, com chave de API só leitura: estado e sessões dos quatro robôs, log de conexões da antena e log de administração.</li>
+      <li><strong>Controladora UniFi</strong>, com chave de API só leitura: estado e sessões dos robôs, log de conexões da antena e log de administração.</li>
       <li><strong>Zabbix</strong>: ocupação do canal e clientes da antena (1 min), <code>icmpping</code>, <code>icmppingloss</code> e <code>icmppingsec</code> dos robôs (3 min), <code>net.tcp.service</code> da porta de aplicação (30 s) e eventos dos dois dias anteriores.</li>
       <li><strong>Grafana</strong>: painéis sobre os mesmos itens, para ver canal e robôs na mesma linha do tempo.</li>
     </ul>
@@ -263,7 +263,7 @@
         <tr><td>Fora da rede</td><td>porta de aplicação sem resposta</td></tr>
       </tbody>
     </table></div>
-    <p class="note">21 avisos nos quatro robôs em dois dias, quase todos de lentidão ou perda, alguns em dois robôs no mesmo minuto: a mesma assinatura do episódio analisado.</p>
+    <p class="note">21 avisos nos robôs em dois dias, quase todos de lentidão ou perda, alguns em dois robôs no mesmo minuto: a mesma assinatura do episódio analisado.</p>
   </div>
 </section>
 

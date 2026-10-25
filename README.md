@@ -15,7 +15,7 @@ Portfólio público que reúne experiência profissional em **infraestrutura de 
 - [Diagnóstico de falha 802.1X](https://pereirashouse.github.io/projetos/incidente-8021x-windows/): investigação orientada por logs após atualização do Windows.
 - [Modernização de rede industrial](https://pereirashouse.github.io/projetos/rede-filial-industrial/): levantamento, VLANs, redundância, documentação e análise de risco.
 - [Quedas dos coletores Wi-Fi](https://pereirashouse.github.io/projetos/quedas-coletores-wifi/): investigação em seis frentes, correções por rodada e comparação de amostras, com validação contínua.
-- [Avaliação de virtualização](https://pereirashouse.github.io/projetos/poc-virtualizacao/): PoC de VMware, Sangfor HCI e Proxmox VE.
+- [Avaliação de virtualização](https://pereirashouse.github.io/projetos/poc-virtualizacao/): avaliação de plataformas de virtualização comerciais e open source, com critérios de rollback.
 - [Troubleshooting pós-migração de VM](https://pereirashouse.github.io/projetos/troubleshooting-pos-migracao/): migração KVM → VMware com três bloqueios em cadeia (acesso, rede e HTTP 503), resolvidos sem rollback.
 - [Monitoramento Wi-Fi com Python](https://github.com/pereirashouse/monitoramentowificompython): código de coleta de eventos de queda de coletores e geração de relatórios.
 
