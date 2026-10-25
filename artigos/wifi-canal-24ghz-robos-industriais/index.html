@@ -44,13 +44,13 @@
     <div><dt>Para quem</dt><dd>Profissionais de infraestrutura e professores de Computação e Redes</dd></div>
     <div><dt>Leitura</dt><dd>Cerca de 7 minutos</dd></div>
   </dl>
-  <p class="summary">Quatro robôs industriais geravam alarmes recorrentes de “fora da rede”. O sinal de Wi-Fi estava entre −53 e −58 dBm, ótimo. Não havia reinicialização de antena. Nenhuma configuração tinha sido alterada. E, ainda assim, o monitoramento (Zabbix, com painéis no Grafana) abria cards de falha por dias seguidos. O problema não estava onde o sintoma apontava.</p>
+  <p class="summary">Robôs industriais geravam alarmes recorrentes de “fora da rede”. O sinal de Wi-Fi estava entre −53 e −58 dBm, ótimo. Não havia reinicialização de antena. Nenhuma configuração tinha sido alterada. E, ainda assim, o monitoramento (Zabbix, com painéis no Grafana) abria cards de falha por dias seguidos. O problema não estava onde o sintoma apontava.</p>
 </header>
 
 <main id="conteudo" class="article">
   <div class="blk">
     <h2>O cenário e a regra do alarme</h2>
-    <p>Os robôs (ESP32) operam na área de silos de uma indústria e são monitorados pelo Zabbix, com painéis no Grafana. O Zabbix testa a porta de aplicação de cada um a cada 30 segundos. Dois testes consecutivos sem resposta, ou seja, um minuto, abrem um card de “fora da rede”. O card só fecha após quatro respostas positivas com menos de quatro mudanças em 30 minutos. A regra foi pensada para evitar oscilação, mas tinha um efeito colateral: esticava o alarme muito além da falha real.</p>
+    <p>Os robôs (ESP32) operam em uma área operacional de uma indústria e são monitorados pelo Zabbix, com painéis no Grafana. O Zabbix testa a porta de aplicação de cada um a cada 30 segundos. Dois testes consecutivos sem resposta, ou seja, um minuto, abrem um card de “fora da rede”. O card só fecha após quatro respostas positivas com menos de quatro mudanças em 30 minutos. A regra foi pensada para evitar oscilação, mas tinha um efeito colateral: esticava o alarme muito além da falha real.</p>
   </div>
 
   <div class="blk">
@@ -60,14 +60,14 @@
       <li><strong>Queda de Wi-Fi: descartada.</strong> A controladora registrava todos os robôs conectados sem interrupção, com sinal estável entre −53 e −58 dBm.</li>
       <li><strong>Falha de antena: descartada.</strong> Não havia reinicializações no período, e 100 % dos pings do monitor foram respondidos.</li>
       <li><strong>Mudança de configuração: descartada.</strong> Os logs de administração mostravam apenas acessos somente-leitura nos dias anteriores.</li>
-      <li><strong>Defeito em um robô: descartada.</strong> Os quatro ficaram lentos exatamente ao mesmo tempo, o que elimina problema isolado de hardware.</li>
+      <li><strong>Defeito em um robô: descartada.</strong> Todos ficaram lentos ao mesmo tempo, o que elimina problema isolado de hardware.</li>
     </ul>
     <p>Cada hipótese descartada reduzia o espaço de busca. O que sobrou foi o que ninguém tinha olhado: o canal de rádio.</p>
   </div>
 
   <div class="blk">
     <h2>A causa raiz: canal 2,4 GHz congestionado</h2>
-    <p>O canal da antena dos silos operava normalmente a 42 % de ocupação. Entre 09:25 e 09:31 do dia do incidente, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %.</p>
+    <p>O canal da antena da área operacional operava normalmente a 42 % de ocupação. Em uma janela de cerca de 6 minutos, celulares corporativos com sinal fraco (−80 a −107 dBm) conectados à mesma antena elevaram o uso do canal para 61–75 %.</p>
     <p>Aparelhos distantes transmitem mais devagar e ocupam o canal por mais tempo por pacote. Com o canal saturado, os robôs, mesmo com sinal ótimo, precisavam aguardar para transmitir. O tempo de resposta ao teste de porta saltou de ~3 ms para 70–150 ms, exatamente no intervalo das falhas consecutivas que abriram o alarme.</p>
   </div>
 
@@ -85,7 +85,7 @@
       <rect class="dg-no" x="500" y="66" width="120" height="24" rx="2"/>
       <rect class="dg-ok" x="690" y="66" width="34" height="24" rx="2"/>
 
-      <text class="dg-t" x="20" y="140">Canal no incidente (09:25–09:31) · 61–75 % ocupado</text>
+      <text class="dg-t" x="20" y="140">Canal no incidente (≈ 6 min) · 61–75 % ocupado</text>
       <text class="dg-s" x="20" y="158">resposta ao teste de porta: 70–150 ms</text>
       <line class="dg" x1="20" y1="200" x2="840" y2="200"/>
       <rect class="dg-no" x="40" y="176" width="150" height="24" rx="2"/>
@@ -113,7 +113,7 @@
 
   <div class="blk">
     <h2>A solução e a validação</h2>
-    <p>Foi ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área de silos. Aparelhos com sinal abaixo desse limiar são desassociados; a reconexão a um AP mais próximo depende do cliente e da cobertura disponível e não é garantida. Os robôs industriais, com sinal entre −53 e −58 dBm, não foram afetados.</p>
+    <p>Foi ativado o RSSI mínimo (≈ −80 dBm) no rádio 2,4 GHz da antena da área operacional. Aparelhos com sinal abaixo desse limiar são desassociados; a reconexão a um AP mais próximo depende do cliente e da cobertura disponível e não é garantida. Os robôs industriais, com sinal entre −53 e −58 dBm, não foram afetados.</p>
     <p>Após a configuração, o canal voltou à faixa normal de ocupação e os alarmes desse tipo não se repetiram.</p>
     <p><strong>Caso completo no portfólio:</strong> <a href="../../projetos/alarme-falso-robos-esp32/">Alarme falso de robô industrial: congestionamento de canal Wi-Fi 2,4 GHz</a><br>
     <strong>Caso irmão:</strong> <a href="https://github.com/pereirashouse/monitoramentowificompython" target="_blank" rel="noopener">monitor de quedas Wi-Fi em Python ↗<span class="sr-only"> (abre em nova aba)</span></a></p>
