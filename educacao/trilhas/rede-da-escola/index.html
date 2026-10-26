@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trilha de aulas · Rede da Escola · Jeferson Pereira</title>
+<meta name="description" content="Sequência didática de 3 aulas de 50 minutos com o simulador Rede da Escola: VLANs, endereçamento IPv4, gateway, DHCP e firewall, com exercícios, avaliação e adaptações. Ensino Médio e cursos técnicos.">
+<link rel="canonical" href="https://pereirashouse.github.io/educacao/trilhas/rede-da-escola/">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#23774A">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Trilha de aulas · Rede da Escola">
+<meta property="og:description" content="Sequência didática de 3 aulas com o simulador Rede da Escola: VLANs, endereçamento IPv4 e firewall, com exercícios, avaliação e adaptações.">
+<meta property="og:url" content="https://pereirashouse.github.io/educacao/trilhas/rede-da-escola/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="stylesheet" href="../../../assets/fonts.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<style>
+.ficha-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font-weight:600;font-size:.93rem;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:currentColor}
+.btn.primary{background:var(--edu);border-color:var(--edu);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.08)}
+.status-val{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--edu-soft);color:var(--edu);font-weight:600;font-size:.88rem}
+.bncc-list{list-style:none;padding:0!important;margin:0;display:flex;flex-direction:column;gap:6px}
+.bncc-list code{display:inline-block;min-width:7.5em;padding:1px 6px;margin-right:6px;border-radius:3px;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.74rem}
+.objetivo{font-size:1.05rem;padding:12px 16px;border-left:3px solid var(--edu);background:var(--surface);border-radius:4px}
+.bloco-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.min{font-family:var(--mono);font-size:.75rem;color:var(--edu);border:1px solid var(--edu);border-radius:3px;padding:0 6px;font-weight:500;white-space:nowrap}
+.steps li::before{border-color:var(--edu)}
+.steps li>p:not(.bloco-t) strong{display:inline}
+.steps li li{counter-increment:none;padding:0;border:0;margin:0}
+.steps li li::before{content:none}
+.steps li li strong,.steps li li b{display:inline}
+.steps ol,.steps ul{gap:6px}
+.trilha-mapa{list-style:none;padding:0!important;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px!important}
+.trilha-mapa li{padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-size:.92rem}
+.trilha-mapa .n{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--edu)}
+.trilha-mapa a{font-family:var(--display);font-weight:700;font-size:1.02rem}
+.sumario{border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--surface)}
+.sumario ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px!important;padding:0!important;margin:8px 0 0}
+.sumario h2{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.aula{border-top:2px solid var(--edu);padding-top:20px;scroll-margin-top:calc(var(--nav-height,56px) + 20px)}
+.aula h2{font-size:clamp(1.4rem,3.6vw,1.9rem)}
+.aula .sub{color:var(--muted);margin-top:4px}
+[id]{scroll-margin-top:calc(var(--nav-height,56px) + 20px)}
+.regra{list-style:none;font-family:var(--mono);font-size:.82rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px!important;gap:6px!important}
+.regra b{color:var(--edu)}
+.tbl td,.tbl th{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td code{font-family:var(--mono);font-size:.82rem}
+.tbl .ok{color:var(--edu);font-weight:600}
+.tbl .no{font-weight:600}
+.limite{border-left:3px solid var(--line);padding:4px 0 4px 12px;color:var(--muted);font-size:.93rem}
+.limite strong{color:var(--fg)}
+.exs{list-style:none;padding:0!important;display:flex;flex-direction:column;gap:12px!important}
+.exs li{padding:14px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.exs h4{margin:0 0 4px}
+.exs .onde{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--edu);display:block;margin-bottom:6px}
+.exs blockquote{margin:0 0 8px;font-style:italic}
+.folha td{height:2.2em}
+@media print{
+  @page{size:A4;margin:14mm}
+  :root{--bg:#fff;--surface:#fff;--fg:#000;--muted:#333;--line:#bbb;--edu:#1d5e3a;--edu-soft:#eef6f1}
+  body{font-size:9.5pt;line-height:1.4;background:#fff;color:#000}
+  .topnav,.ficha-acts,.pager,footer.site,.sumario,.crumb,.no-print{display:none!important}
+  .wrap{padding:0;max-width:none} main,.panel{gap:14px!important}
+  .case-head h1{font-size:16pt} .blk{max-width:none;gap:6px} .blk h3{font-size:12pt}
+  .aula{break-before:page;border-top:0;padding-top:0}
+  .blk,.exs li,.tbl tr{break-inside:avoid}
+  .folha-wrap{break-before:page}
+}
+</style>
+</head>
+<body class="edu-page">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../../">Início</a></li>
+  <li><a href="../../../educacao/">Educação</a></li>
+  <li><a href="../../../educacao/#simuladores">Simuladores</a></li>
+  <li><a href="../../../infraestrutura/">Infraestrutura</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head edu">
+  <p class="crumb"><a href="../../../educacao/simuladores/rede-da-escola/">Ficha do simulador</a> / Trilha de aulas</p>
+  <h1>Redes de computadores na prática: a rede da escola em 3 aulas</h1>
+  <p class="lede">Sequência didática completa para usar com o simulador Rede da Escola: o professor encontra aqui o roteiro de cada aula, o gabarito de endereçamento, os exercícios e a avaliação; a turma usa o simulador no navegador para configurar, testar e documentar a rede de uma escola fictícia.</p>
+  <dl class="facts">
+    <div><dt>Público</dt><dd>Ensino Médio (1º ao 3º ano) e cursos técnicos em Informática</dd></div>
+    <div><dt>Duração</dt><dd>3 aulas de 50 minutos (150 minutos)</dd></div>
+    <div><dt>Modalidade</dt><dd>Duplas, com socialização em grupo</dd></div>
+    <div><dt>Recurso principal</dt><dd>Simulador Rede da Escola (navegador, sem instalação)</dd></div>
+  </dl>
+  <div class="ficha-acts">
+    <a class="btn primary" href="../../../rede-da-escola/">Abrir o simulador <span aria-hidden="true">→</span><span class="sr-only">: Rede da Escola</span></a>
+    <a class="btn" href="../../../educacao/simuladores/rede-da-escola/">Ficha do simulador</a>
+    <a class="btn" href="../../../educacao/guias/guia-rede-da-escola/">Guia de 1 aula</a>
+    <button type="button" class="btn" onclick="window.print()">Imprimir ou salvar em PDF</button>
+  </div>
+</header>
+
+<main id="conteudo">
+<nav class="sumario" aria-labelledby="h-sumario">
+  <h2 id="h-sumario">Nesta página</h2>
+  <ol>
+    <li><a href="#objetivos">Objetivos e BNCC</a></li>
+    <li><a href="#simulador">O que o simulador faz</a></li>
+    <li><a href="#aula-1">Aula 1</a></li>
+    <li><a href="#aula-2">Aula 2</a></li>
+    <li><a href="#aula-3">Aula 3</a></li>
+    <li><a href="#exercicios">Exercícios</a></li>
+    <li><a href="#avaliacao">Avaliação</a></li>
+    <li><a href="#recursos">Recursos</a></li>
+    <li><a href="#adaptacoes">Adaptações</a></li>
+    <li><a href="#interdisciplinar">Conexões</a></li>
+    <li><a href="#folha">Folha de planejamento</a></li>
+  </ol>
+</nav>
+
+<section class="panel" aria-labelledby="h-visao">
+  <h2 class="ph" id="h-visao">Visão geral da trilha</h2>
+  <div class="blk wide">
+    <ul class="trilha-mapa">
+      <li><span class="n">Aula 1 · 50 min</span><a href="#aula-1">Por que separar a rede?</a><br>Problematização, conceitos de IP, VLAN e firewall e primeira missão resolvida em conjunto.</li>
+      <li><span class="n">Aula 2 · 50 min</span><a href="#aula-2">Mão na massa: VLANs e endereços</a><br>As duplas montam a rede da escola do zero e testam a conectividade com ping.</li>
+      <li><span class="n">Aula 3 · 50 min</span><a href="#aula-3">Firewall e documentação técnica</a><br>Regras entre as redes, auditoria de segurança e relatório técnico da dupla.</li>
+    </ul>
+  </div>
+
+  <div class="blk" id="objetivos">
+    <h3>Objetivos de aprendizagem</h3>
+    <p>Ao final da sequência, o estudante será capaz de:</p>
+    <ol>
+      <li>Explicar a função de uma VLAN para separar setores de uma organização que compartilham a mesma estrutura física.</li>
+      <li>Planejar o endereçamento IPv4 de cada rede, com máscara (prefixo /24), gateway e faixa de DHCP coerentes.</li>
+      <li>Identificar quais acessos entre redes precisam ser liberados ou bloqueados para proteger dados sensíveis, como notas e dados pessoais.</li>
+      <li>Testar a conectividade e interpretar onde e por que um pacote foi entregue ou barrado.</li>
+      <li>Documentar as decisões técnicas de forma clara, justificada e replicável.</li>
+    </ol>
+  </div>
+
+  <div class="blk">
+    <h3>Habilidades da BNCC Computação (Ensino Médio)</h3>
+    <ul class="bncc-list">
+      <li><code>EM13CO07</code>Compreender as tecnologias, equipamentos, protocolos e serviços envolvidos no funcionamento de redes de computadores, e identificar possibilidades de escala e confiabilidade.</li>
+      <li><code>EM13CO08</code>Entender como mudanças na tecnologia afetam a segurança, incluindo formas de preservar a privacidade e os dados pessoais.</li>
+      <li><code>EM13CO09</code>Identificar tecnologias digitais, sua presença e formas de uso nas diferentes atividades do mundo do trabalho.</li>
+    </ul>
+    <p><strong>Competência geral 5 (Cultura digital):</strong> compreender, utilizar e criar tecnologias digitais de informação e comunicação de forma crítica, significativa, reflexiva e ética.</p>
+    <p class="note">Para turmas do 8º e 9º ano, use a versão de 1 aula descrita na <a href="../../../educacao/simuladores/rede-da-escola/">ficha do simulador</a>, alinhada às habilidades EF07CO06, EF07CO07, EF08CO06 e EF08CO10.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Pensamento computacional na trilha</h3>
+    <ul>
+      <li><strong>Abstração:</strong> representar a rede de uma escola por ambientes, VLANs e endereços, deixando de lado o que não interfere na decisão.</li>
+      <li><strong>Decomposição:</strong> dividir a escola em setores e cada setor em rede, equipamentos e dispositivos.</li>
+      <li><strong>Reconhecimento de padrões:</strong> perceber quais ambientes têm a mesma necessidade de acesso e o mesmo nível de risco.</li>
+      <li><strong>Algoritmos:</strong> expressar a política de segurança como regras do tipo “se a origem é X e o destino é Y, então libera ou bloqueia”.</li>
+    </ul>
+  </div>
+
+  <div class="blk" id="simulador">
+    <h3>O que o simulador faz (e o que não faz)</h3>
+    <p>As atividades desta trilha foram escritas para o que o simulador realmente oferece:</p>
+    <ul>
+      <li>Uma escola fictícia com <strong>8 ambientes fixos</strong>: Laboratório de informática, Secretaria e direção, Sala dos professores, Biblioteca, Servidores, Impressoras, Câmeras e Visitantes (Wi-Fi). O servidor de notas (<code>SRV-NOTAS</code>) e o de arquivos (<code>SRV-ARQUIVOS</code>) ficam no ambiente Servidores.</li>
+      <li><strong>Seção 1, VLANs e redes:</strong> número da VLAN, rede, prefixo, gateway e DHCP ligado ou desligado. O DHCP entrega endereços de .100 a .199.</li>
+      <li><strong>Seção 2, ambientes:</strong> VLAN de cada ambiente, switch, access points e o endereço de cada dispositivo (IP fixo ou automático).</li>
+      <li><strong>Seção 3, firewall:</strong> uma tabela de quem pode <em>iniciar</em> conexão com quem, por ambiente. O que não está marcado é bloqueado. Dentro da mesma VLAN o tráfego não passa pelo firewall.</li>
+      <li><strong>Seção 4, ping:</strong> mostra cada passo do pacote e o ponto exato em que ele parou.</li>
+      <li><strong>Verificar rede, Relatório final e Salvar projeto (.json):</strong> lista erros e avisos com dicas, gera um relatório em texto e permite continuar o trabalho em outra aula.</li>
+      <li><strong>Missões 1 a 5 e Projeto do zero:</strong> cinco cenários com defeitos e um modo em que a rede é montada desde o início.</li>
+    </ul>
+    <p class="limite"><strong>Limites conhecidos:</strong> não é possível criar novos ambientes nem novos dispositivos; as regras de firewall valem para o ambiente inteiro, e não para um servidor ou uma porta específica; não há simulação de roteamento entre escolas, HTTPS ou SSH. Onde a trilha passa desses limites, a atividade é feita no papel e está indicada.</p>
+  </div>
+</section>
+
+<section class="panel aula" id="aula-1" aria-labelledby="h-aula-1">
+  <div>
+    <h2 id="h-aula-1">Aula 1 · Por que separar a rede da escola?</h2>
+    <p class="sub">Fundamentos de redes e primeiro contato com o simulador · 50 minutos</p>
+  </div>
+  <div class="blk">
+    <ol class="steps">
+      <li>
+        <p class="bloco-t"><strong>Problematização</strong><span class="min">15 min</span></p>
+        <p>Pergunta disparadora: <em>“Por que a rede da secretaria não pode ser a mesma rede dos alunos e dos visitantes? O que pode acontecer se for?”</em></p>
+        <p>Conduza a discussão por quatro eixos: privacidade dos dados (notas, dados pessoais de estudantes e famílias, LGPD), volume de tráfego, segurança e organização. Use exemplos do cotidiano: a rede de convidados do roteador de casa, o Wi-Fi de visitantes de um comércio, a separação entre caixa e área de atendimento de um banco.</p>
+      </li>
+      <li>
+        <p class="bloco-t"><strong>Conceituação</strong><span class="min">20 min</span></p>
+        <p>Apresente os conceitos no quadro, ainda sem o simulador:</p>
+        <ul>
+          <li><strong>Endereço IP (IPv4):</strong> quatro números de 0 a 255, como <code>192.168.10.25</code>. A máscara (ou prefixo) diz qual parte identifica a rede: em <code>/24</code> (255.255.255.0), os três primeiros números são a rede e o último é o dispositivo. O primeiro endereço é o da rede e o último é o de broadcast; nenhum dos dois vai para um dispositivo.</li>
+          <li><strong>Gateway:</strong> o endereço do roteador dentro de cada rede, normalmente o <code>.1</code>. Sem ele o dispositivo só conversa com a própria rede.</li>
+          <li><strong>DHCP:</strong> o serviço que entrega endereço automaticamente. Quando ele não responde, o computador se atribui um endereço <code>169.254.x.x</code> e não sai da própria máquina.</li>
+          <li><strong>VLAN:</strong> uma rede lógica separada dentro dos mesmos switches. Analogia: o prédio da escola é um só, mas cada sala tem sua função e regras próprias de quem entra.</li>
+          <li><strong>Firewall:</strong> o ponto entre as redes que decide, por regras, quem pode iniciar conexão com quem.</li>
+        </ul>
+      </li>
+      <li>
+        <p class="bloco-t"><strong>Primeiro contato com o simulador</strong><span class="min">15 min</span></p>
+        <p>Projete o simulador na <strong>Missão 1 · Conflito na biblioteca</strong> e resolva com a turma, explicando cada parte da tela: mapa da rede, tabela de VLANs, ambientes, firewall e ping.</p>
+        <ol>
+          <li>Clique em <strong>Verificar rede</strong>: aparece um conflito de IP entre <code>PC-BIB-01</code> e <code>PC-BIB-02</code>, os dois com <code>192.168.40.10</code>.</li>
+          <li>Peça para a turma propor a correção: trocar <code>PC-BIB-02</code> para <code>192.168.40.11</code> (fora da faixa .100 a .199 do DHCP).</li>
+          <li>Verifique de novo e teste o ping de <code>PC-BIB-01</code> para a Internet: o caminho mostra switch do ambiente, switch central, gateway <code>192.168.40.1</code> e firewall.</li>
+        </ol>
+        <p>Depois, as duplas abrem o simulador nos seus aparelhos e exploram livremente a Missão 1 já corrigida, anotando quais campos podem ser alterados em cada seção.</p>
+      </li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h4>Registro no caderno</h4>
+    <p>Cada dupla responde: “O que é um conflito de IP e por que ele faz a rede cair e voltar nos dois computadores?”</p>
+  </div>
+</section>
+
+<section class="panel aula" id="aula-2" aria-labelledby="h-aula-2">
+  <div>
+    <h2 id="h-aula-2">Aula 2 · Mão na massa: VLANs e endereçamento</h2>
+    <p class="sub">Montagem da rede no modo Projeto do zero · 50 minutos</p>
+  </div>
+  <div class="blk">
+    <p class="objetivo">Cenário: “Você é a equipe de infraestrutura de uma escola fictícia que vai ganhar rede nova. Precisa separar a secretaria e a direção, os professores e os espaços de uso dos estudantes e visitantes, sem deixar ninguém sem internet.”</p>
+  </div>
+  <div class="blk">
+    <ol class="steps">
+      <li>
+        <p class="bloco-t"><strong>Retomada e planejamento no papel</strong><span class="min">10 min</span></p>
+        <p>Retome os conceitos da aula 1. Cada dupla preenche a <a href="#folha">folha de planejamento</a> antes de abrir o simulador: qual VLAN e qual rede cada ambiente vai usar, e onde o DHCP precisa estar ligado.</p>
+      </li>
+      <li>
+        <p class="bloco-t"><strong>Configuração no simulador</strong><span class="min">25 min</span></p>
+        <p>No campo <strong>Missão</strong>, escolha <strong>Projeto do zero</strong> e digite o nome da dupla. A rede começa vazia: sem VLANs, sem switches, sem endereços fixos e com o firewall todo fechado.</p>
+        <ol>
+          <li><strong>Segmentação por VLAN:</strong> crie as VLANs na seção 1 e associe cada ambiente à sua VLAN na seção 2.</li>
+          <li><strong>Endereçamento:</strong> defina rede, prefixo <code>/24</code> e gateway <code>.1</code> de cada VLAN. Ligue o DHCP nas VLANs que têm dispositivos em modo automático (laboratório, professores e visitantes).</li>
+          <li><strong>Dispositivos:</strong> dê um IP fixo a cada computador, servidor, impressora e câmera, dentro da rede do seu ambiente e fora da faixa .100 a .199.</li>
+          <li><strong>Equipamentos:</strong> escolha um switch com portas suficientes (pontos de cabo + access points + 1 porta de ligação com o switch central) e os access points de quem usa Wi-Fi. As câmeras pedem switch PoE.</li>
+        </ol>
+      </li>
+      <li>
+        <p class="bloco-t"><strong>Teste e validação</strong><span class="min">10 min</span></p>
+        <p>Use <strong>Verificar rede</strong> até não sobrar erro de VLAN, endereçamento ou equipamento. Os avisos “Regra bloqueia um acesso de que a escola precisa” são esperados nesta etapa e serão resolvidos na aula 3. Depois faça os pings abaixo e registre o resultado:</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Teste</th><th>Resultado esperado agora</th><th>Por quê</th></tr></thead>
+          <tbody>
+            <tr><td><code>PC-LAB-01</code> → <code>PC-LAB-02</code></td><td class="ok">Funciona</td><td>Mesma VLAN: entrega direta, sem passar pelo firewall.</td></tr>
+            <tr><td><code>PC-SEC-01</code> → <code>PC-DIRECAO</code></td><td class="ok">Funciona</td><td>Mesma VLAN da secretaria e direção.</td></tr>
+            <tr><td><code>PC-LAB-01</code> → Internet</td><td class="no">Bloqueado</td><td>O pacote chega ao gateway, mas o firewall ainda não tem nenhuma regra liberada.</td></tr>
+            <tr><td><code>PC-LAB-01</code> → <code>SRV-NOTAS</code></td><td class="no">Bloqueado</td><td>Redes diferentes; o firewall barra. É o que queremos manter na aula 3.</td></tr>
+          </tbody>
+        </table></div>
+      </li>
+      <li>
+        <p class="bloco-t"><strong>Salvar e registrar</strong><span class="min">5 min</span></p>
+        <p>Cada dupla clica em <strong>Salvar projeto (.json)</strong> e guarda o arquivo: ele será aberto no início da aula 3. No caderno: “O que funcionou? O que não funcionou? Por quê?”</p>
+      </li>
+    </ol>
+  </div>
+  <div class="blk">
+    <h4>Gabarito de referência (para o professor)</h4>
+    <p>É o plano que o próprio simulador usa como rede bem configurada nas missões. Outras numerações são válidas, desde que as redes não se repitam e cada endereço esteja dentro da rede do seu ambiente.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Ambiente</th><th>VLAN</th><th>Rede</th><th>Gateway</th><th>DHCP</th><th>Switch e AP</th></tr></thead>
+      <tbody>
+        <tr><td>Laboratório de informática</td><td>10</td><td><code>192.168.10.0/24</code></td><td><code>192.168.10.1</code></td><td>Sim</td><td>24 portas</td></tr>
+        <tr><td>Secretaria e direção</td><td>20</td><td><code>192.168.20.0/24</code></td><td><code>192.168.20.1</code></td><td>Não</td><td>8 portas, 1 AP</td></tr>
+        <tr><td>Sala dos professores</td><td>30</td><td><code>192.168.30.0/24</code></td><td><code>192.168.30.1</code></td><td>Sim</td><td>8 portas, 1 AP</td></tr>
+        <tr><td>Biblioteca</td><td>40</td><td><code>192.168.40.0/24</code></td><td><code>192.168.40.1</code></td><td>Sim</td><td>8 portas, 1 AP</td></tr>
+        <tr><td>Servidores</td><td>50</td><td><code>192.168.50.0/24</code></td><td><code>192.168.50.1</code></td><td>Não</td><td>8 portas</td></tr>
+        <tr><td>Impressoras</td><td>60</td><td><code>192.168.60.0/24</code></td><td><code>192.168.60.1</code></td><td>Não</td><td>8 portas</td></tr>
+        <tr><td>Câmeras</td><td>70</td><td><code>192.168.70.0/24</code></td><td><code>192.168.70.1</code></td><td>Não</td><td>PoE 8 portas</td></tr>
+        <tr><td>Visitantes (Wi-Fi)</td><td>90</td><td><code>192.168.90.0/24</code></td><td><code>192.168.90.1</code></td><td>Sim</td><td>8 portas, 2 AP</td></tr>
+      </tbody>
+    </table></div>
+    <p>IPs fixos de exemplo: <code>PC-SEC-01</code> .20.10, <code>PC-DIRECAO</code> .20.11, <code>PC-PROF-01</code> .30.10, <code>PC-BIB-01</code> e <code>02</code> .40.10 e .40.11, <code>SRV-ARQUIVOS</code> .50.10, <code>SRV-NOTAS</code> .50.11, impressoras .60.10 e .60.11, <code>GRAVADOR-NVR</code> .70.5, <code>CAM-PATIO</code> .70.10. Todos os endereços são de rede privada e fictícios.</p>
+  </div>
+</section>
+
+<section class="panel aula" id="aula-3" aria-labelledby="h-aula-3">
+  <div>
+    <h2 id="h-aula-3">Aula 3 · Segurança com firewall e documentação técnica</h2>
+    <p class="sub">Regras entre as redes, auditoria e relatório · 50 minutos</p>
+  </div>
+  <div class="blk">
+    <ol class="steps">
+      <li>
+        <p class="bloco-t"><strong>Regras de firewall</strong><span class="min">25 min</span></p>
+        <p>As duplas abrem o projeto salvo (<strong>Abrir projeto</strong>). Desafio: <em>“A direção pediu que só a secretaria e os professores acessem os servidores, onde fica o sistema de notas. Estudantes e visitantes não podem. Todos precisam de internet.”</em></p>
+        <p>Antes de marcar a tabela, a dupla escreve as regras como algoritmo:</p>
+<ol class="regra">
+          <li><b>Regra 1:</b> SE origem = Secretaria e direção E destino = Servidores, ENTÃO liberar.</li>
+          <li><b>Regra 2:</b> SE origem = Sala dos professores E destino = Servidores, ENTÃO liberar.</li>
+          <li><b>Regra 3:</b> SE origem = Laboratório, Biblioteca, Professores, Secretaria ou Visitantes E destino = Internet, ENTÃO liberar.</li>
+          <li><b>Regra 4:</b> SE origem = Secretaria ou Professores E destino = Impressoras, ENTÃO liberar.</li>
+          <li><b>Regra 5:</b> SE origem = Secretaria e direção E destino = Câmeras, ENTÃO liberar.</li>
+          <li><b>Regra final:</b> em qualquer outro caso, bloquear.</li>
+        </ol>
+        <p>No simulador, a regra final já existe: o que não está marcado é bloqueado. Por isso a dupla só marca o que deve ser liberado. Compare com uma lista que tenta bloquear caso a caso e discuta qual das duas abordagens é mais segura.</p>
+        <p>Testes obrigatórios:</p>
+        <div class="tbl"><table>
+          <thead><tr><th>Teste</th><th>Esperado</th></tr></thead>
+          <tbody>
+            <tr><td><code>PC-PROF-01</code> → <code>SRV-NOTAS</code></td><td class="ok">Funciona</td></tr>
+            <tr><td><code>PC-LAB-01</code> → <code>SRV-NOTAS</code></td><td class="no">Bloqueado pelo firewall</td></tr>
+            <tr><td><code>CELULAR-VISITANTE</code> → <code>SRV-NOTAS</code></td><td class="no">Bloqueado pelo firewall</td></tr>
+            <tr><td><code>CELULAR-VISITANTE</code> → Internet</td><td class="ok">Funciona</td></tr>
+          </tbody>
+        </table></div>
+        <p>Pergunta para a turma: <em>“E se um estudante tentar chegar ao servidor de notas por outro caminho? As regras estão completas?”</em> Dois pontos para levar à discussão, ambos visíveis no simulador:</p>
+        <ul>
+          <li>Se um ambiente for colocado na mesma VLAN da secretaria, o firewall não fica no caminho e as regras não valem. É o defeito da Missão 3.</li>
+          <li>A regra vale para o ambiente Servidores inteiro. Liberar o laboratório para salvar trabalhos no servidor de arquivos também abriria o servidor de notas. Em um firewall real, a regra seria escrita por endereço e por serviço (por exemplo, só o servidor <code>192.168.50.10</code> e só o compartilhamento de arquivos).</li>
+        </ul>
+      </li>
+      <li>
+        <p class="bloco-t"><strong>Documentação técnica</strong><span class="min">15 min</span></p>
+        <p>Cada dupla clica em <strong>Relatório final</strong> e completa um <strong>relatório técnico simplificado</strong> com:</p>
+        <ol>
+          <li>Diagrama da rede (captura do mapa do simulador ou desenho).</li>
+          <li>Tabela de endereçamento IP (VLAN, rede, gateway, DHCP e IPs fixos).</li>
+          <li>Lista das VLANs e da função de cada uma.</li>
+          <li>Regras de firewall liberadas, escritas em linguagem SE / ENTÃO.</li>
+          <li>Justificativa das escolhas e de cada aviso que a dupla decidiu manter.</li>
+        </ol>
+      </li>
+      <li>
+        <p class="bloco-t"><strong>Socialização e encerramento</strong><span class="min">10 min</span></p>
+        <p>Duas ou três duplas apresentam suas soluções. Discussão: “Existem outras formas de configurar essa rede? Qual é mais segura? Qual é mais prática de manter?” Reflexão final: “Que cuidados como esses você imagina que uma escola real precisa ter com a própria rede?”</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="panel" id="exercicios" aria-labelledby="h-exercicios">
+  <h2 class="ph" id="h-exercicios">Exercícios de fixação</h2>
+  <div class="blk wide">
+    <ol class="exs">
+      <li>
+        <h4>1. Diagnóstico: estudantes sem internet</h4>
+        <span class="onde">No simulador · Missão 5</span>
+        <blockquote>“Segunda-feira cedo, nenhum computador do laboratório navega, mas os professores navegam normalmente. A tela mostra o endereço 169.254.x.x.”</blockquote>
+        <p>Use a Missão 5 para encontrar as causas e corrigi-las. Registre cada causa encontrada, a evidência (mensagem da verificação ou passo do ping) e a correção aplicada.</p>
+      </li>
+      <li>
+        <h4>2. Auditoria de segurança: visitante no servidor</h4>
+        <span class="onde">No simulador · Missão 3</span>
+        <blockquote>“Na reunião de pais, um visitante conectado no Wi-Fi conseguiu abrir a pasta compartilhada da secretaria.”</blockquote>
+        <p>Analise a VLAN dos visitantes e as regras do firewall, identifique as falhas e proponha a correção. O ping de <code>CELULAR-VISITANTE</code> para <code>SRV-NOTAS</code> precisa falhar e para a Internet precisa funcionar.</p>
+      </li>
+      <li>
+        <h4>3. Expansão: laboratório de robótica</h4>
+        <span class="onde">No papel, com conferência parcial no simulador</span>
+        <blockquote>“A escola ganhou um laboratório de robótica.”</blockquote>
+        <p>Planeje uma VLAN nova (por exemplo, VLAN 80, <code>192.168.80.0/24</code>, gateway <code>192.168.80.1</code>), a faixa de DHCP e as regras: acesso à internet e a um servidor de controle dos robôs, sem acesso ao servidor de notas. Crie a VLAN 80 na seção 1 do simulador para conferir se a rede não se sobrepõe às outras. Como o simulador não permite criar ambientes, as regras ficam na tabela da dupla.</p>
+      </li>
+      <li>
+        <h4>4. Equipamentos para a reforma</h4>
+        <span class="onde">No simulador · Missão 4</span>
+        <p>Corrija a lista de compras para que todos os ambientes tenham portas, access points e PoE suficientes, gastando o mínimo possível. Justifique cada troca com a conta de portas.</p>
+      </li>
+      <li>
+        <h4>5. Documentação profissional</h4>
+        <span class="onde">Escrita</span>
+        <p>Escolha uma configuração feita no simulador e escreva um passo a passo para que outra pessoa consiga reproduzi-la sem ajuda. Troque o texto com outra dupla e peça que ela siga as instruções: o que ficou ambíguo?</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="panel" id="avaliacao" aria-labelledby="h-avaliacao">
+  <h2 class="ph" id="h-avaliacao">Avaliação</h2>
+  <div class="blk">
+    <h3>Critérios</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Critério</th><th>Peso</th><th>O que observar</th></tr></thead>
+      <tbody>
+        <tr><td>Compreensão conceitual</td><td>30%</td><td>Explica corretamente VLAN, endereço IP, máscara, gateway, DHCP e firewall.</td></tr>
+        <tr><td>Aplicação prática</td><td>40%</td><td>Configura o simulador sem erros na verificação e comprova o resultado com os testes de ping.</td></tr>
+        <tr><td>Pensamento crítico</td><td>20%</td><td>Justifica as escolhas, explica os avisos mantidos e aponta limites ou melhorias.</td></tr>
+        <tr><td>Documentação</td><td>10%</td><td>Relatório técnico claro, organizado e possível de reproduzir.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="blk">
+    <h3>Instrumentos</h3>
+    <ul>
+      <li>Observação durante as atividades práticas (formativa).</li>
+      <li>Relatório final gerado pelo simulador e arquivo do projeto salvo (.json), que registram verificações, dicas usadas e testes de ping (formativa e somativa).</li>
+      <li>Relatório técnico da dupla (somativa).</li>
+      <li>Participação nas discussões e na socialização (formativa).</li>
+      <li>Resolução dos exercícios de fixação (somativa).</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="recursos" aria-labelledby="h-recursos">
+  <h2 class="ph" id="h-recursos">Recursos necessários</h2>
+  <div class="blk">
+    <ul>
+      <li>Computadores, tablets ou celulares com navegador (um por dupla).</li>
+      <li>Projetor para as demonstrações da aula 1.</li>
+      <li>Quadro para conceitos e diagramas.</li>
+      <li>Folha de planejamento impressa (opcional; está no fim desta página).</li>
+      <li>Internet apenas para abrir o simulador. Depois de aberta, ou salva no computador antes da aula, a página funciona sem conexão.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="adaptacoes" aria-labelledby="h-adaptacoes">
+  <h2 class="ph" id="h-adaptacoes">Adaptações</h2>
+  <div class="blk">
+    <h3>Turmas com menos familiaridade com tecnologia</h3>
+    <ul>
+      <li>Troque o Projeto do zero da aula 2 pelas Missões 1, 2 e 5, que já trazem a rede montada e um defeito para encontrar.</li>
+      <li>Entregue o gabarito de endereçamento parcialmente preenchido.</li>
+      <li>Use mais analogias do cotidiano (salas da escola, portaria de prédio, rede de convidados de casa).</li>
+      <li>Incentive o uso dos botões de dica da verificação, que revelam uma pista por vez.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Turmas avançadas e cursos técnicos</h3>
+    <ul>
+      <li>Explore o roteamento entre VLANs a partir do passo a passo do ping (gateway de ida e de volta).</li>
+      <li>Compare DHCP e IP fixo: quem deve ter endereço fixo e por quê; o que acontece com um IP fixo dentro da faixa do DHCP.</li>
+      <li>Peça redes menores que /24 (por exemplo, /26 para impressoras) e o cálculo de quantos endereços sobram.</li>
+      <li>Discuta, fora do simulador, protocolos seguros de acesso (HTTPS, SSH) e regras de firewall por porta e serviço.</li>
+      <li>Proponha, no papel, a interligação de duas unidades escolares.</li>
+    </ul>
+  </div>
+  <div class="blk">
+    <h3>Acessibilidade</h3>
+    <ul>
+      <li>O mapa da rede e os campos têm rótulos para leitores de tela e podem ser operados pelo teclado.</li>
+      <li>O simulador funciona no celular, o que permite usar a trilha em escolas sem laboratório.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel" id="interdisciplinar" aria-labelledby="h-inter">
+  <h2 class="ph" id="h-inter">Conexões interdisciplinares</h2>
+  <div class="blk">
+    <ul>
+      <li><strong>Matemática:</strong> sistema binário e máscara de sub-rede; contagem de endereços por prefixo; lógica booleana nas regras de firewall.</li>
+      <li><strong>Física:</strong> transmissão de sinais e ondas eletromagnéticas no Wi-Fi; alcance e capacidade dos access points.</li>
+      <li><strong>Sociologia e Filosofia:</strong> privacidade, vigilância digital (câmeras) e acesso à informação; responsabilidade no uso de dados pessoais e a LGPD.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="panel folha-wrap" id="folha" aria-labelledby="h-folha">
+  <h2 class="ph" id="h-folha">Folha de planejamento da dupla</h2>
+  <div class="blk wide">
+    <p>Dupla: ________________________________________ &nbsp; Data: ____/____/______</p>
+    <div class="tbl"><table class="folha">
+      <thead><tr><th>Ambiente</th><th>VLAN</th><th>Rede / prefixo</th><th>Gateway</th><th>DHCP?</th><th>Pode acessar</th></tr></thead>
+      <tbody>
+        <tr><td>Laboratório de informática</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Secretaria e direção</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Sala dos professores</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Biblioteca</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Servidores</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Impressoras</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Câmeras</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Visitantes (Wi-Fi)</td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Simulação educacional com escola, equipamentos e endereços fictícios. Material do aluno e do professor no <a href="https://github.com/pereirashouse/computacao-bncc/tree/main/projetos/01-simulador-rede-escola" target="_blank" rel="noopener">repositório do projeto<span class="sr-only"> (abre em nova aba)</span> ↗</a>. Conteúdo sob CC BY 4.0.</p>
+  </div>
+</section>
+</main>
+<nav class="pager" aria-label="Navegação">
+  <a href="../../../educacao/guias/guia-rede-da-escola/"><span>Voltar</span><strong>Guia do Professor · Rede da Escola</strong></a>
+  <a href="../../../rede-da-escola/" style="text-align:right"><span>Aplicar</span><strong>Abrir o simulador Rede da Escola</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../../assets/site.js"></script>
+<script data-goatcounter="https://jpereira.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
