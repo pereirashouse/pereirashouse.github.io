@@ -118,6 +118,15 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 .tool .seq li.aval{list-style:none;margin-left:-18px}
 .vitrine .nota{font-size:.85rem;color:var(--muted);max-width:70ch}
 
+.depo{display:flex;flex-direction:column;gap:16px}
+.depo-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.depo-list[hidden]{display:none}
+.depo-list li{display:flex;flex-direction:column;gap:10px;margin:0;padding:18px 20px;border:1px solid var(--line);border-left:3px solid var(--edu);border-radius:8px;background:var(--surface)}
+.depo-list blockquote{margin:0;font-size:1rem;line-height:1.55}
+.depo-list .quem{margin:0;font-size:.9rem;color:var(--muted)}
+.depo-list .quem strong{color:var(--fg)}
+.depo-list .usou{margin:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--edu)}
+.depo .nota{margin:0;font-size:.85rem;color:var(--muted);max-width:66ch}
 </style>
 </head>
 <body>
@@ -125,6 +134,7 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 <nav class="topnav" aria-label="Seções"><ul>
   <li><a href="../">← Portfólio</a></li>
   <li><a href="#simuladores">Vitrine de inovação</a></li>
+  <li><a href="#depoimentos">Depoimentos</a></li>
   <li><a href="#edu">Materiais</a></li>
   <li><a href="#arquivo">Todos os projetos</a></li>
   <li><a href="#formacao">Formação</a></li>
@@ -208,6 +218,16 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
       </li>
     </ul>
     <p class="nota">Protótipos funcionais publicados como material didático. Público e habilidades de cada um estão detalhados nos materiais abaixo.</p>
+  </section>
+
+  <section id="depoimentos" class="depo" aria-labelledby="h-depo">
+    <div class="sec-head edu">
+      <h2 id="h-depo">Depoimentos</h2>
+      <p>Relatos de quem testou ou usou os simuladores, planos de aula e oficinas. Só aparecem aqui depois de revisados e com autorização de quem escreveu.</p>
+    </div>
+    <ul class="depo-list" id="depo-list" hidden></ul>
+    <div class="acts"><a class="btn primary edu" id="depo-form" href="https://tally.so/r/xVVd49" target="_blank" rel="noopener">Enviar meu depoimento <span aria-hidden="true">↗</span><span class="sr-only"> (formulário Tally, abre em nova aba)</span></a></div>
+    <p class="nota">Publicamos apenas nome ou apelido, função, o que foi usado e o texto. Quem enviou pode pedir a remoção a qualquer momento pelo <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>.</p>
   </section>
 
   <div class="cta">
@@ -540,10 +560,31 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
     <a href="../curriculo/jeferson-pereira-curriculo-educacao.pdf" download>Currículo Educação (PDF)</a>
     <a href="../servicos/">Serviços</a>
   </footer>
-  <p class="updated">Última atualização: 25 de outubro de 2026</p>
+  <p class="updated">Última atualização: 26 de outubro de 2026</p>
 
 </div>
 <script src="../assets/site.js"></script>
+<script>
+// Depoimentos: mostra só as entradas com aprovado === true; sem nenhuma, a lista fica oculta
+(function(){
+  var ul=document.getElementById('depo-list');
+  if(!ul||!window.fetch)return;
+  fetch('../depoimentos/depoimentos.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){
+    var lista=(d&&d.depoimentos||[]).filter(function(x){return x&&x.aprovado===true&&x.texto&&x.nome});
+    lista.forEach(function(x){
+      var li=document.createElement('li');
+      if(x.usou){var u=document.createElement('p');u.className='usou';u.textContent=x.usou;li.appendChild(u)}
+      var q=document.createElement('blockquote');q.textContent='“'+x.texto+'”';li.appendChild(q);
+      var p=document.createElement('p');p.className='quem';
+      var n=document.createElement('strong');n.textContent=x.nome;p.appendChild(n);
+      if(x.funcao)p.appendChild(document.createTextNode(' · '+x.funcao));
+      if(x.data)p.appendChild(document.createTextNode(' · '+x.data));
+      li.appendChild(p);ul.appendChild(li);
+    });
+    if(lista.length)ul.hidden=false;
+  }).catch(function(){});
+})();
+</script>
 <script data-goatcounter="https://jpereira.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>
