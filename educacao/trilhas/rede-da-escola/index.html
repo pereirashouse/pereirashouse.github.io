@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Trilha de aulas · Rede da Escola · Jeferson Pereira</title>
+<title>Sequência didática em 3 planos · Rede da Escola · Jeferson Pereira</title>
 <meta name="description" content="Sequência didática de 3 aulas de 50 minutos com o simulador Rede da Escola: VLANs, endereçamento IPv4, gateway, DHCP e firewall, com exercícios, avaliação e adaptações. Ensino Médio e cursos técnicos.">
 <link rel="canonical" href="https://pereirashouse.github.io/educacao/trilhas/rede-da-escola/">
 <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
@@ -44,6 +44,8 @@
 .aula{border-top:2px solid var(--edu);padding-top:20px;scroll-margin-top:calc(var(--nav-height,56px) + 20px)}
 .aula h2{font-size:clamp(1.4rem,3.6vw,1.9rem)}
 .aula .sub{color:var(--muted);margin-top:4px}
+.plano-ficha{margin:0}
+.plano-ficha .obj{grid-column:1/-1}
 [id]{scroll-margin-top:calc(var(--nav-height,56px) + 20px)}
 .regra{list-style:none;font-family:var(--mono);font-size:.82rem;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px!important;gap:6px!important}
 .regra b{color:var(--edu)}
@@ -69,6 +71,8 @@
   .case-head h1{font-size:16pt} .blk{max-width:none;gap:6px} .blk h3{font-size:12pt}
   .aula{break-before:page;border-top:0;padding-top:0}
   .blk,.exs li,.tbl tr{break-inside:avoid}
+  .aula .blk{break-inside:auto} .steps li,.plano-ficha{break-inside:avoid}
+  .panel>h2.ph,.blk h3,.blk h4{break-after:avoid}
   .folha-wrap{break-before:page}
 }
 </style>
@@ -85,8 +89,8 @@
 <div class="wrap">
 <header class="case-head edu">
   <p class="crumb"><a href="../../../educacao/simuladores/rede-da-escola/">Ficha do simulador</a> / Trilha de aulas</p>
-  <h1>Redes de computadores na prática: a rede da escola em 3 aulas</h1>
-  <p class="lede">Sequência didática completa para usar com o simulador Rede da Escola: o professor encontra aqui o roteiro de cada aula, o gabarito de endereçamento, os exercícios e a avaliação; a turma usa o simulador no navegador para configurar, testar e documentar a rede de uma escola fictícia.</p>
+  <h1>Redes de computadores na prática: sequência didática em 3 planos de aula</h1>
+  <p class="lede">Três planos de aula encadeados, alinhados à BNCC Computação, para usar com o simulador Rede da Escola: o professor encontra aqui o roteiro de cada plano, o gabarito de endereçamento, os exercícios e a avaliação; a turma usa o simulador no navegador para configurar, testar e documentar a rede de uma escola fictícia.</p>
   <dl class="facts">
     <div><dt>Público</dt><dd>Ensino Médio (1º ao 3º ano) e cursos técnicos em Informática</dd></div>
     <div><dt>Duração</dt><dd>3 aulas de 50 minutos (150 minutos)</dd></div>
@@ -97,7 +101,7 @@
     <a class="btn primary" href="../../../rede-da-escola/">Abrir o simulador <span aria-hidden="true">→</span><span class="sr-only">: Rede da Escola</span></a>
     <a class="btn" href="../../../educacao/simuladores/rede-da-escola/">Ficha do simulador</a>
     <a class="btn" href="../../../educacao/guias/guia-rede-da-escola/">Guia de 1 aula</a>
-    <button type="button" class="btn" onclick="window.print()">Imprimir ou salvar em PDF</button>
+    <a class="btn" href="planos-de-aula-rede-da-escola.pdf" download>Baixar os 3 planos em PDF</a>
   </div>
 </header>
 
@@ -107,9 +111,9 @@
   <ol>
     <li><a href="#objetivos">Objetivos e BNCC</a></li>
     <li><a href="#simulador">O que o simulador faz</a></li>
-    <li><a href="#aula-1">Aula 1</a></li>
-    <li><a href="#aula-2">Aula 2</a></li>
-    <li><a href="#aula-3">Aula 3</a></li>
+    <li><a href="#plano-1">Plano 1</a></li>
+    <li><a href="#plano-2">Plano 2</a></li>
+    <li><a href="#plano-3">Plano 3</a></li>
     <li><a href="#exercicios">Exercícios</a></li>
     <li><a href="#avaliacao">Avaliação</a></li>
     <li><a href="#recursos">Recursos</a></li>
@@ -120,12 +124,12 @@
 </nav>
 
 <section class="panel" aria-labelledby="h-visao">
-  <h2 class="ph" id="h-visao">Visão geral da trilha</h2>
+  <h2 class="ph" id="h-visao">Os 3 planos da sequência didática</h2>
   <div class="blk wide">
     <ul class="trilha-mapa">
-      <li><span class="n">Aula 1 · 50 min</span><a href="#aula-1">Por que separar a rede?</a><br>Problematização, conceitos de IP, VLAN e firewall e primeira missão resolvida em conjunto.</li>
-      <li><span class="n">Aula 2 · 50 min</span><a href="#aula-2">Mão na massa: VLANs e endereços</a><br>As duplas montam a rede da escola do zero e testam a conectividade com ping.</li>
-      <li><span class="n">Aula 3 · 50 min</span><a href="#aula-3">Firewall e documentação técnica</a><br>Regras entre as redes, auditoria de segurança e relatório técnico da dupla.</li>
+      <li><span class="n">Plano 1 · 50 min · EM13CO07</span><a href="#plano-1">Fundamentos de rede</a><br>Problematização, conceitos de IP, VLAN e firewall e primeira missão resolvida em conjunto.</li>
+      <li><span class="n">Plano 2 · 50 min · EM13CO07, EM13CO09</span><a href="#plano-2">VLAN e segmentação</a><br>As duplas montam a rede da escola do zero e testam a conectividade com ping.</li>
+      <li><span class="n">Plano 3 · 50 min · EM13CO08, EM13CO09</span><a href="#plano-3">Firewall e diagnóstico</a><br>Regras entre as redes, auditoria de segurança, diagnóstico com ping e relatório técnico da dupla.</li>
     </ul>
   </div>
 
@@ -178,11 +182,17 @@
   </div>
 </section>
 
-<section class="panel aula" id="aula-1" aria-labelledby="h-aula-1">
-  <div>
-    <h2 id="h-aula-1">Aula 1 · Por que separar a rede da escola?</h2>
-    <p class="sub">Fundamentos de redes e primeiro contato com o simulador · 50 minutos</p>
+<section class="panel aula" id="plano-1" aria-labelledby="h-aula-1">
+  <div id="aula-1">
+    <h2 id="h-aula-1">Plano 1 · Fundamentos de rede</h2>
+    <p class="sub">Por que separar a rede da escola?</p>
   </div>
+  <dl class="facts plano-ficha">
+    <div><dt>Série/ano</dt><dd>1º ao 3º ano do Ensino Médio e cursos técnicos</dd></div>
+    <div><dt>Duração</dt><dd>1 aula de 50 minutos</dd></div>
+    <div><dt>BNCC Computação</dt><dd>EM13CO07</dd></div>
+    <div class="obj"><dt>Objetivo</dt><dd>Explicar endereço IP, máscara, gateway, DHCP, VLAN e firewall e corrigir um conflito de IP no simulador.</dd></div>
+  </dl>
   <div class="blk">
     <ol class="steps">
       <li>
@@ -219,11 +229,17 @@
   </div>
 </section>
 
-<section class="panel aula" id="aula-2" aria-labelledby="h-aula-2">
-  <div>
-    <h2 id="h-aula-2">Aula 2 · Mão na massa: VLANs e endereçamento</h2>
-    <p class="sub">Montagem da rede no modo Projeto do zero · 50 minutos</p>
+<section class="panel aula" id="plano-2" aria-labelledby="h-aula-2">
+  <div id="aula-2">
+    <h2 id="h-aula-2">Plano 2 · VLAN e segmentação</h2>
+    <p class="sub">Mão na massa: VLANs e endereçamento</p>
   </div>
+  <dl class="facts plano-ficha">
+    <div><dt>Série/ano</dt><dd>1º ao 3º ano do Ensino Médio e cursos técnicos</dd></div>
+    <div><dt>Duração</dt><dd>1 aula de 50 minutos</dd></div>
+    <div><dt>BNCC Computação</dt><dd>EM13CO07 · EM13CO09</dd></div>
+    <div class="obj"><dt>Objetivo</dt><dd>Planejar e configurar VLANs e endereçamento IPv4 da escola fictícia e testar a conectividade com ping.</dd></div>
+  </dl>
   <div class="blk">
     <p class="objetivo">Cenário: “Você é a equipe de infraestrutura de uma escola fictícia que vai ganhar rede nova. Precisa separar a secretaria e a direção, os professores e os espaços de uso dos estudantes e visitantes, sem deixar ninguém sem internet.”</p>
   </div>
@@ -231,7 +247,7 @@
     <ol class="steps">
       <li>
         <p class="bloco-t"><strong>Retomada e planejamento no papel</strong><span class="min">10 min</span></p>
-        <p>Retome os conceitos da aula 1. Cada dupla preenche a <a href="#folha">folha de planejamento</a> antes de abrir o simulador: qual VLAN e qual rede cada ambiente vai usar, e onde o DHCP precisa estar ligado.</p>
+        <p>Retome os conceitos do Plano 1. Cada dupla preenche a <a href="#folha">folha de planejamento</a> antes de abrir o simulador: qual VLAN e qual rede cada ambiente vai usar, e onde o DHCP precisa estar ligado.</p>
       </li>
       <li>
         <p class="bloco-t"><strong>Configuração no simulador</strong><span class="min">25 min</span></p>
@@ -245,20 +261,20 @@
       </li>
       <li>
         <p class="bloco-t"><strong>Teste e validação</strong><span class="min">10 min</span></p>
-        <p>Use <strong>Verificar rede</strong> até não sobrar erro de VLAN, endereçamento ou equipamento. Os avisos “Regra bloqueia um acesso de que a escola precisa” são esperados nesta etapa e serão resolvidos na aula 3. Depois faça os pings abaixo e registre o resultado:</p>
+        <p>Use <strong>Verificar rede</strong> até não sobrar erro de VLAN, endereçamento ou equipamento. Os avisos “Regra bloqueia um acesso de que a escola precisa” são esperados nesta etapa e serão resolvidos no Plano 3. Depois faça os pings abaixo e registre o resultado:</p>
         <div class="tbl"><table>
           <thead><tr><th>Teste</th><th>Resultado esperado agora</th><th>Por quê</th></tr></thead>
           <tbody>
             <tr><td><code>PC-LAB-01</code> → <code>PC-LAB-02</code></td><td class="ok">Funciona</td><td>Mesma VLAN: entrega direta, sem passar pelo firewall.</td></tr>
             <tr><td><code>PC-SEC-01</code> → <code>PC-DIRECAO</code></td><td class="ok">Funciona</td><td>Mesma VLAN da secretaria e direção.</td></tr>
             <tr><td><code>PC-LAB-01</code> → Internet</td><td class="no">Bloqueado</td><td>O pacote chega ao gateway, mas o firewall ainda não tem nenhuma regra liberada.</td></tr>
-            <tr><td><code>PC-LAB-01</code> → <code>SRV-NOTAS</code></td><td class="no">Bloqueado</td><td>Redes diferentes; o firewall barra. É o que queremos manter na aula 3.</td></tr>
+            <tr><td><code>PC-LAB-01</code> → <code>SRV-NOTAS</code></td><td class="no">Bloqueado</td><td>Redes diferentes; o firewall barra. É o que queremos manter no Plano 3.</td></tr>
           </tbody>
         </table></div>
       </li>
       <li>
         <p class="bloco-t"><strong>Salvar e registrar</strong><span class="min">5 min</span></p>
-        <p>Cada dupla clica em <strong>Salvar projeto (.json)</strong> e guarda o arquivo: ele será aberto no início da aula 3. No caderno: “O que funcionou? O que não funcionou? Por quê?”</p>
+        <p>Cada dupla clica em <strong>Salvar projeto (.json)</strong> e guarda o arquivo: ele será aberto no início do Plano 3. No caderno: “O que funcionou? O que não funcionou? Por quê?”</p>
       </li>
     </ol>
   </div>
@@ -282,11 +298,17 @@
   </div>
 </section>
 
-<section class="panel aula" id="aula-3" aria-labelledby="h-aula-3">
-  <div>
-    <h2 id="h-aula-3">Aula 3 · Segurança com firewall e documentação técnica</h2>
-    <p class="sub">Regras entre as redes, auditoria e relatório · 50 minutos</p>
+<section class="panel aula" id="plano-3" aria-labelledby="h-aula-3">
+  <div id="aula-3">
+    <h2 id="h-aula-3">Plano 3 · Firewall e diagnóstico</h2>
+    <p class="sub">Segurança com firewall e documentação técnica</p>
   </div>
+  <dl class="facts plano-ficha">
+    <div><dt>Série/ano</dt><dd>1º ao 3º ano do Ensino Médio e cursos técnicos</dd></div>
+    <div><dt>Duração</dt><dd>1 aula de 50 minutos</dd></div>
+    <div><dt>BNCC Computação</dt><dd>EM13CO08 · EM13CO09</dd></div>
+    <div class="obj"><dt>Objetivo</dt><dd>Escrever e aplicar regras de firewall que protejam o servidor de notas, auditar falhas e documentar a solução.</dd></div>
+  </dl>
   <div class="blk">
     <ol class="steps">
       <li>
@@ -404,7 +426,7 @@
   <div class="blk">
     <ul>
       <li>Computadores, tablets ou celulares com navegador (um por dupla).</li>
-      <li>Projetor para as demonstrações da aula 1.</li>
+      <li>Projetor para as demonstrações do Plano 1.</li>
       <li>Quadro para conceitos e diagramas.</li>
       <li>Folha de planejamento impressa (opcional; está no fim desta página).</li>
       <li>Internet apenas para abrir o simulador. Depois de aberta, ou salva no computador antes da aula, a página funciona sem conexão.</li>
@@ -417,7 +439,7 @@
   <div class="blk">
     <h3>Turmas com menos familiaridade com tecnologia</h3>
     <ul>
-      <li>Troque o Projeto do zero da aula 2 pelas Missões 1, 2 e 5, que já trazem a rede montada e um defeito para encontrar.</li>
+      <li>Troque o Projeto do zero do Plano 2 pelas Missões 1, 2 e 5, que já trazem a rede montada e um defeito para encontrar.</li>
       <li>Entregue o gabarito de endereçamento parcialmente preenchido.</li>
       <li>Use mais analogias do cotidiano (salas da escola, portaria de prédio, rede de convidados de casa).</li>
       <li>Incentive o uso dos botões de dica da verificação, que revelam uma pista por vez.</li>

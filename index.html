@@ -84,6 +84,12 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
 
 .vitrine-cta{display:flex;flex-direction:column;gap:4px;margin-top:16px;padding:16px 20px;border:1px solid var(--edu);border-left:4px solid var(--edu);border-radius:8px;background:var(--edu-soft);text-decoration:none;color:var(--fg)}
 .vitrine-cta:hover{filter:brightness(1.03)}
+.hl li.com-planos{display:flex;flex-direction:column}
+.hl li.com-planos>a{height:auto;flex:1;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.planos-hl{border:1px solid var(--edu);border-top:0;border-radius:0 0 8px 8px;background:var(--edu-soft);padding:10px 16px 12px}
+.hl .planos-hl a{display:inline;height:auto;padding:0;border:0;background:none;color:var(--edu);font-weight:600;font-size:.86rem;text-decoration:underline;text-underline-offset:2px}
+.hl .planos-hl a.planos-t{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.planos-hl ol{margin:6px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:2px}
 .vitrine-cta .k{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--edu)}
 .vitrine-cta strong{font-family:var(--display);font-size:1.15rem}
 .vitrine-cta>span:last-child{color:var(--muted);font-size:.92rem}
@@ -134,7 +140,9 @@ header.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:700;letter-spacing
       <li class="infra"><a href="projetos/wifi-8021x/"><span class="k">Infraestrutura</span><strong>Wi-Fi corporativo com 802.1X</strong><span>Autenticação de máquinas, NPS, Active Directory e UniFi</span></a></li>
       <li class="infra"><a href="projetos/incidente-8021x-windows/"><span class="k">Infraestrutura</span><strong>Diagnóstico de incidente 802.1X</strong><span>Análise de logs após atualização do Windows</span></a></li>
       <li class="infra"><a href="projetos/quedas-coletores-wifi/"><span class="k">Infraestrutura · Python</span><strong>Monitoramento de quedas de coletores Android em rede Wi-Fi</strong><span>Agente Python para medir quedas via API UniFi, com testes automatizados e relatórios.</span></a></li>
-      <li class="edu"><a href="rede-da-escola/"><span class="k">Educação · Simulador interativo</span><strong>Rede da Escola</strong><span>Simulador de rede escolar com VLAN, IP e firewall para aulas de Computação</span></a></li>
+      <li class="edu com-planos"><a href="rede-da-escola/"><span class="k">Educação · Simulador interativo</span><strong>Rede da Escola · Simulador + 3 planos de aula</strong><span>Recurso interativo para ensinar redes, VLANs, endereçamento IP, firewall e diagnóstico de conectividade, com três planos de aula alinhados à BNCC</span></a>
+        <div class="planos-hl"><a class="planos-t" href="educacao/trilhas/rede-da-escola/">Inclui 3 planos de aula alinhados à BNCC <span aria-hidden="true">→</span></a>
+          <ol><li><a href="educacao/trilhas/rede-da-escola/#plano-1">Plano 1 · Fundamentos de rede</a></li><li><a href="educacao/trilhas/rede-da-escola/#plano-2">Plano 2 · VLAN e segmentação</a></li><li><a href="educacao/trilhas/rede-da-escola/#plano-3">Plano 3 · Firewall e diagnóstico</a></li></ol></div></li>
       <li class="edu"><a href="https://pereirashouse.github.io/simulador-configura-o-roteador/"><span class="k">Educação · Simulador interativo</span><strong>Simulador de configuração de roteador</strong><span>Simulador interativo de roteador doméstico para aulas de redes: configuração Wi-Fi, segurança e troubleshooting</span></a></li>
     </ul>
     <a class="vitrine-cta" href="educacao/#simuladores"><span class="k">Vitrine de inovação educacional</span><strong>Seis simuladores e jogos já utilizados em sala de aula</strong><span>Protótipos funcionais que abrem no navegador e no celular, ligados a habilidades da BNCC Computação. <span class="go">Ver os simuladores →</span></span></a>
