@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plano de Aula Arduino · Introdução · Jeferson Pereira</title>
+<meta name="description" content="Plano de aula de 50 minutos para o 6º ano do Ensino Fundamental: introdução ao Arduino no eixo Pensamento Computacional da BNCC Computação, com roteiro, código, avaliação e adaptações.">
+<link rel="canonical" href="https://pereirashouse.github.io/educacao/planos/arduino/">
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#23774A">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Plano de Aula Arduino · Introdução">
+<meta property="og:description" content="Plano de aula de 50 minutos para o 6º ano do Ensino Fundamental: introdução ao Arduino no eixo Pensamento Computacional da BNCC Computação, com roteiro, código, avaliação e adaptações.">
+<meta property="og:url" content="https://pereirashouse.github.io/educacao/planos/arduino/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="stylesheet" href="../../../assets/fonts.css">
+<link rel="stylesheet" href="../../../assets/site.css">
+<style>
+.ficha-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);font-weight:600;font-size:.93rem;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:currentColor}
+.btn.primary{background:var(--edu);border-color:var(--edu);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.08)}
+.status-val{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--edu-soft);color:var(--edu);font-weight:600;font-size:.88rem}
+.bncc-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.bncc-list code{display:inline-block;min-width:7.5em;padding:1px 6px;margin-right:6px;border-radius:3px;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.74rem}
+.objetivo{font-size:1.05rem;padding:12px 16px;border-left:3px solid var(--edu);background:var(--surface);border-radius:4px}
+.bloco-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.bloco-t .min{font-family:var(--mono);font-size:.75rem;color:var(--edu);border:1px solid var(--edu);border-radius:3px;padding:0 6px}
+.blk ul.rubrica{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;list-style:none;padding:0;margin:0}
+.rubrica li{padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-size:.92rem}
+.rubrica strong{display:block;font-family:var(--display);font-size:1rem;margin-bottom:2px}
+.rubrica .nv{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rubrica li:nth-child(3){border-color:var(--edu)}
+.steps li>p:not(.bloco-t) strong{display:inline}
+.probs dt{font-weight:600} .probs dd{margin:0 0 10px;color:var(--muted)}
+@media print{
+  @page{size:A4;margin:12mm}
+  :root{--bg:#fff;--surface:#fff;--fg:#000;--muted:#333;--line:#bbb;--edu:#1d5e3a;--edu-soft:#eef6f1}
+  body{font-size:9pt;line-height:1.35;background:#fff;color:#000}
+  main,.panel,.case-head{gap:8px!important;padding:0!important;margin:0!important}
+  .panel>h2.ph,.crumb{display:none}
+  .blk{gap:4px!important;margin:0!important} .blk h4{font-size:9.5pt;margin-top:2px}
+  .steps li{padding-bottom:4px!important}
+  .blk ul.rubrica{grid-template-columns:repeat(3,1fr)} .rubrica li{padding:6px 8px;font-size:8.5pt}
+  .facts div{padding:0!important}
+  .topnav,.ficha-acts,.pager,footer.site,.no-print{display:none!important}
+  .case-head h1{font-size:15pt} .blk{break-inside:avoid;padding:0;border:0} .blk h3{font-size:12pt}
+  .facts{gap:4px 16px} .wrap{padding:0;max-width:none}
+}
+.sk{display:inline-block;padding:1px 6px;border-radius:3px;background:var(--fg);color:var(--bg);font-family:var(--mono);font-size:.74rem;white-space:nowrap}
+.blk table td,.blk table th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.blk table th{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.blk details{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:10px 14px}
+.blk details summary{cursor:pointer;font-weight:600}
+@media print{.tbl{border:0} .blk details{border:0;padding:0} .blk details>*{display:block}}
+</style>
+</head>
+<body class="edu-page">
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<nav class="topnav" aria-label="Portfólio"><ul>
+  <li><a href="../../../">Início</a></li>
+  <li><a href="../../../educacao/">Educação</a></li>
+  <li><a href="../../../educacao/#edu">Materiais</a></li>
+  <li><a href="../../../infraestrutura/">Infraestrutura</a></li>
+</ul></nav>
+
+<div class="wrap">
+<header class="case-head edu">
+  <p class="crumb"><a href="../../../educacao/#edu">Computação e Educação</a> / Plano de aula</p>
+  <h1>Plano de Aula Arduino: introdução</h1>
+  <dl class="facts">
+    <div><dt>Público</dt><dd>6º ano do Ensino Fundamental (anos finais)</dd></div>
+    <div><dt>Eixo BNCC Computação</dt><dd>Pensamento Computacional</dd></div>
+    <div><dt>Duração</dt><dd>50 minutos (1 aula)</dd></div>
+    <div><dt>Modalidade</dt><dd>Turma toda e duplas · com ou sem computador</dd></div>
+  </dl>
+  <div class="ficha-acts">
+    <a class="btn primary" href="../../../educacao/#edu">Ver outros materiais <span aria-hidden="true">→</span></a>
+    <button type="button" class="btn" onclick="window.print()">Imprimir ou salvar em PDF</button>
+  </div>
+</header>
+
+<main id="conteudo">
+<section class="panel" aria-labelledby="h-plano">
+  <h2 class="ph" id="h-plano">Plano de aula</h2>
+
+  <div class="blk">
+    <h3>Objetivo</h3>
+    <p class="objetivo">Ao final da aula, o aluno explica com suas palavras o que é o Arduino, identifica em um sistema automatizado a entrada, o processamento e a saída, e lê um programa simples que pisca um LED.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Habilidades da BNCC Computação</h3>
+    <p>A aula se encaixa no 6º ano, no eixo Pensamento Computacional, porque o foco é raciocinar sobre entradas, sequência e repetição de instruções. A placa e seus componentes são o suporte para esse raciocínio.</p>
+    <ul class="bncc-list">
+      <li><code>EF06CO05</code> Identificar os recursos ou insumos necessários (entradas) para a resolução de problemas. <em>Na aula: sensor e botão como entradas, LED como saída.</em></li>
+      <li><code>EF06CO02</code> Elaborar algoritmos com instruções sequenciais, de repetição e de seleção em uma linguagem de programação. <em>Na aula: <span class="sk">setup()</span>, <span class="sk">loop()</span> e o “se… então” do desafio.</em></li>
+      <li><code>EF06CO03</code> Descrever com precisão a solução de um problema e construir o programa que a implementa. <em>Na aula: prever e ajustar o tempo do <span class="sk">delay()</span>.</em></li>
+      <li><code>EF06CO04</code> Construir soluções de problemas com a técnica de decomposição. <em>Na aula: dividir o projeto do desafio em entrada, regra e saída.</em></li>
+    </ul>
+    <p class="micro">Resumos das habilidades. A redação oficial está no <a href="https://www.gov.br/mec/pt-br/cne/pdf/normas-classificadas-por-assunto/base-nacional-comum-curricular-bncc/anexo-ao-parecer-cneceb-no-2-2022-bncc-computacao.pdf/view" target="_blank" rel="noopener">Anexo ao Parecer CNE/CEB nº 2/2022<span class="sr-only"> (abre em nova aba)</span></a>.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Roteiro dos 50 minutos</h3>
+    <ol class="steps">
+      <li><p class="bloco-t"><strong>Abertura</strong><span class="min">00–05 min</span></p><p>Pergunta: “Como uma luz acende sozinha quando alguém entra na sala?”. Ouça três respostas e mostre exemplos: poste que acende no escuro, irrigação automática, robô que desvia de obstáculos. <span class="sk">EF06CO05</span></p></li>
+      <li><p class="bloco-t"><strong>O que é Arduino</strong><span class="min">05–13 min</span></p><p>Plataforma de prototipagem eletrônica, com hardware e programa, criada na Itália em 2005. Mostre a cadeia <strong>entrada → processamento → saída</strong> com o sensor de presença e a lâmpada. <span class="sk">EF06CO05</span></p></li>
+      <li><p class="bloco-t"><strong>Conhecendo a placa</strong><span class="min">13–23 min</span></p><p>Com uma placa real ou uma imagem projetada, localize a porta USB, os pinos digitais, as entradas analógicas, a alimentação, o LED integrado e o botão RESET. Em duplas, os alunos classificam cartões (sensor de luz, botão, LED, buzzer) em <strong>entrada</strong> ou <strong>saída</strong>. <span class="sk">EF06CO05</span></p></li>
+      <li><p class="bloco-t"><strong>Programação básica</strong><span class="min">23–33 min</span></p><p>Apresente <span class="sk">setup()</span>, que roda uma vez, e <span class="sk">loop()</span>, que se repete. No <strong>robô humano</strong>, um aluno executa o algoritmo “acender, esperar 1 s, apagar, esperar 1 s” e a turma aponta a parte que se repete. <span class="sk">EF06CO02</span></p></li>
+      <li><p class="bloco-t"><strong>Demonstração prática</strong><span class="min">33–43 min</span></p><p>Carregue o código do LED piscando. Antes de testar, a turma <strong>prevê</strong> o que muda com <span class="sk">delay(200)</span> e descreve o resultado com números. <span class="sk">EF06CO03</span></p></li>
+      <li><p class="bloco-t"><strong>Fechamento</strong><span class="min">43–50 min</span></p><p>Quiz de cinco perguntas com cartões A, B e C (3 min) e desafio em duplas (4 min): problema, entrada, regra “se… então” e saída. Ouça duas ou três duplas. Se o tempo apertar, corte o quiz para três perguntas e mantenha o desafio. <span class="sk">EF06CO04</span> <span class="sk">EF06CO02</span></p></li>
+    </ol>
+  </div>
+
+  <div class="blk">
+    <h3>Código da demonstração</h3>
+    <p>Use o LED integrado da placa: não precisa de fios nem de resistor.</p>
+<pre><code>void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);    <span class="c">// roda uma vez: o pino do LED será uma saída</span>
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH); <span class="c">// acende</span>
+  delay(1000);                     <span class="c">// espera 1 segundo</span>
+  digitalWrite(LED_BUILTIN, LOW);  <span class="c">// apaga</span>
+  delay(1000);                     <span class="c">// espera 1 segundo</span>
+}                                  <span class="c">// e volta ao início do loop</span></code></pre>
+    <p><strong>Pergunta de previsão:</strong> o que muda se trocarmos <span class="sk">delay(1000)</span> por <span class="sk">delay(200)</span>? O LED pisca mais rápido, com pausas de cerca de 0,2 s em cada estado. Uma piscada completa passa a durar 0,4 s, ou 2,5 piscadas por segundo; com 1.000 ms era uma piscada a cada 2 s.</p>
+    <p class="micro">No Arduino Uno R3, o LED integrado normalmente está ligado ao pino digital 13.</p>
+  </div>
+
+  <div class="blk wide">
+    <h3>Avaliação</h3>
+    <p>A avaliação é formativa e acontece durante a aula, no quiz e no desafio em duplas.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Habilidade</th><th>Ainda não</th><th>Em desenvolvimento</th><th>Atingiu</th></tr></thead>
+      <tbody>
+        <tr><td>EF06CO05 · entradas</td><td>Não separa o que o sistema percebe do que ele faz</td><td>Identifica a entrada ou a saída, mas não as duas</td><td>Aponta entrada, processamento e saída do próprio projeto</td></tr>
+        <tr><td>EF06CO02 · sequência, repetição, seleção</td><td>Não distingue setup() de loop()</td><td>Explica o loop(), mas não a regra “se… então”</td><td>Escreve uma regra “se… então” coerente com a entrada escolhida</td></tr>
+        <tr><td>EF06CO03 · descrever com precisão</td><td>Descreve de forma vaga (“pisca mais”)</td><td>Descreve a direção da mudança</td><td>Descreve com valores (0,2 s por estado)</td></tr>
+        <tr><td>EF06CO04 · decomposição</td><td>Apresenta a ideia inteira, sem partes</td><td>Divide em duas partes</td><td>Divide em entrada, regra e saída, de forma que outra dupla poderia montar</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="blk">
+    <h3>Quiz rápido e desafio</h3>
+    <details>
+      <summary>Ver as cinco perguntas e o gabarito</summary>
+      <ol>
+        <li>O que é Arduino? <strong>B) uma plataforma de hardware e software para projetos eletrônicos</strong> (A: uma linguagem de programação; C: um sistema operacional).</li>
+        <li>Qual é a função de um sensor? <strong>A) perceber ou medir uma condição do ambiente</strong> (B: executar o programa inteiro; C: fornecer energia ao computador).</li>
+        <li>Para que serve setup()? <strong>B) configurar o funcionamento inicial da placa</strong> (A: repetir o programa; C: apagar o programa).</li>
+        <li>O que faz delay(1000)? <strong>A) espera cerca de um segundo</strong> (B: liga o Wi-Fi por mil segundos; C: define mil pinos de saída).</li>
+        <li>Qual é a sequência básica de um sistema automatizado? <strong>C) entrada, processamento, saída</strong> (A: saída, entrada, desligamento; B: computador, internet, impressora).</li>
+      </ol>
+    </details>
+    <p><strong>Desafio de encerramento, em duplas:</strong> cada dupla responde em uma ficha qual problema o projeto resolve, qual é a <strong>entrada</strong>, qual é a regra “se… então” e qual é a <strong>saída</strong>. Exemplo: avisar quando a planta precisa de água. Entrada: sensor de umidade do solo. Regra: se a umidade estiver abaixo do limite, então acender o LED de alerta. Saída: LED.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Materiais, segurança e adaptações</h3>
+    <h4>Materiais</h4>
+    <ul><li>Uma placa Arduino Uno ou compatível e um cabo USB de dados.</li><li>Computador com a Arduino IDE instalada, e projetor ou TV.</li><li>Cartões de papel (sensor de luz, botão, LED, buzzer) e fichas do desafio.</li><li>Opcional: LED externo, resistor e protoboard.</li></ul>
+    <h4>Segurança</h4>
+    <ul><li>Nesta primeira aula, use o LED integrado. Com LED externo, ligue um resistor limitador de corrente e respeite os limites elétricos da placa.</li><li>Os exemplos da abertura (lâmpada, bomba d’água) não são ligados direto à placa. Dispositivos da tomada (127 ou 220 V) exigem circuitos próprios e adultos treinados; na aula, a saída é sempre o LED.</li></ul>
+    <h4>Adaptações</h4>
+    <ul><li><strong>Sem placa ou sem computador:</strong> projete o código, peça a previsão do comportamento antes de revelar o resultado e use o robô humano como execução do programa. A habilidade EF06CO02 continua trabalhada.</li><li><strong>Sem projetor:</strong> desenhe a placa no quadro e escreva o código em cartolina.</li><li><strong>Turma com mais experiência:</strong> peça que alterem o delay() e prevejam o novo ritmo, ou que reescrevam o programa para piscar duas vezes e pausar.</li><li><strong>Turma com dificuldade de leitura:</strong> trabalhe só com os cartões de entrada e saída e deixe o código para a demonstração.</li></ul>
+  </div>
+</section>
+</main>
+<nav class="pager" aria-label="Navegação">
+  <a href="../../../educacao/#edu"><span>Voltar</span><strong>Computação e Educação</strong></a>
+</nav>
+<footer class="site">
+  <span>Jeferson Luiz Pereira</span>
+  <a href="https://github.com/pereirashouse" target="_blank" rel="noopener">GitHub<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="https://www.linkedin.com/in/jefersonluizpereira" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a>
+  <a href="../../../#contato">Contato</a>
+</footer>
+</div>
+<script src="../../../assets/site.js"></script>
+<script data-goatcounter="https://jpereira.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
