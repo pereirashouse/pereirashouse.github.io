@@ -29,7 +29,7 @@ li{margin-bottom:1px}
 .nota{font-size:8.2pt;line-height:1.1;color:#56655F;margin-top:2px}
 """
 
-CONTATO = """<p class="contato"><span>Paraná, Brasil</span><a href="tel:+5542988842215">(42) 98884-2215</a>
+CONTATO = """<p class="contato"><span>Paraná, Brasil</span><a href="tel:+5542999601085">(42) 99960-1085</a>
 <a href="https://www.linkedin.com/in/jefersonluizpereira">linkedin.com/in/jefersonluizpereira</a>
 <a href="https://pereirashouse.github.io/">pereirashouse.github.io</a>
 <a href="https://github.com/pereirashouse">github.com/pereirashouse</a></p>"""
