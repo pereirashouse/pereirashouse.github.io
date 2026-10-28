@@ -1,4 +1,13 @@
 {
   "_leia": "Só entram aqui depoimentos aprovados pelo Jeferson, copiados da planilha do Tally. Nunca incluir e-mail ou outro contato. Para retirar um depoimento, apague a entrada (ou mude aprovado para false).",
-  "depoimentos": []
+  "depoimentos": [
+    {
+      "nome": "Fabiana Hartman",
+      "funcao": "Estudante de Pedagogia, UFPR",
+      "usou": "Rede da Escola · Operação Anzol",
+      "texto": "Os simuladores são muito bons, já trazem a atividade pronta e facilita muito durante as aulas, e o melhor, dá pra usar em mais de uma aula. Utilizei nos meus estágios de pedagogia!",
+      "data": "out. 2026",
+      "aprovado": true
+    }
+  ]
 }
