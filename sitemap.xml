@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://pereirashouse.github.io/</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://pereirashouse.github.io/infraestrutura/</loc><lastmod>2026-10-25</lastmod></url>
-  <url><loc>https://pereirashouse.github.io/educacao/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://pereirashouse.github.io/educacao/</loc><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://pereirashouse.github.io/projetos/wifi-8021x/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://pereirashouse.github.io/projetos/incidente-8021x-windows/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://pereirashouse.github.io/projetos/rede-filial-industrial/</loc><lastmod>2026-10-23</lastmod></url>
@@ -29,4 +29,5 @@
   <url><loc>https://pereirashouse.github.io/educacao/guias/guia-simulador-roteador/</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://pereirashouse.github.io/educacao/simuladores/a-rede-parou/</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://pereirashouse.github.io/educacao/guias/guia-a-rede-parou/</loc><lastmod>2026-10-25</lastmod></url>
+  <url><loc>https://pereirashouse.github.io/educacao/planos/arduino/</loc><lastmod>2026-10-28</lastmod></url>
 </urlset>
