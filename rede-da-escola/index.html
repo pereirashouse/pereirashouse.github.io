@@ -71,6 +71,8 @@ svg .sub{fill:var(--muted)}
 .planos a{color:var(--acc)}
 @media print{.noprint{display:none}}
 </style>
+<style>/* Respeita a preferência do sistema por menos movimento (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}</style>
 </head>
 <body>
 <header>
@@ -490,7 +492,7 @@ function desenhar(){
   h += linhas + caixas;
   svg.innerHTML = h;
   svg.querySelectorAll(".box").forEach(g=>{
-    const abrir = ()=>{ const el=document.getElementById("amb-"+g.dataset.k); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); };
+    const abrir = ()=>{ const el=document.getElementById("amb-"+g.dataset.k); if(el) el.scrollIntoView({behavior: (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"),block:"center"}); };
     const foco = ativo=>{
       const rect=g.querySelector("rect");
       g.style.outline=ativo ? "2px solid var(--acc)" : "none";
