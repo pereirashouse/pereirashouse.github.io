@@ -782,7 +782,7 @@
     somar(pts);
     m1Parcial();
     const p = document.getElementById("painel");
-    if (p && window.matchMedia("(max-width: 879px)").matches) p.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (p && window.matchMedia("(max-width: 879px)").matches) p.scrollIntoView({ behavior: (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"), block: "start" });
   }
   function m1Proximo() {
     S.m1.idx++;
