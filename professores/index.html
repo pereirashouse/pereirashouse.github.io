@@ -171,6 +171,9 @@ footer strong{color:var(--fg);font-family:var(--display);font-size:1rem}
 .topnav a:hover,.topnav a[aria-current]{color:var(--fg)}
 .skip{position:absolute;left:16px;top:-48px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:4px;z-index:20;text-decoration:none}
 .skip:focus{top:8px}
+.priv{font-size:.82rem;line-height:1.5;color:var(--muted);margin:0;max-width:62ch}
+.priv strong{color:var(--fg);font-weight:600}
+.priv a{color:inherit;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -288,8 +291,8 @@ footer strong{color:var(--fg);font-family:var(--display);font-size:1rem}
       <div class="fld"><label for="e-contato">E-mail ou WhatsApp</label><input type="text" id="e-contato" placeholder="Como te respondo"></div>
       <div class="fld"><label for="e-tema">Qual tema você precisa ensinar?</label><textarea id="e-tema" placeholder="Ex.: redes e internet para o 8º ano, segurança digital, pensamento computacional"></textarea></div>
       <button class="btn primary big" type="submit">Quero meu exemplo gratuito</button>
-      <p class="micro">Resposta em até 1 dia útil · Seus dados não são compartilhados</p>
-      
+      <p class="micro">Resposta em até 1 dia útil</p>
+      <p class="priv" id="privacidade-form"><strong>Privacidade:</strong> nada do que você digita aqui fica gravado no site. Ao enviar, o WhatsApp abre com a mensagem pronta e ela só sai do seu aparelho quando você confirma o envio. Uso seus dados apenas para responder ao seu pedido e não os vendo nem compartilho.</p>
     </form>
   </section>
 

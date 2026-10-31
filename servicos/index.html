@@ -160,6 +160,9 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
 .topnav a:hover,.topnav a[aria-current]{color:var(--fg)}
 .skip{position:absolute;left:16px;top:-48px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:4px;z-index:20;text-decoration:none}
 .skip:focus{top:8px}
+.priv{font-size:.82rem;line-height:1.5;color:var(--muted);margin:0;max-width:62ch}
+.priv strong{color:var(--fg);font-weight:600}
+.priv a{color:inherit;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -215,7 +218,7 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
         </tbody>
       </table>
     </div>
-    <div class="brief"><p>Já sabe o que precisa? O briefing leva cerca de 5 minutos e a proposta chega em até 1 dia útil.</p><a class="btn edu" href="https://tally.so/r/WJO4bk" target="_blank" rel="noopener">Preencher briefing pedagógico →</a></div>
+    <div class="brief"><p>Já sabe o que precisa? O briefing leva cerca de 5 minutos e a proposta chega em até 1 dia útil. <a href="#privacidade">Como tratamos seus dados</a>.</p><a class="btn edu" href="https://tally.so/r/WJO4bk" target="_blank" rel="noopener">Preencher briefing pedagógico →</a></div>
     <div class="case">
       <span class="tag">Case de destaque · EF09CO04 · EF09CO10</span>
       <p><strong>Operação Anzol</strong>, jogo de perícia contra golpes digitais para o 9º ano. Funciona offline, no celular.</p>
@@ -254,7 +257,7 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
         </tbody>
       </table>
     </div>
-    <div class="brief"><p>Conte o problema em 3 minutos e eu chego preparado no diagnóstico gratuito de 30 minutos.</p><a class="btn infra" href="https://tally.so/r/jeaK8J" target="_blank" rel="noopener">Agendar diagnóstico gratuito →</a></div>
+    <div class="brief"><p>Conte o problema em 3 minutos e eu chego preparado no diagnóstico gratuito de 30 minutos. <a href="#privacidade">Como tratamos seus dados</a>.</p><a class="btn infra" href="https://tally.so/r/jeaK8J" target="_blank" rel="noopener">Agendar diagnóstico gratuito →</a></div>
     <div class="case">
       <span class="tag">Estudo de caso · Redes</span>
       <p>Rede de filial industrial sem documentação, levantada do zero: VLANs, redundância e roteiro de regularização por risco.</p>
@@ -292,7 +295,7 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
         </tbody>
       </table>
     </div>
-    <div class="brief"><p>Descreva o projeto em cerca de 7 minutos e receba a proposta em até 2 dias úteis.</p><a class="btn dev" href="https://tally.so/r/RWGOqj" target="_blank" rel="noopener">Preencher briefing do projeto →</a></div>
+    <div class="brief"><p>Descreva o projeto em cerca de 7 minutos e receba a proposta em até 2 dias úteis. <a href="#privacidade">Como tratamos seus dados</a>.</p><a class="btn dev" href="https://tally.so/r/RWGOqj" target="_blank" rel="noopener">Preencher briefing do projeto →</a></div>
     <div class="case">
       <span class="tag">Case de destaque · Python · Open source</span>
       <p>Monitor automático de quedas Wi-Fi de coletores WMS: 177 testes, CI em Python 3.10 a 3.13 e validação TLS por padrão.</p>
@@ -347,11 +350,12 @@ footer{color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padd
       </div>
       <div class="fld"><label for="f-msg">Mensagem</label><textarea id="f-msg" name="mensagem" placeholder="Descreva o problema ou o que você precisa"></textarea></div>
       <button class="btn" type="submit">Enviar pelo WhatsApp</button>
-      
+      <p class="priv" id="privacidade-form"><strong>Privacidade:</strong> nada do que você digita aqui fica gravado no site. Ao enviar, o WhatsApp abre com a mensagem pronta e ela só sai do seu aparelho quando você confirma o envio. Uso seus dados apenas para responder ao seu pedido e não os vendo nem compartilho.</p>
     </form>
     <div class="briefs">
       <span class="label">Prefere um formulário? Escolha o seu caso</span>
       <div class="row-btns"><a class="btn edu" href="https://tally.so/r/WJO4bk" target="_blank" rel="noopener">Preencher briefing pedagógico →</a><a class="btn infra" href="https://tally.so/r/jeaK8J" target="_blank" rel="noopener">Agendar diagnóstico gratuito →</a><a class="btn dev" href="https://tally.so/r/RWGOqj" target="_blank" rel="noopener">Preencher briefing do projeto →</a></div>
+      <p class="priv" id="privacidade"><strong>Privacidade dos briefings:</strong> os formulários são hospedados no Tally. As respostas ficam numa planilha privada do Google e eu recebo um aviso pelo Telegram. Uso os dados apenas para preparar o diagnóstico ou a proposta e não os vendo nem compartilho.</p>
     </div>
   </section>
 

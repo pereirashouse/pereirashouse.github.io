@@ -175,6 +175,9 @@ footer strong{color:var(--fg);font-family:var(--display);font-size:1rem}
 .topnav a:hover,.topnav a[aria-current]{color:var(--fg)}
 .skip{position:absolute;left:16px;top:-48px;background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:4px;z-index:20;text-decoration:none}
 .skip:focus{top:8px}
+.priv{font-size:.82rem;line-height:1.5;color:var(--muted);margin:0;max-width:62ch}
+.priv strong{color:var(--fg);font-weight:600}
+.priv a{color:inherit;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -350,7 +353,7 @@ footer strong{color:var(--fg);font-family:var(--display);font-size:1rem}
       <div class="fld"><label for="n-contato">WhatsApp ou e-mail</label><input type="text" id="n-contato" placeholder="Como te respondo"></div>
       <div class="fld"><label for="n-problema">Qual é o problema?</label><textarea id="n-problema" placeholder="Uma frase basta. Ex.: o Wi-Fi não chega no fundo da loja"></textarea></div>
       <button class="btn primary" type="submit">Pedir diagnóstico gratuito</button>
-      
+      <p class="priv" id="privacidade-form"><strong>Privacidade:</strong> nada do que você digita aqui fica gravado no site. Ao enviar, o WhatsApp abre com a mensagem pronta e ela só sai do seu aparelho quando você confirma o envio. Uso seus dados apenas para responder ao seu pedido e não os vendo nem compartilho.</p>
     </form>
   </section>
 
