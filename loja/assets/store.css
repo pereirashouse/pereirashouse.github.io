@@ -157,3 +157,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ph-blue);outline-of
 .ph-niche strong{font-size:1.1rem}
 }
 .ph-section:has(> .ph-niches){padding-bottom:0}
+
+/* Chamada para a área educativa */
+.ph-school .ph-actions{margin-top:16px}
+.ph-school h2{margin-top:6px}
+.ph-grid>.ph-school{grid-column:span 2;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+@media(max-width:560px){.ph-grid>.ph-school{grid-column:auto}}
