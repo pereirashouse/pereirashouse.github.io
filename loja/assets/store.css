@@ -110,3 +110,27 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ph-blue);outline-of
 .ph-about-divs p{margin:0}
 .ph-about-contact p{margin:0 0 6px}
 @media(max-width:760px){.ph-about-grid,.ph-about-divs{grid-template-columns:1fr}}
+
+/* Catálogo de serviços */
+.ph-catalog-nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}
+.ph-catalog-nav a{font-size:.85rem;padding:6px 12px;border:1px solid var(--ph-line);border-radius:999px;text-decoration:none;color:var(--ph-fg);background:var(--ph-surface)}
+.ph-catalog-block{margin-bottom:32px;scroll-margin-top:96px}
+.ph-catalog-block h4{margin:18px 0 10px}
+.ph-catalog ol{margin:0;padding-left:1.3em;color:var(--ph-muted)}
+.ph-table-wrap{overflow-x:auto;border:1px solid var(--ph-line);border-radius:10px;background:var(--ph-surface)}
+.ph-table{width:100%;border-collapse:collapse;font-size:.95rem}
+.ph-table th,.ph-table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--ph-line);vertical-align:top}
+.ph-table thead th{font:600 11px var(--ph-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ph-muted);background:var(--ph-blue-soft)}
+.ph-table tbody tr:last-child th,.ph-table tbody tr:last-child td{border-bottom:0}
+.ph-table tbody th{font-weight:650;color:var(--ph-fg)}
+.ph-table td{color:var(--ph-muted)}
+.ph-table .ph-price{white-space:nowrap;font-weight:650;color:var(--ph-fg)}
+.ph-note{font-size:.92rem;margin-top:12px}
+.ph-plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ph-plan{padding:20px;border:1px solid var(--ph-line);border-radius:10px;background:var(--ph-surface)}
+.ph-plan h4{margin:0 0 4px}
+.ph-plan-price{font:700 1.4rem var(--ph-display);color:var(--ph-green)!important;margin:0 0 12px}
+@media(max-width:760px){.ph-plans{grid-template-columns:1fr}
+.ph-table thead{display:none}.ph-table,.ph-table tbody,.ph-table tr,.ph-table th,.ph-table td{display:block;width:100%}
+.ph-table tr{padding:12px 14px;border-bottom:1px solid var(--ph-line)}.ph-table tbody tr:last-child{border-bottom:0}
+.ph-table th,.ph-table td{padding:0;border:0}.ph-table td{margin-top:4px}.ph-table .ph-price{margin-top:6px}}
