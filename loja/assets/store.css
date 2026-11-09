@@ -96,3 +96,17 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ph-blue);outline-of
 .ph-footer-cols a:hover{color:var(--ph-fg)}
 .ph-footer-base{margin-top:20px;padding-top:14px;border-top:1px solid var(--ph-line)}
 @media(max-width:700px){.ph-footer-cols{grid-template-columns:1fr}}
+
+/* Sobre a Pereira's House (bio) */
+.ph-about{scroll-margin-top:96px}
+.ph-about h3{font:700 1.25rem var(--ph-display);margin:0 0 10px}
+.ph-about h4{font:700 1.05rem var(--ph-display);margin:0 0 8px}
+.ph-about p,.ph-about li{color:var(--ph-muted)}
+.ph-about ul{margin:0;padding-left:1.2em}
+.ph-about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 32px;margin-bottom:28px}
+.ph-about-sub{margin-top:8px}
+.ph-about-divs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:32px}
+.ph-about-divs article{padding:20px;border:1px solid var(--ph-line);border-radius:10px;background:var(--ph-surface)}
+.ph-about-divs p{margin:0}
+.ph-about-contact p{margin:0 0 6px}
+@media(max-width:760px){.ph-about-grid,.ph-about-divs{grid-template-columns:1fr}}
