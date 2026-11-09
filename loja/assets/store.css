@@ -143,3 +143,17 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ph-blue);outline-of
 .ph-niche:hover{border-color:var(--ph-green)}
 .ph-niche-current{border-left:4px solid var(--ph-green)}
 @media(max-width:560px){.ph-niches{grid-template-columns:1fr}}
+
+/* Celular: menu em uma linha com rolagem e cartões de nicho empilhados */
+.ph-niche{line-height:1.35}
+.ph-niche>span,.ph-niche>strong{display:block}
+.ph-niche,.ph-niche:hover,.ph-niche *{text-decoration:none}
+@media(max-width:560px){
+.ph-nav-links{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;width:100%;padding-bottom:4px;gap:16px}
+.ph-nav-links::-webkit-scrollbar{display:none}
+.ph-nav-links a{white-space:nowrap;flex:0 0 auto}
+.ph-niches{grid-template-columns:1fr;gap:12px}
+.ph-niche{padding:16px}
+.ph-niche strong{font-size:1.1rem}
+}
+.ph-section:has(> .ph-niches){padding-bottom:0}
