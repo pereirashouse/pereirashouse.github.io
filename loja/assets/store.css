@@ -134,3 +134,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ph-blue);outline-of
 .ph-table thead{display:none}.ph-table,.ph-table tbody,.ph-table tr,.ph-table th,.ph-table td{display:block;width:100%}
 .ph-table tr{padding:12px 14px;border-bottom:1px solid var(--ph-line)}.ph-table tbody tr:last-child{border-bottom:0}
 .ph-table th,.ph-table td{padding:0;border:0}.ph-table td{margin-top:4px}.ph-table .ph-price{margin-top:6px}}
+
+/* Escolha de nicho: materiais x serviços */
+.ph-niches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ph-niche{display:flex;flex-direction:column;gap:6px;padding:20px;border:1px solid var(--ph-line);border-radius:10px;background:var(--ph-surface);text-decoration:none;color:var(--ph-fg)}
+.ph-niche strong{font:700 1.25rem var(--ph-display)}
+.ph-niche span:last-child{color:var(--ph-muted)}
+.ph-niche:hover{border-color:var(--ph-green)}
+.ph-niche-current{border-left:4px solid var(--ph-green)}
+@media(max-width:560px){.ph-niches{grid-template-columns:1fr}}
