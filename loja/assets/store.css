@@ -39,7 +39,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ph-blue);outline-of
 .ph-btn[aria-disabled="true"]{opacity:.58;cursor:not-allowed}
 .ph-section{padding:34px 0 56px}
 .ph-section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;border-bottom:2px solid var(--ph-line);padding-bottom:15px;margin-bottom:24px}
-.ph-section-head h2{font:700 clamp(1.7rem,4vw,2.4rem)/1.1 var(--ph-display);margin:0}
+.ph-section-head h1,.ph-section-head h2{font:700 clamp(1.7rem,4vw,2.4rem)/1.1 var(--ph-display);margin:0}
 .ph-section-head p{color:var(--ph-muted);max-width:54ch;margin:0}
 .ph-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
 .ph-card{display:flex;flex-direction:column;min-width:0;border:1px solid var(--ph-line);border-radius:11px;background:var(--ph-surface);overflow:hidden}
@@ -163,3 +163,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--ph-blue);outline-of
 .ph-school h2{margin-top:6px}
 .ph-grid>.ph-school{grid-column:span 2;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
 @media(max-width:560px){.ph-grid>.ph-school{grid-column:auto}}
+
+/* Chamadas de orçamento no catálogo de serviços */
+.ph-cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
