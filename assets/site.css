@@ -38,7 +38,7 @@ section{scroll-margin-top:calc(var(--nav-height,56px) + 16px);display:flex;flex-
 .eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .lede{max-width:64ch;font-size:1.12rem;color:var(--muted)}
 .sec-head{display:flex;flex-direction:column;gap:8px;padding-bottom:14px;border-bottom:2px solid var(--line)}
-.sec-head h2{font-size:1.9rem}
+.sec-head h1,.sec-head h2{font-size:1.9rem}
 .sec-head p{color:var(--muted);max-width:66ch}
 .sec-head.infra{border-color:var(--infra)} .sec-head.edu{border-color:var(--edu)}
 .sobre-intro{display:flex;gap:22px;align-items:flex-start}
