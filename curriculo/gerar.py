@@ -35,8 +35,9 @@ CONTATO = """<p class="contato"><span>Paraná, Brasil</span><a href="tel:+554299
 <a href="https://github.com/pereirashouse">github.com/pereirashouse</a></p>"""
 
 EXPERIENCIA = """
-<div class="item"><p class="t">Analista de Infraestrutura Sênior <span>mai. 2026 – atual</span></p><p class="l">Indústria · Paraná</p>
-<ul><li>PoC de substituição da plataforma de virtualização, com alternativa open source e critérios de rollback definidos antes da implantação e acionados quando o risco se confirmou.</li>
+<div class="item"><p class="t">Fundador · Pereira's House <span>nov. 2026 – atual</span></p></div>
+<div class="item"><p class="t">Analista de Infraestrutura Sênior <span>mai. – nov. 2026</span></p><p class="l">Indústria · Paraná</p>
+<ul><li>PoC de substituição da plataforma de virtualização, com critérios de rollback definidos antes e acionados quando o risco se confirmou.</li>
 <li>802.1X por conta de máquina (NPS, Active Directory, GPO) em dezenas de APs.</li>
 <li>Análise de Wi-Fi com Python/API UniFi; automação PowerShell/GPO; backup Veeam e Dell PowerProtect.</li></ul></div>
 <div class="item"><p class="t">Analista de TI Pleno <span>set. 2022 – mai. 2026</span></p><p class="l">Indústria · Paraná</p>
@@ -46,6 +47,10 @@ EXPERIENCIA = """
 <div class="item"><p class="t">Analista Financeiro <span>mar. 2014 – set. 2019</span></p><p class="l">Multinacional de embalagens · Paraná</p></div>
 <div class="item"><p class="t">Assistente de TI <span>jan. 2012 – abr. 2014</span></p><p class="l">Empresa de fundição · Paraná · Help Desk N1/N2 e rede local</p></div>
 """
+
+# Currículo de Educação: mesma experiência, sem o detalhe do cargo júnior, para caber em 1 página.
+EXPERIENCIA_EDU = EXPERIENCIA.replace("""
+<ul><li>Suporte de infraestrutura e usuários no AD; antivírus, Wi-Fi Ubiquiti, VMware vSphere, KVM Oracle, Zabbix e Grafana.</li></ul>""", "")
 
 FORMACAO = """
 <div class="item"><p class="t">Licenciatura em Computação (cursando) <span>UTFPR · desde fev. 2024</span></p></div>
@@ -79,7 +84,7 @@ PONTE = "<p>Mentoria, runbooks e incidentes sanitizados viram materiais didátic
 VARIANTES = {
     "ti": dict(
         titulo="Currículo · Infraestrutura de TI", cor="#1D5BB8",
-        cargo="Analista de Infraestrutura de TI Sênior · Licenciando em Computação (UTFPR)",
+        cargo="Analista de Infraestrutura de TI Sênior · Fundador da Pereira's House · Licenciando em Computação (UTFPR)",
         corpo=f"""<h2>Resumo</h2>
 <p>Analista de infraestrutura com mais de cinco anos em TI industrial, em ambiente com várias unidades, com foco em redes e Wi-Fi, identidade/802.1X, virtualização, backup, monitoramento e automação Python/PowerShell. Atua com hipóteses, evidências e rollback definido antes da mudança.</p>
 {PONTE}
@@ -89,12 +94,12 @@ VARIANTES = {
 <h2>Formação</h2>{FORMACAO}"""),
     "educacao": dict(
         titulo="Currículo · Computação e Educação", cor="#23774A",
-        cargo="Licenciando em Computação (UTFPR) · Professor de tecnologia · Analista de Infraestrutura de TI Sênior",
+        cargo="Licenciando em Computação (UTFPR) · Professor de tecnologia · Analista de TI Sênior · Fundador da Pereira's House",
         corpo=f"""<h2>Resumo</h2>
 <p>Professor de tecnologia em cursos livres desde 2008 (redes, hardware, BNCC Computação, Excel) e analista sênior de infraestrutura. Parte de casos reais antes da teoria, usa IA só como copilota com dados sanitizados e cria materiais alinhados à BNCC, revisados e adaptados ao contexto local, com versões offline e avaliação formativa.</p>
 <h2>Materiais e método</h2>{PROJ_EDU}
 <h2>Formação</h2>{FORMACAO}
-<h2>Experiência profissional</h2>{EXPERIENCIA}
+<h2>Experiência profissional</h2>{EXPERIENCIA_EDU}
 <h2>Competências técnicas</h2>{COMPETENCIAS}"""),
 }
 
