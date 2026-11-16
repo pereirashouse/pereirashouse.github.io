@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Operação Anzol — Produto Educacional · Jeferson Luiz Pereira</title>
+<meta name="description" content="Laboratório gamificado de perícia contra phishing para o 9º ano do Ensino Fundamental. Alinhado à BNCC da Computação (EF09CO04, EF09CO10). Sem instalação.">
+<link rel="canonical" href="https://pereirashouse.github.io/operacao-anzol/sobre/">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#23774A">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Operação Anzol — Produto Educacional · Jeferson Luiz Pereira">
+<meta property="og:description" content="Laboratório gamificado de perícia contra golpes digitais para o 9º ano. BNCC Computação. Sem instalação.">
+<meta property="og:url" content="https://pereirashouse.github.io/operacao-anzol/sobre/">
+<meta property="og:image" content="https://pereirashouse.github.io/og-image.png">
+<link rel="stylesheet" href="../../assets/fonts.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+.hero-prod{display:flex;flex-direction:column;gap:16px}
+.hero-prod h1{font-size:clamp(2rem,5.5vw,3.2rem);font-weight:700;letter-spacing:-.025em}
+.hero-prod h1 em{font-style:normal;background:linear-gradient(104deg,transparent 1%,#D4F0E0 3%,#D4F0E0 97%,transparent 99%);padding:0 .06em}
+
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border-radius:8px;overflow:hidden}
+.stat{background:var(--surface);padding:24px 20px;display:flex;flex-direction:column;gap:4px}
+.stat-num{font-family:var(--display);font-size:2.4rem;font-weight:700;letter-spacing:-.03em;color:var(--edu);line-height:1}
+.stat-desc{font-size:.85rem;color:var(--muted);line-height:1.45}
+
+.missions{display:flex;flex-direction:column;gap:12px}
+.mission{display:grid;grid-template-columns:44px 1fr;gap:0 16px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px;align-items:start}
+.mission-num{width:36px;height:36px;border-radius:6px;background:var(--edu-soft);color:var(--edu);font-weight:700;font-size:.95rem;display:flex;align-items:center;justify-content:center;font-family:var(--mono)}
+.mission h3{font-size:1rem;margin-bottom:4px}
+.mission p{font-size:.9rem;color:var(--muted);margin:0}
+
+.bncc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.bncc-card{background:var(--edu-soft);border-radius:8px;padding:20px}
+.bncc-code{font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--edu);display:block;margin-bottom:4px}
+.bncc-eixo{font-size:.78rem;color:var(--muted);display:block;margin-bottom:8px}
+.bncc-card p{font-size:.9rem;color:var(--fg)}
+
+.momentos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:600px){.momentos{grid-template-columns:1fr}}
+.momento{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px}
+.momento-dur{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--edu);margin-bottom:6px}
+.momento h3{font-size:1rem;margin-bottom:6px}
+.momento p{font-size:.88rem;color:var(--muted);margin:0}
+
+.play-band{background:var(--edu-soft);border-radius:8px;padding:28px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.play-band p{font-size:.95rem;color:var(--edu);font-weight:600;margin:0}
+.play-band span{font-size:.88rem;color:var(--muted);font-weight:400}
+.btn-play{display:inline-flex;align-items:center;gap:6px;background:var(--edu);color:#fff;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:6px;text-decoration:none;white-space:nowrap;margin-left:auto}
+.btn-play:hover{background:#1a5c37}
+
+.ref-list{display:flex;flex-direction:column;gap:6px}
+.ref-list p{font-size:.88rem;color:var(--muted);padding-left:16px;text-indent:-16px}
+
+.tech-note{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px 24px;display:flex;flex-direction:column;gap:8px}
+.tech-note h3{font-size:1rem;margin:0}
+.tech-note p{font-size:.88rem;color:var(--muted);margin:0}
+.chips-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<nav class="topnav" aria-label="Navegação do site">
+  <ul>
+    <li><a href="../../">Início</a></li>
+    <li><a href="../../educacao/" aria-current="page">Educação</a></li>
+    <li><a href="../../infraestrutura/">Infraestrutura</a></li>
+    <li><a href="../../negocios/">Negócios</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+<main id="main">
+
+  <!-- BREADCRUMB -->
+  <p class="crumb"><a href="../../educacao/">Educação</a> › <a href="../">Operação Anzol</a> › Sobre o produto</p>
+
+  <!-- HERO -->
+  <header class="hero-prod">
+    <div class="hero-meta">
+      <span class="badge tipo">Objeto de Aprendizagem</span>
+      <span class="badge">9º Ano · EF</span>
+      <span class="badge">BNCC Computação</span>
+      <span class="badge">60 min</span>
+      <span class="badge">Web · sem instalação</span>
+    </div>
+    <h1>Operação <em>Anzol</em><br>Caça ao Phishing</h1>
+    <p class="lede">Laboratório gamificado de perícia contra golpes digitais para o 9º ano do Ensino Fundamental. O aluno vira detetive digital — analisa mensagens suspeitas, disseca links e aprende o protocolo P.A.R.E. em uma aula.</p>
+    <div class="play-band">
+      <div>
+        <p>Acesse o laboratório agora</p>
+        <span>Funciona no celular, sem cadastro nem instalação</span>
+      </div>
+      <a class="btn-play" href="../">Jogar a Operação Anzol <span aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <!-- PROBLEMA -->
+  <section aria-labelledby="h-problema">
+    <div class="sec-head edu">
+      <p class="eyebrow">O problema</p>
+      <h2 id="h-problema">Jovens conectados, mas vulneráveis</h2>
+      <p>O Brasil tem 24,5 milhões de jovens online — mas poucos sabem reconhecer um golpe digital. A escola é a principal fonte de informação sobre internet para 41% deles.</p>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">92%</span>
+        <span class="stat-desc">dos jovens de 9–17 anos usam internet (TIC Kids Online Brasil, 2025)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">24%</span>
+        <span class="stat-desc">dos adultos perderam dinheiro em golpes digitais nos últimos 12 meses (DataSenado, 2024)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">27%</span>
+        <span class="stat-desc">das vítimas têm entre 16 e 29 anos — a faixa que começa a ser formada hoje no EF</span>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <h4>Escola perdendo espaço digital</h4>
+        <p>O uso de internet na escola caiu de 51% para 37% (TIC Kids Online 2025). A escola ainda não acompanha o ritmo do digital.</p>
+      </div>
+      <div class="field">
+        <h4>BNCC Computação obrigatória desde 2023</h4>
+        <p>A Resolução CNE/CEB 1/2022 tornou a Computação componente curricular obrigatório — mas materiais prontos e acessíveis ainda são escassos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSÕES -->
+  <section aria-labelledby="h-missoes">
+    <div class="sec-head edu">
+      <p class="eyebrow">A solução</p>
+      <h2 id="h-missoes">Três missões + um protocolo</h2>
+      <p>Em 60 minutos o aluno passa por três etapas progressivas e sai com uma ferramenta aplicável em qualquer situação real.</p>
+    </div>
+    <div class="missions">
+      <div class="mission">
+        <div class="mission-num">M1</div>
+        <div>
+          <h3>Perícia de Mensagens — 12 casos</h3>
+          <p>E-mails, SMS e mensagens suspeitas. O aluno decide: golpe ou legítimo? Cada acerto revela os sinais que entregaram o phishing.</p>
+        </div>
+      </div>
+      <div class="mission">
+        <div class="mission-num">M2</div>
+        <div>
+          <h3>Anatomia do Link — 8 endereços para dissecar</h3>
+          <p>Domínio, subdomínio, caminho e parâmetros. O aluno aprende a distinguir o endereço real do domínio falso disfarçado.</p>
+        </div>
+      </div>
+      <div class="mission">
+        <div class="mission-num">M3</div>
+        <div>
+          <h3>Laboratório de Gatilhos — 6 manipulações</h3>
+          <p>Urgência, autoridade, escassez. O aluno identifica os gatilhos emocionais usados por golpistas para fazer a vítima agir sem pensar.</p>
+        </div>
+      </div>
+      <div class="mission">
+        <div class="mission-num">★</div>
+        <div>
+          <h3>Protocolo P.A.R.E.</h3>
+          <p><strong>P</strong>are · <strong>A</strong>nise remetente e link · <strong>R</strong>eveja o pedido · <strong>E</strong>ntre pelo canal oficial. Simples, memorável, aplicável em qualquer mensagem suspeita.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BNCC -->
+  <section aria-labelledby="h-bncc">
+    <div class="sec-head edu">
+      <p class="eyebrow">Alinhamento curricular</p>
+      <h2 id="h-bncc">BNCC da Computação — 9º Ano</h2>
+      <p>Dois objetos de conhecimento verificados na Resolução CNE/CEB 1/2022, publicação oficial do MEC.</p>
+    </div>
+    <div class="bncc-cards">
+      <div class="bncc-card">
+        <span class="bncc-code">EF09CO04</span>
+        <span class="bncc-eixo">Eixo: Mundo Digital · p. 52</span>
+        <p>Compreender o funcionamento de malwares e outros ataques cibernéticos.</p>
+      </div>
+      <div class="bncc-card">
+        <span class="bncc-code">EF09CO10</span>
+        <span class="bncc-eixo">Eixo: Cultura Digital · p. 54</span>
+        <p>Avaliar a veracidade, credibilidade e relevância da informação em seus diferentes formatos, sendo capaz de identificar o propósito pelo qual foi disseminada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRÊS MOMENTOS -->
+  <section aria-labelledby="h-estrutura">
+    <div class="sec-head edu">
+      <p class="eyebrow">Estrutura pedagógica</p>
+      <h2 id="h-estrutura">Três Momentos Pedagógicos · 60 min</h2>
+      <p>Baseado na metodologia de Delizoicov &amp; Angotti, utilizada na formação de professores de ciências e consolidada na literatura de ensino.</p>
+    </div>
+    <div class="momentos">
+      <div class="momento">
+        <p class="momento-dur">7 min</p>
+        <h3>Problematização inicial</h3>
+        <p>O aluno recebe um e-mail suspeito antes de entrar no laboratório. A curiosidade é a isca.</p>
+      </div>
+      <div class="momento">
+        <p class="momento-dur">38 min</p>
+        <h3>Organização do conhecimento</h3>
+        <p>Missões 1, 2 e 3 — o conhecimento é construído por tentativa, erro e retroalimentação imediata.</p>
+      </div>
+      <div class="momento">
+        <p class="momento-dur">15 min</p>
+        <h3>Aplicação do conhecimento</h3>
+        <p>Laudo Final + Protocolo P.A.R.E. O aluno realiza uma perícia final integrando tudo que aprendeu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETALHES TÉCNICOS -->
+  <section aria-labelledby="h-tech">
+    <div class="sec-head edu">
+      <p class="eyebrow">Aspectos técnicos</p>
+      <h2 id="h-tech">Implementação</h2>
+    </div>
+    <div class="tech-note">
+      <h3>Objeto de aprendizagem web — sem dependências externas</h3>
+      <p>HTML, CSS e JavaScript puros em um único arquivo. Funciona offline por download. Nenhum cadastro, nenhuma coleta de dados, nenhuma instalação.</p>
+      <div class="chips-row">
+        <span class="chip">HTML5</span>
+        <span class="chip">CSS3</span>
+        <span class="chip">JavaScript ES6+</span>
+        <span class="chip">Single-file</span>
+        <span class="chip">Offline-ready</span>
+        <span class="chip">Mobile-first</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERÊNCIAS -->
+  <section aria-labelledby="h-ref">
+    <div class="sec-head">
+      <h2 id="h-ref">Referências</h2>
+    </div>
+    <div class="ref-list">
+      <p>CETIC.br. <strong>TIC Kids Online Brasil 2024: pesquisa sobre o uso da internet por crianças e adolescentes no Brasil</strong>. São Paulo: Comitê Gestor da Internet no Brasil, 2025.</p>
+      <p>DATASENADO. <strong>Golpes digitais no Brasil 2024</strong>. Brasília: Senado Federal, 2024.</p>
+      <p>BRASIL. <strong>Resolução CNE/CEB nº 1, de 4 de outubro de 2022</strong>. Define e regulamenta as normas gerais para a Computação na Educação Básica. Brasília: MEC/CNE/CEB, 2022.</p>
+      <p>CIALDINI, R. B. <strong>Influência: a psicologia da persuasão</strong>. São Paulo: Sextante, 2012.</p>
+      <p>DELIZOICOV, D.; ANGOTTI, J. A.; PERNAMBUCO, M. M. <strong>Ensino de Ciências: fundamentos e métodos</strong>. São Paulo: Cortez, 2002.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <span>Jeferson Luiz Pereira · Palmeira / PR · (42) 99960-1085</span>
+  <span><a href="../../educacao/">Voltar à área de Educação</a></span>
+  <span><a href="../">Jogar a Operação Anzol</a></span>
+</footer>
+</div>
+</body>
+</html>
